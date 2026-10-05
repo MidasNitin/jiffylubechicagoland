@@ -50,7 +50,7 @@ h1, h2, h3, p { margin: 0; }
 .lead { font-size: 17px; line-height: 1.5; }
 .body { font-size: 15px; line-height: 1.5; color: var(--gray); }
 .muted { color: var(--muted); }
-.sup { font-size: 0.4em; vertical-align: super; }
+.sup { font-size: 0.5em; vertical-align: super; }
 
 /* Buttons */
 .btn {
@@ -247,7 +247,7 @@ h1, h2, h3, p { margin: 0; }
 .services__list li { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 14px; }
 
 /* Footer */
-.footer { padding: 32px 0 40px; font-size: 11px; line-height: 1.5; }
+.footer { padding: 32px 0 40px; font-size: 12px; line-height: 1.5; }
 .footer__heading { font-weight: 700; font-size: 13px; margin-bottom: 12px; }
 .footer p { margin-top: 8px; }
 
