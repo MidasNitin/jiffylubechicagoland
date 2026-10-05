@@ -1,0 +1,7 @@
+.env
+node_modules/
+.DS_Store
+figma/file.json
+figma/images/
+figma/renders/
+figma/fonts.css

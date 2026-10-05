@@ -1,0 +1,5739 @@
+[
+ {
+  "id": 170,
+  "slug": "merrillville-broadway",
+  "group": "Allied Automotive Group",
+  "city": "Merrillville",
+  "state": "IN",
+  "street": "5920 Broadway",
+  "street_name": "Broadway",
+  "zip": "46410",
+  "card_title": "Merrillville",
+  "page_title": "Merrillville, Broadway",
+  "lat": 41.510784,
+  "lng": -87.3364994,
+  "place_id": "ChIJm9N8rBjpEYgR9rMHf61d7pQ",
+  "phone": "(219) 887-0858",
+  "hours": [
+   null,
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1267,
+  "maps_url": "https://maps.google.com/?cid=10731617961812407286&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/merrillville/170",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 171,
+  "slug": "griffith-w-ridge-rd",
+  "group": "Allied Automotive Group",
+  "city": "Griffith",
+  "state": "IN",
+  "street": "309 W Ridge Rd",
+  "street_name": "W Ridge Rd",
+  "zip": "46319",
+  "card_title": "Griffith",
+  "page_title": "Griffith, W Ridge Rd",
+  "lat": 41.551091,
+  "lng": -87.4312149,
+  "place_id": "ChIJf9LQoRLnEYgRggTrc5ENvPE",
+  "phone": "(219) 972-1019",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1900,
+  "maps_url": "https://maps.google.com/?cid=17418812377128436866&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/griffith/171",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 173,
+  "slug": "lansing-torrence-ave",
+  "group": "Allied Automotive Group",
+  "city": "Lansing",
+  "state": "IL",
+  "street": "17803 Torrence Ave",
+  "street_name": "Torrence Ave",
+  "zip": "60438",
+  "card_title": "Lansing",
+  "page_title": "Lansing, Torrence Ave",
+  "lat": 41.5716782,
+  "lng": -87.5584299,
+  "place_id": "ChIJZefFxvQfDogR3E6VnL60ESw",
+  "phone": "(708) 895-6770",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1507,
+  "maps_url": "https://maps.google.com/?cid=3175517943036727004&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/lansing/173",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 174,
+  "slug": "calumet-city-sibley-blvd",
+  "group": "Allied Automotive Group",
+  "city": "Calumet City",
+  "state": "IL",
+  "street": "1450 Sibley Blvd",
+  "street_name": "Sibley Blvd",
+  "zip": "60409",
+  "card_title": "Calumet City",
+  "page_title": "Calumet City, Sibley Blvd",
+  "lat": 41.6230635,
+  "lng": -87.56004999999999,
+  "place_id": "ChIJjf6A3_IgDogRnb_xTQdMgnU",
+  "phone": "(708) 862-6007",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 2009,
+  "maps_url": "https://maps.google.com/?cid=8467413843666124701&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/calumet-city/174",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 190,
+  "slug": "skokie-golf-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Skokie",
+  "state": "IL",
+  "street": "5147 Golf Rd",
+  "street_name": "Golf Rd",
+  "zip": "60077",
+  "card_title": "Skokie",
+  "page_title": "Skokie, Golf Rd",
+  "lat": 42.0550049,
+  "lng": -87.75602649999999,
+  "place_id": "ChIJl4u0E2DPD4gR0wcU7UhXZek",
+  "phone": "(847) 674-0880",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.8,
+  "review_count": 1896,
+  "maps_url": "https://maps.google.com/?cid=16817944354211760083&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/skokie/190",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 191,
+  "slug": "elmhurst-n-york-st",
+  "group": "JLO Group",
+  "city": "Elmhurst",
+  "state": "IL",
+  "street": "339 N York St",
+  "street_name": "N York St",
+  "zip": "60126",
+  "card_title": "Elmhurst – N York St",
+  "page_title": "Elmhurst, N York St",
+  "lat": 41.9080298,
+  "lng": -87.9394614,
+  "place_id": "ChIJa25vPVGzD4gRsFZa1xjkqfw",
+  "phone": "(630) 833-5823",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1313,
+  "maps_url": "https://maps.google.com/?cid=18206333763965310640&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/elmhurst/191",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 192,
+  "slug": "chicago-w-montrose-ave",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "4400 W Montrose Ave",
+  "street_name": "W Montrose Ave",
+  "zip": "60641",
+  "card_title": "Chicago – W Montrose Ave",
+  "page_title": "Chicago, W Montrose Ave",
+  "lat": 41.9611611,
+  "lng": -87.7387985,
+  "place_id": "ChIJDYVdlDTMD4gRr3QWmH8JZzw",
+  "phone": "(773) 777-0989",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1541,
+  "maps_url": "https://maps.google.com/?cid=4352458008493978799&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/192",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 194,
+  "slug": "lombard-e-roosevelt-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Lombard",
+  "state": "IL",
+  "street": "1 E Roosevelt Rd",
+  "street_name": "E Roosevelt Rd",
+  "zip": "60148",
+  "card_title": "Lombard",
+  "page_title": "Lombard, E Roosevelt Rd",
+  "lat": 41.859738,
+  "lng": -88.01682600000001,
+  "place_id": "ChIJu44pJnxSDogR5AIGsPxzocc",
+  "phone": "(630) 627-5656",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.3,
+  "review_count": 751,
+  "maps_url": "https://maps.google.com/?cid=14384906213920211684&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/lombard/194",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 196,
+  "slug": "palatine-e-dundee-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Palatine",
+  "state": "IL",
+  "street": "866 E Dundee Rd",
+  "street_name": "E Dundee Rd",
+  "zip": "60067",
+  "card_title": "Palatine",
+  "page_title": "Palatine, E Dundee Rd",
+  "lat": 42.139455,
+  "lng": -88.02277319999999,
+  "place_id": "ChIJ93Xb7KekD4gRwoXybovQMoQ",
+  "phone": "(847) 991-5144",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 962,
+  "maps_url": "https://maps.google.com/?cid=9525905459122439618&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/palatine/196",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 197,
+  "slug": "chicago-n-austin-ave",
+  "group": "JLO Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "2401 N Austin Ave",
+  "street_name": "N Austin Ave",
+  "zip": "60639",
+  "card_title": "Chicago – N Austin Ave",
+  "page_title": "Chicago, N Austin Ave",
+  "lat": 41.924057,
+  "lng": -87.77551389999999,
+  "place_id": "ChIJUfgE7p3MD4gRRJ4Do35oGjU",
+  "phone": "(773) 889-1988",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1372,
+  "maps_url": "https://maps.google.com/?cid=3826485726514748996&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/197",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 199,
+  "slug": "chicago-n-western-ave",
+  "group": "PJR Enterprises Inc.",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "6750 N Western Ave",
+  "street_name": "N Western Ave",
+  "zip": "60645",
+  "card_title": "Chicago – N Western Ave",
+  "page_title": "Chicago, N Western Ave",
+  "lat": 42.0047497,
+  "lng": -87.6903868,
+  "place_id": "ChIJLVKjidrRD4gRhHdQyEtfZCQ",
+  "phone": "(773) 274-2900",
+  "hours": [
+   {
+    "open": 540,
+    "close": 900
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 686,
+  "maps_url": "https://maps.google.com/?cid=2622325662124373892&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/199",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 203,
+  "slug": "elmhurst-w-north-ave",
+  "group": "JLO Group",
+  "city": "Elmhurst",
+  "state": "IL",
+  "street": "630 W North Ave",
+  "street_name": "W North Ave",
+  "zip": "60126",
+  "card_title": "Elmhurst – W North Ave",
+  "page_title": "Elmhurst, W North Ave",
+  "lat": 41.905466,
+  "lng": -87.96441639999999,
+  "place_id": "ChIJ5yVOwdG0D4gRtnTBIIfOFUw",
+  "phone": "(630) 832-3601",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 915,
+  "maps_url": "https://maps.google.com/?cid=5482515201158902966&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/elmhurst/203",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 205,
+  "slug": "hanover-park-irving-park-rd",
+  "group": "Driven Service Professionals, Inc.",
+  "city": "Hanover Park",
+  "state": "IL",
+  "street": "1600 Irving Park Rd",
+  "street_name": "Irving Park Rd",
+  "zip": "60103",
+  "card_title": "Hanover Park – Irving Park Rd",
+  "page_title": "Hanover Park, Irving Park Rd",
+  "lat": 42.0059059,
+  "lng": -88.14514849999999,
+  "place_id": "ChIJw1leXL6pD4gR7Vic96NNRxU",
+  "phone": "(630) 289-7744",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 3.7,
+  "review_count": 297,
+  "maps_url": "https://maps.google.com/?cid=1533279564772169965&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/hanover-park/205",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 207,
+  "slug": "elk-grove-village-oakton-st",
+  "group": "JLO Group",
+  "city": "Elk Grove Village",
+  "state": "IL",
+  "street": "1907 Oakton St",
+  "street_name": "Oakton St",
+  "zip": "60007",
+  "card_title": "Elk Grove Village",
+  "page_title": "Elk Grove Village, Oakton St",
+  "lat": 42.022166399999996,
+  "lng": -87.9576328,
+  "place_id": "ChIJ_TDQjuGwD4gRFnFF7rm3a8s",
+  "phone": "(847) 593-5823",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 960
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1022,
+  "maps_url": "https://maps.google.com/?cid=14658011421401772310&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/elk-grove-village/207",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 211,
+  "slug": "chicago-n-cicero-ave",
+  "group": "JLO Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "2940 N Cicero Ave",
+  "street_name": "N Cicero Ave",
+  "zip": "60641",
+  "card_title": "Chicago – N Cicero Ave",
+  "page_title": "Chicago, N Cicero Ave",
+  "lat": 41.934457599999995,
+  "lng": -87.74702479999999,
+  "place_id": "ChIJf9ef1fnMD4gRgSafe2NZs_E",
+  "phone": "(773) 286-1700",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 1903,
+  "maps_url": "https://maps.google.com/?cid=17416362467782502017&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/211",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 212,
+  "slug": "franklin-park-mannheim-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Franklin Park",
+  "state": "IL",
+  "street": "3301 Mannheim Rd",
+  "street_name": "Mannheim Rd",
+  "zip": "60131",
+  "card_title": "Franklin Park",
+  "page_title": "Franklin Park, Mannheim Rd",
+  "lat": 41.938525,
+  "lng": -87.88466299999999,
+  "place_id": "ChIJn8cL3Ae1D4gR10mg_8_baG8",
+  "phone": "(847) 678-6500",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1183,
+  "maps_url": "https://maps.google.com/?cid=8027908022181317079&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/franklin-park/212",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 214,
+  "slug": "waukegan-n-lewis-ave",
+  "group": "MTPDR Group",
+  "city": "Waukegan",
+  "state": "IL",
+  "street": "1212 N Lewis Ave",
+  "street_name": "N Lewis Ave",
+  "zip": "60085",
+  "card_title": "Waukegan – N Lewis Ave",
+  "page_title": "Waukegan, N Lewis Ave",
+  "lat": 42.3773236,
+  "lng": -87.8557986,
+  "place_id": "ChIJX2Cwx1SND4gRQXSFmMe8d6E",
+  "phone": "(224) 214-3924",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 508,
+  "maps_url": "https://maps.google.com/?cid=11634975727778362433&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/waukegan/214",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 218,
+  "slug": "lincolnwood-w-touhy-ave",
+  "group": "JE Enterprise Group",
+  "city": "Lincolnwood",
+  "state": "IL",
+  "street": "4019 W Touhy Ave",
+  "street_name": "W Touhy Ave",
+  "zip": "60712",
+  "card_title": "Lincolnwood",
+  "page_title": "Lincolnwood, W Touhy Ave",
+  "lat": 42.011528899999995,
+  "lng": -87.72937759999999,
+  "place_id": "ChIJrUGMK1LOD4gRaRggQD0Va7o",
+  "phone": "(847) 674-2322",
+  "hours": [
+   {
+    "open": 540,
+    "close": 900
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1417,
+  "maps_url": "https://maps.google.com/?cid=13432853666375669865&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/lincolnwood/218",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 223,
+  "slug": "la-grange-park-n-la-grange-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "La Grange Park",
+  "state": "IL",
+  "street": "1119 N La Grange Rd",
+  "street_name": "N La Grange Rd",
+  "zip": "60526",
+  "card_title": "La Grange Park",
+  "page_title": "La Grange Park, N La Grange Rd",
+  "lat": 41.8349914,
+  "lng": -87.8741873,
+  "place_id": "ChIJs2roAhZKDogRvFkA06Lrm2I",
+  "phone": "(708) 354-6457",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 831,
+  "maps_url": "https://maps.google.com/?cid=7105531921664334268&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/la-grange-park/223",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 226,
+  "slug": "countryside-s-la-grange-rd",
+  "group": "PNOC Group",
+  "city": "Countryside",
+  "state": "IL",
+  "street": "5550 S La Grange Rd",
+  "street_name": "S La Grange Rd",
+  "zip": "60525",
+  "card_title": "Countryside",
+  "page_title": "Countryside, S La Grange Rd",
+  "lat": 41.7889043,
+  "lng": -87.86904229999999,
+  "place_id": "ChIJL7s7Jc9JDogRkBw67SdsyDU",
+  "phone": "(708) 579-3933",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 316,
+  "maps_url": "https://maps.google.com/?cid=3875466398091844752&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/countryside/226",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 233,
+  "slug": "joliet-n-larkin-ave",
+  "group": "JLO Group",
+  "city": "Joliet",
+  "state": "IL",
+  "street": "1600 N Larkin Ave",
+  "street_name": "N Larkin Ave",
+  "zip": "60435",
+  "card_title": "Joliet – N Larkin Ave",
+  "page_title": "Joliet, N Larkin Ave",
+  "lat": 41.5519648,
+  "lng": -88.1255573,
+  "place_id": "ChIJIaJZP_lgDogRlLUGFKARo8k",
+  "phone": "(815) 744-2325",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1141,
+  "maps_url": "https://maps.google.com/?cid=14529476202055775636&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/joliet/233",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 234,
+  "slug": "oak-park-s-harlem-ave",
+  "group": "DeGeatano Group",
+  "city": "Oak Park",
+  "state": "IL",
+  "street": "215 S Harlem Ave",
+  "street_name": "S Harlem Ave",
+  "zip": "60304",
+  "card_title": "Oak Park – S Harlem Ave",
+  "page_title": "Oak Park, S Harlem Ave",
+  "lat": 41.876202,
+  "lng": -87.8043414,
+  "place_id": "ChIJ3ZsC9eg0DogRYXnLFdxmCOg",
+  "phone": "(708) 386-5700",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1080
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 473,
+  "maps_url": "https://maps.google.com/?cid=16719726712057461089&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/oak-park/234",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 235,
+  "slug": "roselle-lake-st",
+  "group": "FTP Management Group",
+  "city": "Roselle",
+  "state": "IL",
+  "street": "500 Lake St",
+  "street_name": "Lake St",
+  "zip": "60172",
+  "card_title": "Roselle",
+  "page_title": "Roselle, Lake St",
+  "lat": 41.963415999999995,
+  "lng": -88.0963769,
+  "place_id": "ChIJk9XUyYyrD4gRb7JihntIJoo",
+  "phone": "(630) 893-3189",
+  "hours": [
+   {
+    "open": 540,
+    "close": 900
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 408,
+  "maps_url": "https://maps.google.com/?cid=9954723721721852527&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/roselle/235",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 236,
+  "slug": "chicago-s-south-chicago-ave",
+  "group": "R Trio Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "8265 S. South Chicago Ave",
+  "street_name": "S. South Chicago Ave",
+  "zip": "60617",
+  "card_title": "Chicago – S. South Chicago Ave",
+  "page_title": "Chicago, S. South Chicago Ave",
+  "lat": 41.745085499999995,
+  "lng": -87.5762092,
+  "place_id": "ChIJzwuL1HwoDogRQ42mhbqccyA",
+  "phone": "(773) 731-2500",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.3,
+  "review_count": 1671,
+  "maps_url": "https://maps.google.com/?cid=2338384956455554371&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/236",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 237,
+  "slug": "chicago-n-harlem-ave-2801",
+  "group": "JLO Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "2801 N Harlem Ave",
+  "street_name": "N Harlem Ave",
+  "zip": "60707",
+  "card_title": "Chicago – 2801 N Harlem Ave",
+  "page_title": "Chicago, 2801 N Harlem Ave",
+  "lat": 41.930987699999996,
+  "lng": -87.8062369,
+  "place_id": "ChIJRdp7dwXLD4gRXwG5a7hv5-s",
+  "phone": "(773) 889-0828",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 2235,
+  "maps_url": "https://maps.google.com/?cid=16998678156405178719&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/237",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 238,
+  "slug": "melrose-park-w-north-ave",
+  "group": "JLO Group",
+  "city": "Melrose Park",
+  "state": "IL",
+  "street": "8351 W North Ave",
+  "street_name": "W North Ave",
+  "zip": "60160",
+  "card_title": "Melrose Park",
+  "page_title": "Melrose Park, W North Ave",
+  "lat": 41.906628999999995,
+  "lng": -87.8346615,
+  "place_id": "ChIJNYfREMjKD4gR_pwl1NMyVWs",
+  "phone": "(708) 865-2100",
+  "hours": [
+   {
+    "open": 540,
+    "close": 840
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1144,
+  "maps_url": "https://maps.google.com/?cid=7734143820457417982&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/melrose-park/238",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 239,
+  "slug": "aurora-n-lake-st",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Aurora",
+  "state": "IL",
+  "street": "700 N Lake St",
+  "street_name": "N Lake St",
+  "zip": "60506",
+  "card_title": "Aurora – N Lake St",
+  "page_title": "Aurora, N Lake St",
+  "lat": 41.770975899999996,
+  "lng": -88.3140329,
+  "place_id": "ChIJhQveLMb6DogR-88TLeLcprg",
+  "phone": "(630) 892-0183",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 539,
+  "maps_url": "https://maps.google.com/?cid=13305565013089701883&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/aurora/239",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 250,
+  "slug": "oak-forest-159th-st",
+  "group": "PNOC Group",
+  "city": "Oak Forest",
+  "state": "IL",
+  "street": "5401 159Th St",
+  "street_name": "159Th St",
+  "zip": "60452",
+  "card_title": "Oak Forest",
+  "page_title": "Oak Forest, 159Th St",
+  "lat": 41.6027029,
+  "lng": -87.7515186,
+  "place_id": "ChIJCQMQGLw9DogRsaUOWb99M90",
+  "phone": "(708) 535-2011",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.2,
+  "review_count": 425,
+  "maps_url": "https://maps.google.com/?cid=15939221766980674993&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/oak-forest/250",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 256,
+  "slug": "westmont-w-ogden-ave",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Westmont",
+  "state": "IL",
+  "street": "411 W Ogden Ave",
+  "street_name": "W Ogden Ave",
+  "zip": "60559",
+  "card_title": "Westmont",
+  "page_title": "Westmont, W Ogden Ave",
+  "lat": 41.809505,
+  "lng": -87.98840129999999,
+  "place_id": "ChIJw5f5OGxODogR1VNdnxdSzy0",
+  "phone": "(630) 963-5870",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 627,
+  "maps_url": "https://maps.google.com/?cid=3300947313297282005&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/westmont/256",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 279,
+  "slug": "berwyn-cermak-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Berwyn",
+  "state": "IL",
+  "street": "6930 Cermak Rd",
+  "street_name": "Cermak Rd",
+  "zip": "60402",
+  "card_title": "Berwyn",
+  "page_title": "Berwyn, Cermak Rd",
+  "lat": 41.8507399,
+  "lng": -87.7975312,
+  "place_id": "ChIJ3RQ1E100DogRFXoYUh8OJ-s",
+  "phone": "(708) 788-1627",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1155,
+  "maps_url": "https://maps.google.com/?cid=16944527650688891413&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/berwyn/279",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 324,
+  "slug": "mt-prospect-w-rand-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Mt Prospect",
+  "state": "IL",
+  "street": "2 W Rand Rd",
+  "street_name": "W Rand Rd",
+  "zip": "60056",
+  "card_title": "Mt Prospect",
+  "page_title": "Mt Prospect, W Rand Rd",
+  "lat": 42.082061599999996,
+  "lng": -87.93728589999999,
+  "place_id": "ChIJh5bluiG6D4gRTZRheyIcFK4",
+  "phone": "(847) 253-0054",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.8,
+  "review_count": 2401,
+  "maps_url": "https://maps.google.com/?cid=12543681796558132301&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/mt-prospect/324",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 325,
+  "slug": "burbank-w-87th-st",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Burbank",
+  "state": "IL",
+  "street": "6400 W 87Th St",
+  "street_name": "W 87Th St",
+  "zip": "60459",
+  "card_title": "Burbank",
+  "page_title": "Burbank, W 87Th St",
+  "lat": 41.734128899999995,
+  "lng": -87.780143,
+  "place_id": "ChIJ9duUSvk5DogRBhLDljsTXho",
+  "phone": "(708) 598-4355",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1240,
+  "maps_url": "https://maps.google.com/?cid=1899977239450292742&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/burbank/325",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 331,
+  "slug": "hoffman-estates-w-higgins-rd",
+  "group": "PVA Group",
+  "city": "Hoffman Estates",
+  "state": "IL",
+  "street": "1 W Higgins Rd",
+  "street_name": "W Higgins Rd",
+  "zip": "60169",
+  "card_title": "Hoffman Estates",
+  "page_title": "Hoffman Estates, W Higgins Rd",
+  "lat": 42.0446774,
+  "lng": -88.0801041,
+  "place_id": "ChIJPb5QprCoD4gRpcJCh0w1WbI",
+  "phone": "(847) 519-1030",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 1265,
+  "maps_url": "https://maps.google.com/?cid=12851361614481506981&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/hoffman-estates/331",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 447,
+  "slug": "oak-lawn-s-cicero-ave",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Oak Lawn",
+  "state": "IL",
+  "street": "9756 S Cicero Ave",
+  "street_name": "S Cicero Ave",
+  "zip": "60453",
+  "card_title": "Oak Lawn",
+  "page_title": "Oak Lawn, S Cicero Ave",
+  "lat": 41.714870999999995,
+  "lng": -87.740987,
+  "place_id": "ChIJd8t8ll46DogRxxjwIHwT0VU",
+  "phone": "(708) 636-1414",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1392,
+  "maps_url": "https://maps.google.com/?cid=6183745187205880007&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/oak-lawn/447",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 449,
+  "slug": "chicago-s-pulaski-rd",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "6901 S Pulaski Rd",
+  "street_name": "S Pulaski Rd",
+  "zip": "60629",
+  "card_title": "Chicago – S Pulaski Rd",
+  "page_title": "Chicago, S Pulaski Rd",
+  "lat": 41.7674915,
+  "lng": -87.7220833,
+  "place_id": "ChIJ74f-B0YwDogRKBe1gzhbDvs",
+  "phone": "(773) 767-7438",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1988,
+  "maps_url": "https://maps.google.com/?cid=18090497051479840552&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/449",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 478,
+  "slug": "chicago-w-archer-ave",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "6600 W Archer Ave",
+  "street_name": "W Archer Ave",
+  "zip": "60638",
+  "card_title": "Chicago – W Archer Ave",
+  "page_title": "Chicago, W Archer Ave",
+  "lat": 41.792569,
+  "lng": -87.7871291,
+  "place_id": "ChIJfR6Vj8U2DogRZseJPULVOno",
+  "phone": "(773) 229-0600",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 704,
+  "maps_url": "https://maps.google.com/?cid=8807586501753423718&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/478",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 488,
+  "slug": "orland-park-w-159th-st",
+  "group": "FTP Management Group",
+  "city": "Orland Park",
+  "state": "IL",
+  "street": "9254 W 159Th St",
+  "street_name": "W 159Th St",
+  "zip": "60462",
+  "card_title": "Orland Park",
+  "page_title": "Orland Park, W 159Th St",
+  "lat": 41.601967099999996,
+  "lng": -87.8437399,
+  "place_id": "ChIJHcHzw5I_DogRKZEK-8O2Zg0",
+  "phone": "(708) 403-1771",
+  "hours": [
+   {
+    "open": 540,
+    "close": 900
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.2,
+  "review_count": 420,
+  "maps_url": "https://maps.google.com/?cid=965660122964201769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/orland-park/488",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 490,
+  "slug": "worth-southwest-hwy",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Worth",
+  "state": "IL",
+  "street": "7201 Southwest Hwy",
+  "street_name": "Southwest Hwy",
+  "zip": "60482",
+  "card_title": "Worth",
+  "page_title": "Worth, Southwest Hwy",
+  "lat": 41.6976991,
+  "lng": -87.798132,
+  "place_id": "ChIJFVwt-go5DogR8VryTE-LrXs",
+  "phone": "(708) 448-0003",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.8,
+  "review_count": 1409,
+  "maps_url": "https://maps.google.com/?cid=8911932410345708273&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/worth/490",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 591,
+  "slug": "michigan-city-franklin-st",
+  "group": "Allied Automotive Group",
+  "city": "Michigan City",
+  "state": "IN",
+  "street": "3325 Franklin St",
+  "street_name": "Franklin St",
+  "zip": "46360",
+  "card_title": "Michigan City",
+  "page_title": "Michigan City, Franklin St",
+  "lat": 41.692014,
+  "lng": -86.89407849999999,
+  "place_id": "ChIJOy4s6SQIEYgRRaKZsrff86o",
+  "phone": "(219) 879-3288",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1034,
+  "maps_url": "https://maps.google.com/?cid=12318435385856860741&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/michigan-city/591",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 592,
+  "slug": "chicago-n-clybourn-ave",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "2366 N Clybourn Ave",
+  "street_name": "N Clybourn Ave",
+  "zip": "60614",
+  "card_title": "Chicago – N Clybourn Ave",
+  "page_title": "Chicago, N Clybourn Ave",
+  "lat": 41.9249174,
+  "lng": -87.6693798,
+  "place_id": "ChIJd0zr6e_SD4gR1kvHvVjCtzY",
+  "phone": "(773) 281-6688",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 1036,
+  "maps_url": "https://maps.google.com/?cid=3942833685183024086&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/592",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 593,
+  "slug": "chicago-n-elston-ave",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "3630 N Elston Ave",
+  "street_name": "N Elston Ave",
+  "zip": "60618",
+  "card_title": "Chicago – N Elston Ave",
+  "page_title": "Chicago, N Elston Ave",
+  "lat": 41.9470699,
+  "lng": -87.70982579999999,
+  "place_id": "ChIJKz80fZDND4gRcGn49sMFy20",
+  "phone": "(773) 463-3200",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1075,
+  "maps_url": "https://maps.google.com/?cid=7911423509626644848&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/593",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 594,
+  "slug": "oak-park-madison-st",
+  "group": "DeGeatano Group",
+  "city": "Oak Park",
+  "state": "IL",
+  "street": "1122 Madison St",
+  "street_name": "Madison St",
+  "zip": "60302",
+  "card_title": "Oak Park – Madison St",
+  "page_title": "Oak Park, Madison St",
+  "lat": 41.87980640000001,
+  "lng": -87.8033607,
+  "place_id": "ChIJUSV_YsI0DogRuQK35geTQxQ",
+  "phone": "(708) 383-3339",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1080
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 571,
+  "maps_url": "https://maps.google.com/?cid=1460172366342980281&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/oak-park/594",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 649,
+  "slug": "chicago-s-halsted-st",
+  "group": "R Trio Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "10750 S Halsted St",
+  "street_name": "S Halsted St",
+  "zip": "60628",
+  "card_title": "Chicago – S Halsted St",
+  "page_title": "Chicago, S Halsted St",
+  "lat": 41.6980781,
+  "lng": -87.6429477,
+  "place_id": "ChIJe-Q1mLQlDogReONLb4LmGIY",
+  "phone": "(773) 821-4700",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1197,
+  "maps_url": "https://maps.google.com/?cid=9662726448410780536&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/649",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 759,
+  "slug": "glenview-glenview-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Glenview",
+  "state": "IL",
+  "street": "3232 Glenview Rd",
+  "street_name": "Glenview Rd",
+  "zip": "60025",
+  "card_title": "Glenview",
+  "page_title": "Glenview, Glenview Rd",
+  "lat": 42.0733414,
+  "lng": -87.8392192,
+  "place_id": "ChIJz0Od5uvHD4gRZIzh0Y062uY",
+  "phone": "(847) 729-7171",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 916,
+  "maps_url": "https://maps.google.com/?cid=16634672554432367716&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/glenview/759",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 780,
+  "slug": "chicago-n-ashland-ave",
+  "group": "FTP Management Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "5601 N Ashland Ave",
+  "street_name": "N Ashland Ave",
+  "zip": "60660",
+  "card_title": "Chicago – N Ashland Ave",
+  "page_title": "Chicago, N Ashland Ave",
+  "lat": 41.9836549,
+  "lng": -87.6695197,
+  "place_id": "ChIJwTcPu4_RD4gRCMJ-JsX2d7U",
+  "phone": "(773) 561-1188",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4,
+  "review_count": 679,
+  "maps_url": "https://maps.google.com/?cid=13076191369708356104&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/780",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 787,
+  "slug": "libertyville-s-milwaukee-ave",
+  "group": "JLO Group",
+  "city": "Libertyville",
+  "state": "IL",
+  "street": "445 S Milwaukee Ave",
+  "street_name": "S Milwaukee Ave",
+  "zip": "60048",
+  "card_title": "Libertyville",
+  "page_title": "Libertyville, S Milwaukee Ave",
+  "lat": 42.2782769,
+  "lng": -87.9527432,
+  "place_id": "ChIJkZV587-WD4gRepYxhqmOdvs",
+  "phone": "(847) 816-3393",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.8,
+  "review_count": 979,
+  "maps_url": "https://maps.google.com/?cid=18119827009523783290&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/libertyville/787",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 839,
+  "slug": "chicago-n-lincoln-ave",
+  "group": "JLO Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "5401 N Lincoln Ave",
+  "street_name": "N Lincoln Ave",
+  "zip": "60625",
+  "card_title": "Chicago – N Lincoln Ave",
+  "page_title": "Chicago, N Lincoln Ave",
+  "lat": 41.9798344,
+  "lng": -87.69248619999999,
+  "place_id": "ChIJDcimyv7RD4gR1k-eCSaq1u4",
+  "phone": "(773) 728-3307",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1778,
+  "maps_url": "https://maps.google.com/?cid=17210130106389778390&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/839",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 855,
+  "slug": "mundelein-s-butterfield-rd",
+  "group": "MTPDR Group",
+  "city": "Mundelein",
+  "state": "IL",
+  "street": "1470 S Butterfield Rd",
+  "street_name": "S Butterfield Rd",
+  "zip": "60060",
+  "card_title": "Mundelein – S Butterfield Rd",
+  "page_title": "Mundelein, S Butterfield Rd",
+  "lat": 42.241440399999995,
+  "lng": -87.97810489999999,
+  "place_id": "ChIJh41WmraXD4gRVen6kVgZfDY",
+  "phone": "(847) 816-0200",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 285,
+  "maps_url": "https://maps.google.com/?cid=3926040843357186389&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/mundelein/855",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 859,
+  "slug": "park-ridge-higgins-rd",
+  "group": "JE Enterprise Group",
+  "city": "Park Ridge",
+  "state": "IL",
+  "street": "700 Higgins Rd",
+  "street_name": "Higgins Rd",
+  "zip": "60068",
+  "card_title": "Park Ridge",
+  "page_title": "Park Ridge, Higgins Rd",
+  "lat": 41.9861089,
+  "lng": -87.83319430000002,
+  "place_id": "ChIJbRKOAY3JD4gRLT8mlrhgHWA",
+  "phone": "(847) 318-0444",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1888,
+  "maps_url": "https://maps.google.com/?cid=6925798147875028781&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/park-ridge/859",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 952,
+  "slug": "addison-w-lake-st",
+  "group": "JLO Group",
+  "city": "Addison",
+  "state": "IL",
+  "street": "705 W Lake St",
+  "street_name": "W Lake St",
+  "zip": "60101",
+  "card_title": "Addison",
+  "page_title": "Addison, W Lake St",
+  "lat": 41.939912,
+  "lng": -88.007576,
+  "place_id": "ChIJ07xZ14CyD4gRI-geqghQh-E",
+  "phone": "(630) 543-1811",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1119,
+  "maps_url": "https://maps.google.com/?cid=16251045778533836835&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/addison/952",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 986,
+  "slug": "wheeling-e-dundee-rd",
+  "group": "PVA Group",
+  "city": "Wheeling",
+  "state": "IL",
+  "street": "10 E Dundee Rd",
+  "street_name": "E Dundee Rd",
+  "zip": "60090",
+  "card_title": "Wheeling",
+  "page_title": "Wheeling, E Dundee Rd",
+  "lat": 42.1398852,
+  "lng": -87.9152604,
+  "place_id": "ChIJF83fX7W-D4gRrLvpFEtsGcg",
+  "phone": "(847) 229-9203",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1132,
+  "maps_url": "https://maps.google.com/?cid=14418674751732562860&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/wheeling/986",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 990,
+  "slug": "west-dundee-w-main-st",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "West Dundee",
+  "state": "IL",
+  "street": "726 W Main St",
+  "street_name": "W Main St",
+  "zip": "60118",
+  "card_title": "West Dundee",
+  "page_title": "West Dundee, W Main St",
+  "lat": 42.0984269,
+  "lng": -88.2866732,
+  "place_id": "ChIJ_YWhu6kPD4gR0NGBF-ceJ1s",
+  "phone": "(847) 428-1070",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 780,
+  "maps_url": "https://maps.google.com/?cid=6568252559423820240&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/west-dundee/990",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1047,
+  "slug": "des-plaines-elmhurst-rd",
+  "group": "JAV Enterprises, Inc.",
+  "city": "Des Plaines",
+  "state": "IL",
+  "street": "777 Elmhurst Rd",
+  "street_name": "Elmhurst Rd",
+  "zip": "60016",
+  "card_title": "Des Plaines",
+  "page_title": "Des Plaines, Elmhurst Rd",
+  "lat": 42.0378818,
+  "lng": -87.94028159999999,
+  "place_id": "ChIJFbUXr8mwD4gRn4Jk3g-sAdM",
+  "phone": "(847) 437-5439",
+  "hours": [
+   null,
+   {
+    "open": 450,
+    "close": 1110
+   },
+   {
+    "open": 450,
+    "close": 1110
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 900
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 197,
+  "maps_url": "https://maps.google.com/?cid=15204623001135121055&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/des-plaines/1047",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1075,
+  "slug": "crystal-lake-northwest-hwy",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Crystal Lake",
+  "state": "IL",
+  "street": "6205 Northwest Hwy",
+  "street_name": "Northwest Hwy",
+  "zip": "60014",
+  "card_title": "Crystal Lake",
+  "page_title": "Crystal Lake, Northwest Hwy",
+  "lat": 42.2258638,
+  "lng": -88.3179818,
+  "place_id": "ChIJXW5kjaxyD4gR4HjHsDS-pFw",
+  "phone": "(815) 455-4455",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 800,
+  "maps_url": "https://maps.google.com/?cid=6675669681183357152&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/crystal-lake/1075",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1100,
+  "slug": "oakbrook-terrace-17w620-butterfield-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Oakbrook Terrace",
+  "state": "IL",
+  "street": "17W620 Butterfield Rd",
+  "street_name": "17W620 Butterfield Rd",
+  "zip": "60181",
+  "card_title": "Oakbrook Terrace",
+  "page_title": "Oakbrook Terrace, 17W620 Butterfield Rd",
+  "lat": 41.851287899999996,
+  "lng": -87.9729555,
+  "place_id": "ChIJbZ7Ut7JNDogRBW-ruLHrBYU",
+  "phone": "(630) 953-2212",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 788,
+  "maps_url": "https://maps.google.com/?cid=9585326530467950341&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/oakbrook-terrace/1100",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1101,
+  "slug": "saint-charles-lincoln-hwy",
+  "group": "MTPDR Group",
+  "city": "Saint Charles",
+  "state": "IL",
+  "street": "1970 Lincoln Hwy",
+  "street_name": "Lincoln Hwy",
+  "zip": "60174",
+  "card_title": "Saint Charles",
+  "page_title": "Saint Charles, Lincoln Hwy",
+  "lat": 41.8998752,
+  "lng": -88.3342359,
+  "place_id": "ChIJrQg27K_iDogRXo_6kMjM9kA",
+  "phone": "(630) 513-1277",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 461,
+  "maps_url": "https://maps.google.com/?cid=4681154024496074590&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/saint-charles/1101",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1160,
+  "slug": "chicago-n-harlem-ave-7200",
+  "group": "PJR Enterprises Inc.",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "7200 N Harlem Ave",
+  "street_name": "N Harlem Ave",
+  "zip": "60631",
+  "card_title": "Chicago – 7200 N Harlem Ave",
+  "page_title": "Chicago, 7200 N Harlem Ave",
+  "lat": 42.0119664,
+  "lng": -87.8069867,
+  "place_id": "ChIJEyiivQTJD4gRlcg6EJVpiZ8",
+  "phone": "(773) 774-4414",
+  "hours": [
+   {
+    "open": 600,
+    "close": 900
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 454,
+  "maps_url": "https://maps.google.com/?cid=11495835612783233173&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/1160",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1385,
+  "slug": "wilmette-green-bay-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Wilmette",
+  "state": "IL",
+  "street": "1115 Green Bay Rd",
+  "street_name": "Green Bay Rd",
+  "zip": "60091",
+  "card_title": "Wilmette",
+  "page_title": "Wilmette, Green Bay Rd",
+  "lat": 42.0822406,
+  "lng": -87.714148,
+  "place_id": "ChIJn0O0WzzFD4gR9rqoxSSEF1o",
+  "phone": "(847) 256-4891",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 435,
+  "maps_url": "https://maps.google.com/?cid=6491802681347717878&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/wilmette/1385",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1599,
+  "slug": "gurnee-grand-ave",
+  "group": "MTPDR Group",
+  "city": "Gurnee",
+  "state": "IL",
+  "street": "7692 Grand Ave",
+  "street_name": "Grand Ave",
+  "zip": "60031",
+  "card_title": "Gurnee",
+  "page_title": "Gurnee, Grand Ave",
+  "lat": 42.3863664,
+  "lng": -87.9925509,
+  "place_id": "ChIJwwGBAeiPD4gRlEhOb9QE43g",
+  "phone": "(847) 265-0566",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 526,
+  "maps_url": "https://maps.google.com/?cid=8710811414711650452&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/gurnee/1599",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1727,
+  "slug": "mc-henry-n-richmond-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Mc Henry",
+  "state": "IL",
+  "street": "1807 N Richmond Rd",
+  "street_name": "N Richmond Rd",
+  "zip": "60050",
+  "card_title": "Mc Henry",
+  "page_title": "Mc Henry, N Richmond Rd",
+  "lat": 42.353842,
+  "lng": -88.2678428,
+  "place_id": "ChIJN8HGQuhwD4gR9rST8XVVPHk",
+  "phone": "(815) 363-7299",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1037,
+  "maps_url": "https://maps.google.com/?cid=8735951342244443382&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/mc-henry/1727",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1812,
+  "slug": "waukegan-s-green-bay-rd",
+  "group": "BLACK GOLD PARTNERS GROUP",
+  "city": "Waukegan",
+  "state": "IL",
+  "street": "556 S Green Bay Rd",
+  "street_name": "S Green Bay Rd",
+  "zip": "60085",
+  "card_title": "Waukegan – S Green Bay Rd",
+  "page_title": "Waukegan, S Green Bay Rd",
+  "lat": 42.3501324,
+  "lng": -87.87442949999999,
+  "place_id": "ChIJrQs6-8GSD4gRZd4kNU9jAO4",
+  "phone": "(847) 336-4070",
+  "hours": [
+   {
+    "open": 480,
+    "close": 900
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 864,
+  "maps_url": "https://maps.google.com/?cid=17149816572872023653&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/waukegan/1812",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1835,
+  "slug": "hanover-park-army-trail-rd",
+  "group": "Driven Service Professionals, Inc.",
+  "city": "Hanover Park",
+  "state": "IL",
+  "street": "1860 Army Trail Rd",
+  "street_name": "Army Trail Rd",
+  "zip": "60133",
+  "card_title": "Hanover Park – Army Trail Rd",
+  "page_title": "Hanover Park, Army Trail Rd",
+  "lat": 41.9418287,
+  "lng": -88.1526069,
+  "place_id": "ChIJa46tdv6qD4gR_QoW-zGINOg",
+  "phone": "(630) 372-5823",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 245,
+  "maps_url": "https://maps.google.com/?cid=16732148263835536125&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/hanover-park/1835",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1841,
+  "slug": "evanston-dempster-st",
+  "group": "JLO Group",
+  "city": "Evanston",
+  "state": "IL",
+  "street": "1941 Dempster St",
+  "street_name": "Dempster St",
+  "zip": "60201",
+  "card_title": "Evanston",
+  "page_title": "Evanston, Dempster St",
+  "lat": 42.041325799999996,
+  "lng": -87.7006588,
+  "place_id": "ChIJn2EizePPD4gRov_MosQeZb8",
+  "phone": "(847) 328-5222",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1258,
+  "maps_url": "https://maps.google.com/?cid=13791463263785779106&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/evanston/1841",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1964,
+  "slug": "ottawa-kain-st",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Ottawa",
+  "state": "IL",
+  "street": "113 Kain St",
+  "street_name": "Kain St",
+  "zip": "61350",
+  "card_title": "Ottawa",
+  "page_title": "Ottawa, Kain St",
+  "lat": 41.3696672,
+  "lng": -88.8374623,
+  "place_id": "ChIJlZXqqZBTCYgR7lHvlnA5l8g",
+  "phone": "(815) 433-6325",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.9,
+  "review_count": 1271,
+  "maps_url": "https://maps.google.com/?cid=14454084684800283118&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/ottawa/1964",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 1965,
+  "slug": "bourbonnais-william-latham-dr",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Bourbonnais",
+  "state": "IL",
+  "street": "598 William Latham Dr",
+  "street_name": "William Latham Dr",
+  "zip": "60914",
+  "card_title": "Bourbonnais",
+  "page_title": "Bourbonnais, William Latham Dr",
+  "lat": 41.1622349,
+  "lng": -87.8757937,
+  "place_id": "ChIJHd96JcDdDYgRF1lbCJIRa_A",
+  "phone": "(815) 935-0002",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 622,
+  "maps_url": "https://maps.google.com/?cid=17323959710513846551&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/bourbonnais/1965",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2501,
+  "slug": "arlington-heights-w-rand-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Arlington Heights",
+  "state": "IL",
+  "street": "215 W Rand Rd",
+  "street_name": "W Rand Rd",
+  "zip": "60004",
+  "card_title": "Arlington Heights",
+  "page_title": "Arlington Heights, W Rand Rd",
+  "lat": 42.116025099999995,
+  "lng": -87.9860495,
+  "place_id": "ChIJA9_EwRO7D4gRb-RngGusRuk",
+  "phone": "(847) 506-0030",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 655,
+  "maps_url": "https://maps.google.com/?cid=16809312236922725487&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/arlington-heights/2501",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2502,
+  "slug": "bolingbrook-brook-ct",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Bolingbrook",
+  "state": "IL",
+  "street": "101 Brook Ct",
+  "street_name": "Brook Ct",
+  "zip": "60440",
+  "card_title": "Bolingbrook",
+  "page_title": "Bolingbrook, Brook Ct",
+  "lat": 41.7040863,
+  "lng": -88.0689304,
+  "place_id": "ChIJrZAPN7VbDogR_dGTdrh9hhI",
+  "phone": "(630) 759-1494",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 998,
+  "maps_url": "https://maps.google.com/?cid=1334892570778784253&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/bolingbrook/2502",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2504,
+  "slug": "cicero-w-ogden-ave",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Cicero",
+  "state": "IL",
+  "street": "6140 W Ogden Ave",
+  "street_name": "W Ogden Ave",
+  "zip": "60804",
+  "card_title": "Cicero",
+  "page_title": "Cicero, W Ogden Ave",
+  "lat": 41.8328846,
+  "lng": -87.7773135,
+  "place_id": "ChIJvdtk7Ak0DogRgX8smTndGIU",
+  "phone": "(708) 863-5855",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1368,
+  "maps_url": "https://maps.google.com/?cid=9590658645938175873&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/cicero/2504",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2505,
+  "slug": "naperville-e-ogden-ave",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Naperville",
+  "state": "IL",
+  "street": "922 E Ogden Ave",
+  "street_name": "E Ogden Ave",
+  "zip": "60563",
+  "card_title": "Naperville – E Ogden Ave",
+  "page_title": "Naperville, E Ogden Ave",
+  "lat": 41.788790999999996,
+  "lng": -88.13254789999999,
+  "place_id": "ChIJ65BUFVRWDogRQVQHhiDJjgo",
+  "phone": "(630) 961-1616",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 453,
+  "maps_url": "https://maps.google.com/?cid=760766528596956225&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/naperville/2505",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2506,
+  "slug": "naperville-w-75th-st",
+  "group": "PVA Group",
+  "city": "Naperville",
+  "state": "IL",
+  "street": "944 W 75Th St",
+  "street_name": "W 75Th St",
+  "zip": "60565",
+  "card_title": "Naperville – W 75Th St",
+  "page_title": "Naperville, W 75Th St",
+  "lat": 41.7470919,
+  "lng": -88.1656482,
+  "place_id": "ChIJ2eqOdf9XDogRxSpxcUlB5vE",
+  "phone": "(630) 995-3829",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.3,
+  "review_count": 733,
+  "maps_url": "https://maps.google.com/?cid=17430691191475743429&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/naperville/2506",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2509,
+  "slug": "romeoville-n-independence-blvd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Romeoville",
+  "state": "IL",
+  "street": "653 N Independence Blvd",
+  "street_name": "N Independence Blvd",
+  "zip": "60446",
+  "card_title": "Romeoville – N Independence Blvd",
+  "page_title": "Romeoville, N Independence Blvd",
+  "lat": 41.6539715,
+  "lng": -88.0800458,
+  "place_id": "ChIJe1h7CxBcDogR1ySeDY_mNbg",
+  "phone": "(815) 886-5823",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 513,
+  "maps_url": "https://maps.google.com/?cid=13273768978827584727&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/romeoville/2509",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2510,
+  "slug": "schaumburg-w-golf-rd",
+  "group": "PVA Group",
+  "city": "Schaumburg",
+  "state": "IL",
+  "street": "801 W Golf Rd",
+  "street_name": "W Golf Rd",
+  "zip": "60194",
+  "card_title": "Schaumburg",
+  "page_title": "Schaumburg, W Golf Rd",
+  "lat": 42.0481087,
+  "lng": -88.09990230000001,
+  "place_id": "ChIJPb5QprCoD4gR34l5vheRBbQ",
+  "phone": "(847) 885-8888",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 759,
+  "maps_url": "https://maps.google.com/?cid=12971933832876493279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/schaumburg/2510",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2511,
+  "slug": "carol-stream-n-main-st",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Carol Stream",
+  "state": "IL",
+  "street": "2222 N Main St",
+  "street_name": "N Main St",
+  "zip": "60188",
+  "card_title": "Carol Stream",
+  "page_title": "Carol Stream, N Main St",
+  "lat": 41.889443799999995,
+  "lng": -88.1072164,
+  "place_id": "ChIJQ4ja275UDogRukuGVpzrW6c",
+  "phone": "(630) 668-4848",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 681,
+  "maps_url": "https://maps.google.com/?cid=12059491483913702330&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/carol-stream/2511",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2551,
+  "slug": "la-porte-j-st",
+  "group": "Allied Automotive Group",
+  "city": "La Porte",
+  "state": "IN",
+  "street": "512 J St",
+  "street_name": "J St",
+  "zip": "46350",
+  "card_title": "La Porte",
+  "page_title": "La Porte, J St",
+  "lat": 41.602323899999995,
+  "lng": -86.7306054,
+  "place_id": "ChIJ8zQyJ2USEYgRDRRmG0dw5B0",
+  "phone": "(219) 324-7741",
+  "hours": [
+   null,
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 942,
+  "maps_url": "https://maps.google.com/?cid=2153969972494603277&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/la-porte/2551",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2557,
+  "slug": "elgin-s-mclean-blvd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Elgin",
+  "state": "IL",
+  "street": "445 S Mclean Blvd",
+  "street_name": "S Mclean Blvd",
+  "zip": "60123",
+  "card_title": "Elgin",
+  "page_title": "Elgin, S Mclean Blvd",
+  "lat": 42.0218193,
+  "lng": -88.3121877,
+  "place_id": "ChIJNS38hNkED4gRqKLNWXrMtFU",
+  "phone": "(847) 622-1500",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1018,
+  "maps_url": "https://maps.google.com/?cid=6175785814896517800&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/elgin/2557",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2560,
+  "slug": "chesterton-ahrens-rd",
+  "group": "Allied Automotive Group",
+  "city": "Chesterton",
+  "state": "IN",
+  "street": "802 Ahrens Rd",
+  "street_name": "Ahrens Rd",
+  "zip": "46304",
+  "card_title": "Chesterton",
+  "page_title": "Chesterton, Ahrens Rd",
+  "lat": 41.6155689,
+  "lng": -87.0361535,
+  "place_id": "ChIJZZHnIxGjEYgRnjpDTVqbR64",
+  "phone": "(219) 926-3636",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 876,
+  "maps_url": "https://maps.google.com/?cid=12558176898091530910&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/chesterton/2560",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2565,
+  "slug": "chicago-w-north-ave",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "1049 W North Ave",
+  "street_name": "W North Ave",
+  "zip": "60642",
+  "card_title": "Chicago – W North Ave",
+  "page_title": "Chicago, W North Ave",
+  "lat": 41.910618799999995,
+  "lng": -87.6552086,
+  "place_id": "ChIJA84m0ybTD4gRLBEEkCC5wtE",
+  "phone": "(312) 642-1991",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 900,
+  "maps_url": "https://maps.google.com/?cid=15114846848915083564&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/2565",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2566,
+  "slug": "montgomery-montgomery-rd",
+  "group": "Wimbles Group",
+  "city": "Montgomery",
+  "state": "IL",
+  "street": "344 Montgomery Rd",
+  "street_name": "Montgomery Rd",
+  "zip": "60538",
+  "card_title": "Montgomery",
+  "page_title": "Montgomery, Montgomery Rd",
+  "lat": 41.7282343,
+  "lng": -88.319282,
+  "place_id": "ChIJUUO3_iHwDogR76Fi8dd0ERU",
+  "phone": "(630) 264-2225",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 786,
+  "maps_url": "https://maps.google.com/?cid=1518123020217131503&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/montgomery/2566",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2567,
+  "slug": "joliet-w-jefferson-st",
+  "group": "JLO Group",
+  "city": "Joliet",
+  "state": "IL",
+  "street": "1644 W Jefferson St",
+  "street_name": "W Jefferson St",
+  "zip": "60435",
+  "card_title": "Joliet – W Jefferson St",
+  "page_title": "Joliet, W Jefferson St",
+  "lat": 41.522436899999995,
+  "lng": -88.12205469999999,
+  "place_id": "ChIJ2d4ItHNhDogRb92UNL8w7ds",
+  "phone": "(815) 729-2225",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1035,
+  "maps_url": "https://maps.google.com/?cid=15847376261565701487&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/joliet/2567",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2569,
+  "slug": "chicago-s-kedzie-ave",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "10345 S Kedzie Ave",
+  "street_name": "S Kedzie Ave",
+  "zip": "60655",
+  "card_title": "Chicago – S Kedzie Ave",
+  "page_title": "Chicago, S Kedzie Ave",
+  "lat": 41.704816699999995,
+  "lng": -87.700974,
+  "place_id": "ChIJDxXKsNM6DogRbQaF6usmHuA",
+  "phone": "(773) 233-3640",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 1188,
+  "maps_url": "https://maps.google.com/?cid=16149388108490933869&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/2569",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2659,
+  "slug": "algonquin-w-algonquin-rd",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Algonquin",
+  "state": "IL",
+  "street": "2361 W Algonquin Rd",
+  "street_name": "W Algonquin Rd",
+  "zip": "60102",
+  "card_title": "Algonquin",
+  "page_title": "Algonquin, W Algonquin Rd",
+  "lat": 42.1751802,
+  "lng": -88.3319126,
+  "place_id": "ChIJV-x4T2USD4gRcJvqxc6PUPY",
+  "phone": "(224) 333-2242",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.8,
+  "review_count": 1319,
+  "maps_url": "https://maps.google.com/?cid=17748844249713646448&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/algonquin/2659",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2675,
+  "slug": "oak-park-north-ave",
+  "group": "DeGeatano Group",
+  "city": "Oak Park",
+  "state": "IL",
+  "street": "6845 North Ave",
+  "street_name": "North Ave",
+  "zip": "60302",
+  "card_title": "Oak Park – North Ave",
+  "page_title": "Oak Park, North Ave",
+  "lat": 41.908716,
+  "lng": -87.79733,
+  "place_id": "ChIJkyDiIDjLD4gRAZxDV-Zw6Wk",
+  "phone": "(708) 386-5855",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.1,
+  "review_count": 235,
+  "maps_url": "https://maps.google.com/?cid=7631755178164853761&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/oak-park/2675",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2711,
+  "slug": "crown-point-broadway",
+  "group": "Allied Automotive Group",
+  "city": "Crown Point",
+  "state": "IN",
+  "street": "9301 Broadway",
+  "street_name": "Broadway",
+  "zip": "46307",
+  "card_title": "Crown Point",
+  "page_title": "Crown Point, Broadway",
+  "lat": 41.44885860000001,
+  "lng": -87.3350561,
+  "place_id": "ChIJ4YQhE1buEYgR1sjMLmCuuUQ",
+  "phone": "(219) 756-7672",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 1947,
+  "maps_url": "https://maps.google.com/?cid=4952180993395837142&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/crown-point/2711",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2907,
+  "slug": "zion-sheridan-rd",
+  "group": "MTPDR Group",
+  "city": "Zion",
+  "state": "IL",
+  "street": "2000 Sheridan Rd",
+  "street_name": "Sheridan Rd",
+  "zip": "60099",
+  "card_title": "Zion",
+  "page_title": "Zion, Sheridan Rd",
+  "lat": 42.4586562,
+  "lng": -87.8255317,
+  "place_id": "ChIJc8dnLZv0D4gRjoxy7xt-_Jk",
+  "phone": "(847) 731-7647",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 361,
+  "maps_url": "https://maps.google.com/?cid=11095882240380537998&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/zion/2907",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2913,
+  "slug": "plainfield-s-route-59",
+  "group": "Wimbles Group",
+  "city": "Plainfield",
+  "state": "IL",
+  "street": "2021 S Route 59",
+  "street_name": "S Route 59",
+  "zip": "60544",
+  "card_title": "Plainfield",
+  "page_title": "Plainfield, S Route 59",
+  "lat": 41.559041,
+  "lng": -88.2007605,
+  "place_id": "ChIJE7VLsQD1DogRYgDKqoyLAb4",
+  "phone": "(815) 609-7238",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 769,
+  "maps_url": "https://maps.google.com/?cid=13691377778460065890&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/plainfield/2913",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2947,
+  "slug": "valparaiso-morthland-dr",
+  "group": "Allied Automotive Group",
+  "city": "Valparaiso",
+  "state": "IN",
+  "street": "355 Morthland Dr",
+  "street_name": "Morthland Dr",
+  "zip": "46383",
+  "card_title": "Valparaiso",
+  "page_title": "Valparaiso, Morthland Dr",
+  "lat": 41.4590104,
+  "lng": -87.06508769999999,
+  "place_id": "ChIJeexAtXaaEYgRH_wzUOQUY_M",
+  "phone": "(219) 462-7000",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 450,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 906,
+  "maps_url": "https://maps.google.com/?cid=17537884344741526559&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/in/valparaiso/2947",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2958,
+  "slug": "matteson-cicero-avenue",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Matteson",
+  "state": "IL",
+  "street": "20602 Cicero Avenue",
+  "street_name": "Cicero Avenue",
+  "zip": "60443",
+  "card_title": "Matteson",
+  "page_title": "Matteson, Cicero Avenue",
+  "lat": 41.5150401,
+  "lng": -87.7334005,
+  "place_id": "ChIJ_0r_OCEXDogRJYc5kfmbRYE",
+  "phone": "(708) 283-0631",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 983,
+  "maps_url": "https://maps.google.com/?cid=9315022900471367461&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/matteson/2958",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2982,
+  "slug": "crestwood-cicero-ave",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Crestwood",
+  "state": "IL",
+  "street": "14007 Cicero Ave",
+  "street_name": "Cicero Ave",
+  "zip": "60445",
+  "card_title": "Crestwood",
+  "page_title": "Crestwood, Cicero Ave",
+  "lat": 41.637785,
+  "lng": -87.73735909999999,
+  "place_id": "ChIJZ0py7l88DogRwlfy30o-sHc",
+  "phone": "(708) 371-9779",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 942,
+  "maps_url": "https://maps.google.com/?cid=8624461777720203202&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/crestwood/2982",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 2983,
+  "slug": "glenwood-s-halsted-st",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Glenwood",
+  "state": "IL",
+  "street": "18233 S Halsted St",
+  "street_name": "S Halsted St",
+  "zip": "60425",
+  "card_title": "Glenwood",
+  "page_title": "Glenwood, S Halsted St",
+  "lat": 41.5587618,
+  "lng": -87.6356936,
+  "place_id": "ChIJ9xkqp78YDogRibHmk7NaenM",
+  "phone": "(708) 441-6611",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 984,
+  "maps_url": "https://maps.google.com/?cid=8321062988847427977&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/glenwood/2983",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3017,
+  "slug": "chicago-s-western-ave",
+  "group": "PVA Group",
+  "city": "Chicago",
+  "state": "IL",
+  "street": "1230 S Western Ave",
+  "street_name": "S Western Ave",
+  "zip": "60608",
+  "card_title": "Chicago – S Western Ave",
+  "page_title": "Chicago, S Western Ave",
+  "lat": 41.8657014,
+  "lng": -87.6863683,
+  "place_id": "ChIJPa11PnAtDogRFdIS75RpM9Q",
+  "phone": "(312) 633-0600",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.3,
+  "review_count": 1588,
+  "maps_url": "https://maps.google.com/?cid=15290681248240030229&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/chicago/3017",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3035,
+  "slug": "homer-glen-w-159th-st",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "Homer Glen",
+  "state": "IL",
+  "street": "12554 W 159Th St",
+  "street_name": "W 159Th St",
+  "zip": "60491",
+  "card_title": "Homer Glen",
+  "page_title": "Homer Glen, W 159Th St",
+  "lat": 41.6005435,
+  "lng": -87.9249203,
+  "place_id": "ChIJbeBDqhJADogREb1zVx8SiTk",
+  "phone": "(708) 301-2233",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 616,
+  "maps_url": "https://maps.google.com/?cid=4145864857791741201&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "http://chicagolandjiffylube.com/stores/jiffy-lube-in-homer-glen",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3087,
+  "slug": "lemont-w-127th-st",
+  "group": "ODEA Oil Services Group",
+  "city": "Lemont",
+  "state": "IL",
+  "street": "15667 W 127Th St",
+  "street_name": "W 127Th St",
+  "zip": "60439",
+  "card_title": "Lemont",
+  "page_title": "Lemont, W 127Th St",
+  "lat": 41.656949000000004,
+  "lng": -88.0020778,
+  "place_id": "ChIJ__OgeFpDDogRrYlgsTqEyqQ",
+  "phone": "(331) 757-5024",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 420,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 323,
+  "maps_url": "https://maps.google.com/?cid=11874448755134597549&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/lemont/3087",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3093,
+  "slug": "west-chicago-w-north-ave",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "West Chicago",
+  "state": "IL",
+  "street": "137 W North Ave",
+  "street_name": "W North Ave",
+  "zip": "60185",
+  "card_title": "West Chicago",
+  "page_title": "West Chicago, W North Ave",
+  "lat": 41.9158045,
+  "lng": -88.20751159999999,
+  "place_id": "ChIJ0UVFVM0BD4gRHyXVkt-f46k",
+  "phone": "(630) 293-7725",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 544,
+  "maps_url": "https://maps.google.com/?cid=12241803994713105695&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/west-chicago/3093",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3143,
+  "slug": "woodstock-catalpa-ln",
+  "group": "TEAM CAR CARE, LLC",
+  "city": "Woodstock",
+  "state": "IL",
+  "street": "11601 Catalpa Ln",
+  "street_name": "Catalpa Ln",
+  "zip": "60098",
+  "card_title": "Woodstock",
+  "page_title": "Woodstock, Catalpa Ln",
+  "lat": 42.293876399999995,
+  "lng": -88.42385159999999,
+  "place_id": "ChIJEXrjLsNrD4gR1mTYNydr4CQ",
+  "phone": "(815) 308-2325",
+  "hours": [
+   null,
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 420,
+    "close": 1020
+   }
+  ],
+  "rating": 4.6,
+  "review_count": 686,
+  "maps_url": "https://maps.google.com/?cid=2657241596333417686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/woodstock/3143",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3201,
+  "slug": "yorkville-marketview-dr",
+  "group": "DeGeatano Group",
+  "city": "Yorkville",
+  "state": "IL",
+  "street": "1845 Marketview Dr",
+  "street_name": "Marketview Dr",
+  "zip": "60560",
+  "card_title": "Yorkville",
+  "page_title": "Yorkville, Marketview Dr",
+  "lat": 41.6649689,
+  "lng": -88.4414352,
+  "place_id": "ChIJy5EHzizqDogRERWY6g4is2s",
+  "phone": "(630) 553-1784",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1080
+   }
+  ],
+  "rating": 3.8,
+  "review_count": 352,
+  "maps_url": "https://maps.google.com/?cid=7760584030350218513&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/yorkville/3201",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3253,
+  "slug": "aurora-w-sullivan-rd",
+  "group": "PVA Group",
+  "city": "Aurora",
+  "state": "IL",
+  "street": "2428 W Sullivan Rd",
+  "street_name": "W Sullivan Rd",
+  "zip": "60506",
+  "card_title": "Aurora – W Sullivan Rd",
+  "page_title": "Aurora, W Sullivan Rd",
+  "lat": 41.7875156,
+  "lng": -88.37825930000001,
+  "place_id": "ChIJgRrnkLTlDogRV8cuoltBJNo",
+  "phone": "(630) 907-9595",
+  "hours": [
+   {
+    "open": 540,
+    "close": 1020
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   },
+   {
+    "open": 420,
+    "close": 1200
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 1307,
+  "maps_url": "https://maps.google.com/?cid=15718760461248677719&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/aurora/3253",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3271,
+  "slug": "sturtevant-durand-ave",
+  "group": "BLACK GOLD PARTNERS GROUP",
+  "city": "Sturtevant",
+  "state": "IN",
+  "street": "7127 Durand Ave",
+  "street_name": "Durand Ave",
+  "zip": "53177",
+  "card_title": "Sturtevant",
+  "page_title": "Sturtevant, Durand Ave",
+  "lat": 42.697153899999996,
+  "lng": -87.868602,
+  "place_id": "ChIJJ0d8nnJoBYgRShURHRWQF1I",
+  "phone": "(262) 554-4100",
+  "hours": [
+   {
+    "open": 540,
+    "close": 840
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.4,
+  "review_count": 813,
+  "maps_url": "https://maps.google.com/?cid=5915355055930807626&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/wi/sturtevant/3271",
+  "business_status": "OPERATIONAL",
+  "multicare": false,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3276,
+  "slug": "vernon-hills-s-milwaukee-avenue",
+  "group": "MTPDR Group",
+  "city": "Vernon Hills",
+  "state": "IL",
+  "street": "840 S Milwaukee Avenue",
+  "street_name": "S Milwaukee Avenue",
+  "zip": "60061",
+  "card_title": "Vernon Hills",
+  "page_title": "Vernon Hills, S Milwaukee Avenue",
+  "lat": 42.210751099999996,
+  "lng": -87.93506599999999,
+  "place_id": "ChIJ36CCxm2WD4gRrPJ6cpQgvOA",
+  "phone": "(847) 821-8126",
+  "hours": [
+   {
+    "open": 540,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1080
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.5,
+  "review_count": 315,
+  "maps_url": "https://maps.google.com/?cid=16193854182065369772&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/vernon-hills/3276",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": false,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3965,
+  "slug": "romeoville-west-airport-rd",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "Romeoville",
+  "state": "IL",
+  "street": "1332 West Airport Rd.",
+  "street_name": "West Airport Rd.",
+  "zip": "60446",
+  "card_title": "Romeoville – West Airport Rd.",
+  "page_title": "Romeoville, West Airport Rd.",
+  "lat": 41.610135500000005,
+  "lng": -88.1249287,
+  "place_id": "ChIJ0Yg8ttBfDogRgZhJ7IGsD2Y",
+  "phone": "(779) 234-6993",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.9,
+  "review_count": 1464,
+  "maps_url": "https://maps.google.com/?cid=7354286390534314113&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/romeoville/3965",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 3975,
+  "slug": "huntley-kreutzer-road",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "Huntley",
+  "state": "IL",
+  "street": "11875 Kreutzer Road",
+  "street_name": "Kreutzer Road",
+  "zip": "60142",
+  "card_title": "Huntley",
+  "page_title": "Huntley, Kreutzer Road",
+  "lat": 42.153414,
+  "lng": -88.431794,
+  "place_id": "ChIJj7VnD1UVD4gREseG4553OpU",
+  "phone": "(224) 654-6965",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.7,
+  "review_count": 786,
+  "maps_url": "https://maps.google.com/?cid=10753038584606279442&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/huntley/3975",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 4001,
+  "slug": "sycamore-south-peace-rd",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "Sycamore",
+  "state": "IL",
+  "street": "491 South Peace Rd.",
+  "street_name": "South Peace Rd.",
+  "zip": "60178",
+  "card_title": "Sycamore",
+  "page_title": "Sycamore, South Peace Rd.",
+  "lat": 41.987051699999995,
+  "lng": -88.7093901,
+  "place_id": "ChIJ0wncO6cpD4gRkS5tfCakveo",
+  "phone": "(815) 895-5853",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.8,
+  "review_count": 1356,
+  "maps_url": "https://maps.google.com/?cid=16914856260676693649&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/sycamore/4001",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 4144,
+  "slug": "new-lenox-east-lincoln-highway",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "New Lenox",
+  "state": "IL",
+  "street": "682 East Lincoln Highway",
+  "street_name": "East Lincoln Highway",
+  "zip": "60451",
+  "card_title": "New Lenox",
+  "page_title": "New Lenox, East Lincoln Highway",
+  "lat": 41.5119718,
+  "lng": -87.94936349999999,
+  "place_id": "ChIJPw3XQ6ZpDogRiUONqmVSC3k",
+  "phone": "(815) 717-4936",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 4.9,
+  "review_count": 474,
+  "maps_url": "https://maps.google.com/?cid=8722155699939656585&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/new-lenox/4144",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 4218,
+  "slug": "mundelein-sysmex-way",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "Mundelein",
+  "state": "IL",
+  "street": "3 Sysmex Way",
+  "street_name": "Sysmex Way",
+  "zip": "60060",
+  "card_title": "Mundelein – Sysmex Way",
+  "page_title": "Mundelein, Sysmex Way",
+  "lat": 42.2744183,
+  "lng": -88.0390178,
+  "place_id": "ChIJAaf11PSZD4gRbXdH5-PDLOg",
+  "phone": "(224) 292-5009",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 5,
+  "review_count": 519,
+  "maps_url": "https://maps.google.com/?cid=16729962099379763053&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/mundelein/4218",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ },
+ {
+  "id": 4256,
+  "slug": "sugar-grove-e-galena-blvd",
+  "group": "STONEBRIAR AUTO SERVICES GROUP",
+  "city": "Sugar Grove",
+  "state": "IL",
+  "street": "112 E Galena Blvd",
+  "street_name": "E Galena Blvd",
+  "zip": "60554",
+  "card_title": "Sugar Grove",
+  "page_title": "Sugar Grove, E Galena Blvd",
+  "lat": 41.772566,
+  "lng": -88.43986090000001,
+  "place_id": "ChIJscozR73nDogRypt4G3Q2YnQ",
+  "phone": "(331) 227-4473",
+  "hours": [
+   {
+    "open": 600,
+    "close": 960
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1140
+   },
+   {
+    "open": 480,
+    "close": 1020
+   }
+  ],
+  "rating": 5,
+  "review_count": 298,
+  "maps_url": "https://maps.google.com/?cid=8386325328422280138&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "jiffylube_url": "https://www.jiffylube.com/locations/il/sugar-grove/4256",
+  "business_status": "OPERATIONAL",
+  "multicare": true,
+  "tires": true,
+  "manager_name": null,
+  "manager_photo": null,
+  "coupon_code": "CORE01"
+ }
+]

@@ -1,0 +1,79 @@
+{
+  "site_name": "Jiffy Lube Chicagoland",
+  "domain": "https://www.jiffylubechicagoland.com",
+  "region_name": "Chicago",
+  "region_long": "Chicagoland",
+  "rating_as_of": "October 2026",
+  "trust_year": "2026",
+  "offer": {
+    "_note": "The Figma design shows a <generic offer> placeholder on the region page and $16 OFF on store pages. Edit these to change what shows on the site.",
+    "amount": "$16 OFF",
+    "description": "any oil change, plus a free tire pressure check and fill",
+    "code": "CORE01",
+    "expires": "January 31, 2027",
+    "hero_title": "$16 off any oil change",
+    "copy_instructions": "Show this code at the counter. Not valid with any other offer."
+  },
+  "region_copy": {
+    "team_heading": "Keeping Chicagoland drivers on the road",
+    "team_body": "Our team at Jiffy Lube is here to make routine maintenance fast, easy, and worry-free for drivers in the Chicago area. Our certified technicians handle everything from oil changes and tire rotations to multi-point inspections, so you don’t have to think twice about it. We know your time matters — that’s why we focus on quick, honest service you can trust, with no surprises and no upselling you don’t need. Stop by your nearest Chicagoland Jiffy Lube and see why your neighbors keep coming back. Jiffy Does It."
+  },
+  "store_copy": {
+    "team_heading": "Keeping {city} drivers on the road",
+    "team_body": "Our team at Jiffy Lube is here to make routine maintenance fast, easy, and worry-free. Our certified technicians handle everything from oil changes and tire rotations to multi-point inspections, so you don’t have to think twice about it. Stop by and see why your neighbors keep coming back to us for their vehicle care.",
+    "team_body_with_manager": "Our team at Jiffy Lube is here to make routine maintenance fast, easy, and worry-free. Led by {manager}, our certified technicians bring decades of combined experience to every service. Stop by and see why your neighbors keep coming back to us for their vehicle care."
+  },
+  "included": [
+    "Oil change with a new oil filter",
+    "Visual inspection of key components",
+    "Fluids topped off",
+    "Tire pressure checked and set",
+    "Exterior windows cleaned",
+    "Interior floors vacuumed"
+  ],
+  "services": [
+    "Oil change",
+    "Engine oil filters",
+    "Cabin air filter",
+    "Wiper blades",
+    "Battery replacement",
+    "Tire rotation",
+    "Brakes (rotors and pads)",
+    "Air conditioning recharge",
+    "Radiator coolant exchange",
+    "Brake fluid exchange",
+    "Differential fluid exchange",
+    "Lights and bulb replacement",
+    "Spark plug replacement",
+    "Tire replacement"
+  ],
+  "legal": {
+    "privacy_heading": "Privacy and call recording",
+    "lines": [
+      "Valid only at participating locations. See store for details. Expires {expires}. Coupon code must be presented at time of service. Not valid with any other offer.",
+      "*Voted most trusted brand by American shoppers based on the BrandSpark® American Trust Study, for 2026 (Fast Oil Change Service), 2024-2025 (Oil and Lube Change Service), 2023 (Quick Oil Change Service).",
+      "*15 minute oil change service time is based on national averages from independent store audits of oil change services only, does not include wait time or additional services.",
+      "This site is operated by {franchisee}, an independent Jiffy Lube® franchisee, and covers only the locations listed here.",
+      "Jiffy Lube®, the Jiffy Lube design mark, and Jiffy Lube Signature Service® are registered trademarks of Jiffy Lube, LLC. © 2026 Jiffy Lube, LLC."
+    ],
+    "region_franchisee": "participating independent Jiffy Lube® franchisees"
+  },
+  "popular_times": {
+    "_note": "PLACEHOLDER. Google does not provide popular-times data through its API. Values are relative busyness 0-100 for each hour 7am-8pm, per weekday starting Sunday. Replace with real data or set enabled to false to hide the section.",
+    "enabled": true,
+    "hours_start": 7,
+    "days": [
+      [10, 20, 35, 50, 55, 50, 45, 40, 35, 30, 20, 10, 5, 0],
+      [15, 20, 30, 35, 40, 45, 55, 70, 80, 75, 60, 45, 25, 10],
+      [15, 20, 30, 35, 40, 45, 55, 70, 80, 75, 60, 45, 25, 10],
+      [15, 20, 30, 35, 40, 45, 55, 70, 80, 75, 60, 45, 25, 10],
+      [15, 20, 30, 35, 40, 45, 55, 70, 80, 75, 60, 45, 25, 10],
+      [20, 25, 35, 45, 50, 55, 65, 80, 90, 85, 70, 50, 30, 15],
+      [25, 40, 60, 80, 90, 85, 75, 60, 50, 40, 25, 10, 5, 0]
+    ]
+  },
+  "analytics": {
+    "_note": "Paste a Google Analytics 4 measurement ID like G-XXXXXXXXXX to enable tracking, or leave empty.",
+    "ga4_id": ""
+  }
+}
