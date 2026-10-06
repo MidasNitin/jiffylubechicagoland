@@ -179,7 +179,7 @@
   },
   "analytics": {
     "_note": "Paste a Google Analytics 4 measurement ID like G-XXXXXXXXXX to enable tracking, or leave empty.",
-    "ga4_id": ""
+    "ga4_id": "G-ZQFKPHL9J8"
   },
   "wallet": {
     "_note": "Set enabled to true once the Apple and Google Wallet accounts are configured in Vercel. apple/google can be toggled separately.",

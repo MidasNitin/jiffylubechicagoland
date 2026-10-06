@@ -52,7 +52,9 @@ const legalLines = (franchisee) => site.legal.lines.map((l) => l.replace('{expir
 
 /* ---------- partials ---------- */
 function head(title, desc, canonical, extra = '') {
-  const ga = site.analytics.ga4_id ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4_id}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.analytics.ga4_id}');</script>` : '';
+  // GA4, loaded after the page has finished loading so it never competes with content.
+  // Events fired before the library arrives are queued in dataLayer and sent once it loads.
+  const ga = site.analytics.ga4_id ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.analytics.ga4_id}',{send_page_view:true});(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4_id}';document.head.appendChild(s);}if(document.readyState==='complete')setTimeout(l,0);else window.addEventListener('load',function(){setTimeout(l,0);});['pointerdown','keydown','touchstart'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});})();</script>` : '';
   return `<!doctype html>
 <html lang="en">
 <head>
