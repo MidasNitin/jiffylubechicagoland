@@ -185,7 +185,7 @@
     "_note": "Set enabled to true once the Apple and Google Wallet accounts are configured in Vercel. apple/google can be toggled separately.",
     "enabled": true,
     "apple": true,
-    "google": false
+    "google": true
   },
   "attribution": {
     "_note": "Visitors arriving with ?utm_term=<key> (or whatever 'param' is set to) see the coupon code mapped to that key, on every page for 30 days. Keys not in the table fall back to offer.code. Add one line per campaign; make sure the stores accept each code.",
