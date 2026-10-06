@@ -22,6 +22,35 @@
     return h12 + (m ? ':' + (m < 10 ? '0' : '') + m : '') + suffix;
   }
 
+  /* ---- Analytics: one helper, GA4 events (no-op until a measurement ID is configured) ---- */
+  function track(name, params) {
+    try {
+      var p = params || {};
+      var store = document.body.getAttribute('data-store');
+      if (store && !p.store) p.store = store;
+      var saved = JSON.parse(localStorage.getItem('jl_attr') || 'null');
+      if (saved && saved.k) p.campaign_key = saved.k;
+      if (typeof window.gtag === 'function') window.gtag('event', name, p);
+      if (window.dataLayer && typeof window.gtag !== 'function') window.dataLayer.push(Object.assign({ event: name }, p));
+    } catch (e) { /* never break the page for analytics */ }
+  }
+  function initTracking() {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a, button');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href.indexOf('tel:') === 0) track('call_click', { phone: href.slice(4), location: a.closest('.sticky') ? 'sticky_bar' : a.closest('.nav') ? 'nav' : 'page' });
+      else if (href.indexOf('google.com/maps') >= 0) track('get_directions', { location: a.closest('.loc-card') ? 'search_result' : a.closest('.nav') ? 'nav' : 'page' });
+      else if (a.classList.contains('coupon__cta')) track('get_coupon', { code: (a.closest('.coupon') || {}).getAttribute ? a.closest('.coupon').getAttribute('data-code') : '' });
+      else if (a.classList.contains('js-copy')) track('copy_code', { code: a.closest('.coupon').getAttribute('data-code') });
+      else if (a.classList.contains('coupon__wallet-btn--apple')) track('wallet_add', { wallet: 'apple', code: a.closest('.coupon').getAttribute('data-code') });
+      else if (a.classList.contains('coupon__wallet-btn--google')) track('wallet_add', { wallet: 'google', code: a.closest('.coupon').getAttribute('data-code') });
+      else if (a.classList.contains('js-goto-coupon')) track('get_coupon', { location: 'sticky_bar' });
+      else if (a.classList.contains('js-geo')) track('use_location');
+      else if (a.classList.contains('loc-card__name') || (a.closest('.loc-card') && href.indexOf('/coupon/') >= 0)) track('select_store', { store: (href.match(/\/(store|coupon)\/([^/?]+)/) || [])[2] || '', via: href.indexOf('/coupon/') >= 0 ? 'coupon_button' : 'name' });
+    }, true);
+  }
+
   /* ---- Open / closed status (store + coupon pages) ---- */
   function initStatus() {
     var el = document.querySelector('[data-hours]');
@@ -220,6 +249,7 @@
       list.innerHTML = '';
       shown = 0;
       title.textContent = sorted.length + ' location' + (sorted.length === 1 ? '' : 's') + ' near ' + placeLabel;
+      track('search_results', { results: sorted.length, nearest: sorted[0] ? sorted[0].slug : '', nearest_miles: sorted[0] ? Math.round(sorted[0].d * 10) / 10 : null });
       results.classList.add('is-visible');
       more(PAGE);
       results.scrollIntoView({ block: 'start', behavior: 'smooth' });
@@ -254,7 +284,7 @@
       try { history.replaceState(null, '', '?zip=' + zip); } catch (e) { /* ignore */ }
     }
 
-    form.addEventListener('submit', function (e) { e.preventDefault(); searchZip(input.value); });
+    form.addEventListener('submit', function (e) { e.preventDefault(); track('search_zip', { zip: input.value.trim() }); searchZip(input.value); });
 
     geoBtns.forEach(function (b) {
       b.addEventListener('click', function (e) {
@@ -342,6 +372,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     initAttribution();
     initPlatform();
+    initTracking();
     initMap();
     initStatus();
     initPopular();

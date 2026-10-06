@@ -119,8 +119,8 @@ function couponCard(store, extraCls = '') {
       <button class="btn btn--primary btn--block js-copy" type="button">Copy Code</button>
       <div class="coupon__copied">Code copied to your clipboard.</div>
       ${site.wallet && site.wallet.enabled ? `<div class="coupon__wallet" data-store="${store ? esc(store.slug) : ''}">
-        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Apple Wallet">${svg('badge-apple-wallet')}</a>` : ''}
-        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Google Wallet">${svg('badge-google-wallet')}</a>` : ''}
+        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple/${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Apple Wallet">${svg('badge-apple-wallet')}</a>` : ''}
+        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google/${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Google Wallet">${svg('badge-google-wallet')}</a>` : ''}
       </div>` : ''}
       <p class="coupon__fine">${esc(o.copy_instructions)} Expires ${esc(o.expires)}</p>
     </div>
@@ -298,7 +298,7 @@ function storePage(s) {
   const title = `Jiffy Lube® ${s.city}, ${s.street_name} | Oil Change, No Appointment Needed`;
   const desc = `Jiffy Lube at ${s.street}, ${s.city}, ${s.state}. Oil changes in about 15 minutes, no appointment needed. Hours, directions, and a ${site.offer.amount.toLowerCase()} coupon.`;
   return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s))}
-<body data-hours='${JSON.stringify(s.hours)}'>
+<body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s)}
 <main class="page page--store">
@@ -328,7 +328,7 @@ function couponPage(s) {
   const title = `${site.offer.hero_title} in ${s.city} | Jiffy Lube® ${s.street_name}`;
   const desc = `${site.offer.amount} ${site.offer.description} at Jiffy Lube ${s.street}, ${s.city}. No appointment needed. Get your coupon code.`;
   return `${head(title, desc, `/coupon/${s.slug}/`, storeJsonLd(s))}
-<body data-hours='${JSON.stringify(s.hours)}'>
+<body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s)}
 <main class="page page--coupon">

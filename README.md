@@ -103,3 +103,25 @@ environment variables in Vercel (Project → Settings → Environment Variables)
 
 Pass artwork is in `wallet/apple-model/` (Apple) and `assets/img/wallet/` (Google). Apple's
 WWDR intermediate certificate is bundled in `wallet/certs/wwdr.pem` (valid to 2030).
+
+## Google Analytics (GA4) events
+
+Put the GA4 measurement ID (looks like `G-XXXXXXXXXX`) in `data/site.json` → `analytics.ga4_id`,
+rebuild and push. Tracking is then live on every page. Events sent, each with `store`
+(the store slug, on store/coupon pages) and `campaign_key` (from `?utm_term=`) attached:
+
+| Event | When |
+| --- | --- |
+| `get_coupon` | "Get My Coupon" clicked (location: page or sticky_bar) |
+| `copy_code` | "Copy Code" clicked (code) |
+| `wallet_add` | Apple or Google Wallet button clicked (wallet, code) |
+| `call_click` | any phone-number button (phone, location: nav / page / sticky_bar) |
+| `get_directions` | any Get Directions button (location: nav / page / search_result) |
+| `search_zip` | zip search submitted (zip) |
+| `use_location` | "Use my location" clicked |
+| `search_results` | results shown (results count, nearest store, nearest_miles) |
+| `select_store` | a store chosen from the results (store, via: name / coupon_button) |
+
+In GA4, mark `get_coupon`, `copy_code`, `wallet_add`, `call_click` and `get_directions` as
+Key events (Admin → Events → toggle "Mark as key event") so they count as conversions and can
+be imported into Google Ads.
