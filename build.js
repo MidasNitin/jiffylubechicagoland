@@ -51,10 +51,11 @@ const fullAddr = (s) => `${s.street}, ${s.city}, ${s.state} ${s.zip}`;
 const legalLines = (franchisee) => site.legal.lines.map((l) => l.replace('{expires}', site.offer.expires).replace('{franchisee}', franchisee));
 
 /* ---------- partials ---------- */
-function head(title, desc, canonical, extra = '') {
+function head(title, desc, canonical, extra = '', phone = null) {
+  const adsCall = (phone && site.analytics.google_ads_id && site.analytics.google_ads_call_label) ? `gtag('config','${site.analytics.google_ads_call_label}',{'phone_conversion_number':'${phone}'});` : '';
   // GA4, loaded after the page has finished loading so it never competes with content.
   // Events fired before the library arrives are queued in dataLayer and sent once it loads.
-  const ga = site.analytics.ga4_id ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.analytics.ga4_id}',{send_page_view:true});(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4_id}';document.head.appendChild(s);}if(document.readyState==='complete')setTimeout(l,0);else window.addEventListener('load',function(){setTimeout(l,0);});['pointerdown','keydown','touchstart'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});})();</script>` : '';
+  const ga = site.analytics.ga4_id ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.analytics.ga4_id}',{send_page_view:true});${site.analytics.google_ads_id ? `gtag('config','${site.analytics.google_ads_id}');` : ''}${adsCall}(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4_id}';document.head.appendChild(s);}if(document.readyState==='complete')setTimeout(l,0);else window.addEventListener('load',function(){setTimeout(l,0);});['pointerdown','keydown','touchstart'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});})();</script>` : '';
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -69,7 +70,7 @@ function head(title, desc, canonical, extra = '') {
 <meta property="og:url" content="${site.domain}${canonical}">
 <meta property="og:image" content="${site.domain}/assets/img/team.jpg">
 <meta name="theme-color" content="#700000">
-<script>window.JL_ATTR=${JSON.stringify({ param: site.attribution.param, days: site.attribution.days, codes: site.attribution.codes, defaultCode: site.offer.code })};</script>
+<script>window.JL_ATTR=${JSON.stringify({ params: site.attribution.params, days: site.attribution.days, codes: site.attribution.codes, defaultCode: site.offer.code })};window.JL_ADS=${JSON.stringify(Object.fromEntries(Object.entries(site.analytics.google_ads_conversions || {}).filter(([k]) => !k.startsWith('_'))))};</script>
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/Poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Poppins-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -301,7 +302,7 @@ ${scripts()}
 function storePage(s) {
   const title = `Jiffy Lube® ${s.city}, ${s.street_name} | Oil Change, No Appointment Needed`;
   const desc = `Jiffy Lube at ${s.street}, ${s.city}, ${s.state}. Oil changes in about 15 minutes, no appointment needed. Hours, directions, and a ${site.offer.amount.toLowerCase()} coupon.`;
-  return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s))}
+  return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s)}
@@ -331,7 +332,7 @@ ${scripts()}
 function couponPage(s) {
   const title = `${site.offer.hero_title} in ${s.city} | Jiffy Lube® ${s.street_name}`;
   const desc = `${site.offer.amount} ${site.offer.description} at Jiffy Lube ${s.street}, ${s.city}. No appointment needed. Get your coupon code.`;
-  return `${head(title, desc, `/coupon/${s.slug}/`, storeJsonLd(s))}
+  return `${head(title, desc, `/coupon/${s.slug}/`, storeJsonLd(s), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s)}

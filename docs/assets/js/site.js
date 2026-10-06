@@ -31,6 +31,8 @@
       var saved = JSON.parse(localStorage.getItem('jl_attr') || 'null');
       if (saved && saved.k) p.campaign_key = saved.k;
       if (typeof window.gtag === 'function') window.gtag('event', name, p);
+      // Google Ads conversion alongside the GA4 event (labels come from data/site.json)
+      if (window.JL_ADS && window.JL_ADS[name] && typeof window.gtag === 'function') window.gtag('event', 'conversion', { send_to: window.JL_ADS[name] });
       if (window.dataLayer && typeof window.gtag !== 'function') window.dataLayer.push(Object.assign({ event: name }, p));
     } catch (e) { /* never break the page for analytics */ }
   }
@@ -225,7 +227,7 @@
     }
 
     function attrSuffix() {
-      try { var cfg = window.JL_ATTR, saved = JSON.parse(localStorage.getItem('jl_attr') || 'null'); if (cfg && saved && saved.k && cfg.codes[saved.k]) return '?' + cfg.param + '=' + encodeURIComponent(saved.k); } catch (e) { /* ignore */ }
+      try { var cfg = window.JL_ATTR, saved = JSON.parse(localStorage.getItem('jl_attr') || 'null'); if (cfg && saved && saved.k && cfg.codes[saved.k]) return '?' + (saved.p || (cfg.params || ['utm_term'])[0]) + '=' + encodeURIComponent(saved.k); } catch (e) { /* ignore */ }
       return '';
     }
     function card(s) {
@@ -340,15 +342,19 @@
     var cfg = window.JL_ATTR;
     if (!cfg || !cfg.codes) return;
     var KEY = 'jl_attr';
-    var key = null;
+    var params = cfg.params || [cfg.param || 'utm_term'];
+    var key = null, param = params[0];
     try {
-      var fromUrl = new URLSearchParams(location.search).get(cfg.param);
-      if (fromUrl && cfg.codes[fromUrl.toLowerCase()]) {
-        key = fromUrl.toLowerCase();
-        localStorage.setItem(KEY, JSON.stringify({ k: key, t: Date.now() }));
+      var qs = new URLSearchParams(location.search);
+      for (var i = 0; i < params.length && !key; i++) {
+        var v = qs.get(params[i]);
+        if (v && cfg.codes[v.toLowerCase()]) { key = v.toLowerCase(); param = params[i]; }
+      }
+      if (key) {
+        localStorage.setItem(KEY, JSON.stringify({ k: key, p: param, t: Date.now() }));
       } else {
         var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-        if (saved && saved.k && cfg.codes[saved.k] && Date.now() - saved.t < cfg.days * 864e5) key = saved.k;
+        if (saved && saved.k && cfg.codes[saved.k] && Date.now() - saved.t < cfg.days * 864e5) { key = saved.k; param = saved.p || param; }
       }
     } catch (e) { /* storage unavailable: fall back to default code */ }
     if (!key) return;
@@ -365,7 +371,7 @@
     document.querySelectorAll('a[href^="/"]').forEach(function (a) {
       if (a.classList.contains('coupon__wallet-btn')) return;
       var href = a.getAttribute('href');
-      if (href.indexOf(cfg.param + '=') === -1) a.setAttribute('href', href + (href.indexOf('?') >= 0 ? '&' : '?') + cfg.param + '=' + encodeURIComponent(key));
+      if (href.indexOf(param + '=') === -1) a.setAttribute('href', href + (href.indexOf('?') >= 0 ? '&' : '?') + param + '=' + encodeURIComponent(key));
     });
   }
 
