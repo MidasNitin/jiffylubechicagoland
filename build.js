@@ -256,7 +256,7 @@ function storeJsonLd(store) {
 function regionPage() {
   const title = `Jiffy Lube Chicagoland | Find a Jiffy Lube location in the ${site.region_name} Area`;
   const desc = `Fast, easy oil changes at over ${stores.length} Chicagoland Jiffy Lube locations. No appointment needed. Find your nearest location and save with a coupon.`;
-  return `${head(title, desc, '/')}
+  return `${head(title, desc, '/', '<meta name="google-site-verification" content="U3tLAynZUkEMmaz5xKYES6V3tN6ElHLO9mZ8Ek5KoTw">')}
 <body>
 ${SPRITE}
 ${nav(null)}
