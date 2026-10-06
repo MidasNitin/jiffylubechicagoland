@@ -1,0 +1,15 @@
+{
+  "name": "jiffy-lube-chicagoland",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Jiffy Lube Chicagoland website (static site + wallet pass functions)",
+  "scripts": {
+    "build": "node build.js",
+    "preview": "python3 -m http.server 8787 --directory docs"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "passkit-generator": "^3.3.0"
+  }
+}

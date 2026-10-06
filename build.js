@@ -67,6 +67,7 @@ function head(title, desc, canonical, extra = '') {
 <meta property="og:url" content="${site.domain}${canonical}">
 <meta property="og:image" content="${site.domain}/assets/img/team.jpg">
 <meta name="theme-color" content="#700000">
+<script>window.JL_ATTR=${JSON.stringify({ param: site.attribution.param, days: site.attribution.days, codes: site.attribution.codes, defaultCode: site.offer.code })};</script>
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/Poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Poppins-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -114,9 +115,13 @@ function couponCard(store, extraCls = '') {
     <hr class="coupon__divider">
     <button class="btn btn--primary btn--block coupon__cta" type="button">Get My Coupon</button>
     <div class="coupon__reveal">
-      <div class="coupon__code" aria-label="Coupon code ${esc(o.code)}">${esc(o.code)}</div>
+      <div class="coupon__code js-code" aria-label="Coupon code ${esc(o.code)}">${esc(o.code)}</div>
       <button class="btn btn--primary btn--block js-copy" type="button">Copy Code</button>
       <div class="coupon__copied">Code copied to your clipboard.</div>
+      ${site.wallet && site.wallet.enabled ? `<div class="coupon__wallet" data-store="${store ? esc(store.slug) : ''}">
+        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Apple Wallet">${svg('badge-apple-wallet')}</a>` : ''}
+        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Google Wallet">${svg('badge-google-wallet')}</a>` : ''}
+      </div>` : ''}
       <p class="coupon__fine">${esc(o.copy_instructions)} Expires ${esc(o.expires)}</p>
     </div>
   </div>`;

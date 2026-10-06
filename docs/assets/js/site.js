@@ -195,14 +195,18 @@
       return html + '</span>';
     }
 
+    function attrSuffix() {
+      try { var cfg = window.JL_ATTR, saved = JSON.parse(localStorage.getItem('jl_attr') || 'null'); if (cfg && saved && saved.k && cfg.codes[saved.k]) return '?' + cfg.param + '=' + encodeURIComponent(saved.k); } catch (e) { /* ignore */ }
+      return '';
+    }
     function card(s) {
-      var url = base + 'store/' + s.slug + '/';
+      var url = base + 'store/' + s.slug + '/' + attrSuffix();
       return '<article class="loc-card">' +
         '<div class="loc-card__top"><a class="loc-card__name" href="' + url + '">' + s.card_title + '</a><span class="loc-card__dist">' + s.d.toFixed(1) + ' mi</span></div>' +
         '<p class="loc-card__addr">' + s.street + ', ' + s.city + '</p>' +
         (s.phone ? '<a class="loc-card__phone" href="tel:' + s.phone.replace(/\D/g, '') + '">' + s.phone + '</a>' : '') +
         '<div class="loc-card__rating">' + s.rating.toFixed(1) + ' ' + stars(s.rating) + '</div>' +
-        '<div class="loc-card__btns"><a class="btn btn--secondary" href="' + base + 'coupon/' + s.slug + '/">Coupon</a>' +
+        '<div class="loc-card__btns"><a class="btn btn--secondary" href="' + base + 'coupon/' + s.slug + '/' + attrSuffix() + '">Coupon</a>' +
         '<a class="btn btn--secondary" href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.street + ', ' + s.city + ', ' + s.state + ' ' + s.zip) + '&destination_place_id=' + s.place_id + '" target="_blank" rel="noopener">Get Directions</a></div>' +
         '</article>';
     }
@@ -292,7 +296,52 @@
     } else { maps.forEach(load); }
   }
 
+  /* ---- Platform class for wallet buttons ---- */
+  function initPlatform() {
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var isAndroid = /Android/.test(ua);
+    if (isIOS) document.body.classList.add('is-ios');
+    else if (isAndroid) document.body.classList.add('is-android');
+  }
+
+  /* ---- Campaign attribution: ?utm_term=<key> picks the coupon code ---- */
+  function initAttribution() {
+    var cfg = window.JL_ATTR;
+    if (!cfg || !cfg.codes) return;
+    var KEY = 'jl_attr';
+    var key = null;
+    try {
+      var fromUrl = new URLSearchParams(location.search).get(cfg.param);
+      if (fromUrl && cfg.codes[fromUrl.toLowerCase()]) {
+        key = fromUrl.toLowerCase();
+        localStorage.setItem(KEY, JSON.stringify({ k: key, t: Date.now() }));
+      } else {
+        var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (saved && saved.k && cfg.codes[saved.k] && Date.now() - saved.t < cfg.days * 864e5) key = saved.k;
+      }
+    } catch (e) { /* storage unavailable: fall back to default code */ }
+    if (!key) return;
+    var code = cfg.codes[key];
+    document.querySelectorAll('.coupon').forEach(function (c) {
+      c.setAttribute('data-code', code);
+      c.querySelectorAll('.js-code').forEach(function (el) { el.textContent = code; el.setAttribute('aria-label', 'Coupon code ' + code); });
+      c.querySelectorAll('.coupon__wallet-btn').forEach(function (a) {
+        var href = a.getAttribute('href');
+        a.setAttribute('href', href + (href.indexOf('?') >= 0 ? '&' : '?') + 'code=' + encodeURIComponent(key));
+      });
+    });
+    // keep the key on internal links so store/coupon pages opened in a fresh browser still get it
+    document.querySelectorAll('a[href^="/"]').forEach(function (a) {
+      if (a.classList.contains('coupon__wallet-btn')) return;
+      var href = a.getAttribute('href');
+      if (href.indexOf(cfg.param + '=') === -1) a.setAttribute('href', href + (href.indexOf('?') >= 0 ? '&' : '?') + cfg.param + '=' + encodeURIComponent(key));
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initAttribution();
+    initPlatform();
     initMap();
     initStatus();
     initPopular();

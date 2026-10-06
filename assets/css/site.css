@@ -351,3 +351,11 @@ body.has-sticky { padding-bottom: 80px; }
   .page--coupon .find { order: 1; } .page--coupon .trust { order: 2; } .page--coupon .team { order: 3; }
   .page--coupon .how { order: 4; } .page--coupon .lounge { order: 5; } .page--coupon .services { order: 6; }
 }
+
+/* Wallet buttons: shown instead of Copy Code on the matching phone platform */
+.coupon__wallet { display: none; justify-content: center; margin-top: 4px; }
+.coupon__wallet-btn { display: none; }
+.coupon__wallet-btn svg { height: 48px; width: auto; }
+body.is-ios .coupon.is-revealed .coupon__wallet, body.is-android .coupon.is-revealed .coupon__wallet { display: flex; }
+body.is-ios .coupon__wallet-btn--apple, body.is-android .coupon__wallet-btn--google { display: inline-block; }
+body.is-ios .coupon.is-revealed .js-copy, body.is-android .coupon.is-revealed .js-copy { display: none; }
