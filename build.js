@@ -246,7 +246,9 @@ function allLocations() {
   </div></section>`;
 }
 
-const scripts = () => `<script src="/assets/js/site.js" defer></script>`;
+const JS_HASH = require('crypto').createHash('sha1').update(fs.readFileSync(path.join(ROOT, 'assets/js/site.js'))).digest('hex').slice(0, 10);
+const JS_FILE = `site.${JS_HASH}.js`;
+const scripts = () => `<script src="/assets/js/${JS_FILE}" defer></script>`;
 
 function storeJsonLd(store) {
   const spec = DAY_NAMES.map((n, d) => store.hours[d] ? { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d], opens: `${String(Math.floor(store.hours[d].open / 60)).padStart(2, '0')}:${String(store.hours[d].open % 60).padStart(2, '0')}`, closes: `${String(Math.floor(store.hours[d].close / 60)).padStart(2, '0')}:${String(store.hours[d].close % 60).padStart(2, '0')}` } : null).filter(Boolean);
@@ -362,6 +364,7 @@ function copyDir(src, dst) { fs.mkdirSync(dst, { recursive: true }); for (const 
 
 rmrf(OUT);
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
+fs.copyFileSync(path.join(ROOT, 'assets/js/site.js'), path.join(OUT, 'assets/js', JS_FILE));
 write('assets/img/favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#700000"/><text x="32" y="44" font-family="Poppins,Arial,sans-serif" font-weight="700" font-size="36" fill="#fff" text-anchor="middle">J</text></svg>`);
 const publicStores = stores.map(({ slug, card_title, street, city, state, zip, lat, lng, phone, rating, place_id }) => ({ slug, card_title, street, city, state, zip, lat, lng, phone, rating, place_id }));
 write('data/stores.json', JSON.stringify(publicStores));
