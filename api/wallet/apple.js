@@ -14,7 +14,7 @@ const { PKPass } = require('passkit-generator');
 const site = require('../../data/site.json');
 const stores = require('../../data/stores.json');
 
-const MODEL_DIR = path.join(__dirname, '..', '..', 'wallet', 'apple-model');
+const MODEL_DIR = path.join(__dirname, '..', '..', 'wallet', 'apple-model.pass');
 const WWDR = fs.readFileSync(path.join(__dirname, '..', '..', 'wallet', 'certs', 'wwdr.pem'));
 
 const pem = (v) => (v || '').replace(/\\n/g, '\n');

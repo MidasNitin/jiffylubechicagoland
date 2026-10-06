@@ -5,3 +5,8 @@ figma/file.json
 figma/images/
 figma/renders/
 figma/fonts.css
+wallet/certs/*.key
+wallet/certs/*.csr
+wallet/certs/pass*.pem
+wallet/certs/*.cer
+wallet/certs/*.p12

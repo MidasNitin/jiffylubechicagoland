@@ -101,7 +101,7 @@ environment variables in Vercel (Project → Settings → Environment Variables)
 | `GOOGLE_WALLET_ISSUER_ID` | pay.google.com/business/console → Google Wallet API → Issuer ID |
 | `GOOGLE_WALLET_SA_KEY` | A Google Cloud service-account key JSON (the whole file on one line); the service account must be added as a user in the Wallet console |
 
-Pass artwork is in `wallet/apple-model/` (Apple) and `assets/img/wallet/` (Google). Apple's
+Pass artwork is in `wallet/apple-model.pass/` (Apple) and `assets/img/wallet/` (Google). Apple's
 WWDR intermediate certificate is bundled in `wallet/certs/wwdr.pem` (valid to 2030).
 
 ## Google Analytics (GA4) events
