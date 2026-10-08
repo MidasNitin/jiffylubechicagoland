@@ -105,7 +105,7 @@ function trust(store) {
     </div>` : '';
   return `<section class="trust"><div class="wrap trust__inner${store ? '' : ' trust__inner--single'}">
     <div class="trust__item">
-      <img class="trust__badge" src="/assets/img/newsweek-badge.png" alt="Newsweek #1 Most Trusted badge" width="72" height="80">
+      <picture><source type="image/webp" srcset="/assets/img/newsweek-badge-160.webp 160w, /assets/img/newsweek-badge.webp 175w" sizes="72px"><img class="trust__badge" src="/assets/img/newsweek-badge-160.png" srcset="/assets/img/newsweek-badge-160.png 160w, /assets/img/newsweek-badge.png 175w" sizes="72px" alt="Newsweek #1 Most Trusted badge" width="72" height="80" decoding="async"></picture>
       <div><div class="trust__title">#1 Trusted Fast Oil Change<span class="sup">*</span></div>
       <div class="trust__sub">BrandSpark® American Trust Study, ${site.trust_year}</div></div>
     </div>${rating}
@@ -158,7 +158,7 @@ function how() {
   </div></section>`;
 }
 
-const TEAM_IMG = `<picture><source type="image/webp" srcset="/assets/img/team-450.webp 450w, /assets/img/team-900.webp 900w" sizes="(min-width: 900px) 450px, calc(100vw - 32px)"><img src="/assets/img/team-900.jpg" srcset="/assets/img/team-450.jpg 450w, /assets/img/team-900.jpg 900w" sizes="(min-width: 900px) 450px, calc(100vw - 32px)" width="900" height="675" alt="Jiffy Lube technician reviewing service with a customer" loading="lazy" decoding="async"></picture>`;
+const TEAM_IMG = `<picture><source type="image/webp" srcset="/assets/img/team-450.webp 450w, /assets/img/team-600.webp 600w, /assets/img/team-900.webp 900w" sizes="(min-width: 900px) 450px, calc(100vw - 32px)"><img src="/assets/img/team-900.jpg" srcset="/assets/img/team-450.jpg 450w, /assets/img/team-600.jpg 600w, /assets/img/team-900.jpg 900w" sizes="(min-width: 900px) 450px, calc(100vw - 32px)" width="900" height="675" alt="Jiffy Lube technician reviewing service with a customer" loading="lazy" decoding="async"></picture>`;
 function team(store) {
   let heading, body, photos, cls = '';
   if (store) {
