@@ -360,6 +360,7 @@
     if (!key) return;
     var code = cfg.codes[key];
     document.querySelectorAll('.coupon').forEach(function (c) {
+      if (c.getAttribute('data-fixed-code')) return; // this store has its own code; campaign codes don't override it
       c.setAttribute('data-code', code);
       c.querySelectorAll('.js-code').forEach(function (el) { el.textContent = code; el.setAttribute('aria-label', 'Coupon code ' + code); });
       c.querySelectorAll('.coupon__wallet-btn').forEach(function (a) {

@@ -50,6 +50,9 @@ const dirUrl = (s) => `https://www.google.com/maps/dir/?api=1&destination=${enco
 const fullAddr = (s) => `${s.street}, ${s.city}, ${s.state} ${s.zip}`;
 const legalLines = (franchisee) => site.legal.lines.map((l) => l.replace('{expires}', site.offer.expires).replace('{franchisee}', franchisee));
 
+/* A store may carry its own offer (amount/description/code/hero_title); otherwise the site-wide one applies. */
+const offerFor = (store) => Object.assign({}, site.offer, (store && store.offer) || {});
+
 /* ---------- partials ---------- */
 function head(title, desc, canonical, extra = '', phone = null) {
   const adsCall = (phone && site.analytics.google_ads_id && site.analytics.google_ads_call_label) ? `gtag('config','${site.analytics.google_ads_call_label}',{'phone_conversion_number':'${phone}'});` : '';
@@ -110,8 +113,9 @@ function trust(store) {
 }
 
 function couponCard(store, extraCls = '') {
-  const o = site.offer;
-  return `<div class="coupon ${extraCls}" data-code="${esc(o.code)}">
+  const o = offerFor(store);
+  const fixed = store && store.offer && store.offer.code ? ' data-fixed-code="1"' : '';
+  return `<div class="coupon ${extraCls}" data-code="${esc(o.code)}"${fixed}>
     ${store ? `<div class="coupon__store">Jiffy Lube ${esc(store.city)}</div>` : `<div class="coupon__store">Any Chicago area location</div>`}
     <div class="coupon__amount">${esc(o.amount)}</div>
     <p class="coupon__desc">${esc(o.description)}</p>
@@ -301,7 +305,7 @@ ${scripts()}
 
 function storePage(s) {
   const title = `Jiffy Lube® ${s.city}, ${s.street_name} | Oil Change, No Appointment Needed`;
-  const desc = `Jiffy Lube at ${s.street}, ${s.city}, ${s.state}. Oil changes in about 15 minutes, no appointment needed. Hours, directions, and a ${site.offer.amount.toLowerCase()} coupon.`;
+  const desc = `Jiffy Lube at ${s.street}, ${s.city}, ${s.state}. Oil changes in about 15 minutes, no appointment needed. Hours, directions, and a ${offerFor(s).amount.toLowerCase()} coupon.`;
   return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
@@ -330,8 +334,9 @@ ${scripts()}
 }
 
 function couponPage(s) {
-  const title = `${site.offer.hero_title} in ${s.city} | Jiffy Lube® ${s.street_name}`;
-  const desc = `${site.offer.amount} ${site.offer.description} at Jiffy Lube ${s.street}, ${s.city}. No appointment needed. Get your coupon code.`;
+  const o = offerFor(s);
+  const title = `${o.hero_title} in ${s.city} | Jiffy Lube® ${s.street_name}`;
+  const desc = `${o.amount} ${o.description} at Jiffy Lube ${s.street}, ${s.city}. No appointment needed. Get your coupon code.`;
   return `${head(title, desc, `/coupon/${s.slug}/`, storeJsonLd(s), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
@@ -339,7 +344,7 @@ ${nav(s)}
 <main class="page page--coupon">
 <section class="hero hero--split"><div class="wrap hero__inner">
   <div>
-    <h1 class="h1">${esc(site.offer.hero_title)}<br>in ${esc(s.city)}</h1>
+    <h1 class="h1">${esc(o.hero_title)}<br>in ${esc(s.city)}</h1>
     <p class="hero__sub">No appointment needed. Pull in to ${esc(s.street)}.</p>
   </div>
   ${couponCard(s, 'coupon--hero')}

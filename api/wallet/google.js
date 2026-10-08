@@ -16,7 +16,7 @@ function findStore(slug) {
 }
 
 function buildPayload(issuerId, store, code) {
-  const o = site.offer;
+  const o = Object.assign({}, site.offer, (store && store.offer) || {});
   const safeSlug = store ? store.slug.replace(/[^a-z0-9]/gi, '_') : 'region';
   const classId = `${issuerId}.jiffy_oil_change_${o.code.toLowerCase()}`;
   const objectId = `${issuerId}.jiffy_${safeSlug}_${code.toLowerCase()}`;
@@ -74,9 +74,9 @@ module.exports = async (req, res) => {
   const slug = String((req.query && req.query.store) || '');
   const store = slug ? findStore(slug) : null;
   if (slug && !store) { res.status(404).json({ error: 'Unknown store.' }); return; }
-  const o = site.offer;
+  const o = Object.assign({}, site.offer, (store && store.offer) || {});
   const codeKey = String((req.query && req.query.code) || '').toLowerCase();
-  const code = (site.attribution && site.attribution.codes && site.attribution.codes[codeKey]) || (store && store.coupon_code) || o.code;
+  const code = (store && store.offer && store.offer.code) || (site.attribution && site.attribution.codes && site.attribution.codes[codeKey]) || (store && store.coupon_code) || o.code;
 
   const claims = {
     iss: sa.client_email,

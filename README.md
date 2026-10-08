@@ -43,7 +43,7 @@ GitHub Pages picks up the push and the live site updates in about a minute.
 - **Change the offer or coupon code:** `data/site.json` → `offer`.
 - **Change the expiration date:** `data/site.json` → `offer.expires` (used in the coupon and the legal footer).
 - **Add a store manager to a store page:** in `data/stores.json` set `manager_name` (for example `"Brian Olson"`) and `manager_photo` (a file in `assets/img/`, for example `"manager-brian.jpg"`). The page then shows the manager photo and the "Led by …" copy.
-- **Different coupon code per store:** set `coupon_code` on that store in `data/stores.json`. (Not wired up yet; all stores use `offer.code`.)
+- **Different offer for one store:** add an `offer` block to that store in `data/stores.json`, for example `"offer": {"amount": "$22 OFF", "description": "any oil change, plus a free tire pressure check and fill", "code": "GG1AD22", "hero_title": "$22 off any oil change"}`. That store's pages, wallet passes and page titles use it; campaign codes do not override a store-specific code.
 - **Turn on Google Analytics:** `data/site.json` → `analytics.ga4_id`.
 - **Hide the Popular times chart:** `data/site.json` → `popular_times.enabled: false`.
 

@@ -29,9 +29,9 @@ module.exports = async (req, res) => {
   const store = slug ? stores.find((s) => s.slug === slug) : null;
   if (slug && !store) { res.status(404).json({ error: 'Unknown store.' }); return; }
 
-  const o = site.offer;
+  const o = Object.assign({}, site.offer, (store && store.offer) || {});
   const codeKey = String((req.query && req.query.code) || '').toLowerCase();
-  const code = (site.attribution && site.attribution.codes && site.attribution.codes[codeKey]) || (store && store.coupon_code) || o.code;
+  const code = (store && store.offer && store.offer.code) || (site.attribution && site.attribution.codes && site.attribution.codes[codeKey]) || (store && store.coupon_code) || o.code;
   const expires = new Date(o.expires + ' 23:59:59 GMT-0600');
   const storeLabel = store ? `JIFFY LUBE ${store.city.toUpperCase()}` : 'ANY CHICAGO AREA LOCATION';
 

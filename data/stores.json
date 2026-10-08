@@ -1152,7 +1152,13 @@
   "tires": true,
   "manager_name": null,
   "manager_photo": null,
-  "coupon_code": "CORE01"
+  "coupon_code": "GG1AD22",
+  "offer": {
+   "amount": "$22 OFF",
+   "description": "any oil change, plus a free tire pressure check and fill",
+   "code": "GG1AD22",
+   "hero_title": "$22 off any oil change"
+  }
  },
  {
   "id": 234,
@@ -3474,7 +3480,13 @@
   "tires": true,
   "manager_name": null,
   "manager_photo": null,
-  "coupon_code": "CORE01"
+  "coupon_code": "GG1AD22",
+  "offer": {
+   "amount": "$22 OFF",
+   "description": "any oil change, plus a free tire pressure check and fill",
+   "code": "GG1AD22",
+   "hero_title": "$22 off any oil change"
+  }
  },
  {
   "id": 1964,
@@ -4343,7 +4355,13 @@
   "tires": false,
   "manager_name": null,
   "manager_photo": null,
-  "coupon_code": "CORE01"
+  "coupon_code": "GG1AD22",
+  "offer": {
+   "amount": "$22 OFF",
+   "description": "any oil change, plus a free tire pressure check and fill",
+   "code": "GG1AD22",
+   "hero_title": "$22 off any oil change"
+  }
  },
  {
   "id": 2569,
