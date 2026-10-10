@@ -31,6 +31,8 @@
       var saved = JSON.parse(localStorage.getItem('jl_attr') || 'null');
       if (saved && saved.k) p.campaign_key = saved.k;
       if (typeof window.gtag === 'function') window.gtag('event', name, p);
+      // Vercel Web Analytics custom event (max 2 properties on the included plan)
+      if (typeof window.va === 'function') window.va('event', { name: name, data: { store: p.store || '', campaign_key: p.campaign_key || '' } });
       // Google Ads conversion alongside the GA4 event (labels come from data/site.json)
       if (window.JL_ADS && window.JL_ADS[name] && typeof window.gtag === 'function') window.gtag('event', 'conversion', { send_to: window.JL_ADS[name] });
       if (window.dataLayer && typeof window.gtag !== 'function') window.dataLayer.push(Object.assign({ event: name }, p));
