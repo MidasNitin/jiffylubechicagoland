@@ -189,7 +189,9 @@
       "get_directions": "AW-18429093418/3gO2CL3SuZMdEKrM1tNE",
       "call_click": "AW-18429093418/sVTTCMDSuZMdEKrM1tNE"
     },
-    "google_ads_call_label": "AW-18429093418/8Pq6CN-RuJMdEKrM1tNE"
+    "google_ads_call_label": "AW-18429093418/8Pq6CN-RuJMdEKrM1tNE",
+    "vercel_analytics": true,
+    "_vercel_note": "Vercel Web Analytics: set vercel_analytics to false to remove the script. Also needs Analytics enabled in the Vercel project dashboard."
   },
   "wallet": {
     "_note": "Set enabled to true once the Apple and Google Wallet accounts are configured in Vercel. apple/google can be toggled separately.",

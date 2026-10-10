@@ -253,7 +253,7 @@ function allLocations() {
 
 const JS_HASH = require('crypto').createHash('sha1').update(fs.readFileSync(path.join(ROOT, 'assets/js/site.js'))).digest('hex').slice(0, 10);
 const JS_FILE = `site.${JS_HASH}.js`;
-const scripts = () => `<script src="/assets/js/${JS_FILE}" defer></script>`;
+const scripts = () => `<script src="/assets/js/${JS_FILE}" defer></script>${site.analytics.vercel_analytics ? `<script defer src="/_vercel/insights/script.js"></script>` : ''}`;
 
 function storeJsonLd(store) {
   const spec = DAY_NAMES.map((n, d) => store.hours[d] ? { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d], opens: `${String(Math.floor(store.hours[d].open / 60)).padStart(2, '0')}:${String(store.hours[d].open % 60).padStart(2, '0')}`, closes: `${String(Math.floor(store.hours[d].close / 60)).padStart(2, '0')}:${String(store.hours[d].close % 60).padStart(2, '0')}` } : null).filter(Boolean);
