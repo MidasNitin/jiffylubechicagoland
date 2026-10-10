@@ -6,12 +6,12 @@
   "rating_as_of": "October 2026",
   "trust_year": "2026",
   "offer": {
-    "_note": "The Figma design shows a <generic offer> placeholder on the region page and $16 OFF on store pages. Edit these to change what shows on the site.",
-    "amount": "$16 OFF",
-    "description": "any oil change, plus a free tire pressure check and fill",
-    "code": "CORE01",
+    "_note": "Site-wide offer from Karl (2026-10-10): $10 off, code YCGUF2. Pilot stores override this via their own offer block in stores.json.",
+    "amount": "$10 OFF",
+    "description": "any oil change",
+    "code": "YCGUF2",
     "expires": "January 31, 2027",
-    "hero_title": "$16 off any oil change",
+    "hero_title": "$10 off any oil change",
     "copy_instructions": "Show this code at the counter. Not valid with any other offer."
   },
   "region_copy": {
@@ -200,21 +200,21 @@
     "google": true
   },
   "attribution": {
-    "_note": "Visitors arriving with ?jl=<key> (checked first) or ?utm_term=<key> see the coupon code mapped to that key, on every page for 30 days. Keys not in the table fall back to offer.code. Add one line per campaign; make sure the stores accept each code.",
+    "_note": "Visitors arriving with ?jl=<key> (checked first) or ?utm_term=<key> see the coupon code mapped to that key for 30 days. All keys currently map to the site-wide code YCGUF2 because the stores only accept YCGUF2 and GG1AD22. Stores with their own offer code are never overridden.",
     "days": 30,
     "codes": {
-      "google": "GOOG01",
-      "facebook": "META01",
-      "mailer": "MAIL01",
-      "g-evn-core": "GOOG01",
-      "g-evn-brand": "GOOG01",
-      "g-evn-conq": "GOOG01",
-      "g-jlk-core": "GOOG01",
-      "g-jlk-brand": "GOOG01",
-      "g-jlk-conq": "GOOG01",
-      "g-jwj-core": "GOOG01",
-      "g-jwj-brand": "GOOG01",
-      "g-jwj-conq": "GOOG01"
+      "google": "YCGUF2",
+      "facebook": "YCGUF2",
+      "mailer": "YCGUF2",
+      "g-evn-core": "YCGUF2",
+      "g-evn-brand": "YCGUF2",
+      "g-evn-conq": "YCGUF2",
+      "g-jlk-core": "YCGUF2",
+      "g-jlk-brand": "YCGUF2",
+      "g-jlk-conq": "YCGUF2",
+      "g-jwj-core": "YCGUF2",
+      "g-jwj-brand": "YCGUF2",
+      "g-jwj-conq": "YCGUF2"
     },
     "params": [
       "jl",
