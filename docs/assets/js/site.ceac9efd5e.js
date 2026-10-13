@@ -48,7 +48,11 @@
       else if (a.classList.contains('coupon__cta')) track('get_coupon', { code: (a.closest('.coupon') || {}).getAttribute ? a.closest('.coupon').getAttribute('data-code') : '' });
       else if (a.classList.contains('js-copy')) track('copy_code', { code: a.closest('.coupon').getAttribute('data-code') });
       else if (a.classList.contains('coupon__wallet-btn--apple')) track('wallet_add', { wallet: 'apple', code: a.closest('.coupon').getAttribute('data-code') });
-      else if (a.classList.contains('coupon__wallet-btn--google')) track('wallet_add', { wallet: 'google', code: a.closest('.coupon').getAttribute('data-code') });
+      else if (a.classList.contains('coupon__wallet-btn--google')) {
+        // This link leaves the page for pay.google.com; hold it briefly so the analytics hits get out first.
+        track('wallet_add', { wallet: 'google', code: a.closest('.coupon').getAttribute('data-code') });
+        if (href && !e.defaultPrevented) { e.preventDefault(); setTimeout(function () { window.location.href = href; }, 350); }
+      }
       else if (a.classList.contains('js-goto-coupon')) track('get_coupon', { location: 'sticky_bar' });
       else if (a.classList.contains('js-geo')) track('use_location');
       else if (a.classList.contains('loc-card__name') || (a.closest('.loc-card') && href.indexOf('/coupon/') >= 0)) track('select_store', { store: (href.match(/\/(store|coupon)\/([^/?]+)/) || [])[2] || '', via: href.indexOf('/coupon/') >= 0 ? 'coupon_button' : 'name' });
