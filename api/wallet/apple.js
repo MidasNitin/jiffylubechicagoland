@@ -67,7 +67,7 @@ module.exports = async (req, res) => {
     }
     pass.backFields.push({ key: 'terms', label: 'Terms', value: `${o.copy_instructions} Valid only at participating locations. See store for details. Coupon code must be presented at time of service.` });
 
-    pass.setBarcodes({ format: 'PKBarcodeFormatCode128', message: code, messageEncoding: 'iso-8859-1', altText: code });
+    pass.setBarcodes({ format: 'PKBarcodeFormatPDF417', message: code, messageEncoding: 'iso-8859-1', altText: code });
     pass.setExpirationDate(expires);
     if (store) pass.setLocations({ latitude: store.lat, longitude: store.lng, relevantText: `${o.amount} at this Jiffy Lube. Show your coupon at the counter.` });
 

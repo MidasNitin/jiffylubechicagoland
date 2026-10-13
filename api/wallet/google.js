@@ -40,7 +40,7 @@ function buildPayload(issuerId, store, code) {
     id: objectId,
     classId,
     state: 'ACTIVE',
-    barcode: { type: 'CODE_128', value: code, alternateText: code },
+    barcode: { type: 'PDF_417', value: code, alternateText: code },
     validTimeInterval: { end: { date: expires } },
     heroImage: { sourceUri: { uri: `${ORIGIN}/assets/img/wallet/hero.png` } },
     textModulesData: [
