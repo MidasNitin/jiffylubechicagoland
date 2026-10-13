@@ -9,7 +9,7 @@ One home page (location finder), one store page and one coupon page for each of 
 | Folder / file | What it is |
 | --- | --- |
 | `data/stores.json` | The 104 stores: address, phone, hours, Google rating, map link. Phone + hours came from Google Places. |
-| `data/site.json` | Everything else you might want to change: the offer ($16 OFF), coupon code, expiration, copy text, services list, legal lines, analytics ID. |
+| `data/site.json` | Everything else you might want to change: the default offer (D1S6F3, $11 off, the Chicagoland co-op code), coupon code, expiration, copy text, services list, legal lines, analytics ID. |
 | `assets/` | Fonts, CSS, JavaScript, logo/icons (SVG) and photos exported from Figma. |
 | `build.js` | Reads the two data files and writes every page into `docs/`. |
 | `docs/` | The finished site. This is what GitHub Pages publishes. Never edit files here by hand; they get overwritten. |
@@ -125,3 +125,14 @@ rebuild and push. Tracking is then live on every page. Events sent, each with `s
 In GA4, mark `get_coupon`, `copy_code`, `wallet_add`, `call_click` and `get_directions` as
 Key events (Admin → Events → toggle "Mark as key event") so they count as conversions and can
 be imported into Google Ads.
+
+## Which coupon shows where (as of 2026-10-12)
+
+| Stores | Offer | Code |
+| --- | --- | --- |
+| 1841 Evanston, 2567 Joliet Jefferson, 233 Joliet Larkin (JLO pilots) | $22 OFF any oil change + free tire pressure check | GG1AD22 |
+| The other 10 JLO Group stores | $10 OFF any oil change | YCGUF2 |
+| All other stores and the home page | $11 OFF any oil change (Chicagoland co-op code) | D1S6F3 |
+
+JLO stores carry their code in an `offer` block in `data/stores.json`; everything else uses `offer` in
+`data/site.json`. Wallet pass barcodes are PDF417 of the plain code text, matching the stores' printed coupons.

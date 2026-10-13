@@ -6,12 +6,12 @@
   "rating_as_of": "October 2026",
   "trust_year": "2026",
   "offer": {
-    "_note": "Site-wide offer from Karl (2026-10-10): $10 off, code YCGUF2. Pilot stores override this via their own offer block in stores.json.",
-    "amount": "$10 OFF",
+    "_note": "Site-wide default = Chicagoland co-op code D1S6F3 (Jen Ramirez, 2026-09-22): $11 off any oil change, expires 1/31/2027. JLO Group stores override this in stores.json (YCGUF2 $10; pilots GG1AD22 $22).",
+    "amount": "$11 OFF",
     "description": "any oil change",
-    "code": "YCGUF2",
+    "code": "D1S6F3",
     "expires": "January 31, 2027",
-    "hero_title": "$10 off any oil change",
+    "hero_title": "$11 off any oil change",
     "copy_instructions": "Show this code at the counter. Not valid with any other offer."
   },
   "region_copy": {
@@ -200,21 +200,21 @@
     "google": true
   },
   "attribution": {
-    "_note": "Visitors arriving with ?jl=<key> (checked first) or ?utm_term=<key> see the coupon code mapped to that key for 30 days. All keys currently map to the site-wide code YCGUF2 because the stores only accept YCGUF2 and GG1AD22. Stores with their own offer code are never overridden.",
+    "_note": "Visitors arriving with ?jl=<key> (checked first) or ?utm_term=<key> see the coupon code mapped to that key for 30 days. All keys currently map to the default co-op code D1S6F3. Stores with their own offer code (all JLO Group stores) are never overridden.",
     "days": 30,
     "codes": {
-      "google": "YCGUF2",
-      "facebook": "YCGUF2",
-      "mailer": "YCGUF2",
-      "g-evn-core": "YCGUF2",
-      "g-evn-brand": "YCGUF2",
-      "g-evn-conq": "YCGUF2",
-      "g-jlk-core": "YCGUF2",
-      "g-jlk-brand": "YCGUF2",
-      "g-jlk-conq": "YCGUF2",
-      "g-jwj-core": "YCGUF2",
-      "g-jwj-brand": "YCGUF2",
-      "g-jwj-conq": "YCGUF2"
+      "google": "D1S6F3",
+      "facebook": "D1S6F3",
+      "mailer": "D1S6F3",
+      "g-evn-core": "D1S6F3",
+      "g-evn-brand": "D1S6F3",
+      "g-evn-conq": "D1S6F3",
+      "g-jlk-core": "D1S6F3",
+      "g-jlk-brand": "D1S6F3",
+      "g-jlk-conq": "D1S6F3",
+      "g-jwj-core": "D1S6F3",
+      "g-jwj-brand": "D1S6F3",
+      "g-jwj-conq": "D1S6F3"
     },
     "params": [
       "jl",
