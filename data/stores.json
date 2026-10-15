@@ -1167,7 +1167,8 @@
       "description": "any oil change, plus a free tire pressure check and fill",
       "code": "GG1AD22",
       "hero_title": "$22 off any oil change"
-    }
+    },
+    "free_pages": true
   },
   {
     "id": 234,
@@ -3483,7 +3484,8 @@
       "description": "any oil change, plus a free tire pressure check and fill",
       "code": "GG1AD22",
       "hero_title": "$22 off any oil change"
-    }
+    },
+    "free_pages": true
   },
   {
     "id": 1964,
@@ -4342,7 +4344,8 @@
       "description": "any oil change, plus a free tire pressure check and fill",
       "code": "GG1AD22",
       "hero_title": "$22 off any oil change"
-    }
+    },
+    "free_pages": true
   },
   {
     "id": 2569,

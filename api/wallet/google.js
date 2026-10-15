@@ -15,11 +15,12 @@ function findStore(slug) {
   return stores.find((s) => s.slug === slug) || null;
 }
 
-function buildPayload(issuerId, store, code) {
+function buildPayload(issuerId, store, code, free) {
   const o = Object.assign({}, site.offer, (store && store.offer) || {});
+  const off = o.amount.replace(/\s*OFF$/i, ' off');
   const safeSlug = store ? store.slug.replace(/[^a-z0-9]/gi, '_') : 'region';
-  const classId = `${issuerId}.jiffy_oil_change_${o.code.toLowerCase()}`;
-  const objectId = `${issuerId}.jiffy_${safeSlug}_${code.toLowerCase()}`;
+  const classId = `${issuerId}.jiffy_${free ? 'free_' + free.split(' ')[1] : 'oil_change'}_${o.code.toLowerCase()}`;
+  const objectId = `${issuerId}.jiffy_${safeSlug}_${code.toLowerCase()}${free ? '_free_' + free.split(' ')[1] : ''}`;
   const expires = new Date(o.expires + ' 23:59:59 GMT-0600').toISOString();
   const storeName = store ? `Jiffy Lube ${store.city}` : 'Any Chicago area location';
 
@@ -28,12 +29,12 @@ function buildPayload(issuerId, store, code) {
     issuerName: 'Jiffy Lube Chicagoland',
     reviewStatus: 'UNDER_REVIEW',
     provider: 'Jiffy Lube Chicagoland',
-    title: `${o.amount} ${o.description}`,
+    title: free ? `${free}, ${off} oil change` : `${o.amount} ${o.description}`,
     redemptionChannel: 'INSTORE',
     titleImage: { sourceUri: { uri: `${ORIGIN}/assets/img/wallet/logo-square.png` } },
     hexBackgroundColor: '#700000',
     helpUri: { uri: ORIGIN },
-    finePrint: `${o.copy_instructions} Expires ${o.expires}.`
+    finePrint: `${o.copy_instructions}${free ? ' The free service requires no purchase.' : ''} Expires ${o.expires}.`
   };
 
   const offerObject = {
@@ -84,7 +85,7 @@ module.exports = async (req, res) => {
     typ: 'savetowallet',
     iat: Math.floor(Date.now() / 1000),
     origins: [ORIGIN],
-    payload: buildPayload(issuerId, store, code)
+    payload: buildPayload(issuerId, store, code, { air: 'Free tire air', battery: 'Free battery test' }[String((req.query && req.query.variant) || '')] || '')
   };
   const token = jwt.sign(claims, sa.private_key, { algorithm: 'RS256' });
   const url = `https://pay.google.com/gp/v/save/${token}`;

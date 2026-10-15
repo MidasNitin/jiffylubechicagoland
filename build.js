@@ -112,24 +112,34 @@ function trust(store) {
   </div></section>`;
 }
 
-function couponCard(store, extraCls = '') {
+const offAmount = (o) => o.amount.replace(/\s*OFF$/i, ' off'); // "$22 OFF" -> "$22 off"
+// Ad landing page variants: one free service each, plus the store's oil change coupon.
+const FREE_VARIANTS = {
+  air: { path: 'free-air', h1: 'Free air for your tires.', titleWord: 'Free air for tires', sub: "we'll check and fill your tire pressure, free.", feature: 'Free tire pressure check and fill', cardTitle: 'Tire air check and fill', cta: 'Get My Free Air Coupon', show: 'free air', sticky: 'Get Free Air Coupon', desc: 'Free tire pressure check and fill, no purchase necessary.' },
+  battery: { path: 'free-battery', h1: 'Free battery test.', titleWord: 'Free battery test', sub: "we'll test your battery, free.", feature: 'Free battery test', cardTitle: 'Battery test', cta: 'Get My Free Battery Test Coupon', show: 'a free battery test', sticky: 'Get Free Battery Coupon', desc: 'Free battery test, no purchase necessary.' }
+};
+function couponCard(store, extraCls = '', variant = '') {
   const o = offerFor(store);
   const fixed = store && store.offer && store.offer.code ? ' data-fixed-code="1"' : '';
-  return `<div class="coupon ${extraCls}" data-code="${esc(o.code)}"${fixed}>
-    ${store ? `<div class="coupon__store">Jiffy Lube ${esc(store.city)}</div>` : `<div class="coupon__store">Any Chicago area location</div>`}
-    <div class="coupon__amount">${esc(o.amount)}</div>
-    <p class="coupon__desc">${esc(o.description)}</p>
+  const fv = FREE_VARIANTS[variant] || null;
+  const free = !!fv;
+  const walletQs = (store ? '?store=' + esc(store.slug) : '?') + (free ? (store ? '&' : '') + 'variant=' + variant : '');
+  return `<div class="coupon ${extraCls}${free ? ' coupon--free' : ''}" data-code="${esc(o.code)}"${fixed}>
+    ${free ? `<div class="coupon__store coupon__store--free">FREE</div>` : store ? `<div class="coupon__store">Jiffy Lube ${esc(store.city)}</div>` : `<div class="coupon__store">Any Chicago area location</div>`}
+    ${free ? `<div class="coupon__amount coupon__amount--text">${fv.cardTitle}</div>` : `<div class="coupon__amount">${esc(o.amount)}</div>`}
+    <p class="coupon__desc">${free ? `No purchase necessary. If you get an oil change today, take ${esc(offAmount(o))}.` : esc(o.description)}</p>
     <hr class="coupon__divider">
-    <button class="btn btn--primary btn--block coupon__cta" type="button">Get My Coupon</button>
+    <button class="btn btn--primary btn--block coupon__cta" type="button">${free ? fv.cta : 'Get My Coupon'}</button>
     <div class="coupon__reveal">
       <div class="coupon__code js-code" aria-label="Coupon code ${esc(o.code)}">${esc(o.code)}</div>
+      ${free ? `<p class="coupon__show">Show this code at the counter for ${fv.show}. It also takes ${esc(offAmount(o))} any oil change.</p>` : ''}
       <button class="btn btn--primary btn--block js-copy" type="button">Copy Code</button>
       <div class="coupon__copied">Code copied to your clipboard.</div>
       ${site.wallet && site.wallet.enabled ? `<div class="coupon__wallet" data-store="${store ? esc(store.slug) : ''}">
-        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple/${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Apple Wallet">${svg('badge-apple-wallet')}</a>` : ''}
-        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google/${store ? '?store=' + esc(store.slug) : ''}" aria-label="Add to Google Wallet">${svg('badge-google-wallet')}</a>` : ''}
+        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple/${walletQs}" aria-label="Add to Apple Wallet">${svg('badge-apple-wallet')}</a>` : ''}
+        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google/${walletQs}" aria-label="Add to Google Wallet">${svg('badge-google-wallet')}</a>` : ''}
       </div>` : ''}
-      <p class="coupon__fine">${esc(o.copy_instructions)} Expires ${esc(o.expires)}</p>
+      <p class="coupon__fine">${esc(o.copy_instructions)} Expires ${esc(o.expires)}.${free ? ' The free service requires no purchase.' : ''}</p>
     </div>
   </div>`;
 }
@@ -231,16 +241,20 @@ const services = () => `<section class="section services" id="services"><div cla
   <ul class="services__list">${site.services.map((s) => `<li>${CHECK}${esc(s)}</li>`).join('')}</ul>
 </div></section>`;
 
-function footer(franchisee) {
+function footer(franchisee, store = null) {
+  const links = store
+    ? [[`/store/${store.slug}/`, `Jiffy Lube ${store.city}, ${store.street_name}`], [`/coupon/${store.slug}/`, `${offAmount(offerFor(store))} oil change coupon`], ...(store.free_pages ? [[`/free-air/${store.slug}/`, 'Free air for tires'], [`/free-battery/${store.slug}/`, 'Free battery test']] : []), ['/', 'All Chicagoland locations']]
+    : [['/', 'Find a Jiffy Lube location'], ['/#all-locations', 'All Chicagoland locations']];
   return `<footer class="footer section--dark"><div class="wrap">
+    <nav class="footer__links" aria-label="Site links">${links.map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join('')}</nav>
     <div class="footer__heading">${esc(site.legal.privacy_heading)}</div>
     ${legalLines(franchisee).map((l) => `<p>${esc(l)}</p>`).join('')}
   </div></footer>`;
 }
 
-const sticky = (store) => `<div class="sticky mobile-only">
+const sticky = (store, label = 'Get Coupon') => `<div class="sticky mobile-only">
   ${store.phone ? `<a class="btn btn--primary" href="${tel(store.phone)}">${PHONE}Call</a>` : `<a class="btn btn--primary" href="${dirUrl(store)}" target="_blank" rel="noopener">${PIN}Directions</a>`}
-  <a class="btn btn--secondary js-goto-coupon" href="#coupon">${TICKET.replace(/#ffffff/g, '#700000')}Get Coupon</a>
+  <a class="btn btn--secondary js-goto-coupon" href="#coupon">${TICKET.replace(/#ffffff/g, '#700000')}${label}</a>
 </div>`;
 
 function allLocations() {
@@ -327,7 +341,7 @@ ${lounge()}
 ${team(s)}
 ${services()}
 </main>
-${footer(s.group)}
+${footer(s.group, s)}
 ${sticky(s)}
 ${scripts()}
 </body></html>`;
@@ -357,8 +371,44 @@ ${lounge()}
 ${findUs(s)}
 ${services()}
 </main>
-${footer(s.group)}
+${footer(s.group, s)}
 ${sticky(s)}
+${scripts()}
+</body></html>`;
+}
+
+/* Ad landing pages: one free service (air or battery) plus the store's oil change coupon. Not linked from the nav. */
+function freePage(s, key) {
+  const v = FREE_VARIANTS[key];
+  const o = offerFor(s);
+  const off = offAmount(o);
+  const title = `${v.titleWord}, no purchase necessary | Jiffy Lube ${s.street_name}, ${s.city}`;
+  const desc = `${v.desc} Pull in to Jiffy Lube ${s.street}, ${s.city}. Want an oil change while you're here? Take ${off}.`;
+  return `${head(title, desc, `/${v.path}/${s.slug}/`, storeJsonLd(s), s.phone)}
+<body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
+${SPRITE}
+${nav(s)}
+<main class="page page--coupon page--free">
+<section class="hero hero--split"><div class="wrap hero__inner">
+  <div>
+    <h1 class="h1">${v.h1} No purchase necessary.</h1>
+    <p class="hero__sub">Pull in to ${esc(s.street)} and ${v.sub} Want an oil change while you're here? Take ${esc(off)}.</p>
+    <ul class="freefeat">
+      <li class="freefeat__item">${icon('icon-check', '#ffffff', 'freefeat__ic')}<div><strong class="freefeat__title">${v.feature}</strong><span class="freefeat__sub">No appointment. No purchase necessary. Stay in your car.</span></div></li>
+    </ul>
+  </div>
+  ${couponCard(s, 'coupon--hero', key)}
+</div></section>
+<div id="coupon"></div>
+${trust(s)}
+${team(s)}
+${how()}
+${lounge()}
+${findUs(s)}
+${services()}
+</main>
+${footer(s.group, s)}
+${sticky(s, v.sticky)}
 ${scripts()}
 </body></html>`;
 }
@@ -380,6 +430,10 @@ for (const s of stores) {
   write(`store/${s.slug}/index.html`, storePage(s));
   write(`coupon/${s.slug}/index.html`, couponPage(s));
   urls.push(`/store/${s.slug}/`, `/coupon/${s.slug}/`);
+  if (s.free_pages) for (const key of Object.keys(FREE_VARIANTS)) { // free-service ad pages: only stores flagged in stores.json
+    write(`${FREE_VARIANTS[key].path}/${s.slug}/index.html`, freePage(s, key));
+    urls.push(`/${FREE_VARIANTS[key].path}/${s.slug}/`);
+  }
 }
 write('404.html', `${head('Page not found | Jiffy Lube Chicagoland', 'Page not found', '/404.html')}<body>${nav(null)}<main><section class="section"><div class="wrap" style="text-align:center"><h1 class="h2">We couldn’t find that page.</h1><p class="body" style="margin-top:12px"><a href="/">Find a Jiffy Lube location near you</a></p></div></section></main>${footer(site.legal.region_franchisee)}</body></html>`);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${site.domain}${u}</loc></url>`).join('\n')}\n</urlset>\n`);

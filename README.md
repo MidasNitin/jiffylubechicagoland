@@ -136,3 +136,11 @@ be imported into Google Ads.
 
 JLO stores carry their code in an `offer` block in `data/stores.json`; everything else uses `offer` in
 `data/site.json`. Wallet pass barcodes are PDF417 of the plain code text, matching the stores' printed coupons.
+
+## Free-service ad landing pages (free-air, free-battery)
+
+Stores with `"free_pages": true` in `data/stores.json` (currently the three $22 pilots) also get
+`/free-air/<slug>/` and `/free-battery/<slug>/`: one free service each, plus the store's oil change
+coupon, same tracking as the coupon page. Copy lives in `FREE_VARIANTS` in `build.js`. Wallet links
+on those pages pass `variant=air|battery`, which changes the pass title. Footer links on each store's
+pages point to its store, coupon and free-service pages.

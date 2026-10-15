@@ -173,6 +173,14 @@ h1, h2, h3, p { margin: 0; }
 .coupon__copied { display: none; font-size: 14px; color: #2a7a2a; margin-top: 8px; }
 .coupon.is-copied .coupon__copied { display: block; }
 .coupon--hero { --notch: var(--maroon); margin-top: 24px; }
+.coupon__store--free { color: var(--red); font-weight: 700; font-size: 14px; letter-spacing: .18em; }
+.coupon__amount--text { font-size: 26px; }
+.coupon__show { font-size: 15px; line-height: 1.5; margin: -4px 0 14px; color: var(--dark); }
+.freefeat { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; }
+.freefeat__item { display: flex; gap: 12px; align-items: flex-start; }
+.freefeat__ic { width: 28px; height: 28px; flex: 0 0 28px; padding: 6px; border-radius: 50%; background: var(--red); }
+.freefeat__title { display: block; font-size: 18px; line-height: 1.3; }
+.freefeat__sub { display: block; font-size: 14px; opacity: .85; margin-top: 2px; }
 
 .offer { display: grid; gap: 24px; align-items: center; }
 .offer__title { font-size: 30px; line-height: 1.07; }
@@ -248,6 +256,8 @@ h1, h2, h3, p { margin: 0; }
 
 /* Footer */
 .footer { padding: 32px 0 40px; font-size: 12px; line-height: 1.5; }
+.footer__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 20px; font-size: 13px; }
+.footer__links a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 .footer__heading { font-weight: 700; font-size: 13px; margin-bottom: 12px; }
 .footer p { margin-top: 8px; }
 

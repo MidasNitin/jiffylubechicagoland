@@ -32,6 +32,8 @@ module.exports = async (req, res) => {
   const o = Object.assign({}, site.offer, (store && store.offer) || {});
   const codeKey = String((req.query && req.query.code) || '').toLowerCase();
   const code = (store && store.offer && store.offer.code) || (site.attribution && site.attribution.codes && site.attribution.codes[codeKey]) || (store && store.coupon_code) || o.code;
+  const free = { air: 'Free tire air', battery: 'Free battery test' }[String((req.query && req.query.variant) || '')] || '';
+  const off = o.amount.replace(/\s*OFF$/i, ' off');
   const expires = new Date(o.expires + ' 23:59:59 GMT-0600');
   const storeLabel = store ? `JIFFY LUBE ${store.city.toUpperCase()}` : 'ANY CHICAGO AREA LOCATION';
 
@@ -47,9 +49,9 @@ module.exports = async (req, res) => {
     }, {
       passTypeIdentifier: env.APPLE_PASS_TYPE_ID,
       teamIdentifier: env.APPLE_TEAM_ID,
-      serialNumber: `${store ? store.slug : 'region'}-${code}`,
+      serialNumber: `${store ? store.slug : 'region'}-${code}${free ? '-' + String(req.query.variant) : ''}`,
       organizationName: 'Jiffy Lube Chicagoland',
-      description: `${o.amount} ${o.description}`,
+      description: free ? `${free}, ${off} oil change` : `${o.amount} ${o.description}`,
       logoText: 'Jiffy Lube',
       foregroundColor: 'rgb(255, 255, 255)',
       backgroundColor: 'rgb(112, 0, 0)',
@@ -57,19 +59,24 @@ module.exports = async (req, res) => {
     });
 
     pass.type = 'coupon';
-    pass.primaryFields.push({ key: 'offer', label: storeLabel, value: o.amount });
-    pass.secondaryFields.push({ key: 'desc', label: 'ON', value: o.description });
+    if (free) {
+      pass.primaryFields.push({ key: 'offer', label: storeLabel, value: free.toUpperCase() });
+      pass.secondaryFields.push({ key: 'desc', label: 'PLUS', value: `${off} any oil change` });
+    } else {
+      pass.primaryFields.push({ key: 'offer', label: storeLabel, value: o.amount });
+      pass.secondaryFields.push({ key: 'desc', label: 'ON', value: o.description });
+    }
     pass.auxiliaryFields.push({ key: 'expires', label: 'EXPIRES', value: o.expires });
     if (store) {
       pass.backFields.push({ key: 'address', label: 'Location', value: `${store.street}\n${store.city}, ${store.state} ${store.zip}` });
       if (store.phone) pass.backFields.push({ key: 'phone', label: 'Phone', value: store.phone });
       pass.backFields.push({ key: 'web', label: 'Store page', value: `${site.domain}/store/${store.slug}/` });
     }
-    pass.backFields.push({ key: 'terms', label: 'Terms', value: `${o.copy_instructions} Valid only at participating locations. See store for details. Coupon code must be presented at time of service.` });
+    pass.backFields.push({ key: 'terms', label: 'Terms', value: `${o.copy_instructions}${free ? ' The free service requires no purchase.' : ''} Valid only at participating locations. See store for details. Coupon code must be presented at time of service.` });
 
     pass.setBarcodes({ format: 'PKBarcodeFormatPDF417', message: code, messageEncoding: 'iso-8859-1', altText: code });
     pass.setExpirationDate(expires);
-    if (store) pass.setLocations({ latitude: store.lat, longitude: store.lng, relevantText: `${o.amount} at this Jiffy Lube. Show your coupon at the counter.` });
+    if (store) pass.setLocations({ latitude: store.lat, longitude: store.lng, relevantText: free ? `${free} and ${off} an oil change at this Jiffy Lube. Show your coupon at the counter.` : `${o.amount} at this Jiffy Lube. Show your coupon at the counter.` });
 
     const buffer = pass.getAsBuffer();
     res.setHeader('Content-Type', 'application/vnd.apple.pkpass');
