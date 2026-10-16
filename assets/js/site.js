@@ -258,7 +258,7 @@
       sorted = near;
       list.innerHTML = '';
       shown = 0;
-      title.textContent = t('results', '{n} location{s} near {place}').replace('{n}', sorted.length).replace('{s}', sorted.length === 1 ? '' : t('plural', 's')).replace('{place}', placeLabel);
+      title.textContent = (sorted.length === 1 && I18N.results_one ? I18N.results_one : t('results', '{n} location{s} near {place}')).replace('{n}', sorted.length).replace('{s}', sorted.length === 1 ? '' : t('plural', 's')).replace('{place}', placeLabel);
       track('search_results', { results: sorted.length, nearest: sorted[0] ? sorted[0].slug : '', nearest_miles: sorted[0] ? Math.round(sorted[0].d * 10) / 10 : null });
       results.classList.add('is-visible');
       more(PAGE);

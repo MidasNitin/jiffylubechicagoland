@@ -52,13 +52,48 @@
     }
   },
   "offers": {
-    "D1S6F3": { "amount": "AHORRA $11", "off": "$11 de descuento", "description": "en cualquier cambio de aceite", "hero_title": "$11 de descuento en tu cambio de aceite" },
-    "YCGUF2": { "amount": "AHORRA $10", "off": "$10 de descuento", "description": "en cualquier cambio de aceite", "hero_title": "$10 de descuento en tu cambio de aceite" },
-    "GG1AD22": { "amount": "AHORRA $22", "off": "$22 de descuento", "description": "en cualquier cambio de aceite, más revisión y llenado de aire de las llantas gratis", "hero_title": "$22 de descuento en tu cambio de aceite" }
+    "D1S6F3": {
+      "amount": "AHORRA $11",
+      "off": "$11 de descuento",
+      "description": "en cualquier cambio de aceite",
+      "hero_title": "$11 de descuento en tu cambio de aceite"
+    },
+    "YCGUF2": {
+      "amount": "AHORRA $10",
+      "off": "$10 de descuento",
+      "description": "en cualquier cambio de aceite",
+      "hero_title": "$10 de descuento en tu cambio de aceite"
+    },
+    "GG1AD22": {
+      "amount": "AHORRA $22",
+      "off": "$22 de descuento",
+      "description": "en cualquier cambio de aceite, más revisión y llenado de aire de las llantas gratis",
+      "hero_title": "$22 de descuento en tu cambio de aceite"
+    }
   },
   "free": {
-    "air": { "h1": "Aire gratis para tus llantas.", "titleWord": "Aire gratis para llantas", "sub": "revisamos y llenamos la presión de tus llantas, gratis.", "feature": "Revisión y llenado de presión de llantas gratis", "cardTitle": "Revisión y llenado de aire", "cta": "Obtener mi cupón de aire gratis", "show": "aire gratis", "sticky": "Cupón de aire gratis", "desc": "Revisión y llenado de presión de llantas gratis, sin necesidad de compra." },
-    "battery": { "h1": "Prueba de batería gratis.", "titleWord": "Prueba de batería gratis", "sub": "probamos tu batería, gratis.", "feature": "Prueba de batería gratis", "cardTitle": "Prueba de batería", "cta": "Obtener mi cupón de prueba de batería", "show": "una prueba de batería gratis", "sticky": "Cupón de batería gratis", "desc": "Prueba de batería gratis, sin necesidad de compra." }
+    "air": {
+      "h1": "Aire gratis para tus llantas.",
+      "titleWord": "Aire gratis para llantas",
+      "sub": "revisamos y llenamos la presión de tus llantas, gratis.",
+      "feature": "Revisión y llenado de presión de llantas gratis",
+      "cardTitle": "Revisión y llenado de aire",
+      "cta": "Obtener mi cupón de aire gratis",
+      "show": "aire gratis",
+      "sticky": "Cupón de aire gratis",
+      "desc": "Revisión y llenado de presión de llantas gratis, sin necesidad de compra."
+    },
+    "battery": {
+      "h1": "Prueba de batería gratis.",
+      "titleWord": "Prueba de batería gratis",
+      "sub": "probamos tu batería, gratis.",
+      "feature": "Prueba de batería gratis",
+      "cardTitle": "Prueba de batería",
+      "cta": "Obtener mi cupón de prueba de batería",
+      "show": "una prueba de batería gratis",
+      "sticky": "Cupón de batería gratis",
+      "desc": "Prueba de batería gratis, sin necesidad de compra."
+    }
   },
   "ui": {
     "lang_switch": "English",
@@ -87,7 +122,12 @@
     "how_title": "Tu cambio de aceite, en unos 15 minutos",
     "no_appt": "Sin cita previa",
     "open7": "Abierto los 7 días",
-    "steps": ["Cofre arriba", "Revisión", "Cambio de aceite", "Cofre abajo"],
+    "steps": [
+      "Cofre arriba",
+      "Revisión",
+      "Cambio de aceite",
+      "Cofre abajo"
+    ],
     "see_included": "Ver qué incluye",
     "hide": "Ocultar",
     "included_title": "Qué incluye",
@@ -98,10 +138,24 @@
     "closed": "Cerrado",
     "today": "Hoy",
     "mon_fri": "Lun – Vie",
-    "days_long": { "Mon": "Lunes", "Tue": "Martes", "Wed": "Miércoles", "Thu": "Jueves", "Fri": "Viernes" },
+    "days_long": {
+      "Mon": "Lunes",
+      "Tue": "Martes",
+      "Wed": "Miércoles",
+      "Thu": "Jueves",
+      "Fri": "Viernes"
+    },
     "saturday": "Sábado",
     "sunday": "Domingo",
-    "day_short": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+    "day_short": [
+      "Dom",
+      "Lun",
+      "Mar",
+      "Mié",
+      "Jue",
+      "Vie",
+      "Sáb"
+    ],
     "popular": "Horas populares",
     "call_wait": "Llámanos para consultar el tiempo de espera",
     "find_us": "Encuéntranos",
@@ -143,7 +197,15 @@
     "free_feat_sub": "Sin cita. Sin necesidad de compra. Quédate en tu auto."
   },
   "js": {
-    "days": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+    "days": [
+      "Dom",
+      "Lun",
+      "Mar",
+      "Mié",
+      "Jue",
+      "Vie",
+      "Sáb"
+    ],
     "open_until": "Abierto hasta las {t}",
     "opens_at": "Abre a las {t}",
     "opens_tomorrow": "Abre mañana a las {t}",
@@ -158,8 +220,8 @@
     "copied": "¡Copiado!",
     "hide": "Ocultar",
     "see_included": "Ver qué incluye",
-    "results": "{n} ubicación{s} cerca de {place}",
-    "plural": "es",
+    "results": "{n} ubicaciones cerca de {place}",
+    "plural": "",
     "show_more": "Ver {n} más",
     "zip_error": "Escribe un código postal de 5 dígitos.",
     "zip_notfound": "No encontramos ese código postal. Prueba con otro o usa tu ubicación.",
@@ -171,6 +233,7 @@
     "directions": "Cómo llegar",
     "coupon_code_aria": "Código de cupón ",
     "stars_aria": " de 5 estrellas",
-    "mi": " mi"
+    "mi": " mi",
+    "results_one": "1 ubicación cerca de {place}"
   }
 }
