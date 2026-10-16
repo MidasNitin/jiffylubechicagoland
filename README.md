@@ -151,3 +151,12 @@ Anything under `private/` is copied to `/private/...` on the site and protected 
 (`middleware.js`, credentials in Vercel env vars `PRIVATE_USER` / `PRIVATE_PASS`, also in local `.env`).
 It is excluded from the sitemap, robots.txt, llms.txt and llms-full.txt, and sent with noindex headers.
 Currently: `/private/competitor-map/` (built from `../jiffy-lube-competitor-map/dist/index.html`).
+
+## Spanish site (/es/)
+
+Every page is built twice: English at `/` and Spanish at `/es/`. Spanish copy lives in `data/es.json`
+(`site` overrides site.json copy, `ui` matches the `t()` keys in build.js, `js` feeds `window.JL_I18N`
+for site.js, `offers` are keyed by coupon code, `free` covers the free-service pages). Pages link to
+their twin with hreflang tags, the nav has an English/Español switch, the sitemap lists both with
+alternates, and wallet links pass `lang=es` so the passes are in Spanish. To change Spanish copy, edit
+`data/es.json` and rebuild. Store data is shared; nothing in stores.json needs translating.

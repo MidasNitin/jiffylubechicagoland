@@ -13,6 +13,7 @@ Current offers (valid through January 31, 2027):
 - [Find a location](https://www.jiffylubechicagoland.com/): search by zip code or use your location.
 - [Sitemap](https://www.jiffylubechicagoland.com/sitemap.xml)
 - [Full site text](https://www.jiffylubechicagoland.com/llms-full.txt): every page as plain text in one file.
+- [Sitio en español](https://www.jiffylubechicagoland.com/es/): every page is also available in Spanish under /es/ (same stores, same coupon codes).
 
 ## Free services (no purchase necessary)
 - [Free air for tires, Joliet N Larkin Ave](https://www.jiffylubechicagoland.com/free-air/joliet-n-larkin-ave/)

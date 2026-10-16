@@ -3,7 +3,9 @@
   'use strict';
 
   var TZ = 'America/Chicago';
-  var DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var I18N = window.JL_I18N || {}; // Spanish strings on /es/ pages; English fallbacks inline
+  function t(k, en) { return I18N[k] !== undefined ? I18N[k] : en; }
+  var DAY_NAMES = I18N.days || ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   function chicagoNow() {
     var parts = new Intl.DateTimeFormat('en-US', {
@@ -69,13 +71,13 @@
     var today = hours[now.day];
     var text, open = false;
     if (today && now.minutes >= today.open && now.minutes < today.close) {
-      open = true; text = 'Open until ' + fmtTime(today.close);
+      open = true; text = t('open_until', 'Open until {t}').replace('{t}', fmtTime(today.close));
     } else if (today && now.minutes < today.open) {
-      text = 'Opens at ' + fmtTime(today.open);
+      text = t('opens_at', 'Opens at {t}').replace('{t}', fmtTime(today.open));
     } else {
       var next = null;
       for (var i = 1; i <= 7; i++) { var d = hours[(now.day + i) % 7]; if (d) { next = { d: (now.day + i) % 7, h: d }; break; } }
-      text = next ? 'Opens ' + (next.d === (now.day + 1) % 7 ? 'tomorrow' : DAY_NAMES[next.d]) + ' at ' + fmtTime(next.h.open) : 'Closed';
+      text = next ? (next.d === (now.day + 1) % 7 ? t('opens_tomorrow', 'Opens tomorrow at {t}') : t('opens_day', 'Opens {d} at {t}').replace('{d}', DAY_NAMES[next.d])).replace('{t}', fmtTime(next.h.open)) : t('closed', 'Closed');
     }
     document.querySelectorAll('.js-status').forEach(function (s) {
       s.querySelector('.js-status-text').textContent = text;
@@ -85,7 +87,7 @@
       todayRow.hidden = false;
       todayRow.classList.add('is-today');
       var lbl = todayRow.querySelector('.js-today-label');
-      if (lbl) lbl.textContent = 'Today (' + DAY_NAMES[now.day] + ')';
+      if (lbl) lbl.textContent = t('today', 'Today ({d})').replace('{d}', DAY_NAMES[now.day]);
     });
   }
 
@@ -103,10 +105,10 @@
     var days = root.querySelectorAll('.popular__day');
 
     function label(v) {
-      if (v >= 75) return 'usually very busy';
-      if (v >= 50) return 'usually a little busy';
-      if (v >= 25) return 'usually not too busy';
-      return 'usually quiet';
+      if (v >= 75) return t('very_busy', 'usually very busy');
+      if (v >= 50) return t('little_busy', 'usually a little busy');
+      if (v >= 25) return t('not_busy', 'usually not too busy');
+      return t('quiet', 'usually quiet');
     }
     function render(day) {
       days.forEach(function (b) { b.classList.toggle('is-active', parseInt(b.getAttribute('data-day'), 10) === day); });
@@ -122,7 +124,7 @@
       });
       if (nowEl) {
         if (day === now.day && curIdx >= 0 && curIdx < vals.length) {
-          nowEl.innerHTML = 'Right now: <b>' + label(vals[curIdx]) + '</b>';
+          nowEl.innerHTML = t('right_now', 'Right now: ') + '<b>' + label(vals[curIdx]) + '</b>';
           nowEl.style.display = '';
         } else {
           nowEl.style.display = 'none';
@@ -146,7 +148,7 @@
         c.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       });
       if (copy) copy.addEventListener('click', function () {
-        var done = function () { c.classList.add('is-copied'); copy.textContent = 'Copied!'; };
+        var done = function () { c.classList.add('is-copied'); copy.textContent = t('copied', 'Copied!'); };
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(code).then(done, done);
         } else { done(); }
@@ -171,7 +173,7 @@
     if (!btn) return;
     btn.addEventListener('click', function () {
       var open = how.classList.toggle('is-open');
-      btn.querySelector('span').textContent = open ? 'Hide' : "See what's included";
+      btn.querySelector('span').textContent = open ? t('hide', 'Hide') : t('see_included', "See what's included");
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
@@ -224,7 +226,7 @@
     }
 
     function stars(r) {
-      var html = '<span class="stars" aria-label="' + r + ' out of 5 stars">';
+      var html = '<span class="stars" aria-label="' + r + t('stars_aria', ' out of 5 stars') + '">';
       for (var i = 0; i < 5; i++) {
         var w = Math.max(0, Math.min(1, r - i)) * 100;
         html += '<span class="star"><svg class="star__bg" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.7l-6.1 3.4 1.4-6.8L2.2 9.6l6.9-.8z"/></svg><span class="star__fg" style="--w:' + w + '%"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.7l-6.1 3.4 1.4-6.8L2.2 9.6l6.9-.8z"/></svg></span></span>';
@@ -239,12 +241,12 @@
     function card(s) {
       var url = base + 'store/' + s.slug + '/' + attrSuffix();
       return '<article class="loc-card">' +
-        '<div class="loc-card__top"><a class="loc-card__name" href="' + url + '">' + s.card_title + '</a><span class="loc-card__dist">' + s.d.toFixed(1) + ' mi</span></div>' +
+        '<div class="loc-card__top"><a class="loc-card__name" href="' + url + '">' + s.card_title + '</a><span class="loc-card__dist">' + s.d.toFixed(1) + t('mi', ' mi') + '</span></div>' +
         '<p class="loc-card__addr">' + s.street + ', ' + s.city + '</p>' +
         (s.phone ? '<a class="loc-card__phone" href="tel:' + s.phone.replace(/\D/g, '') + '">' + s.phone + '</a>' : '') +
         '<div class="loc-card__rating">' + s.rating.toFixed(1) + ' ' + stars(s.rating) + '</div>' +
-        '<div class="loc-card__btns"><a class="btn btn--secondary" href="' + base + 'coupon/' + s.slug + '/' + attrSuffix() + '">Coupon</a>' +
-        '<a class="btn btn--secondary" href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.street + ', ' + s.city + ', ' + s.state + ' ' + s.zip) + '&destination_place_id=' + s.place_id + '" target="_blank" rel="noopener">Get Directions</a></div>' +
+        '<div class="loc-card__btns"><a class="btn btn--secondary" href="' + base + 'coupon/' + s.slug + '/' + attrSuffix() + '">' + t('coupon', 'Coupon') + '</a>' +
+        '<a class="btn btn--secondary" href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.street + ', ' + s.city + ', ' + s.state + ' ' + s.zip) + '&destination_place_id=' + s.place_id + '" target="_blank" rel="noopener">' + t('directions', 'Get Directions') + '</a></div>' +
         '</article>';
     }
 
@@ -256,7 +258,7 @@
       sorted = near;
       list.innerHTML = '';
       shown = 0;
-      title.textContent = sorted.length + ' location' + (sorted.length === 1 ? '' : 's') + ' near ' + placeLabel;
+      title.textContent = t('results', '{n} location{s} near {place}').replace('{n}', sorted.length).replace('{s}', sorted.length === 1 ? '' : t('plural', 's')).replace('{place}', placeLabel);
       track('search_results', { results: sorted.length, nearest: sorted[0] ? sorted[0].slug : '', nearest_miles: sorted[0] ? Math.round(sorted[0].d * 10) / 10 : null });
       results.classList.add('is-visible');
       more(PAGE);
@@ -269,13 +271,13 @@
       shown += next.length;
       var left = sorted.length - shown;
       moreWrap.style.display = left > 0 ? '' : 'none';
-      moreBtn.textContent = 'Show ' + Math.min(left, MORE) + ' more';
+      moreBtn.textContent = t('show_more', 'Show {n} more').replace('{n}', Math.min(left, MORE));
     }
     moreBtn.addEventListener('click', function () { more(MORE); });
 
     function searchZip(zip) {
       zip = (zip || '').trim();
-      if (!/^\d{5}$/.test(zip)) { err('Please enter a 5-digit zip code.'); return; }
+      if (!/^\d{5}$/.test(zip)) { err(t('zip_error', 'Please enter a 5-digit zip code.')); return; }
       err('');
       // Zippopotam is a free, keyless zip lookup. Fallback: nearest store by zip prefix.
       fetch('https://api.zippopotam.us/us/' + zip).then(function (r) {
@@ -287,7 +289,7 @@
       }).catch(function () {
         var m = stores.filter(function (s) { return s.zip === zip; })[0];
         if (m) show(m.lat, m.lng, m.city + ', ' + m.state + ' ' + zip);
-        else err("We couldn't find that zip code. Try another or use your location.");
+        else err(t('zip_notfound', "We couldn't find that zip code. Try another or use your location."));
       });
       try { history.replaceState(null, '', '?zip=' + zip); } catch (e) { /* ignore */ }
     }
@@ -297,16 +299,16 @@
     geoBtns.forEach(function (b) {
       b.addEventListener('click', function (e) {
         e.preventDefault();
-        if (!navigator.geolocation) { err('Location is not available in this browser.'); return; }
+        if (!navigator.geolocation) { err(t('geo_unavailable', 'Location is not available in this browser.')); return; }
         err('');
         var orig = b.textContent;
-        b.textContent = 'Finding you…';
+        b.textContent = t('finding', 'Finding you…');
         navigator.geolocation.getCurrentPosition(function (pos) {
           b.textContent = orig;
-          show(pos.coords.latitude, pos.coords.longitude, 'you');
+          show(pos.coords.latitude, pos.coords.longitude, t('you', 'you'));
         }, function () {
           b.textContent = orig;
-          err("We couldn't get your location. Please enter a zip code.");
+          err(t('geo_failed', "We couldn't get your location. Please enter a zip code."));
         }, { timeout: 10000, maximumAge: 300000 });
       });
     });
@@ -368,7 +370,7 @@
     document.querySelectorAll('.coupon').forEach(function (c) {
       if (c.getAttribute('data-fixed-code')) return; // this store has its own code; campaign codes don't override it
       c.setAttribute('data-code', code);
-      c.querySelectorAll('.js-code').forEach(function (el) { el.textContent = code; el.setAttribute('aria-label', 'Coupon code ' + code); });
+      c.querySelectorAll('.js-code').forEach(function (el) { el.textContent = code; el.setAttribute('aria-label', t('coupon_code_aria', 'Coupon code ') + code); });
       c.querySelectorAll('.coupon__wallet-btn').forEach(function (a) {
         var href = a.getAttribute('href');
         a.setAttribute('href', href + (href.indexOf('?') >= 0 ? '&' : '?') + 'code=' + encodeURIComponent(key));

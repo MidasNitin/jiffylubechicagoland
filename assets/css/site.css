@@ -82,6 +82,7 @@ h1, h2, h3, p { margin: 0; }
 .nav__status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
 .nav__status.is-closed .dot { background: var(--pink-2); }
 .nav__btns { display: none; gap: 12px; }
+.nav__lang { font-size: 14px; color: var(--white); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
 
 /* Hero */
 .hero { position: relative; background: var(--maroon); color: var(--white); overflow: hidden; }
