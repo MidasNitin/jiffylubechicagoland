@@ -1,0 +1,128 @@
+# Jiffy Lube Chicagoland
+
+> Official site for 104 Jiffy Lube service centers in the Chicago area (Illinois, northwest Indiana and southeast Wisconsin). Oil changes in about 15 minutes, no appointment needed. Each location page lists the street address, phone number, today's hours, Google rating and a printable or mobile-wallet coupon code.
+
+Current offers (valid through January 31, 2027):
+- $11 OFF any oil change at most locations, code D1S6F3
+- $22 OFF any oil change, plus a free tire pressure check and fill at Jiffy Lube 1600 N Larkin Ave, Joliet, code GG1AD22
+- $22 OFF any oil change, plus a free tire pressure check and fill at Jiffy Lube 1941 Dempster St, Evanston, code GG1AD22
+- $22 OFF any oil change, plus a free tire pressure check and fill at Jiffy Lube 1644 W Jefferson St, Joliet, code GG1AD22
+- Free tire pressure check and fill, and free battery test, no purchase necessary, at the 3 locations listed under Free services.
+
+## Main pages
+- [Find a location](https://www.jiffylubechicagoland.com/): search by zip code or use your location.
+- [Sitemap](https://www.jiffylubechicagoland.com/sitemap.xml)
+
+## Free services (no purchase necessary)
+- [Free air for tires, Joliet N Larkin Ave](https://www.jiffylubechicagoland.com/free-air/joliet-n-larkin-ave/)
+- [Free battery test, Joliet N Larkin Ave](https://www.jiffylubechicagoland.com/free-battery/joliet-n-larkin-ave/)
+- [Free air for tires, Evanston Dempster St](https://www.jiffylubechicagoland.com/free-air/evanston-dempster-st/)
+- [Free battery test, Evanston Dempster St](https://www.jiffylubechicagoland.com/free-battery/evanston-dempster-st/)
+- [Free air for tires, Joliet W Jefferson St](https://www.jiffylubechicagoland.com/free-air/joliet-w-jefferson-st/)
+- [Free battery test, Joliet W Jefferson St](https://www.jiffylubechicagoland.com/free-battery/joliet-w-jefferson-st/)
+
+## Locations
+- [Jiffy Lube Addison, 705 W Lake St](https://www.jiffylubechicagoland.com/store/addison-w-lake-st/): (630) 543-1811, coupon at https://www.jiffylubechicagoland.com/coupon/addison-w-lake-st/
+- [Jiffy Lube Algonquin, 2361 W Algonquin Rd](https://www.jiffylubechicagoland.com/store/algonquin-w-algonquin-rd/): (224) 333-2242, coupon at https://www.jiffylubechicagoland.com/coupon/algonquin-w-algonquin-rd/
+- [Jiffy Lube Arlington Heights, 215 W Rand Rd](https://www.jiffylubechicagoland.com/store/arlington-heights-w-rand-rd/): (847) 506-0030, coupon at https://www.jiffylubechicagoland.com/coupon/arlington-heights-w-rand-rd/
+- [Jiffy Lube Aurora, 700 N Lake St](https://www.jiffylubechicagoland.com/store/aurora-n-lake-st/): (630) 892-0183, coupon at https://www.jiffylubechicagoland.com/coupon/aurora-n-lake-st/
+- [Jiffy Lube Aurora, 2428 W Sullivan Rd](https://www.jiffylubechicagoland.com/store/aurora-w-sullivan-rd/): (630) 907-9595, coupon at https://www.jiffylubechicagoland.com/coupon/aurora-w-sullivan-rd/
+- [Jiffy Lube Berwyn, 6930 Cermak Rd](https://www.jiffylubechicagoland.com/store/berwyn-cermak-rd/): (708) 788-1627, coupon at https://www.jiffylubechicagoland.com/coupon/berwyn-cermak-rd/
+- [Jiffy Lube Bolingbrook, 101 Brook Ct](https://www.jiffylubechicagoland.com/store/bolingbrook-brook-ct/): (630) 759-1494, coupon at https://www.jiffylubechicagoland.com/coupon/bolingbrook-brook-ct/
+- [Jiffy Lube Bourbonnais, 598 William Latham Dr](https://www.jiffylubechicagoland.com/store/bourbonnais-william-latham-dr/): (815) 935-0002, coupon at https://www.jiffylubechicagoland.com/coupon/bourbonnais-william-latham-dr/
+- [Jiffy Lube Burbank, 6400 W 87Th St](https://www.jiffylubechicagoland.com/store/burbank-w-87th-st/): (708) 598-4355, coupon at https://www.jiffylubechicagoland.com/coupon/burbank-w-87th-st/
+- [Jiffy Lube Calumet City, 1450 Sibley Blvd](https://www.jiffylubechicagoland.com/store/calumet-city-sibley-blvd/): (708) 862-6007, coupon at https://www.jiffylubechicagoland.com/coupon/calumet-city-sibley-blvd/
+- [Jiffy Lube Carol Stream, 2222 N Main St](https://www.jiffylubechicagoland.com/store/carol-stream-n-main-st/): (630) 668-4848, coupon at https://www.jiffylubechicagoland.com/coupon/carol-stream-n-main-st/
+- [Jiffy Lube Chesterton, 802 Ahrens Rd](https://www.jiffylubechicagoland.com/store/chesterton-ahrens-rd/): (219) 926-3636, coupon at https://www.jiffylubechicagoland.com/coupon/chesterton-ahrens-rd/
+- [Jiffy Lube Chicago, 5601 N Ashland Ave](https://www.jiffylubechicagoland.com/store/chicago-n-ashland-ave/): (773) 561-1188, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-ashland-ave/
+- [Jiffy Lube Chicago, 2401 N Austin Ave](https://www.jiffylubechicagoland.com/store/chicago-n-austin-ave/): (773) 889-1988, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-austin-ave/
+- [Jiffy Lube Chicago, 2940 N Cicero Ave](https://www.jiffylubechicagoland.com/store/chicago-n-cicero-ave/): (773) 286-1700, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-cicero-ave/
+- [Jiffy Lube Chicago, 2366 N Clybourn Ave](https://www.jiffylubechicagoland.com/store/chicago-n-clybourn-ave/): (773) 281-6688, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-clybourn-ave/
+- [Jiffy Lube Chicago, 3630 N Elston Ave](https://www.jiffylubechicagoland.com/store/chicago-n-elston-ave/): (773) 463-3200, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-elston-ave/
+- [Jiffy Lube Chicago, 2801 N Harlem Ave](https://www.jiffylubechicagoland.com/store/chicago-n-harlem-ave-2801/): (773) 889-0828, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-harlem-ave-2801/
+- [Jiffy Lube Chicago, 7200 N Harlem Ave](https://www.jiffylubechicagoland.com/store/chicago-n-harlem-ave-7200/): (773) 774-4414, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-harlem-ave-7200/
+- [Jiffy Lube Chicago, 5401 N Lincoln Ave](https://www.jiffylubechicagoland.com/store/chicago-n-lincoln-ave/): (773) 728-3307, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-lincoln-ave/
+- [Jiffy Lube Chicago, 6750 N Western Ave](https://www.jiffylubechicagoland.com/store/chicago-n-western-ave/): (773) 274-2900, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-n-western-ave/
+- [Jiffy Lube Chicago, 10750 S Halsted St](https://www.jiffylubechicagoland.com/store/chicago-s-halsted-st/): (773) 821-4700, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-s-halsted-st/
+- [Jiffy Lube Chicago, 10345 S Kedzie Ave](https://www.jiffylubechicagoland.com/store/chicago-s-kedzie-ave/): (773) 233-3640, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-s-kedzie-ave/
+- [Jiffy Lube Chicago, 6901 S Pulaski Rd](https://www.jiffylubechicagoland.com/store/chicago-s-pulaski-rd/): (773) 767-7438, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-s-pulaski-rd/
+- [Jiffy Lube Chicago, 1230 S Western Ave](https://www.jiffylubechicagoland.com/store/chicago-s-western-ave/): (312) 633-0600, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-s-western-ave/
+- [Jiffy Lube Chicago, 8265 S. South Chicago Ave](https://www.jiffylubechicagoland.com/store/chicago-s-south-chicago-ave/): (773) 731-2500, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-s-south-chicago-ave/
+- [Jiffy Lube Chicago, 6600 W Archer Ave](https://www.jiffylubechicagoland.com/store/chicago-w-archer-ave/): (773) 229-0600, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-w-archer-ave/
+- [Jiffy Lube Chicago, 4400 W Montrose Ave](https://www.jiffylubechicagoland.com/store/chicago-w-montrose-ave/): (773) 777-0989, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-w-montrose-ave/
+- [Jiffy Lube Chicago, 1049 W North Ave](https://www.jiffylubechicagoland.com/store/chicago-w-north-ave/): (312) 642-1991, coupon at https://www.jiffylubechicagoland.com/coupon/chicago-w-north-ave/
+- [Jiffy Lube Cicero, 6140 W Ogden Ave](https://www.jiffylubechicagoland.com/store/cicero-w-ogden-ave/): (708) 863-5855, coupon at https://www.jiffylubechicagoland.com/coupon/cicero-w-ogden-ave/
+- [Jiffy Lube Countryside, 5550 S La Grange Rd](https://www.jiffylubechicagoland.com/store/countryside-s-la-grange-rd/): (708) 579-3933, coupon at https://www.jiffylubechicagoland.com/coupon/countryside-s-la-grange-rd/
+- [Jiffy Lube Crestwood, 14007 Cicero Ave](https://www.jiffylubechicagoland.com/store/crestwood-cicero-ave/): (708) 371-9779, coupon at https://www.jiffylubechicagoland.com/coupon/crestwood-cicero-ave/
+- [Jiffy Lube Crown Point, 9301 Broadway](https://www.jiffylubechicagoland.com/store/crown-point-broadway/): (219) 756-7672, coupon at https://www.jiffylubechicagoland.com/coupon/crown-point-broadway/
+- [Jiffy Lube Crystal Lake, 6205 Northwest Hwy](https://www.jiffylubechicagoland.com/store/crystal-lake-northwest-hwy/): (815) 455-4455, coupon at https://www.jiffylubechicagoland.com/coupon/crystal-lake-northwest-hwy/
+- [Jiffy Lube Des Plaines, 777 Elmhurst Rd](https://www.jiffylubechicagoland.com/store/des-plaines-elmhurst-rd/): (847) 437-5439, coupon at https://www.jiffylubechicagoland.com/coupon/des-plaines-elmhurst-rd/
+- [Jiffy Lube Elgin, 445 S Mclean Blvd](https://www.jiffylubechicagoland.com/store/elgin-s-mclean-blvd/): (847) 622-1500, coupon at https://www.jiffylubechicagoland.com/coupon/elgin-s-mclean-blvd/
+- [Jiffy Lube Elk Grove Village, 1907 Oakton St](https://www.jiffylubechicagoland.com/store/elk-grove-village-oakton-st/): (847) 593-5823, coupon at https://www.jiffylubechicagoland.com/coupon/elk-grove-village-oakton-st/
+- [Jiffy Lube Elmhurst, 339 N York St](https://www.jiffylubechicagoland.com/store/elmhurst-n-york-st/): (630) 833-5823, coupon at https://www.jiffylubechicagoland.com/coupon/elmhurst-n-york-st/
+- [Jiffy Lube Elmhurst, 630 W North Ave](https://www.jiffylubechicagoland.com/store/elmhurst-w-north-ave/): (630) 832-3601, coupon at https://www.jiffylubechicagoland.com/coupon/elmhurst-w-north-ave/
+- [Jiffy Lube Evanston, 1941 Dempster St](https://www.jiffylubechicagoland.com/store/evanston-dempster-st/): (847) 328-5222, coupon at https://www.jiffylubechicagoland.com/coupon/evanston-dempster-st/
+- [Jiffy Lube Franklin Park, 3301 Mannheim Rd](https://www.jiffylubechicagoland.com/store/franklin-park-mannheim-rd/): (847) 678-6500, coupon at https://www.jiffylubechicagoland.com/coupon/franklin-park-mannheim-rd/
+- [Jiffy Lube Glenview, 3232 Glenview Rd](https://www.jiffylubechicagoland.com/store/glenview-glenview-rd/): (847) 729-7171, coupon at https://www.jiffylubechicagoland.com/coupon/glenview-glenview-rd/
+- [Jiffy Lube Glenwood, 18233 S Halsted St](https://www.jiffylubechicagoland.com/store/glenwood-s-halsted-st/): (708) 441-6611, coupon at https://www.jiffylubechicagoland.com/coupon/glenwood-s-halsted-st/
+- [Jiffy Lube Griffith, 309 W Ridge Rd](https://www.jiffylubechicagoland.com/store/griffith-w-ridge-rd/): (219) 972-1019, coupon at https://www.jiffylubechicagoland.com/coupon/griffith-w-ridge-rd/
+- [Jiffy Lube Gurnee, 7692 Grand Ave](https://www.jiffylubechicagoland.com/store/gurnee-grand-ave/): (847) 265-0566, coupon at https://www.jiffylubechicagoland.com/coupon/gurnee-grand-ave/
+- [Jiffy Lube Hanover Park, 1860 Army Trail Rd](https://www.jiffylubechicagoland.com/store/hanover-park-army-trail-rd/): (630) 372-5823, coupon at https://www.jiffylubechicagoland.com/coupon/hanover-park-army-trail-rd/
+- [Jiffy Lube Hanover Park, 1600 Irving Park Rd](https://www.jiffylubechicagoland.com/store/hanover-park-irving-park-rd/): (630) 289-7744, coupon at https://www.jiffylubechicagoland.com/coupon/hanover-park-irving-park-rd/
+- [Jiffy Lube Hoffman Estates, 1 W Higgins Rd](https://www.jiffylubechicagoland.com/store/hoffman-estates-w-higgins-rd/): (847) 519-1030, coupon at https://www.jiffylubechicagoland.com/coupon/hoffman-estates-w-higgins-rd/
+- [Jiffy Lube Homer Glen, 12554 W 159Th St](https://www.jiffylubechicagoland.com/store/homer-glen-w-159th-st/): (708) 301-2233, coupon at https://www.jiffylubechicagoland.com/coupon/homer-glen-w-159th-st/
+- [Jiffy Lube Huntley, 11875 Kreutzer Road](https://www.jiffylubechicagoland.com/store/huntley-kreutzer-road/): (224) 654-6965, coupon at https://www.jiffylubechicagoland.com/coupon/huntley-kreutzer-road/
+- [Jiffy Lube Joliet, 1600 N Larkin Ave](https://www.jiffylubechicagoland.com/store/joliet-n-larkin-ave/): (815) 744-2325, coupon at https://www.jiffylubechicagoland.com/coupon/joliet-n-larkin-ave/
+- [Jiffy Lube Joliet, 1644 W Jefferson St](https://www.jiffylubechicagoland.com/store/joliet-w-jefferson-st/): (815) 729-2225, coupon at https://www.jiffylubechicagoland.com/coupon/joliet-w-jefferson-st/
+- [Jiffy Lube La Grange Park, 1119 N La Grange Rd](https://www.jiffylubechicagoland.com/store/la-grange-park-n-la-grange-rd/): (708) 354-6457, coupon at https://www.jiffylubechicagoland.com/coupon/la-grange-park-n-la-grange-rd/
+- [Jiffy Lube La Porte, 512 J St](https://www.jiffylubechicagoland.com/store/la-porte-j-st/): (219) 324-7741, coupon at https://www.jiffylubechicagoland.com/coupon/la-porte-j-st/
+- [Jiffy Lube Lansing, 17803 Torrence Ave](https://www.jiffylubechicagoland.com/store/lansing-torrence-ave/): (708) 895-6770, coupon at https://www.jiffylubechicagoland.com/coupon/lansing-torrence-ave/
+- [Jiffy Lube Lemont, 15667 W 127Th St](https://www.jiffylubechicagoland.com/store/lemont-w-127th-st/): (331) 757-5024, coupon at https://www.jiffylubechicagoland.com/coupon/lemont-w-127th-st/
+- [Jiffy Lube Libertyville, 445 S Milwaukee Ave](https://www.jiffylubechicagoland.com/store/libertyville-s-milwaukee-ave/): (847) 816-3393, coupon at https://www.jiffylubechicagoland.com/coupon/libertyville-s-milwaukee-ave/
+- [Jiffy Lube Lincolnwood, 4019 W Touhy Ave](https://www.jiffylubechicagoland.com/store/lincolnwood-w-touhy-ave/): (847) 674-2322, coupon at https://www.jiffylubechicagoland.com/coupon/lincolnwood-w-touhy-ave/
+- [Jiffy Lube Lombard, 1 E Roosevelt Rd](https://www.jiffylubechicagoland.com/store/lombard-e-roosevelt-rd/): (630) 627-5656, coupon at https://www.jiffylubechicagoland.com/coupon/lombard-e-roosevelt-rd/
+- [Jiffy Lube Matteson, 20602 Cicero Avenue](https://www.jiffylubechicagoland.com/store/matteson-cicero-avenue/): (708) 283-0631, coupon at https://www.jiffylubechicagoland.com/coupon/matteson-cicero-avenue/
+- [Jiffy Lube Mc Henry, 1807 N Richmond Rd](https://www.jiffylubechicagoland.com/store/mc-henry-n-richmond-rd/): (815) 363-7299, coupon at https://www.jiffylubechicagoland.com/coupon/mc-henry-n-richmond-rd/
+- [Jiffy Lube Melrose Park, 8351 W North Ave](https://www.jiffylubechicagoland.com/store/melrose-park-w-north-ave/): (708) 865-2100, coupon at https://www.jiffylubechicagoland.com/coupon/melrose-park-w-north-ave/
+- [Jiffy Lube Merrillville, 5920 Broadway](https://www.jiffylubechicagoland.com/store/merrillville-broadway/): (219) 887-0858, coupon at https://www.jiffylubechicagoland.com/coupon/merrillville-broadway/
+- [Jiffy Lube Michigan City, 3325 Franklin St](https://www.jiffylubechicagoland.com/store/michigan-city-franklin-st/): (219) 879-3288, coupon at https://www.jiffylubechicagoland.com/coupon/michigan-city-franklin-st/
+- [Jiffy Lube Montgomery, 344 Montgomery Rd](https://www.jiffylubechicagoland.com/store/montgomery-montgomery-rd/): (630) 264-2225, coupon at https://www.jiffylubechicagoland.com/coupon/montgomery-montgomery-rd/
+- [Jiffy Lube Mt Prospect, 2 W Rand Rd](https://www.jiffylubechicagoland.com/store/mt-prospect-w-rand-rd/): (847) 253-0054, coupon at https://www.jiffylubechicagoland.com/coupon/mt-prospect-w-rand-rd/
+- [Jiffy Lube Mundelein, 1470 S Butterfield Rd](https://www.jiffylubechicagoland.com/store/mundelein-s-butterfield-rd/): (847) 816-0200, coupon at https://www.jiffylubechicagoland.com/coupon/mundelein-s-butterfield-rd/
+- [Jiffy Lube Mundelein, 3 Sysmex Way](https://www.jiffylubechicagoland.com/store/mundelein-sysmex-way/): (224) 292-5009, coupon at https://www.jiffylubechicagoland.com/coupon/mundelein-sysmex-way/
+- [Jiffy Lube Naperville, 922 E Ogden Ave](https://www.jiffylubechicagoland.com/store/naperville-e-ogden-ave/): (630) 961-1616, coupon at https://www.jiffylubechicagoland.com/coupon/naperville-e-ogden-ave/
+- [Jiffy Lube Naperville, 944 W 75Th St](https://www.jiffylubechicagoland.com/store/naperville-w-75th-st/): (630) 995-3829, coupon at https://www.jiffylubechicagoland.com/coupon/naperville-w-75th-st/
+- [Jiffy Lube New Lenox, 682 East Lincoln Highway](https://www.jiffylubechicagoland.com/store/new-lenox-east-lincoln-highway/): (815) 717-4936, coupon at https://www.jiffylubechicagoland.com/coupon/new-lenox-east-lincoln-highway/
+- [Jiffy Lube Oak Forest, 5401 159Th St](https://www.jiffylubechicagoland.com/store/oak-forest-159th-st/): (708) 535-2011, coupon at https://www.jiffylubechicagoland.com/coupon/oak-forest-159th-st/
+- [Jiffy Lube Oak Lawn, 9756 S Cicero Ave](https://www.jiffylubechicagoland.com/store/oak-lawn-s-cicero-ave/): (708) 636-1414, coupon at https://www.jiffylubechicagoland.com/coupon/oak-lawn-s-cicero-ave/
+- [Jiffy Lube Oak Park, 1122 Madison St](https://www.jiffylubechicagoland.com/store/oak-park-madison-st/): (708) 383-3339, coupon at https://www.jiffylubechicagoland.com/coupon/oak-park-madison-st/
+- [Jiffy Lube Oak Park, 6845 North Ave](https://www.jiffylubechicagoland.com/store/oak-park-north-ave/): (708) 386-5855, coupon at https://www.jiffylubechicagoland.com/coupon/oak-park-north-ave/
+- [Jiffy Lube Oak Park, 215 S Harlem Ave](https://www.jiffylubechicagoland.com/store/oak-park-s-harlem-ave/): (708) 386-5700, coupon at https://www.jiffylubechicagoland.com/coupon/oak-park-s-harlem-ave/
+- [Jiffy Lube Oakbrook Terrace, 17W620 Butterfield Rd](https://www.jiffylubechicagoland.com/store/oakbrook-terrace-17w620-butterfield-rd/): (630) 953-2212, coupon at https://www.jiffylubechicagoland.com/coupon/oakbrook-terrace-17w620-butterfield-rd/
+- [Jiffy Lube Orland Park, 9254 W 159Th St](https://www.jiffylubechicagoland.com/store/orland-park-w-159th-st/): (708) 403-1771, coupon at https://www.jiffylubechicagoland.com/coupon/orland-park-w-159th-st/
+- [Jiffy Lube Ottawa, 113 Kain St](https://www.jiffylubechicagoland.com/store/ottawa-kain-st/): (815) 433-6325, coupon at https://www.jiffylubechicagoland.com/coupon/ottawa-kain-st/
+- [Jiffy Lube Palatine, 866 E Dundee Rd](https://www.jiffylubechicagoland.com/store/palatine-e-dundee-rd/): (847) 991-5144, coupon at https://www.jiffylubechicagoland.com/coupon/palatine-e-dundee-rd/
+- [Jiffy Lube Park Ridge, 700 Higgins Rd](https://www.jiffylubechicagoland.com/store/park-ridge-higgins-rd/): (847) 318-0444, coupon at https://www.jiffylubechicagoland.com/coupon/park-ridge-higgins-rd/
+- [Jiffy Lube Plainfield, 2021 S Route 59](https://www.jiffylubechicagoland.com/store/plainfield-s-route-59/): (815) 609-7238, coupon at https://www.jiffylubechicagoland.com/coupon/plainfield-s-route-59/
+- [Jiffy Lube Romeoville, 653 N Independence Blvd](https://www.jiffylubechicagoland.com/store/romeoville-n-independence-blvd/): (815) 886-5823, coupon at https://www.jiffylubechicagoland.com/coupon/romeoville-n-independence-blvd/
+- [Jiffy Lube Romeoville, 1332 West Airport Rd.](https://www.jiffylubechicagoland.com/store/romeoville-west-airport-rd/): (779) 234-6993, coupon at https://www.jiffylubechicagoland.com/coupon/romeoville-west-airport-rd/
+- [Jiffy Lube Roselle, 500 Lake St](https://www.jiffylubechicagoland.com/store/roselle-lake-st/): (630) 893-3189, coupon at https://www.jiffylubechicagoland.com/coupon/roselle-lake-st/
+- [Jiffy Lube Saint Charles, 1970 Lincoln Hwy](https://www.jiffylubechicagoland.com/store/saint-charles-lincoln-hwy/): (630) 513-1277, coupon at https://www.jiffylubechicagoland.com/coupon/saint-charles-lincoln-hwy/
+- [Jiffy Lube Schaumburg, 801 W Golf Rd](https://www.jiffylubechicagoland.com/store/schaumburg-w-golf-rd/): (847) 885-8888, coupon at https://www.jiffylubechicagoland.com/coupon/schaumburg-w-golf-rd/
+- [Jiffy Lube Skokie, 5147 Golf Rd](https://www.jiffylubechicagoland.com/store/skokie-golf-rd/): (847) 674-0880, coupon at https://www.jiffylubechicagoland.com/coupon/skokie-golf-rd/
+- [Jiffy Lube Sturtevant, 7127 Durand Ave](https://www.jiffylubechicagoland.com/store/sturtevant-durand-ave/): (262) 554-4100, coupon at https://www.jiffylubechicagoland.com/coupon/sturtevant-durand-ave/
+- [Jiffy Lube Sugar Grove, 112 E Galena Blvd](https://www.jiffylubechicagoland.com/store/sugar-grove-e-galena-blvd/): (331) 227-4473, coupon at https://www.jiffylubechicagoland.com/coupon/sugar-grove-e-galena-blvd/
+- [Jiffy Lube Sycamore, 491 South Peace Rd.](https://www.jiffylubechicagoland.com/store/sycamore-south-peace-rd/): (815) 895-5853, coupon at https://www.jiffylubechicagoland.com/coupon/sycamore-south-peace-rd/
+- [Jiffy Lube Valparaiso, 355 Morthland Dr](https://www.jiffylubechicagoland.com/store/valparaiso-morthland-dr/): (219) 462-7000, coupon at https://www.jiffylubechicagoland.com/coupon/valparaiso-morthland-dr/
+- [Jiffy Lube Vernon Hills, 840 S Milwaukee Avenue](https://www.jiffylubechicagoland.com/store/vernon-hills-s-milwaukee-avenue/): (847) 821-8126, coupon at https://www.jiffylubechicagoland.com/coupon/vernon-hills-s-milwaukee-avenue/
+- [Jiffy Lube Waukegan, 1212 N Lewis Ave](https://www.jiffylubechicagoland.com/store/waukegan-n-lewis-ave/): (224) 214-3924, coupon at https://www.jiffylubechicagoland.com/coupon/waukegan-n-lewis-ave/
+- [Jiffy Lube Waukegan, 556 S Green Bay Rd](https://www.jiffylubechicagoland.com/store/waukegan-s-green-bay-rd/): (847) 336-4070, coupon at https://www.jiffylubechicagoland.com/coupon/waukegan-s-green-bay-rd/
+- [Jiffy Lube West Chicago, 137 W North Ave](https://www.jiffylubechicagoland.com/store/west-chicago-w-north-ave/): (630) 293-7725, coupon at https://www.jiffylubechicagoland.com/coupon/west-chicago-w-north-ave/
+- [Jiffy Lube West Dundee, 726 W Main St](https://www.jiffylubechicagoland.com/store/west-dundee-w-main-st/): (847) 428-1070, coupon at https://www.jiffylubechicagoland.com/coupon/west-dundee-w-main-st/
+- [Jiffy Lube Westmont, 411 W Ogden Ave](https://www.jiffylubechicagoland.com/store/westmont-w-ogden-ave/): (630) 963-5870, coupon at https://www.jiffylubechicagoland.com/coupon/westmont-w-ogden-ave/
+- [Jiffy Lube Wheeling, 10 E Dundee Rd](https://www.jiffylubechicagoland.com/store/wheeling-e-dundee-rd/): (847) 229-9203, coupon at https://www.jiffylubechicagoland.com/coupon/wheeling-e-dundee-rd/
+- [Jiffy Lube Wilmette, 1115 Green Bay Rd](https://www.jiffylubechicagoland.com/store/wilmette-green-bay-rd/): (847) 256-4891, coupon at https://www.jiffylubechicagoland.com/coupon/wilmette-green-bay-rd/
+- [Jiffy Lube Woodstock, 11601 Catalpa Ln](https://www.jiffylubechicagoland.com/store/woodstock-catalpa-ln/): (815) 308-2325, coupon at https://www.jiffylubechicagoland.com/coupon/woodstock-catalpa-ln/
+- [Jiffy Lube Worth, 7201 Southwest Hwy](https://www.jiffylubechicagoland.com/store/worth-southwest-hwy/): (708) 448-0003, coupon at https://www.jiffylubechicagoland.com/coupon/worth-southwest-hwy/
+- [Jiffy Lube Yorkville, 1845 Marketview Dr](https://www.jiffylubechicagoland.com/store/yorkville-marketview-dr/): (630) 553-1784, coupon at https://www.jiffylubechicagoland.com/coupon/yorkville-marketview-dr/
+- [Jiffy Lube Zion, 2000 Sheridan Rd](https://www.jiffylubechicagoland.com/store/zion-sheridan-rd/): (847) 731-7647, coupon at https://www.jiffylubechicagoland.com/coupon/zion-sheridan-rd/

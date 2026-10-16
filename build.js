@@ -438,6 +438,30 @@ for (const s of stores) {
 write('404.html', `${head('Page not found | Jiffy Lube Chicagoland', 'Page not found', '/404.html')}<body>${nav(null)}<main><section class="section"><div class="wrap" style="text-align:center"><h1 class="h2">We couldn’t find that page.</h1><p class="body" style="margin-top:12px"><a href="/">Find a Jiffy Lube location near you</a></p></div></section></main>${footer(site.legal.region_franchisee)}</body></html>`);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${site.domain}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.domain}/sitemap.xml\n`);
+// llms.txt: a plain-language index for AI assistants (Claude, ChatGPT, Gemini, Perplexity).
+{
+  const pilots = stores.filter((s) => s.free_pages);
+  const byCity = [...stores].sort((a, b) => a.city.localeCompare(b.city) || a.street_name.localeCompare(b.street_name));
+  write('llms.txt', `# Jiffy Lube Chicagoland
+
+> Official site for ${stores.length} Jiffy Lube service centers in the Chicago area (Illinois, northwest Indiana and southeast Wisconsin). Oil changes in about 15 minutes, no appointment needed. Each location page lists the street address, phone number, today's hours, Google rating and a printable or mobile-wallet coupon code.
+
+Current offers (valid through ${site.offer.expires}):
+- ${site.offer.amount} ${site.offer.description} at most locations, code ${site.offer.code}
+${pilots.map((s) => `- ${s.offer.amount} ${s.offer.description} at Jiffy Lube ${s.street}, ${s.city}, code ${s.offer.code}`).join('\n')}
+- Free tire pressure check and fill, and free battery test, no purchase necessary, at the ${pilots.length} locations listed under Free services.
+
+## Main pages
+- [Find a location](${site.domain}/): search by zip code or use your location.
+- [Sitemap](${site.domain}/sitemap.xml)
+
+## Free services (no purchase necessary)
+${pilots.map((s) => `- [Free air for tires, ${s.city} ${s.street_name}](${site.domain}/free-air/${s.slug}/)\n- [Free battery test, ${s.city} ${s.street_name}](${site.domain}/free-battery/${s.slug}/)`).join('\n')}
+
+## Locations
+${byCity.map((s) => `- [Jiffy Lube ${s.city}, ${s.street}](${site.domain}/store/${s.slug}/): ${s.phone || ''}${s.phone ? ', ' : ''}coupon at ${site.domain}/coupon/${s.slug}/`).join('\n')}
+`);
+}
 write('CNAME', site.domain.replace(/^https?:\/\//, '') + '\n');
 write('.nojekyll', '');
 console.log(`Built ${urls.length} pages into docs/`);
