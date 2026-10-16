@@ -252,7 +252,7 @@ function homePage() {
   <a class="card" href="/private/quadrants/" data-nav="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours ${esc(latestLabel)}, competitors ${esc(compDate)}</span></a>
   <a class="card" href="/private/ratings/" data-nav="/private/ratings/"><h3>Ratings over time</h3><p>Average rating and review totals by brand over time, with every store and every competitor listed snapshot by snapshot. Refreshed automatically on the 1st of each month.</p><span class="tag">${dates.length} snapshot${dates.length === 1 ? '' : 's'}</span></a>
 </div>
-<div class="cards"><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate from Google Analytics, by source, campaign, store and campaign key.</p><span class="tag">Google Analytics</span></a></div>
+<div class="cards"><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate, plus Google Ads spend, clicks, cost per conversion and search terms, by campaign, store and campaign key.</p><span class="tag">Google Analytics + Google Ads</span></a></div>
 <p class="foot">Questions or new sections: david.perez@neptuneventures.co</p>
 <script>
 (function(){
@@ -292,7 +292,16 @@ function campaignsPage() {
   if (!ga) {
     return page('Campaigns', `<h1>Campaigns</h1><p class="sub">Google Analytics data has not been pulled yet. Once the service account has Viewer access to the GA property, run <code>node scripts/ga-pull.mjs</code> and rebuild.</p>`, 'camp');
   }
-  const data = JSON.stringify({ ga, slugGroup, slugLabel });
+  // campaign name -> store: "JL Evanston | Core" matches the store whose city (and street word) appear in the name
+  const campStore = {};
+  const names = new Set([].concat(ga.ads_campaigns || [], ga.ads_daily || []).map((r) => r.sessionGoogleAdsCampaignName).filter(Boolean));
+  for (const name of names) {
+    const n = name.toLowerCase();
+    const hits = siteStores.filter((st) => n.includes(st.city.toLowerCase()));
+    const best = hits.length > 1 ? hits.filter((st) => st.street_name.toLowerCase().split(/\s+/).some((w) => w.length > 3 && n.includes(w))) : hits;
+    if (best.length === 1) campStore[name] = { slug: best[0].slug, group: best[0].group, label: slugLabel[best[0].slug] };
+  }
+  const data = JSON.stringify({ ga, slugGroup, slugLabel, campStore });
   const evLabel = { get_coupon: 'Get coupon', copy_code: 'Copy code', wallet_add: 'Add to wallet', call_click: 'Call', get_directions: 'Directions' };
   const body = `
 <h1>Campaigns</h1>
@@ -300,6 +309,13 @@ function campaignsPage() {
 <div class="ctl"><label>Range <select id="crange"><option value="7">Last 7 days</option><option value="28" selected>Last 28 days</option><option value="${ga.days}">Last ${ga.days} days</option></select></label><span class="muted" id="cnote"></span></div>
 <div class="stats" id="c-stats"></div>
 <div class="panel"><div class="legend" id="c-legend"></div><div style="position:relative"><svg class="plot" id="cplot" viewBox="0 0 900 360" role="img" aria-label="Sessions and key events per day"></svg><div class="tip" id="ctip"></div></div></div>
+<h2>Google Ads</h2>
+<p class="sub muted" id="a-note"></p>
+<div class="stats" id="a-stats"></div>
+<div class="panel"><div class="legend"><span><i style="background:#2a78d6"></i>Clicks</span><span><i style="background:#eda100"></i>Spend ($)</span></div><div style="position:relative"><svg class="plot" id="aplot" viewBox="0 0 900 300" role="img" aria-label="Google Ads clicks and spend per day"></svg><div class="tip" id="atip"></div></div></div>
+<div class="panel" style="overflow:auto"><table id="a-camp"><thead><tr><th>Campaign</th><th>Ad group</th><th>Store</th><th class="num">Impr.</th><th class="num">Clicks</th><th class="num">CTR</th><th class="num">Spend</th><th class="num">CPC</th><th class="num">Sessions</th><th class="num">Key events</th><th class="num">Cost / key event</th></tr></thead><tbody></tbody></table></div>
+<h3 style="font-size:16px;margin:20px 0 8px">What people searched</h3>
+<div class="panel" style="overflow:auto"><table id="a-q"><thead><tr><th>Search term</th><th>Campaign</th><th class="num">Clicks</th><th class="num">Spend</th><th class="num">Key events</th></tr></thead><tbody></tbody></table></div>
 <h2>Conversions by action</h2>
 <div class="stats" id="c-events"></div>
 <h2>Where visitors came from</h2>
@@ -328,7 +344,7 @@ function render(){
   var prevDays=ga.daily.map(function(d){return d.date}).sort().slice(-2*N,-N),pset={};prevDays.forEach(function(d){pset[d]=1});var P=ga.daily.filter(function(d){return pset[d.date]});
   var pS=P.reduce(function(a,d){return a+d.sessions},0),pK=P.reduce(function(a,d){return a+d.keyEvents},0);
   function arrow(cur,prev,fmt){if(!prevDays.length||prevDays.length<N)return '';var d=cur-prev;var col=d>0?'var(--q-strong)':d<0?'var(--q-risk)':'var(--muted)';return '<div><span style="color:'+col+';font-size:13px;font-weight:700">'+(d>0?'&#9650; +':d<0?'&#9660; ':'&#9644; ')+fmt(d)+' vs prior '+N+' days</span></div>'}
-  var st='';var stat=function(b,l,a){return '<div class="stat"><b>'+b+'</b>'+(a||'')+'<span>'+l+'</span></div>'};
+  var st='';var stat=function(b,l,a){return '<div class="stat"><b>'+b+'</b>'+(a||'')+'<span>'+l+'</span></div>'};var td=function(v,num){return '<td'+(num?' class="num"':'')+'>'+v+'</td>'};
   st+=stat(n(S),'Sessions (visits)',arrow(S,pS,n));st+=stat(n(U),'Users');st+=stat(n(V),'Page views');
   st+=stat(n(K),'Key events (conversions)',arrow(K,pK,n));st+=stat(pct(K,S),'Conversion rate',arrow(S?K/S:0,pS?pK/pS:0,function(d){return (100*d).toFixed(1)+' pts'}));st+=stat(pct(E,S),'Engaged sessions');
   document.getElementById('c-stats').innerHTML=st;
@@ -342,12 +358,37 @@ function render(){
   [['sessions','#2a78d6'],['keyEvents','#008300']].forEach(function(sr){var p='';D.forEach(function(d,i){p+=(p?' L':'M')+sx(i)+' '+sy(d[sr[0]])});s+='<path d="'+p+'" fill="none" stroke="'+sr[1]+'" stroke-width="2.5"/>';D.forEach(function(d,i){s+='<circle class="pt" data-i="'+i+'" data-k="'+sr[0]+'" cx="'+sx(i)+'" cy="'+sy(d[sr[0]])+'" r="5" fill="'+sr[1]+'"/>'})});
   svg.innerHTML=s;svg._D=D;
   document.getElementById('c-legend').innerHTML='<span><i style="background:#2a78d6"></i>Sessions</span><span><i style="background:#008300"></i>Key events</span>';
+  // Google Ads
+  (function(){
+    var g=window.JL_GROUP||'',CS=X.campStore||{};var inG=function(name){return !g||(CS[name]&&CS[name].group===g)};
+    var money=function(v){return '$'+(v||0).toFixed(2)};
+    var ad=(ga.ads_daily||[]).filter(function(r){return dset[r.date]&&inG(r.sessionGoogleAdsCampaignName)});
+    var byDay={};ad.forEach(function(r){var d=byDay[r.date]=byDay[r.date]||{c:0,s:0,i:0,k:0};d.c+=r.advertiserAdClicks;d.s+=r.advertiserAdCost;d.i+=r.advertiserAdImpressions;d.k+=r.keyEvents});
+    var AD=days.map(function(d){return Object.assign({date:d},byDay[d]||{c:0,s:0,i:0,k:0})});
+    var T=AD.reduce(function(a,d){a.c+=d.c;a.s+=d.s;a.i+=d.i;a.k+=d.k;return a},{c:0,s:0,i:0,k:0});
+    var pad=(ga.ads_daily||[]).filter(function(r){return pset[r.date]&&inG(r.sessionGoogleAdsCampaignName)}).reduce(function(a,r){a.c+=r.advertiserAdClicks;a.s+=r.advertiserAdCost;a.k+=r.keyEvents;return a},{c:0,s:0,k:0});
+    var h='';h+=stat(money(T.s),'Spend',arrow(T.s,pad.s,function(d){return money(Math.abs(d))}));h+=stat(n(T.c),'Clicks',arrow(T.c,pad.c,n));h+=stat(n(T.i),'Impressions');
+    h+=stat(T.i?(100*T.c/T.i).toFixed(1)+'%':'-','Click-through rate');h+=stat(T.c?money(T.s/T.c):'-','Cost per click');h+=stat(n(T.k),'Key events from ads',arrow(T.k,pad.k,n));h+=stat(T.k?money(T.s/T.k):'-','Cost per key event');
+    document.getElementById('a-stats').innerHTML=h;
+    document.getElementById('a-note').textContent=(g?'Campaigns for '+g+' stores. ':'All campaigns. ')+'Spend, clicks and impressions come from the Google Ads account through its link to Analytics; key events are the conversions those visits produced on the site.';
+    var svg=document.getElementById('aplot'),W=900,H=300,Pd={l:48,r:56,t:16,b:40};var mc=Math.max(1,Math.max.apply(null,AD.map(function(d){return d.c}))),ms=Math.max(1,Math.max.apply(null,AD.map(function(d){return d.s})));
+    var sx=function(i){return AD.length===1?(Pd.l+W-Pd.r)/2:Pd.l+i/(AD.length-1)*(W-Pd.l-Pd.r)},syc=function(v){return H-Pd.b-v/mc*(H-Pd.t-Pd.b)},sys=function(v){return H-Pd.b-v/ms*(H-Pd.t-Pd.b)};
+    var s='';for(var k=0;k<=4;k++){s+='<line class="grid" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+syc(mc*k/4)+'" y2="'+syc(mc*k/4)+'"/><text class="lbl" x="'+(Pd.l-8)+'" y="'+(syc(mc*k/4)+4)+'" text-anchor="end">'+Math.round(mc*k/4)+'</text><text class="lbl" x="'+(W-Pd.r+8)+'" y="'+(sys(ms*k/4)+4)+'">$'+Math.round(ms*k/4)+'</text>'}
+    var step=Math.max(1,Math.ceil(AD.length/10));AD.forEach(function(d,i){if(i%step===0||i===AD.length-1)s+='<text class="lbl" x="'+sx(i)+'" y="'+(H-Pd.b+18)+'" text-anchor="middle">'+d.date.slice(4,6)+'/'+d.date.slice(6)+'</text>'});
+    s+='<line class="axis" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+(H-Pd.b)+'" y2="'+(H-Pd.b)+'"/>';
+    var bw=Math.max(4,(W-Pd.l-Pd.r)/Math.max(AD.length,1)*0.5);AD.forEach(function(d,i){s+='<rect class="pt" data-i="'+i+'" x="'+(sx(i)-bw/2)+'" y="'+sys(d.s)+'" width="'+bw+'" height="'+Math.max(0,H-Pd.b-sys(d.s))+'" rx="3" fill="#eda100" fill-opacity=".6"/>'});
+    var p='';AD.forEach(function(d,i){p+=(p?' L':'M')+sx(i)+' '+syc(d.c)});s+='<path d="'+p+'" fill="none" stroke="#2a78d6" stroke-width="2.5"/>';AD.forEach(function(d,i){s+='<circle class="pt" data-i="'+i+'" cx="'+sx(i)+'" cy="'+syc(d.c)+'" r="5" fill="#2a78d6"/>'});
+    svg.innerHTML=s;svg._AD=AD;
+    var camps=(ga.ads_campaigns||[]).filter(function(r){return inG(r.sessionGoogleAdsCampaignName)});
+    document.querySelector('#a-camp tbody').innerHTML=camps.map(function(r){var cs=CS[r.sessionGoogleAdsCampaignName];return '<tr>'+td(r.sessionGoogleAdsCampaignName)+td(r.sessionGoogleAdsAdGroupName)+td(cs?cs.label:'<span class="muted">-</span>')+td(n(r.advertiserAdImpressions),1)+td(n(r.advertiserAdClicks),1)+td(r.advertiserAdImpressions?(100*r.advertiserAdClicks/r.advertiserAdImpressions).toFixed(1)+'%':'-',1)+td(money(r.advertiserAdCost),1)+td(r.advertiserAdClicks?money(r.advertiserAdCost/r.advertiserAdClicks):'-',1)+td(n(r.sessions),1)+td(n(r.keyEvents),1)+td(r.keyEvents?money(r.advertiserAdCost/r.keyEvents):'-',1)+'</tr>'}).join('')||'<tr><td colspan="11" class="muted">No ad data in this period.</td></tr>';
+    var qs=(ga.ads_queries||[]).filter(function(r){return inG(r.sessionGoogleAdsCampaignName)&&r.sessionGoogleAdsQuery&&r.sessionGoogleAdsQuery!=='(not set)'}).slice(0,60);
+    document.querySelector('#a-q tbody').innerHTML=qs.map(function(r){return '<tr>'+td(r.sessionGoogleAdsQuery)+td(r.sessionGoogleAdsCampaignName)+td(n(r.advertiserAdClicks),1)+td(money(r.advertiserAdCost),1)+td(n(r.keyEvents),1)+'</tr>'}).join('')||'<tr><td colspan="5" class="muted">No search terms in this period.</td></tr>';
+  })();
   // events by action
   var ev={};ga.daily_events.filter(function(r){return dset[r.date]}).forEach(function(r){ev[r.eventName]=(ev[r.eventName]||0)+r.eventCount});
   document.getElementById('c-events').innerHTML=KE.map(function(k){return stat(n(ev[k]),EV[k]||k)}).join('');
   // sources / campaigns / pages are whole-pull (GA aggregates don't split by day here)
   var rows=function(list,cols){return list.map(function(r){return '<tr>'+cols.map(function(c){return c(r)}).join('')+'</tr>'}).join('')||'<tr><td colspan="9" class="muted">No data</td></tr>'};
-  var td=function(v,num){return '<td'+(num?' class="num"':'')+'>'+v+'</td>'};
   document.querySelector('#c-src tbody').innerHTML=rows(ga.sources,[function(r){return td(r.sessionSource+' / '+r.sessionMedium)},function(r){return td(n(r.sessions),1)},function(r){return td(n(r.totalUsers),1)},function(r){return td(n(r.keyEvents),1)},function(r){return td(pct(r.keyEvents,r.sessions),1)}]);
   document.querySelector('#c-camp tbody').innerHTML=rows(ga.campaigns.filter(function(r){return r.sessionCampaignName&&r.sessionCampaignName.charAt(0)!=='('}),[function(r){return td(r.sessionCampaignName)},function(r){return td(r.sessionSource)},function(r){return td(n(r.sessions),1)},function(r){return td(n(r.totalUsers),1)},function(r){return td(n(r.keyEvents),1)},function(r){return td(pct(r.keyEvents,r.sessions),1)}]);
   document.querySelector('#c-pages tbody').innerHTML=rows(ga.pages.slice(0,40),[function(r){return td(r.pagePath)},function(r){return td(n(r.screenPageViews),1)},function(r){return td(n(r.sessions),1)},function(r){return td(n(r.keyEvents),1)}]);
@@ -363,6 +404,9 @@ function render(){
 var tip=document.getElementById('ctip'),svg=document.getElementById('cplot');
 svg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){tip.style.display='none';return}var d=svg._D[+t.getAttribute('data-i')];tip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>Sessions '+d.sessions+', users '+d.totalUsers+'<br>Key events '+d.keyEvents+' ('+pct(d.keyEvents,d.sessions)+')';var box=svg.parentNode.getBoundingClientRect();tip.style.display='block';tip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';tip.style.top=(e.clientY-box.top+14)+'px'});
 svg.addEventListener('mouseleave',function(){tip.style.display='none'});
+var atip=document.getElementById('atip'),asvg=document.getElementById('aplot');
+asvg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){atip.style.display='none';return}var d=asvg._AD[+t.getAttribute('data-i')];atip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>'+d.c+' clicks, '+d.i+' impressions<br>Spend $'+d.s.toFixed(2)+', key events '+d.k;var box=asvg.parentNode.getBoundingClientRect();atip.style.display='block';atip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';atip.style.top=(e.clientY-box.top+14)+'px'});
+asvg.addEventListener('mouseleave',function(){atip.style.display='none'});
 sel.addEventListener('change',render);window.addEventListener('jl-group',render);render();
 })();
 </script>`;

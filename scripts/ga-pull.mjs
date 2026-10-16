@@ -52,6 +52,13 @@ out.campaigns = await report({ dateRanges: range, dimensions: D('sessionCampaign
 out.pages = await report({ dateRanges: range, dimensions: D('pagePath'), metrics: M('screenPageViews', 'sessions', 'keyEvents'), orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }], limit: 100 });
 out.cities = await report({ dateRanges: range, dimensions: D('city'), metrics: M('sessions', 'totalUsers', 'keyEvents'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 25 });
 out.devices = await report({ dateRanges: range, dimensions: D('deviceCategory'), metrics: M('sessions', 'keyEvents') });
+// Google Ads (via the GA <-> Ads link): spend, clicks, impressions by campaign / ad group / day / search term
+const adsM = M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents');
+const adsFilter = { notExpression: { filter: { fieldName: 'sessionGoogleAdsCampaignName', stringFilter: { value: '(not set)' } } } };
+out.ads_campaigns = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'), metrics: adsM, dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 200 });
+out.ads_daily = await report({ dateRanges: range, dimensions: D('date', 'sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, limit: 5000 });
+out.ads_queries = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdClicks' }, desc: true }], limit: 300 });
+out.ads_keywords = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'keyEvents'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 300 });
 // custom event parameters (registered as event-scoped custom dimensions in GA): store slug and campaign key
 for (const [name, dim] of [['by_store', 'customEvent:store'], ['by_campaign_key', 'customEvent:campaign_key']]) {
   try { out[name] = await report({ dateRanges: range, dimensions: D(dim, 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 2000 }); }
