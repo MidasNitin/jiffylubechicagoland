@@ -454,6 +454,7 @@ ${pilots.map((s) => `- ${s.offer.amount} ${s.offer.description} at Jiffy Lube ${
 ## Main pages
 - [Find a location](${site.domain}/): search by zip code or use your location.
 - [Sitemap](${site.domain}/sitemap.xml)
+- [Full site text](${site.domain}/llms-full.txt): every page as plain text in one file.
 
 ## Free services (no purchase necessary)
 ${pilots.map((s) => `- [Free air for tires, ${s.city} ${s.street_name}](${site.domain}/free-air/${s.slug}/)\n- [Free battery test, ${s.city} ${s.street_name}](${site.domain}/free-battery/${s.slug}/)`).join('\n')}
@@ -461,6 +462,28 @@ ${pilots.map((s) => `- [Free air for tires, ${s.city} ${s.street_name}](${site.d
 ## Locations
 ${byCity.map((s) => `- [Jiffy Lube ${s.city}, ${s.street}](${site.domain}/store/${s.slug}/): ${s.phone || ''}${s.phone ? ', ' : ''}coupon at ${site.domain}/coupon/${s.slug}/`).join('\n')}
 `);
+}
+// llms-full.txt: every page as plain text in one file, for crawlers that want the whole site in a single fetch.
+{
+  const toText = (html) => html
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<svg[\s\S]*?<\/svg>|<!--[\s\S]*?-->/gi, ' ')
+    .replace(/<(h1|h2|h3|p|li|div|section|footer|header|tr|br|hr)[^>]*>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+    .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
+  const pages = [];
+  const walk = (dir) => { for (const f of fs.readdirSync(dir)) { const p = path.join(dir, f); if (fs.statSync(p).isDirectory()) walk(p); else if (f === 'index.html') pages.push(p); } };
+  walk(OUT);
+  const order = (p) => (p.includes('/store/') ? 1 : p.includes('/coupon/') ? 2 : p.includes('/free-') ? 3 : 0);
+  pages.sort((a, b) => order(a) - order(b) || a.localeCompare(b));
+  const out = pages.map((p) => {
+    const rel = '/' + path.relative(OUT, path.dirname(p)).split(path.sep).filter(Boolean).join('/') + '/';
+    const html = fs.readFileSync(p, 'utf8');
+    const title = (html.match(/<title>([^<]*)<\/title>/) || [, ''])[1];
+    const body = (html.match(/<main[\s\S]*?<\/main>/i) || [html])[0];
+    return `# ${title}\nURL: ${site.domain}${rel === '//' ? '/' : rel}\n\n${toText(body)}`;
+  }).join('\n\n---\n\n');
+  write('llms-full.txt', `# Jiffy Lube Chicagoland, full site text\n\nSee ${site.domain}/llms.txt for the index. Generated ${new Date().toISOString().slice(0, 10)}.\n\n---\n\n${out}\n`);
 }
 write('CNAME', site.domain.replace(/^https?:\/\//, '') + '\n');
 write('.nojekyll', '');
