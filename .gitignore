@@ -11,3 +11,6 @@ wallet/certs/pass*.pem
 wallet/certs/*.cer
 wallet/certs/*.p12
 wallet/certs/*.json
+data/ga/daily.log
+data/ga/launchd.out
+data/ga/launchd.err
