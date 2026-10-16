@@ -420,6 +420,7 @@ function copyDir(src, dst) { fs.mkdirSync(dst, { recursive: true }); for (const 
 
 rmrf(OUT);
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
+if (fs.existsSync(path.join(ROOT, 'private'))) copyDir(path.join(ROOT, 'private'), path.join(OUT, 'private')); // password-gated by middleware.js; never linked, never in sitemap/llms
 fs.copyFileSync(path.join(ROOT, 'assets/js/site.js'), path.join(OUT, 'assets/js', JS_FILE));
 write('assets/img/favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#700000"/><text x="32" y="44" font-family="Poppins,Arial,sans-serif" font-weight="700" font-size="36" fill="#fff" text-anchor="middle">J</text></svg>`);
 const publicStores = stores.map(({ slug, card_title, street, city, state, zip, lat, lng, phone, rating, place_id }) => ({ slug, card_title, street, city, state, zip, lat, lng, phone, rating, place_id }));
@@ -437,7 +438,7 @@ for (const s of stores) {
 }
 write('404.html', `${head('Page not found | Jiffy Lube Chicagoland', 'Page not found', '/404.html')}<body>${nav(null)}<main><section class="section"><div class="wrap" style="text-align:center"><h1 class="h2">We couldn’t find that page.</h1><p class="body" style="margin-top:12px"><a href="/">Find a Jiffy Lube location near you</a></p></div></section></main>${footer(site.legal.region_franchisee)}</body></html>`);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${site.domain}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
-write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.domain}/sitemap.xml\n`);
+write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /private/\nSitemap: ${site.domain}/sitemap.xml\n`);
 // llms.txt: a plain-language index for AI assistants (Claude, ChatGPT, Gemini, Perplexity).
 {
   const pilots = stores.filter((s) => s.free_pages);
@@ -472,7 +473,7 @@ ${byCity.map((s) => `- [Jiffy Lube ${s.city}, ${s.street}](${site.domain}/store/
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
     .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
   const pages = [];
-  const walk = (dir) => { for (const f of fs.readdirSync(dir)) { const p = path.join(dir, f); if (fs.statSync(p).isDirectory()) walk(p); else if (f === 'index.html') pages.push(p); } };
+  const walk = (dir) => { for (const f of fs.readdirSync(dir)) { const p = path.join(dir, f); if (dir === OUT && f === 'private') continue; if (fs.statSync(p).isDirectory()) walk(p); else if (f === 'index.html') pages.push(p); } };
   walk(OUT);
   const order = (p) => (p.includes('/store/') ? 1 : p.includes('/coupon/') ? 2 : p.includes('/free-') ? 3 : 0);
   pages.sort((a, b) => order(a) - order(b) || a.localeCompare(b));

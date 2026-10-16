@@ -144,3 +144,10 @@ Stores with `"free_pages": true` in `data/stores.json` (currently the three $22 
 coupon, same tracking as the coupon page. Copy lives in `FREE_VARIANTS` in `build.js`. Wallet links
 on those pages pass `variant=air|battery`, which changes the pass title. Footer links on each store's
 pages point to its store, coupon and free-service pages.
+
+## Private area (owners and marketing only)
+
+Anything under `private/` is copied to `/private/...` on the site and protected by HTTP Basic Auth
+(`middleware.js`, credentials in Vercel env vars `PRIVATE_USER` / `PRIVATE_PASS`, also in local `.env`).
+It is excluded from the sitemap, robots.txt, llms.txt and llms-full.txt, and sent with noindex headers.
+Currently: `/private/competitor-map/` (built from `../jiffy-lube-competitor-map/dist/index.html`).
