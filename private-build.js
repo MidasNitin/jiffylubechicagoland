@@ -57,7 +57,7 @@ details{margin:10px 0}summary{cursor:pointer;font-weight:700}
 const GROUP_NAV = () => `<label class="gsel">Franchise group <select id="gsel"><option value="">All groups</option>${GROUPS.map((g) => `<option>${esc(g)}</option>`).join('')}</select></label>`;
 const GROUP_JS = `<script>(function(){var k='jl_group',sel=document.getElementById('gsel'),u=new URLSearchParams(location.search),g=u.get('group');try{if(g!==null)localStorage.setItem(k,g);else g=localStorage.getItem(k)||''}catch(e){g=g||''}
 if(![].some.call(sel.options,function(o){return o.value===g}))g='';sel.value=g;window.JL_GROUP=g;
-function link(){document.querySelectorAll('nav a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}
+function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}
 sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();if(g)window.dispatchEvent(new Event('jl-group'));})();</script>`;
 const page = (title, body, active) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${esc(title)} | Jiffy Lube Chicagoland dashboard</title><style>${CSS}</style></head>
 <body><header class="top"><div class="wrap"><a href="/private/">Jiffy Lube Chicagoland · Owner dashboard</a><nav>
@@ -156,7 +156,8 @@ render();
 }
 
 /* ---------- ratings over time: built from data/history/*.json in the map project ---------- */
-function ratingsPage() {
+/* ---------- rating history: data/history/*.json in the map project ---------- */
+const HIST = (() => {
   const histDir = path.join(MAP, 'data/history');
   const snaps = fs.existsSync(histDir) ? fs.readdirSync(histDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().map((f) => JSON.parse(fs.readFileSync(path.join(histDir, f), 'utf8'))) : [];
   const dates = snaps.map((h) => h.date);
@@ -168,7 +169,13 @@ function ratingsPage() {
     for (const r of h.stores || []) { const s = storeInfo.get(r.store); if (!s) continue; const k = 'jl:' + r.store; if (!ent.has(k)) ent.set(k, { key: k, label: `#${r.store} ${s.street}, ${s.city}`, brand: 'jl', group: s.group, groups: [s.group], series: {} }); ent.get(k).series[h.date] = { r: r.rating, n: r.reviews }; }
     for (const c of h.competitors || []) { const k = 'c:' + c.id; if (!ent.has(k)) ent.set(k, { key: k, label: `${brandLabel[c.brand] || c.brand}, ${c.address}`, brand: c.brand, group: '', groups: [...new Set((c.near_stores || []).map((n) => (storeInfo.get(n.store) || {}).group).filter(Boolean))], series: {} }); ent.get(k).series[h.date] = { r: c.rating, n: c.reviews }; }
   }
-  const data = JSON.stringify({ dates, brands: Object.keys(brandLabel), brandLabel, brandColor, entities: [...ent.values()] });
+  return { dates, brands: Object.keys(brandLabel), brandLabel, brandColor, entities: [...ent.values()] };
+})();
+
+function ratingsPage() {
+  const { dates } = HIST;
+  const brandLabel = HIST.brandLabel;
+  const data = JSON.stringify(HIST);
   const body = `
 <h1>Ratings over time</h1>
 <p class="sub">Google rating and review count for every Jiffy Lube store and every tracked competitor, recorded on each snapshot date. ${dates.length} snapshot${dates.length === 1 ? '' : 's'} so far (${esc(dates.join(', '))}). A new one is taken automatically on the 1st of each month.</p>
@@ -232,24 +239,48 @@ window.addEventListener('jl-group',render);render();
 
 /* ---------- home ---------- */
 function homePage() {
-  const avg = (rows.reduce((a, r) => a + r.rating, 0) / rows.length).toFixed(2);
+  const { dates } = HIST;
+  const data = JSON.stringify({ dates, brandLabel: HIST.brandLabel, brandColor: HIST.brandColor, entities: HIST.entities.map((e) => ({ b: e.brand, g: e.groups, s: e.series })) });
   const body = `
 <h1>Owner dashboard</h1>
-<p class="sub">Private reporting for Jiffy Lube Chicagoland owners and the marketing team. Not linked from the public site. Pick your franchise group in the top bar and every section filters to your stores.</p>
-<div class="stats">
-  <div class="stat"><b>${rows.length}</b><span>Stores</span></div>
-  <div class="stat"><b>${avg}</b><span>Average Google rating (${esc(latestLabel)})</span></div>
-  <div class="stat"><b>${competitors.length}</b><span>Competitor locations within ${radius} miles of a store</span></div>
-  <div class="stat"><b>${rows.filter((r) => r.comps === 0).length}</b><span>Stores with no competitor nearby</span></div>
-</div>
+<p class="sub">Private reporting for Jiffy Lube Chicagoland owners and the marketing team. Not linked from the public site. Pick your franchise group in the top bar and every section filters to your stores. Arrows compare the latest snapshot (<span id="h-latest"></span>) with the one before (<span id="h-prev"></span>).</p>
+<div class="stats" id="h-stats"></div>
+<h2>Average Google rating by brand</h2>
+<div class="stats" id="h-brands"></div>
 <div class="cards">
-  <a class="card" href="/private/competitor-map/"><h3>Competitor map</h3><p>Every store with ${BRANDS} locations inside its ${radius}-mile trade area. Filter by group, search by store, click a pin for ratings.</p><span class="tag">Competitors ${esc(compDate)}</span></a>
-  <a class="card" href="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours ${esc(latestLabel)}, competitors ${esc(compDate)}</span></a>
-  <a class="card" href="/private/ratings/"><h3>Ratings over time</h3><p>How each store's Google rating and review count move snapshot to snapshot. Grows a trend line as monthly refreshes accumulate.</p><span class="tag">2 snapshots</span></a>
+  <a class="card" href="/private/competitor-map/" data-nav="/private/competitor-map/"><h3>Competitor map</h3><p>Every store with ${BRANDS} locations inside its ${radius}-mile trade area. Search by store, click a pin for ratings.</p><span class="tag">Competitors ${esc(compDate)}</span></a>
+  <a class="card" href="/private/quadrants/" data-nav="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours ${esc(latestLabel)}, competitors ${esc(compDate)}</span></a>
+  <a class="card" href="/private/ratings/" data-nav="/private/ratings/"><h3>Ratings over time</h3><p>Average rating and review totals by brand over time, with every store and every competitor listed snapshot by snapshot. Refreshed automatically on the 1st of each month.</p><span class="tag">${dates.length} snapshot${dates.length === 1 ? '' : 's'}</span></a>
 </div>
 <h2>Coming next</h2>
-<p class="muted">Monthly automatic rating refresh for stores and competitors. Campaign results from Google Analytics and Google Ads.</p>
-<p class="foot">Questions or new sections: david.perez@neptuneventures.co</p>`;
+<p class="muted">Campaign results from Google Analytics and Google Ads.</p>
+<p class="foot">Questions or new sections: david.perez@neptuneventures.co</p>
+<script>
+(function(){
+var D=${data},E=D.entities,dates=D.dates,L=dates[dates.length-1],P=dates.length>1?dates[dates.length-2]:null;
+document.getElementById('h-latest').textContent=L||'none';document.getElementById('h-prev').textContent=P||'none';
+function arrow(d,fmt,goodUp){if(d==null||P==null)return '<span class="muted" style="font-size:13px">no prior snapshot</span>';var up=d>0,down=d<0;var good=goodUp?up:down;var col=up||down?(good?'var(--q-strong)':'var(--q-risk)'):'var(--muted)';var sym=up?'&#9650;':down?'&#9660;':'&#9644;';return '<span style="color:'+col+';font-size:14px;font-weight:700">'+sym+' '+(d>0?'+':'')+fmt(d)+'</span>'}
+function stat(big,label,arr){return '<div class="stat"><b>'+big+'</b>'+(arr?'<div>'+arr+'</div>':'')+'<span>'+label+'</span></div>'}
+function render(){
+  var g=window.JL_GROUP||'';var es=E.filter(function(e){return !g||e.g.indexOf(g)>=0});
+  function agg(list,d){var vs=list.map(function(e){return e.s[d]}).filter(function(v){return v&&v.r!=null});return vs.length?{avg:vs.reduce(function(a,v){return a+v.r},0)/vs.length,n:vs.length,rev:vs.reduce(function(a,v){return a+(v.n||0)},0)}:null}
+  var ours=es.filter(function(e){return e.b==='jl'}),comps=es.filter(function(e){return e.b!=='jl'});
+  var oL=agg(ours,L),oP=P?agg(ours,P):null,cL=agg(comps,L),cP=P?agg(comps,P):null;
+  var up=0,down=0;if(P)ours.forEach(function(e){var a=e.s[P],b=e.s[L];if(a&&b&&a.r!=null&&b.r!=null){if(b.r>a.r)up++;else if(b.r<a.r)down++}});
+  var h='';
+  h+=stat(oL?oL.n:0,'Jiffy Lube stores'+(g?' in '+g:''));
+  h+=stat(oL?oL.avg.toFixed(2):'-','Our average Google rating',oL&&oP?arrow(oL.avg-oP.avg,function(d){return d.toFixed(3)},true):null);
+  h+=stat(cL?cL.avg.toFixed(2):'-','Competitor average rating ('+(cL?cL.n:0)+' locations)',cL&&cP?arrow(cL.avg-cP.avg,function(d){return d.toFixed(3)},false):null);
+  h+=stat(oL?oL.rev.toLocaleString():'-','Our Google reviews',oL&&oP?arrow(oL.rev-oP.rev,function(d){return Math.round(d).toLocaleString()},true):null);
+  h+=stat('<span style="color:var(--q-strong)">&#9650; '+up+'</span> <span class="muted" style="font-size:16px">/</span> <span style="color:var(--q-risk)">&#9660; '+down+'</span>','Stores up / down since '+(P||'-'));
+  h+=stat(oL&&cL?((oL.avg-cL.avg>0?'+':'')+(oL.avg-cL.avg).toFixed(2)):'-','Our rating minus competitor average',oL&&cL&&oP&&cP?arrow((oL.avg-cL.avg)-(oP.avg-cP.avg),function(d){return d.toFixed(3)},true):null);
+  document.getElementById('h-stats').innerHTML=h;
+  var b='';Object.keys(D.brandLabel).forEach(function(k){var list=es.filter(function(e){return e.b===k});var l=agg(list,L),p=P?agg(list,P):null;if(!l)return;b+='<div class="stat" style="border-top:4px solid '+D.brandColor[k]+'"><b>'+l.avg.toFixed(2)+'</b><div>'+(p?arrow(l.avg-p.avg,function(d){return d.toFixed(3)},k==='jl'):'<span class="muted" style="font-size:13px">first snapshot</span>')+'</div><span>'+D.brandLabel[k]+' ('+l.n+' location'+(l.n===1?'':'s')+', '+l.rev.toLocaleString()+' reviews)</span></div>'});
+  document.getElementById('h-brands').innerHTML=b;
+}
+window.addEventListener('jl-group',render);render();
+})();
+</script>`;
   return page('Owner dashboard', body, 'home');
 }
 
