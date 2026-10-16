@@ -59,9 +59,9 @@ const GROUP_JS = `<script>(function(){var k='jl_group',sel=document.getElementBy
 if(![].some.call(sel.options,function(o){return o.value===g}))g='';sel.value=g;window.JL_GROUP=g;
 function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}
 sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();if(g)window.dispatchEvent(new Event('jl-group'));})();</script>`;
-const page = (title, body, active) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${esc(title)} | Jiffy Lube Chicagoland dashboard</title><style>${CSS}</style></head>
+const page = (title, body, active) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"><title>${esc(title)} | Jiffy Lube Chicagoland dashboard</title><style>${CSS}</style></head>
 <body><header class="top"><div class="wrap"><a href="/private/">Jiffy Lube Chicagoland · Owner dashboard</a><nav>
-<a data-nav="/private/" href="/private/"${active === 'home' ? ' class="on"' : ''}>Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/"${active === 'map' ? ' class="on"' : ''}>Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/"${active === 'quad' ? ' class="on"' : ''}>Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/"${active === 'ratings' ? ' class="on"' : ''}>Ratings over time</a>
+<a data-nav="/private/" href="/private/"${active === 'home' ? ' class="on"' : ''}>Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/"${active === 'map' ? ' class="on"' : ''}>Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/"${active === 'quad' ? ' class="on"' : ''}>Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/"${active === 'ratings' ? ' class="on"' : ''}>Ratings over time</a><a data-nav="/private/campaigns/" href="/private/campaigns/"${active === 'camp' ? ' class="on"' : ''}>Campaigns</a>
 </nav>${GROUP_NAV()}</div></header><main class="wrap">${body}</main>${GROUP_JS}</body></html>`;
 
 /* ---------- data: join August map data with latest site ratings ---------- */
@@ -252,8 +252,7 @@ function homePage() {
   <a class="card" href="/private/quadrants/" data-nav="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours ${esc(latestLabel)}, competitors ${esc(compDate)}</span></a>
   <a class="card" href="/private/ratings/" data-nav="/private/ratings/"><h3>Ratings over time</h3><p>Average rating and review totals by brand over time, with every store and every competitor listed snapshot by snapshot. Refreshed automatically on the 1st of each month.</p><span class="tag">${dates.length} snapshot${dates.length === 1 ? '' : 's'}</span></a>
 </div>
-<h2>Coming next</h2>
-<p class="muted">Campaign results from Google Analytics and Google Ads.</p>
+<div class="cards"><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate from Google Analytics, by source, campaign, store and campaign key.</p><span class="tag">Google Analytics</span></a></div>
 <p class="foot">Questions or new sections: david.perez@neptuneventures.co</p>
 <script>
 (function(){
@@ -284,9 +283,96 @@ window.addEventListener('jl-group',render);render();
   return page('Owner dashboard', body, 'home');
 }
 
+/* ---------- campaigns: Google Analytics pull (data/ga/latest.json from scripts/ga-pull.mjs) ---------- */
+function campaignsPage() {
+  const gaFile = path.join(ROOT, 'data', 'ga', 'latest.json');
+  const ga = fs.existsSync(gaFile) ? JSON.parse(fs.readFileSync(gaFile, 'utf8')) : null;
+  const slugGroup = Object.fromEntries(siteStores.map((st) => [st.slug, st.group]));
+  const slugLabel = Object.fromEntries(siteStores.map((st) => [st.slug, `#${st.id} ${st.city}, ${st.street_name}`]));
+  if (!ga) {
+    return page('Campaigns', `<h1>Campaigns</h1><p class="sub">Google Analytics data has not been pulled yet. Once the service account has Viewer access to the GA property, run <code>node scripts/ga-pull.mjs</code> and rebuild.</p>`, 'camp');
+  }
+  const data = JSON.stringify({ ga, slugGroup, slugLabel });
+  const evLabel = { get_coupon: 'Get coupon', copy_code: 'Copy code', wallet_add: 'Add to wallet', call_click: 'Call', get_directions: 'Directions' };
+  const body = `
+<h1>Campaigns</h1>
+<p class="sub">Website traffic and conversions from Google Analytics for the last ${ga.days} days, through yesterday. Pulled ${esc(ga.pulled_at.slice(0, 16).replace('T', ' '))} UTC. Conversions are the five key events: get coupon, copy code, add to wallet, call, directions. Conversion rate is key events divided by sessions.</p>
+<div class="ctl"><label>Range <select id="crange"><option value="7">Last 7 days</option><option value="28" selected>Last 28 days</option><option value="${ga.days}">Last ${ga.days} days</option></select></label><span class="muted" id="cnote"></span></div>
+<div class="stats" id="c-stats"></div>
+<div class="panel"><div class="legend" id="c-legend"></div><div style="position:relative"><svg class="plot" id="cplot" viewBox="0 0 900 360" role="img" aria-label="Sessions and key events per day"></svg><div class="tip" id="ctip"></div></div></div>
+<h2>Conversions by action</h2>
+<div class="stats" id="c-events"></div>
+<h2>Where visitors came from</h2>
+<div class="panel" style="overflow:auto"><table id="c-src"><thead><tr><th>Source / medium</th><th class="num">Sessions</th><th class="num">Users</th><th class="num">Key events</th><th class="num">Conv. rate</th></tr></thead><tbody></tbody></table></div>
+<h2>Google Ads campaigns</h2>
+<div class="panel" style="overflow:auto"><table id="c-camp"><thead><tr><th>Campaign</th><th>Source</th><th class="num">Sessions</th><th class="num">Users</th><th class="num">Key events</th><th class="num">Conv. rate</th></tr></thead><tbody></tbody></table></div>
+<h2>Conversions by store</h2>
+<p class="sub muted" id="c-store-note"></p>
+<div class="panel" style="overflow:auto"><table id="c-store"><thead><tr><th>Store</th><th>Group</th><th class="num">Get coupon</th><th class="num">Copy code</th><th class="num">Wallet</th><th class="num">Call</th><th class="num">Directions</th><th class="num">Total</th></tr></thead><tbody></tbody></table></div>
+<h2>Conversions by campaign key (the jl= link parameter)</h2>
+<div class="panel" style="overflow:auto"><table id="c-key"><thead><tr><th>Campaign key</th><th class="num">Get coupon</th><th class="num">Copy code</th><th class="num">Wallet</th><th class="num">Call</th><th class="num">Directions</th><th class="num">Total</th></tr></thead><tbody></tbody></table></div>
+<h2>Top pages</h2>
+<div class="panel" style="overflow:auto"><table id="c-pages"><thead><tr><th>Page</th><th class="num">Views</th><th class="num">Sessions</th><th class="num">Key events</th></tr></thead><tbody></tbody></table></div>
+<p class="foot">The store and campaign-key tables need the custom dimensions "store" and "campaign_key" registered in GA (Admin, Custom definitions). Until then they stay empty. The franchise group picker filters the by-store table; the other numbers are site-wide because GA does not tag sessions with a group.</p>
+<script>
+(function(){
+var X=${data},ga=X.ga,EV=${JSON.stringify(evLabel)},KE=ga.key_events;
+var sel=document.getElementById('crange');
+function cut(n){var ds=ga.daily.map(function(d){return d.date}).sort();return ds.slice(-n)}
+function pct(a,b){return b?(100*a/b).toFixed(1)+'%':'-'}
+function n(v){return (v||0).toLocaleString()}
+function render(){
+  var N=+sel.value,days=cut(N),dset={};days.forEach(function(d){dset[d]=1});
+  var D=ga.daily.filter(function(d){return dset[d.date]});
+  var S=D.reduce(function(a,d){return a+d.sessions},0),U=D.reduce(function(a,d){return a+d.totalUsers},0),K=D.reduce(function(a,d){return a+d.keyEvents},0),E=D.reduce(function(a,d){return a+d.engagedSessions},0),V=D.reduce(function(a,d){return a+d.screenPageViews},0);
+  var prevDays=ga.daily.map(function(d){return d.date}).sort().slice(-2*N,-N),pset={};prevDays.forEach(function(d){pset[d]=1});var P=ga.daily.filter(function(d){return pset[d.date]});
+  var pS=P.reduce(function(a,d){return a+d.sessions},0),pK=P.reduce(function(a,d){return a+d.keyEvents},0);
+  function arrow(cur,prev,fmt){if(!prevDays.length||prevDays.length<N)return '';var d=cur-prev;var col=d>0?'var(--q-strong)':d<0?'var(--q-risk)':'var(--muted)';return '<div><span style="color:'+col+';font-size:13px;font-weight:700">'+(d>0?'&#9650; +':d<0?'&#9660; ':'&#9644; ')+fmt(d)+' vs prior '+N+' days</span></div>'}
+  var st='';var stat=function(b,l,a){return '<div class="stat"><b>'+b+'</b>'+(a||'')+'<span>'+l+'</span></div>'};
+  st+=stat(n(S),'Sessions (visits)',arrow(S,pS,n));st+=stat(n(U),'Users');st+=stat(n(V),'Page views');
+  st+=stat(n(K),'Key events (conversions)',arrow(K,pK,n));st+=stat(pct(K,S),'Conversion rate',arrow(S?K/S:0,pS?pK/pS:0,function(d){return (100*d).toFixed(1)+' pts'}));st+=stat(pct(E,S),'Engaged sessions');
+  document.getElementById('c-stats').innerHTML=st;
+  document.getElementById('cnote').textContent=days.length?days[0].replace(/(\\d{4})(\\d{2})(\\d{2})/,'$1-$2-$3')+' to '+days[days.length-1].replace(/(\\d{4})(\\d{2})(\\d{2})/,'$1-$2-$3'):'';
+  // chart: sessions + key events per day
+  var svg=document.getElementById('cplot'),W=900,H=360,Pd={l:48,r:20,t:16,b:40};var mx=Math.max(1,Math.max.apply(null,D.map(function(d){return d.sessions})));
+  var sx=function(i){return D.length===1?(Pd.l+W-Pd.r)/2:Pd.l+i/(D.length-1)*(W-Pd.l-Pd.r)},sy=function(v){return H-Pd.b-v/mx*(H-Pd.t-Pd.b)};
+  var s='';for(var k=0;k<=4;k++){var v=mx*k/4;s+='<line class="grid" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+sy(v)+'" y2="'+sy(v)+'"/><text class="lbl" x="'+(Pd.l-8)+'" y="'+(sy(v)+4)+'" text-anchor="end">'+Math.round(v)+'</text>'}
+  var step=Math.max(1,Math.ceil(D.length/10));D.forEach(function(d,i){if(i%step===0||i===D.length-1)s+='<text class="lbl" x="'+sx(i)+'" y="'+(H-Pd.b+18)+'" text-anchor="middle">'+d.date.slice(4,6)+'/'+d.date.slice(6)+'</text>'});
+  s+='<line class="axis" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+(H-Pd.b)+'" y2="'+(H-Pd.b)+'"/>';
+  [['sessions','#2a78d6'],['keyEvents','#008300']].forEach(function(sr){var p='';D.forEach(function(d,i){p+=(p?' L':'M')+sx(i)+' '+sy(d[sr[0]])});s+='<path d="'+p+'" fill="none" stroke="'+sr[1]+'" stroke-width="2.5"/>';D.forEach(function(d,i){s+='<circle class="pt" data-i="'+i+'" data-k="'+sr[0]+'" cx="'+sx(i)+'" cy="'+sy(d[sr[0]])+'" r="5" fill="'+sr[1]+'"/>'})});
+  svg.innerHTML=s;svg._D=D;
+  document.getElementById('c-legend').innerHTML='<span><i style="background:#2a78d6"></i>Sessions</span><span><i style="background:#008300"></i>Key events</span>';
+  // events by action
+  var ev={};ga.daily_events.filter(function(r){return dset[r.date]}).forEach(function(r){ev[r.eventName]=(ev[r.eventName]||0)+r.eventCount});
+  document.getElementById('c-events').innerHTML=KE.map(function(k){return stat(n(ev[k]),EV[k]||k)}).join('');
+  // sources / campaigns / pages are whole-pull (GA aggregates don't split by day here)
+  var rows=function(list,cols){return list.map(function(r){return '<tr>'+cols.map(function(c){return c(r)}).join('')+'</tr>'}).join('')||'<tr><td colspan="9" class="muted">No data</td></tr>'};
+  var td=function(v,num){return '<td'+(num?' class="num"':'')+'>'+v+'</td>'};
+  document.querySelector('#c-src tbody').innerHTML=rows(ga.sources,[function(r){return td(r.sessionSource+' / '+r.sessionMedium)},function(r){return td(n(r.sessions),1)},function(r){return td(n(r.totalUsers),1)},function(r){return td(n(r.keyEvents),1)},function(r){return td(pct(r.keyEvents,r.sessions),1)}]);
+  document.querySelector('#c-camp tbody').innerHTML=rows(ga.campaigns.filter(function(r){return r.sessionCampaignName&&r.sessionCampaignName!=='(not set)'&&r.sessionCampaignName!=='(direct)'}),[function(r){return td(r.sessionCampaignName)},function(r){return td(r.sessionSource)},function(r){return td(n(r.sessions),1)},function(r){return td(n(r.totalUsers),1)},function(r){return td(n(r.keyEvents),1)},function(r){return td(pct(r.keyEvents,r.sessions),1)}]);
+  document.querySelector('#c-pages tbody').innerHTML=rows(ga.pages.slice(0,40),[function(r){return td(r.pagePath)},function(r){return td(n(r.screenPageViews),1)},function(r){return td(n(r.sessions),1)},function(r){return td(n(r.keyEvents),1)}]);
+  // by store (group-filtered) and by campaign key
+  var g=window.JL_GROUP||'';var bs={};(ga.by_store||[]).forEach(function(r){var slug=r['customEvent:store'];if(!slug||slug==='(not set)')return;if(g&&X.slugGroup[slug]!==g)return;bs[slug]=bs[slug]||{};bs[slug][r.eventName]=(bs[slug][r.eventName]||0)+r.eventCount});
+  var bsl=Object.keys(bs).map(function(k){var t=KE.reduce(function(a,e){return a+(bs[k][e]||0)},0);return {k:k,t:t}}).sort(function(a,b){return b.t-a.t});
+  document.querySelector('#c-store tbody').innerHTML=rows(bsl,[function(r){return td(X.slugLabel[r.k]||r.k)},function(r){return td(X.slugGroup[r.k]||'')}].concat(KE.map(function(e){return function(r){return td(n(bs[r.k][e]),1)}})).concat([function(r){return td(n(r.t),1)}]));
+  document.getElementById('c-store-note').textContent=ga.by_store_error?'Store breakdown unavailable: '+ga.by_store_error:(g?'Showing '+g+' stores only.':'All stores, whole pull period.');
+  var bk={};(ga.by_campaign_key||[]).forEach(function(r){var k=r['customEvent:campaign_key'];if(!k||k==='(not set)')return;bk[k]=bk[k]||{};bk[k][r.eventName]=(bk[k][r.eventName]||0)+r.eventCount});
+  var bkl=Object.keys(bk).map(function(k){return {k:k,t:KE.reduce(function(a,e){return a+(bk[k][e]||0)},0)}}).sort(function(a,b){return b.t-a.t});
+  document.querySelector('#c-key tbody').innerHTML=rows(bkl,[function(r){return td(r.k)}].concat(KE.map(function(e){return function(r){return td(n(bk[r.k][e]),1)}})).concat([function(r){return td(n(r.t),1)}]));
+}
+var tip=document.getElementById('ctip'),svg=document.getElementById('cplot');
+svg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){tip.style.display='none';return}var d=svg._D[+t.getAttribute('data-i')];tip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>Sessions '+d.sessions+', users '+d.totalUsers+'<br>Key events '+d.keyEvents+' ('+pct(d.keyEvents,d.sessions)+')';var box=svg.parentNode.getBoundingClientRect();tip.style.display='block';tip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';tip.style.top=(e.clientY-box.top+14)+'px'});
+svg.addEventListener('mouseleave',function(){tip.style.display='none'});
+sel.addEventListener('change',render);window.addEventListener('jl-group',render);render();
+})();
+</script>`;
+  return page('Campaigns', body, 'camp');
+}
+
 /* ---------- write ---------- */
 fs.copyFileSync(path.join(MAP, 'dist/index.html'), path.join(OUT, 'competitor-map/index.html'));
 write('index.html', homePage());
 write('quadrants/index.html', quadrantsPage());
 write('ratings/index.html', ratingsPage());
+write('campaigns/index.html', campaignsPage());
 console.log(`Private dashboard built: ${rows.length} stores, ${competitors.length} competitors, ${rows.filter((r) => r.compAvg !== null).length} plotted in quadrants`);

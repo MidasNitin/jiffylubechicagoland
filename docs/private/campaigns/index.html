@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"><title>Campaigns | Jiffy Lube Chicagoland dashboard</title><style>
+:root{--maroon:#700000;--red:#fc2b22;--ink:#1a1a1a;--muted:#5d5d5d;--line:#e3e3e3;--bg:#f6f6f6;--white:#fff;--q-strong:#008300;--q-battle:#2a78d6;--q-open:#eda100;--q-risk:#e34948}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+a{color:var(--maroon)}.top{background:var(--maroon);color:#fff;padding:14px 0}.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#fff;text-decoration:none;font-weight:700}.top nav a{font-weight:400;margin-left:18px;opacity:.9}.top nav a.on{text-decoration:underline;opacity:1}
+.top .gsel{font-size:13px;display:flex;align-items:center;gap:8px}.top .gsel select{font:inherit;padding:5px 8px;border-radius:6px;border:0;max-width:240px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}h1{font-size:26px;margin:28px 0 6px}h2{font-size:18px;margin:28px 0 10px}.sub{color:var(--muted);margin:0 0 20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;text-decoration:none;color:var(--ink);display:block}
+.card:hover{border-color:var(--maroon)}.card h3{margin:0 0 6px;font-size:17px}.card p{margin:0;color:var(--muted);font-size:14px}.card .tag{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.stat{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px}
+.stat b{display:block;font-size:26px;line-height:1.1}.stat span{font-size:12px;color:var(--muted)}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}
+.ctl{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:14px;margin-bottom:12px}.ctl label{display:flex;gap:8px;align-items:center}select{font:inherit;padding:4px 8px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:10px 0}.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+svg.plot{width:100%;height:auto;display:block}.plot text{font-family:inherit}.plot .grid{stroke:#e9e9e9;stroke-width:1}.plot .axis{stroke:#bbb;stroke-width:1}.plot .lbl{fill:#5d5d5d;font-size:11px}.plot .qlbl{font-size:12px;font-weight:700;fill:#333;opacity:.85}
+.plot .pt{stroke:#fff;stroke-width:2;cursor:pointer}.plot .pt:hover{stroke:#111}
+.tip{position:absolute;pointer-events:none;background:#111;color:#fff;font-size:12px;padding:8px 10px;border-radius:8px;max-width:260px;display:none;z-index:5;line-height:1.4}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap}
+td.num,th.num{text-align:right}.q{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff}
+.q-strong{background:var(--q-strong)}.q-battle{background:var(--q-battle)}.q-open{background:var(--q-open);color:#1a1a1a}.q-risk{background:var(--q-risk)}
+.muted{color:var(--muted)}.foot{color:var(--muted);font-size:12px;margin:30px 0}
+details{margin:10px 0}summary{cursor:pointer;font-weight:700}
+@media (max-width:720px){.top nav a{margin-left:12px}th,td{padding:6px}}
+</style></head>
+<body><header class="top"><div class="wrap"><a href="/private/">Jiffy Lube Chicagoland · Owner dashboard</a><nav>
+<a data-nav="/private/" href="/private/">Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/">Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/">Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/">Ratings over time</a><a data-nav="/private/campaigns/" href="/private/campaigns/" class="on">Campaigns</a>
+</nav><label class="gsel">Franchise group <select id="gsel"><option value="">All groups</option><option>Allied Automotive Group</option><option>BLACK GOLD PARTNERS GROUP</option><option>DeGeatano Group</option><option>Driven Service Professionals, Inc.</option><option>FTP Management Group</option><option>JAV Enterprises, Inc.</option><option>JE Enterprise Group</option><option>JLO Group</option><option>MTPDR Group</option><option>ODEA Oil Services Group</option><option>PJR Enterprises Inc.</option><option>PNOC Group</option><option>PVA Group</option><option>R Trio Group</option><option>STONEBRIAR AUTO SERVICES GROUP</option><option>TEAM CAR CARE, LLC</option><option>Wimbles Group</option></select></label></div></header><main class="wrap"><h1>Campaigns</h1><p class="sub">Google Analytics data has not been pulled yet. Once the service account has Viewer access to the GA property, run <code>node scripts/ga-pull.mjs</code> and rebuild.</p></main><script>(function(){var k='jl_group',sel=document.getElementById('gsel'),u=new URLSearchParams(location.search),g=u.get('group');try{if(g!==null)localStorage.setItem(k,g);else g=localStorage.getItem(k)||''}catch(e){g=g||''}
+if(![].some.call(sel.options,function(o){return o.value===g}))g='';sel.value=g;window.JL_GROUP=g;
+function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}
+sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();if(g)window.dispatchEvent(new Event('jl-group'));})();</script></body></html>
