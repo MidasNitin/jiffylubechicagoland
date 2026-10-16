@@ -55,7 +55,7 @@ out.devices = await report({ dateRanges: range, dimensions: D('deviceCategory'),
 // Google Ads (via the GA <-> Ads link): spend, clicks, impressions by campaign / ad group / day / search term
 const adsM = M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents');
 const adsFilter = { notExpression: { filter: { fieldName: 'sessionGoogleAdsCampaignName', stringFilter: { value: '(not set)' } } } };
-out.ads_campaigns = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'), metrics: adsM, dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 200 });
+out.ads_campaigns = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 200 });
 out.ads_daily = await report({ dateRanges: range, dimensions: D('date', 'sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, limit: 5000 });
 out.ads_queries = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdClicks' }, desc: true }], limit: 300 });
 out.ads_keywords = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'keyEvents'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 300 });
