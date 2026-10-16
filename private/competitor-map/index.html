@@ -5291,7 +5291,7 @@ if (META.approx) { notice.classList.remove("hidden"); notice.innerHTML = "<b>Pre
 
 // ---- map ----
 const map = L.map("map", {zoomControl:true, maxZoom:19, minZoom:7, zoomSnap:0.5, wheelPxPerZoomLevel:120}).setView([41.85,-87.95], 9);
-if (COUNTIES) L.geoJSON(COUNTIES, {style:{color:getCss("--county"),weight:1,fillColor:getCss("--land"),fillOpacity:1}, interactive:false}).addTo(map);
+if (COUNTIES) L.geoJSON(COUNTIES, {style:{color:getCss("--county"),weight:1,fillColor:getCss("--land"),fillOpacity:0}, interactive:false}).addTo(map); // outlines only; street tiles show through
 let tilesOk = false;
 const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, attribution:'&copy; OpenStreetMap contributors', opacity:.92});
 tiles.on("tileload", ()=>{ tilesOk = true; });
