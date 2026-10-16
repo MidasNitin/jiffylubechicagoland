@@ -3,6 +3,7 @@
 *{box-sizing:border-box}body{margin:0;font-family:Poppins,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
 a{color:var(--maroon)}.top{background:var(--maroon);color:#fff;padding:14px 0}.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .top a{color:#fff;text-decoration:none;font-weight:700}.top nav a{font-weight:400;margin-left:18px;opacity:.9}.top nav a.on{text-decoration:underline;opacity:1}
+.top .gsel{font-size:13px;display:flex;align-items:center;gap:8px}.top .gsel select{font:inherit;padding:5px 8px;border-radius:6px;border:0;max-width:240px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}h1{font-size:26px;margin:28px 0 6px}h2{font-size:18px;margin:28px 0 10px}.sub{color:var(--muted);margin:0 0 20px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
 .card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;text-decoration:none;color:var(--ink);display:block}
@@ -23,10 +24,10 @@ details{margin:10px 0}summary{cursor:pointer;font-weight:700}
 @media (max-width:720px){.top nav a{margin-left:12px}th,td{padding:6px}}
 </style></head>
 <body><header class="top"><div class="wrap"><a href="/private/">Jiffy Lube Chicagoland · Owner dashboard</a><nav>
-<a href="/private/" class="on">Home</a><a href="/private/competitor-map/">Competitor map</a><a href="/private/quadrants/">Rating quadrants</a><a href="/private/ratings/">Ratings over time</a>
-</nav></div></header><main class="wrap">
+<a data-nav="/private/" href="/private/" class="on">Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/">Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/">Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/">Ratings over time</a>
+</nav><label class="gsel">Franchise group <select id="gsel"><option value="">All groups</option><option>Allied Automotive Group</option><option>BLACK GOLD PARTNERS GROUP</option><option>DeGeatano Group</option><option>Driven Service Professionals, Inc.</option><option>FTP Management Group</option><option>JAV Enterprises, Inc.</option><option>JE Enterprise Group</option><option>JLO Group</option><option>MTPDR Group</option><option>ODEA Oil Services Group</option><option>PJR Enterprises Inc.</option><option>PNOC Group</option><option>PVA Group</option><option>R Trio Group</option><option>STONEBRIAR AUTO SERVICES GROUP</option><option>TEAM CAR CARE, LLC</option><option>Wimbles Group</option></select></label></div></header><main class="wrap">
 <h1>Owner dashboard</h1>
-<p class="sub">Private reporting for Jiffy Lube Chicagoland owners and the marketing team. Not linked from the public site.</p>
+<p class="sub">Private reporting for Jiffy Lube Chicagoland owners and the marketing team. Not linked from the public site. Pick your franchise group in the top bar and every section filters to your stores.</p>
 <div class="stats">
   <div class="stat"><b>104</b><span>Stores</span></div>
   <div class="stat"><b>4.52</b><span>Average Google rating (October 2026)</span></div>
@@ -34,10 +35,13 @@ details{margin:10px 0}summary{cursor:pointer;font-weight:700}
   <div class="stat"><b>16</b><span>Stores with no competitor nearby</span></div>
 </div>
 <div class="cards">
-  <a class="card" href="/private/competitor-map/"><h3>Competitor map</h3><p>Every store with Take 5, Valvoline, Strickland Brothers and Firestone locations inside its 3-mile trade area. Filter by group, search by store, click a pin for ratings.</p><span class="tag">Competitors 2026-08-24 (Firestone 2026-10-16)</span></a>
-  <a class="card" href="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours October 2026, competitors 2026-08-24 (Firestone 2026-10-16)</span></a>
+  <a class="card" href="/private/competitor-map/"><h3>Competitor map</h3><p>Every store with Take 5, Valvoline, Strickland Brothers and Firestone locations inside its 3-mile trade area. Filter by group, search by store, click a pin for ratings.</p><span class="tag">Competitors 2026-10-16</span></a>
+  <a class="card" href="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours October 2026, competitors 2026-10-16</span></a>
   <a class="card" href="/private/ratings/"><h3>Ratings over time</h3><p>How each store's Google rating and review count move snapshot to snapshot. Grows a trend line as monthly refreshes accumulate.</p><span class="tag">2 snapshots</span></a>
 </div>
 <h2>Coming next</h2>
 <p class="muted">Monthly automatic rating refresh for stores and competitors. Campaign results from Google Analytics and Google Ads.</p>
-<p class="foot">Questions or new sections: david.perez@neptuneventures.co</p></main></body></html>
+<p class="foot">Questions or new sections: david.perez@neptuneventures.co</p></main><script>(function(){var k='jl_group',sel=document.getElementById('gsel'),u=new URLSearchParams(location.search),g=u.get('group');try{if(g!==null)localStorage.setItem(k,g);else g=localStorage.getItem(k)||''}catch(e){g=g||''}
+if(![].some.call(sel.options,function(o){return o.value===g}))g='';sel.value=g;window.JL_GROUP=g;
+function link(){document.querySelectorAll('nav a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}
+sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();})();</script></body></html>
