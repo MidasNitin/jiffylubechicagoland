@@ -61,7 +61,7 @@ function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.h
 sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();if(g)window.dispatchEvent(new Event('jl-group'));})();</script>`;
 const page = (title, body, active) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"><title>${esc(title)} | Jiffy Lube Chicagoland dashboard</title><style>${CSS}</style></head>
 <body><header class="top"><div class="wrap"><a href="/private/">Jiffy Lube Chicagoland · Owner dashboard</a><nav>
-<a data-nav="/private/" href="/private/"${active === 'home' ? ' class="on"' : ''}>Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/"${active === 'map' ? ' class="on"' : ''}>Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/"${active === 'quad' ? ' class="on"' : ''}>Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/"${active === 'ratings' ? ' class="on"' : ''}>Ratings over time</a><a data-nav="/private/campaigns/" href="/private/campaigns/"${active === 'camp' ? ' class="on"' : ''}>Campaigns</a>
+<a data-nav="/private/" href="/private/"${active === 'home' ? ' class="on"' : ''}>Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/"${active === 'map' ? ' class="on"' : ''}>Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/"${active === 'quad' ? ' class="on"' : ''}>Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/"${active === 'ratings' ? ' class="on"' : ''}>Ratings over time</a><a data-nav="/private/campaigns/" href="/private/campaigns/"${active === 'camp' ? ' class="on"' : ''}>Campaigns</a><a data-nav="/private/reviews/" href="/private/reviews/"${active === 'reviews' ? ' class="on"' : ''}>Reviews</a>
 </nav>${GROUP_NAV()}</div></header><main class="wrap">${body}</main>${GROUP_JS}</body></html>`;
 
 /* ---------- data: join August map data with latest site ratings ---------- */
@@ -252,7 +252,7 @@ function homePage() {
   <a class="card" href="/private/quadrants/" data-nav="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours ${esc(latestLabel)}, competitors ${esc(compDate)}</span></a>
   <a class="card" href="/private/ratings/" data-nav="/private/ratings/"><h3>Ratings over time</h3><p>Average rating and review totals by brand over time, with every store and every competitor listed snapshot by snapshot. Refreshed automatically on the 1st of each month.</p><span class="tag">${dates.length} snapshot${dates.length === 1 ? '' : 's'}</span></a>
 </div>
-<div class="cards"><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate, plus Google Ads spend, clicks, cost per conversion and search terms, by campaign, store and campaign key.</p><span class="tag">Google Analytics + Google Ads</span></a></div>
+<div class="cards"><a class="card" href="/private/reviews/" data-nav="/private/reviews/"><h3>Reviews</h3><p>Google review themes, ratings trend, response rates and review velocity, by store, by owner group, and for the competitors in each trade area.</p><span class="tag">Google reviews</span></a><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate, plus Google Ads spend, clicks, cost per conversion and search terms, by campaign, store and campaign key.</p><span class="tag">Google Analytics + Google Ads</span></a></div>
 <p class="foot">Questions or new sections: david.perez@neptuneventures.co</p>
 <script>
 (function(){
@@ -428,10 +428,116 @@ sel.addEventListener('change',render);document.getElementById('cmetric').addEven
   return page('Campaigns', body, 'camp');
 }
 
+/* ---------- reviews: data/reviews-summary.json from the competitor-map project ---------- */
+function reviewsPage() {
+  const f = path.join(MAP, 'data', 'reviews-summary.json');
+  if (!fs.existsSync(f)) return page('Reviews', `<h1>Reviews</h1><p class="sub">No review data yet. Run scripts/reviews-pull.mjs and scripts/reviews-analyze.mjs in the competitor-map project, then rebuild.</p>`, 'reviews');
+  const R = JSON.parse(fs.readFileSync(f, 'utf8'));
+  const storeInfo = new Map(augStores.map((st) => [st.store, st]));
+  const slugById = Object.fromEntries(siteStores.map((st) => [String(st.id), st.slug]));
+  const brandLabel = { jl: 'Jiffy Lube', take5: 'Take 5', valvoline: 'Valvoline', strickland: 'Strickland Brothers', firestone: 'Firestone' };
+  const brandColor = { jl: '#c8102e', take5: '#7a3fd1', valvoline: '#1f6fd1', strickland: '#2e9e5b', firestone: '#e07b1a' };
+  // slim the location records for the page: keep metrics, themes, months, quotes; add groups a competitor sits near
+  const locs = R.locations.map((l) => ({ ...l, slug: l.store ? slugById[String(l.store)] : null, groups: l.kind === 'store' ? [l.group] : [...new Set((l.near_stores || []).map((n) => (storeInfo.get(n.store) || {}).group).filter(Boolean))], near_stores: undefined }));
+  const data = JSON.stringify({ themes: R.themes, brandLabel, brandColor, locs, generated: R.generated, cutoff: R.cutoff, source: R.source });
+  const sample = R.source !== 'outscraper';
+  const body = `
+<h1>Reviews</h1>
+<p class="sub">Google reviews for every Jiffy Lube store and every tracked competitor, tagged by theme. ${sample ? '<strong>Sample data only:</strong> the newest 5 reviews per location from Google\'s API, to prove the page. The full pull (all reviews since ' + esc(R.cutoff || '2025') + ') replaces this once the Outscraper account is in place.' : 'All reviews since ' + esc(R.cutoff || '') + ', refreshed monthly.'} Last analyzed ${esc((R.generated || '').slice(0, 10))}. Negative = 1 to 3 stars. The franchise group picker filters our stores to that group and competitors to those within 3 miles of its stores.</p>
+<div class="ctl"><label>Compare with <select id="rvcomp"><option value="">All competitors</option>${Object.keys(brandLabel).filter((b) => b !== 'jl').map((b) => `<option value="${b}">${brandLabel[b]}</option>`).join('')}</select></label><span class="muted" id="rvnote"></span></div>
+<div class="stats" id="rv-stats"></div>
+<h2>What negative reviews are about</h2>
+<p class="sub">Share of 1 to 3 star reviews that mention each theme. Ours versus the competitors in the same trade areas. A theme where our bar is longer is a weakness customers keep writing about.</p>
+<div class="panel"><div class="legend"><span><i style="background:#c8102e"></i>Jiffy Lube</span><span><i style="background:#5d5d5d"></i>Competitors</span></div><svg class="plot" id="rvthemes" viewBox="0 0 900 340" role="img" aria-label="Negative review themes, ours versus competitors"></svg></div>
+<h2>Trend by month</h2>
+<div class="panel"><div class="ctl"><label>Chart <select id="rvmetric"><option value="avg">Average star rating</option><option value="n">Reviews per month</option><option value="negpct">Share of negative reviews</option></select></label></div><div class="legend"><span><i style="background:#c8102e"></i>Jiffy Lube</span><span><i style="background:#5d5d5d"></i>Competitors</span></div><div style="position:relative"><svg class="plot" id="rvtrend" viewBox="0 0 900 320" role="img" aria-label="Monthly review trend"></svg><div class="tip" id="rvtip"></div></div></div>
+<h2>By owner group</h2>
+<p class="sub">Every franchise group side by side. Click a heading to sort. "Top negative theme" is the complaint that appears most in that group's 1 to 3 star reviews.</p>
+<div class="panel" style="overflow:auto"><table id="rv-groups"><thead><tr><th>Group</th><th class="num">Stores</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Change</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
+<h2>By store</h2>
+<div class="ctl"><label>Find store <input id="rvq" type="search" placeholder="store #, city, street" style="font:inherit;padding:4px 8px;width:220px"></label><span class="muted">Click a store for its themes and example quotes.</span></div>
+<div class="panel" style="overflow:auto"><table id="rv-stores"><thead><tr><th>Store</th><th>Group</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Change</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reply days</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
+<div class="panel" id="rv-detail" hidden></div>
+<h2>Competitors</h2>
+<div class="panel" style="overflow:auto"><table id="rv-brands"><thead><tr><th>Brand</th><th class="num">Locations</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
+<div class="ctl"><label>Find competitor <input id="rvcq" type="search" placeholder="brand, address" style="font:inherit;padding:4px 8px;width:220px"></label><span class="muted">Click a row for its themes and quotes.</span></div>
+<div class="panel" style="overflow:auto"><table id="rv-comps"><thead><tr><th>Location</th><th>Near groups</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
+<div class="panel" id="rv-cdetail" hidden></div>
+<p class="foot">Themes are tagged by keyword rules (wait time, upsell pressure, price surprise, coupon problems, staff attitude, workmanship or damage, honesty and trust, cleanliness, communication); a review can carry several. Reply rate is the share of reviews with an owner response; reply days is the median time to respond. Raw reviews are kept outside the repo.</p>
+<script>
+(function(){
+var D=${data},L=D.locs,TK=Object.keys(D.themes);
+var gv=function(){return window.JL_GROUP||''},comp=document.getElementById('rvcomp'),metric=document.getElementById('rvmetric'),q=document.getElementById('rvq'),cq=document.getElementById('rvcq');
+var n=function(v){return (v||0).toLocaleString()},f1=function(v){return v==null?'-':v.toFixed(2)},pc=function(v){return v==null?'-':(100*v).toFixed(0)+'%'};
+function ours(){var g=gv();return L.filter(function(l){return l.kind==='store'&&(!g||l.group===g)})}
+function comps(){var g=gv(),b=comp.value;return L.filter(function(l){return l.kind==='competitor'&&(!g||l.groups.indexOf(g)>=0)&&(!b||l.brand===b)})}
+function roll(list){var pulled=0,sum=0,s90=0,n90=0,sp=0,np=0,neg=0,rep=0,vel=0,th={};TK.forEach(function(k){th[k]={neg:0,all:0}});
+  list.forEach(function(l){pulled+=l.pulled;sum+=(l.avg_all||0)*l.pulled;if(l.avg_90!=null){s90+=l.avg_90*l.n_90;n90+=l.n_90}if(l.avg_prior_90!=null){sp+=l.avg_prior_90*l.n_prior_90;np+=l.n_prior_90}neg+=Math.round((l.neg_share||0)*l.pulled);rep+=Math.round((l.reply_rate||0)*l.pulled);vel+=l.velocity||0;TK.forEach(function(k){th[k].neg+=l.themes[k].neg;th[k].all+=l.themes[k].all})});
+  return {locations:list.length,pulled:pulled,avg:pulled?sum/pulled:null,avg90:n90?s90/n90:null,avgp:np?sp/np:null,neg:pulled?neg/pulled:null,negN:neg,reply:pulled?rep/pulled:null,vel:vel,th:th}}
+function topTheme(th,negN){var best=null;TK.forEach(function(k){if(!best||th[k].neg>th[best].neg)best=k});return best&&th[best].neg?D.themes[best]+' ('+(negN?Math.round(100*th[best].neg/negN):0)+'%)':'-'}
+function arrow(cur,prev,fmt,goodUp){if(cur==null||prev==null)return '';var d=cur-prev;var col=d>0?(goodUp?'var(--q-strong)':'var(--q-risk)'):d<0?(goodUp?'var(--q-risk)':'var(--q-strong)'):'var(--muted)';return '<div><span style="color:'+col+';font-size:13px;font-weight:700">'+(d>0?'&#9650; +':d<0?'&#9660; ':'&#9644; ')+fmt(d)+' vs prior 90 days</span></div>'}
+function stat(b,l,a){return '<div class="stat"><b>'+b+'</b>'+(a||'')+'<span>'+l+'</span></div>'}
+function render(){
+  var O=roll(ours()),C=roll(comps()),g=gv();
+  document.getElementById('rvnote').textContent=(g?'Showing '+g+' stores and competitors within 3 miles of them.':'All stores and all competitors.')+' '+O.pulled.toLocaleString()+' of our reviews, '+C.pulled.toLocaleString()+' competitor reviews.';
+  var h='';h+=stat(f1(O.avg),'Our average rating ('+n(O.pulled)+' reviews)');h+=stat(f1(O.avg90),'Our last 90 days',arrow(O.avg90,O.avgp,function(d){return Math.abs(d).toFixed(2)},true));h+=stat(pc(O.neg),'Our negative share');h+=stat(pc(O.reply),'Our reply rate');
+  h+=stat(f1(C.avg),'Competitor average ('+n(C.pulled)+' reviews)');h+=stat(f1(C.avg90),'Competitor last 90 days',arrow(C.avg90,C.avgp,function(d){return Math.abs(d).toFixed(2)},false));h+=stat(pc(C.neg),'Competitor negative share');h+=stat(pc(C.reply),'Competitor reply rate');
+  document.getElementById('rv-stats').innerHTML=h;
+  // theme bars
+  var svg=document.getElementById('rvthemes'),W=900,rowH=34;var keys=TK.slice().sort(function(a,b){return (O.negN?O.th[b].neg/O.negN:0)-(O.negN?O.th[a].neg/O.negN:0)});
+  var H=keys.length*rowH+20;svg.setAttribute('viewBox','0 0 '+W+' '+H);var lab=200,bw=W-lab-70,mx=0.01;keys.forEach(function(k){mx=Math.max(mx,O.negN?O.th[k].neg/O.negN:0,C.negN?C.th[k].neg/C.negN:0)});
+  var s='';keys.forEach(function(k,i){var y=10+i*rowH,o=O.negN?O.th[k].neg/O.negN:0,c=C.negN?C.th[k].neg/C.negN:0;
+    s+='<text class="lbl" x="'+(lab-10)+'" y="'+(y+15)+'" text-anchor="end" style="font-size:13px;fill:#1a1a1a">'+D.themes[k]+'</text>';
+    s+='<rect x="'+lab+'" y="'+(y+2)+'" width="'+(bw*o/mx)+'" height="11" rx="3" fill="#c8102e"/><text class="lbl" x="'+(lab+bw*o/mx+6)+'" y="'+(y+12)+'">'+(100*o).toFixed(0)+'%</text>';
+    s+='<rect x="'+lab+'" y="'+(y+16)+'" width="'+(bw*c/mx)+'" height="11" rx="3" fill="#5d5d5d"/><text class="lbl" x="'+(lab+bw*c/mx+6)+'" y="'+(y+26)+'">'+(100*c).toFixed(0)+'%</text>'});
+  svg.innerHTML=s;
+  // trend
+  var tm=metric.value,months={};[[ours(),'o'],[comps(),'c']].forEach(function(pair){pair[0].forEach(function(l){Object.keys(l.months).forEach(function(m){months[m]=months[m]||{o:{n:0,sum:0,neg:0},c:{n:0,sum:0,neg:0}};var x=months[m][pair[1]],v=l.months[m];x.n+=v.n;x.sum+=v.avg*v.n;x.neg+=v.neg})})});
+  var ms=Object.keys(months).sort().slice(-24);var val=function(x){return !x.n?null:tm==='avg'?x.sum/x.n:tm==='n'?x.n:100*x.neg/x.n};
+  var tsvg=document.getElementById('rvtrend'),TW=900,TH=320,TP={l:56,r:20,t:16,b:44};var vals=[];ms.forEach(function(m){['o','c'].forEach(function(k){var v=val(months[m][k]);if(v!=null)vals.push(v)})});
+  var y0=tm==='avg'?Math.max(1,Math.floor(Math.min.apply(null,vals.concat([5]))*2)/2-0.5):0,y1=tm==='avg'?5:Math.max(1,Math.max.apply(null,vals.concat([0]))*1.1);
+  var sx=function(i){return ms.length===1?(TP.l+TW-TP.r)/2:TP.l+i/(ms.length-1)*(TW-TP.l-TP.r)},sy=function(v){return TH-TP.b-(v-y0)/(y1-y0)*(TH-TP.t-TP.b)};
+  var t='';for(var k=0;k<=4;k++){var v=y0+(y1-y0)*k/4;t+='<line class="grid" x1="'+TP.l+'" x2="'+(TW-TP.r)+'" y1="'+sy(v)+'" y2="'+sy(v)+'"/><text class="lbl" x="'+(TP.l-8)+'" y="'+(sy(v)+4)+'" text-anchor="end">'+(tm==='avg'?v.toFixed(2):tm==='n'?Math.round(v):v.toFixed(0)+'%')+'</text>'}
+  ms.forEach(function(m,i){if(i%Math.max(1,Math.ceil(ms.length/12))===0||i===ms.length-1)t+='<text class="lbl" x="'+sx(i)+'" y="'+(TH-TP.b+18)+'" text-anchor="middle">'+m+'</text>'});
+  t+='<line class="axis" x1="'+TP.l+'" x2="'+(TW-TP.r)+'" y1="'+(TH-TP.b)+'" y2="'+(TH-TP.b)+'"/>';
+  [['o','#c8102e'],['c','#5d5d5d']].forEach(function(sr){var p='';ms.forEach(function(m,i){var v=val(months[m][sr[0]]);if(v==null)return;p+=(p?' L':'M')+sx(i)+' '+sy(v)});t+='<path d="'+p+'" fill="none" stroke="'+sr[1]+'" stroke-width="2.5"/>';ms.forEach(function(m,i){var v=val(months[m][sr[0]]);if(v==null)return;t+='<circle class="pt" data-m="'+m+'" data-k="'+sr[0]+'" cx="'+sx(i)+'" cy="'+sy(v)+'" r="5" fill="'+sr[1]+'"/>'})});
+  tsvg.innerHTML=t;tsvg._months=months;tsvg._tm=tm;
+  // tables
+  var td=function(v,num){return '<td'+(num?' class="num"':'')+'>'+v+'</td>'};
+  var chg=function(l){if(l.avg_90==null||l.avg_prior_90==null)return '<span class="muted">-</span>';var d=l.avg_90-l.avg_prior_90;return '<span style="color:'+(d>0?'var(--q-strong)':d<0?'var(--q-risk)':'inherit')+'">'+(d>0?'+':'')+d.toFixed(2)+'</span>'};
+  var byG={};ours().forEach(function(l){(byG[l.group]=byG[l.group]||[]).push(l)});
+  document.querySelector('#rv-groups tbody').innerHTML=Object.keys(byG).sort().map(function(gk){var r=roll(byG[gk]);return '<tr>'+td(gk)+td(r.locations,1)+td(n(r.pulled),1)+td(f1(r.avg),1)+td(f1(r.avg90),1)+td(r.avg90!=null&&r.avgp!=null?((r.avg90-r.avgp>0?'+':'')+(r.avg90-r.avgp).toFixed(2)):'-',1)+td(pc(r.neg),1)+td(pc(r.reply),1)+td(r.vel.toFixed(1),1)+td(topTheme(r.th,r.negN))+'</tr>'}).join('')||'<tr><td colspan="10" class="muted">No data</td></tr>';
+  var qs=q.value.toLowerCase();
+  document.querySelector('#rv-stores tbody').innerHTML=ours().filter(function(l){return !qs||l.label.toLowerCase().indexOf(qs)>=0}).map(function(l){return '<tr data-id="'+l.id+'" style="cursor:pointer">'+td(l.label.replace('Jiffy Lube ',''))+td(l.group)+td(n(l.pulled)+(l.place_reviews?' <span class="muted">of '+n(l.place_reviews)+'</span>':''),1)+td(f1(l.avg_all),1)+td(f1(l.avg_90),1)+td(chg(l),1)+td(pc(l.neg_share),1)+td(pc(l.reply_rate),1)+td(l.reply_median_days==null?'-':l.reply_median_days,1)+td(l.velocity==null?'-':l.velocity,1)+td(topTheme(l.themes,Math.round((l.neg_share||0)*l.pulled)))+'</tr>'}).join('')||'<tr><td colspan="11" class="muted">No data</td></tr>';
+  var byB={};comps().forEach(function(l){(byB[l.brand]=byB[l.brand]||[]).push(l)});
+  document.querySelector('#rv-brands tbody').innerHTML=Object.keys(byB).map(function(b){var r=roll(byB[b]);return '<tr>'+td('<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+D.brandColor[b]+';margin-right:6px"></span>'+D.brandLabel[b])+td(r.locations,1)+td(n(r.pulled),1)+td(f1(r.avg),1)+td(f1(r.avg90),1)+td(pc(r.neg),1)+td(pc(r.reply),1)+td(r.vel.toFixed(1),1)+td(topTheme(r.th,r.negN))+'</tr>'}).join('')||'<tr><td colspan="9" class="muted">No data</td></tr>';
+  var cqs=cq.value.toLowerCase();
+  document.querySelector('#rv-comps tbody').innerHTML=comps().filter(function(l){return !cqs||l.label.toLowerCase().indexOf(cqs)>=0}).map(function(l){return '<tr data-id="'+l.id+'" style="cursor:pointer">'+td(l.label)+td(l.groups.join(', '))+td(n(l.pulled)+(l.place_reviews?' <span class="muted">of '+n(l.place_reviews)+'</span>':''),1)+td(f1(l.avg_all),1)+td(f1(l.avg_90),1)+td(pc(l.neg_share),1)+td(pc(l.reply_rate),1)+td(l.velocity==null?'-':l.velocity,1)+td(topTheme(l.themes,Math.round((l.neg_share||0)*l.pulled)))+'</tr>'}).join('')||'<tr><td colspan="9" class="muted">No data</td></tr>';
+}
+function detail(id,boxId){var l=L.filter(function(x){return x.id===id})[0],box=document.getElementById(boxId);if(!l){box.hidden=true;return}var negN=Math.round((l.neg_share||0)*l.pulled);
+  var rows=TK.map(function(k){return [k,l.themes[k]]}).sort(function(a,b){return b[1].neg-a[1].neg});
+  box.innerHTML='<h3 style="margin:0 0 6px">'+l.label+'</h3><p class="muted" style="margin:0 0 12px">'+n(l.pulled)+' reviews pulled, '+negN+' negative. Average '+f1(l.avg_all)+', last 90 days '+f1(l.avg_90)+'. Reply rate '+pc(l.reply_rate)+'.</p><table><thead><tr><th>Theme</th><th class="num">In negative reviews</th><th class="num">In all reviews</th><th>Example</th></tr></thead><tbody>'+rows.map(function(r){var qt=(l.quotes[r[0]]||[])[0];return '<tr><td>'+D.themes[r[0]]+'</td><td class="num">'+r[1].neg+(negN?' ('+Math.round(100*r[1].neg/negN)+'%)':'')+'</td><td class="num">'+r[1].all+'</td><td class="muted" style="font-size:13px">'+(qt?'&#9733;'+qt.rating+' '+qt.date+': &ldquo;'+qt.text.replace(/</g,'&lt;')+'&rdquo;':'')+'</td></tr>'}).join('')+'</tbody></table>';box.hidden=false;box.scrollIntoView({block:'nearest',behavior:'smooth'})}
+document.querySelector('#rv-stores tbody').addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)detail(tr.getAttribute('data-id'),'rv-detail')});
+document.querySelector('#rv-comps tbody').addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)detail(tr.getAttribute('data-id'),'rv-cdetail')});
+var tip=document.getElementById('rvtip'),tsvg=document.getElementById('rvtrend');
+tsvg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){tip.style.display='none';return}var m=t.getAttribute('data-m'),k=t.getAttribute('data-k'),x=tsvg._months[m][k];tip.innerHTML='<b>'+(k==='o'?'Jiffy Lube':'Competitors')+' '+m+'</b><br>'+x.n+' reviews, avg '+(x.n?(x.sum/x.n).toFixed(2):'-')+', '+x.neg+' negative';var box=tsvg.parentNode.getBoundingClientRect();tip.style.display='block';tip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';tip.style.top=(e.clientY-box.top+14)+'px'});
+tsvg.addEventListener('mouseleave',function(){tip.style.display='none'});
+// click-to-sort (same behavior as the Campaigns page)
+var SORT={};function parseCell(td){var t=td.textContent.trim().replace(/[$,%]/g,'').replace(/ of .*$/,'');var m=t.match(/^[-+]?[0-9.]+/);return m?parseFloat(m[0]):t.toLowerCase()}
+function applySort(tbl){var st=SORT[tbl.id];if(!st)return;var tb=tbl.tBodies[0],rows=Array.prototype.slice.call(tb.rows);if(rows.length<2)return;rows.sort(function(a,b){var va=parseCell(a.cells[st.col]),vb=parseCell(b.cells[st.col]);if(typeof va==='number'&&typeof vb==='number')return (va-vb)*st.dir;if(typeof va==='number')return -1;if(typeof vb==='number')return 1;return String(va).localeCompare(String(vb))*st.dir});rows.forEach(function(r){tb.appendChild(r)});Array.prototype.forEach.call(tbl.tHead.rows[0].cells,function(th,i){th.setAttribute('aria-sort',i===st.col?(st.dir>0?'ascending':'descending'):'none');th.style.textDecoration=i===st.col?'underline':''})}
+function sortable(){Array.prototype.forEach.call(document.querySelectorAll('main table[id]'),function(tbl){if(tbl._s)return;tbl._s=true;Array.prototype.forEach.call(tbl.tHead.rows[0].cells,function(th,i){th.title='Click to sort';th.addEventListener('click',function(){var st=SORT[tbl.id]||{col:-1,dir:1};SORT[tbl.id]={col:i,dir:st.col===i?-st.dir:(th.classList.contains('num')?-1:1)};applySort(tbl)})})});Array.prototype.forEach.call(document.querySelectorAll('main table[id]'),applySort)}
+function all(){render();sortable()}
+[comp,metric].forEach(function(el){el.addEventListener('change',all)});[q,cq].forEach(function(el){el.addEventListener('input',all)});window.addEventListener('jl-group',all);all();
+})();
+</script>`;
+  return page('Reviews', body, 'reviews');
+}
+
 /* ---------- write ---------- */
 fs.copyFileSync(path.join(MAP, 'dist/index.html'), path.join(OUT, 'competitor-map/index.html'));
 write('index.html', homePage());
 write('quadrants/index.html', quadrantsPage());
 write('ratings/index.html', ratingsPage());
 write('campaigns/index.html', campaignsPage());
+write('reviews/index.html', reviewsPage());
 console.log(`Private dashboard built: ${rows.length} stores, ${competitors.length} competitors, ${rows.filter((r) => r.compAvg !== null).length} plotted in quadrants`);
