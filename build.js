@@ -11,12 +11,13 @@ const OUT = path.join(ROOT, 'docs');
 const siteEn = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/site.json'), 'utf8'));
 const ES = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/es.json'), 'utf8'));
 const stores = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stores.json'), 'utf8'));
+const LEGAL = require('./data/legal.js');
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 /* ---------- languages: every page is built twice, English at / and Spanish at /es/ ---------- */
 const deepMerge = (a, b) => { const o = Array.isArray(a) ? [...a] : { ...a }; for (const k of Object.keys(b || {})) o[k] = (b[k] && typeof b[k] === 'object' && !Array.isArray(b[k]) && a && typeof a[k] === 'object') ? deepMerge(a[k], b[k]) : b[k]; return o; };
 const UI_EN = {
-  lang_switch: 'Español', nav_open: 'Open', nav_directions: 'Get Directions', logo_aria: 'Jiffy Lube Chicagoland home',
+  lang_switch: 'Español', skip: 'Skip to main content', quick_actions: 'Quick actions', site_links: 'Site links', legal_links: 'Legal', footer_privacy: 'Privacy and call recording', footer_dns: 'Do Not Sell or Share My Personal Information', footer_terms: 'Terms of use', footer_a11y: 'Accessibility', nav_open: 'Open', nav_directions: 'Get Directions', logo_aria: 'Jiffy Lube Chicagoland home',
   reviews: '{n} reviews', rating_asof: 'Google Rating as of {date}', trust_title: '#1 Trusted Fast Oil Change', trust_sub: 'BrandSpark® American Trust Study, {year}', badge_alt: 'Newsweek #1 Most Trusted badge',
   coupon_any: 'Any Chicago area location', coupon_free: 'FREE', free_desc: 'No purchase necessary. If you get an oil change today, take {off}.', get_coupon: 'Get My Coupon', coupon_code_aria: 'Coupon code {code}',
   free_show: 'Show this code at the counter for {show}. It also takes {off} any oil change.', copy_code: 'Copy Code', copied: 'Code copied to your clipboard.', apple_aria: 'Add to Apple Wallet', google_aria: 'Add to Google Wallet',
@@ -58,7 +59,9 @@ function symbol(name) {
   const inner = raw.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '').replace(/\sfill="#[0-9A-Fa-f]{3,6}"/g, '');
   return `<symbol id="${name}" viewBox="${vb}">${inner}</symbol>`;
 }
-const SPRITE = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">${SPRITE_ICONS.map(symbol).join('')}</svg>`;
+const SPRITE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">${SPRITE_ICONS.map(symbol).join('')}</svg>`;
+// Every page starts with the skip link (first focusable element) and the icon sprite.
+const SPRITE = { toString() { return `<a class="skip" href="#main">${t('skip')}</a>${SPRITE_SVG}`; } };
 const icon = (name, color, cls = '') => `<svg class="ic${cls ? ' ' + cls : ''}" fill="${color}" aria-hidden="true" focusable="false"><use href="#${name}"/></svg>`;
 const CHECK = icon('icon-check', '#fc2b22');
 const PHONE = icon('icon-phone', '#ffffff');
@@ -84,8 +87,10 @@ function head(title, desc, canonical, extra = '', phone = null) {
   const adsCall = (phone && site.analytics.google_ads_id && site.analytics.google_ads_call_label) ? `gtag('config','${site.analytics.google_ads_call_label}',{'phone_conversion_number':'${phone}'});` : '';
   // GA4, loaded after the page has finished loading so it never competes with content.
   // Events fired before the library arrives are queued in dataLayer and sent once it loads.
-  const ga = site.analytics.ga4_id ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.analytics.ga4_id}',{send_page_view:true});${site.analytics.google_ads_id ? `gtag('config','${site.analytics.google_ads_id}');` : ''}${adsCall}(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4_id}';document.head.appendChild(s);}if(document.readyState==='complete')setTimeout(l,0);else window.addEventListener('load',function(){setTimeout(l,0);});['pointerdown','keydown','touchstart'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});})();</script>` : '';
-  const alts = canonical === '/404.html' ? '' : `<link rel="alternate" hreflang="en" href="${site.domain}${canonical}">
+  // Consent Mode v2: ads consent denied when the browser sends Global Privacy Control or the visitor opted out on /privacy/; no banner.
+  const consent = `(function(){var o=navigator.globalPrivacyControl===true||/(^|;\\s*)jlc_optout=1/.test(document.cookie);gtag('consent','default',{ad_storage:o?'denied':'granted',ad_user_data:o?'denied':'granted',ad_personalization:o?'denied':'granted',analytics_storage:'granted',wait_for_update:0});window.JL_OPTOUT=o;})();`;
+  const ga = site.analytics.ga4_id ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}${consent}gtag('js',new Date());gtag('config','${site.analytics.ga4_id}',{send_page_view:true});${site.analytics.google_ads_id ? `gtag('config','${site.analytics.google_ads_id}');` : ''}${adsCall}(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${site.analytics.ga4_id}';document.head.appendChild(s);}if(document.readyState==='complete')setTimeout(l,0);else window.addEventListener('load',function(){setTimeout(l,0);});['pointerdown','keydown','touchstart'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});})();</script>` : '';
+  const alts = (canonical === '/404.html' || LEGAL.pages.some((pg) => canonical === `/${pg.slug}/`)) ? '' : `<link rel="alternate" hreflang="en" href="${site.domain}${canonical}">
 <link rel="alternate" hreflang="es" href="${site.domain}/es${canonical}">
 <link rel="alternate" hreflang="x-default" href="${site.domain}${canonical}">`;
   const i18n = L === 'es' ? `<script>window.JL_I18N=${JSON.stringify(ES.js)};</script>` : '';
@@ -124,7 +129,7 @@ function nav(store, canonical = '/') {
         <a class="btn btn--inverse btn--sm" href="${dirUrl(store)}" target="_blank" rel="noopener">${CARET_RIGHT}${t('nav_directions')}</a>
       </div>${lang}
     </div>` : `<div class="nav__right">${lang}</div>`;
-  return `<header class="nav"><div class="wrap nav__inner">
+  return `<header class="nav" role="banner"><div class="wrap nav__inner">
     <a class="nav__logo" href="${P}/" aria-label="${t('logo_aria')}">${svg('logo')}</a>${right}
   </div></header>`;
 }
@@ -159,17 +164,18 @@ function couponCard(store, extraCls = '', variant = '') {
   const free = !!fv;
   const qs = [store ? 'store=' + esc(store.slug) : '', free ? 'variant=' + variant : '', L === 'es' ? 'lang=es' : ''].filter(Boolean).join('&');
   const walletQs = qs ? '?' + qs : '';
+  const cid = 'coupon-body-' + (store ? esc(store.slug) : 'region') + (variant ? '-' + variant : '');
   return `<div class="coupon ${extraCls}${free ? ' coupon--free' : ''}" data-code="${esc(o.code)}"${fixed}>
     ${free ? `<div class="coupon__store coupon__store--free">${t('coupon_free')}</div>` : store ? `<div class="coupon__store">Jiffy Lube ${esc(store.city)}</div>` : `<div class="coupon__store">${t('coupon_any')}</div>`}
     ${free ? `<div class="coupon__amount coupon__amount--text">${fv.cardTitle}</div>` : `<div class="coupon__amount">${esc(o.amount)}</div>`}
     <p class="coupon__desc">${free ? esc(t('free_desc', { off: offAmount(o) })) : esc(o.description)}</p>
     <hr class="coupon__divider">
-    <button class="btn btn--primary btn--block coupon__cta" type="button">${free ? fv.cta : t('get_coupon')}</button>
-    <div class="coupon__reveal">
+    <button class="btn btn--primary btn--block coupon__cta" type="button" aria-expanded="false" aria-controls="${cid}">${free ? fv.cta : t('get_coupon')}</button>
+    <div class="coupon__reveal" id="${cid}">
       <div class="coupon__code js-code" aria-label="${esc(t('coupon_code_aria', { code: o.code }))}">${esc(o.code)}</div>
       ${free ? `<p class="coupon__show">${esc(t('free_show', { show: fv.show, off: offAmount(o) }))}</p>` : ''}
       <button class="btn btn--primary btn--block js-copy" type="button">${t('copy_code')}</button>
-      <div class="coupon__copied">${t('copied')}</div>
+      <div class="coupon__copied" role="status" aria-live="polite">${t('copied')}</div>
       ${site.wallet && site.wallet.enabled ? `<div class="coupon__wallet" data-store="${store ? esc(store.slug) : ''}">
         ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple/${walletQs}" aria-label="${t('apple_aria')}">${svg('badge-apple-wallet')}</a>` : ''}
         ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google/${walletQs}" aria-label="${t('google_aria')}">${svg('badge-google-wallet')}</a>` : ''}
@@ -194,9 +200,9 @@ function how() {
       <h2 class="h2 how__title">${t('how_title')}<span class="sup">*</span></h2>
       <div class="how__checks"><span class="check">${CHECK}${t('no_appt')}</span><span class="check">${CHECK}${t('open7')}</span></div>
       <div class="steps">${steps.map(([f, l]) => `<div class="step"><div class="step__icon">${svg(f)}</div><div class="step__label">${l}</div></div>`).join('')}</div>
-      <div class="how__toggle"><button class="btn btn--text" type="button" aria-expanded="false"><span>${t('see_included')}</span>${CARET_DOWN}</button></div>
+      <div class="how__toggle"><button class="btn btn--text" type="button" aria-expanded="false" aria-controls="included"><span>${t('see_included')}</span>${CARET_DOWN}</button></div>
     </div>
-    <div class="included">
+    <div class="included" id="included">
       <div class="included__title">${t('included_title')}</div>
       <ul class="included__list">${site.included.map((i) => `<li>${CHECK}${esc(i)}</li>`).join('')}</ul>
     </div>
@@ -245,8 +251,9 @@ function findUs(store) {
   const pt = site.popular_times;
   const popular = pt.enabled ? `<div class="popular" data-popular='${JSON.stringify(pt.days)}' data-start="${pt.hours_start}">
       <h3 class="h3">${t('popular')}</h3>
-      <div class="popular__days">${t('day_short').map((n, d) => `<button class="popular__day" type="button" data-day="${d}">${n}</button>`).join('')}</div>
+      <div class="popular__days" role="group" aria-label="${esc(t('popular'))}">${t('day_short').map((n, d) => `<button class="popular__day" type="button" data-day="${d}" aria-pressed="false">${n}</button>`).join('')}</div>
       <div class="popular__chart" aria-hidden="true"></div>
+      <p class="visually-hidden popular__summary" aria-live="polite"></p>
       <div class="popular__axis"><span style="left:7.1%">8a</span><span style="left:39.3%">12p</span><span style="left:67.9%">4p</span><span style="left:96.4%">8p</span></div>
       <p class="popular__now"></p>
       ${store.phone ? `<p class="popular__call"><a href="${tel(store.phone)}">${t('call_wait')}</a></p>` : ''}
@@ -280,17 +287,19 @@ function footer(franchisee, store = null) {
   const links = store
     ? [[`${P}/store/${store.slug}/`, t('footer_store', { city: store.city, street: store.street_name })], [`${P}/coupon/${store.slug}/`, t('footer_coupon', { off: offAmount(offerFor(store)) })], ...(store.free_pages ? [[`${P}/free-air/${store.slug}/`, t('footer_air')], [`${P}/free-battery/${store.slug}/`, t('footer_battery')]] : []), [`${P}/`, t('footer_all')]]
     : [[`${P}/`, t('footer_find')], [`${P}/#all-locations`, t('footer_all')]];
-  return `<footer class="footer section--dark"><div class="wrap">
-    <nav class="footer__links" aria-label="Site links">${links.map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join('')}</nav>
+  const legal = [['/privacy/', t('footer_privacy')], ['/privacy/#choices', t('footer_dns')], ['/terms/', t('footer_terms')], ['/accessibility/', t('footer_a11y')]];
+  return `<footer class="footer section--dark" role="contentinfo"><div class="wrap">
+    <nav class="footer__links" aria-label="${esc(t('site_links'))}">${links.map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join('')}</nav>
+    <nav class="footer__links" aria-label="${esc(t('legal_links'))}">${legal.map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join('')}</nav>
     <div class="footer__heading">${esc(site.legal.privacy_heading)}</div>
     ${legalLines(franchisee).map((l) => `<p>${esc(l)}</p>`).join('')}
   </div></footer>`;
 }
 
-const sticky = (store, label = '') => `<div class="sticky mobile-only">
+const sticky = (store, label = '') => `<nav class="sticky mobile-only" aria-label="${esc(t('quick_actions'))}">
   ${store.phone ? `<a class="btn btn--primary" href="${tel(store.phone)}">${PHONE}${t('sticky_call')}</a>` : `<a class="btn btn--primary" href="${dirUrl(store)}" target="_blank" rel="noopener">${PIN}${t('sticky_dir')}</a>`}
   <a class="btn btn--secondary js-goto-coupon" href="#coupon">${TICKET.replace(/#ffffff/g, '#700000')}${label || t('sticky_coupon')}</a>
-</div>`;
+</nav>`;
 
 function allLocations() {
   const sorted = [...stores].sort((a, b) => a.city.localeCompare(b.city) || a.street_name.localeCompare(b.street_name));
@@ -323,17 +332,18 @@ function regionPage() {
 <body>
 ${SPRITE}
 ${nav(null, '/')}
-<main>
+<main id="main" tabindex="-1">
 <section class="hero hero--center"><div class="hero__graphic">${svg('j-graphic')}</div><div class="wrap hero__inner">
   <h1 class="h1 hero__title--region">${esc(t('region_h1', { region: site.region_name }))}</h1>
   <p class="hero__sub">${esc(t('region_sub', { n: stores.length }))}</p>
-  <form class="search js-search" data-base="${P}/" action="${P}/" method="get">
+  <form class="search js-search" data-base="${P}/" action="${P}/" method="get" role="search" aria-label="${esc(t('zip_label'))}">
     <label class="visually-hidden" for="zip">${t('zip_label')}</label>
-    <input class="search__field" id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" placeholder="${esc(t('zip_ph'))}">
+    <input class="search__field" id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" placeholder="${esc(t('zip_ph'))}" aria-describedby="zip-err">
     <button class="btn btn--inverse" type="submit">${t('search')}</button>
     <div class="search__geo"><button class="btn btn--inverse js-geo" type="button">${PIN}${t('use_location')}</button><button class="search__geo-link js-geo" type="button">${t('use_location')}</button></div>
   </form>
-  <p class="search__error" role="alert"></p>
+  <p class="search__error" id="zip-err" role="alert"></p>
+  <p class="visually-hidden js-search-status" role="status" aria-live="polite"></p>
   <div class="results" aria-live="polite">
     <div class="results__title"></div>
     <div class="results__list"></div>
@@ -359,7 +369,7 @@ function storePage(s) {
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/store/${s.slug}/`)}
-<main class="page page--store">
+<main id="main" tabindex="-1" class="page page--store">
 <section class="hero hero--store"><div class="hero__graphic">${svg('j-graphic')}</div><div class="wrap hero__inner">
   <h1 class="h1">Jiffy Lube® ${esc(s.city)},<br>${esc(s.street_name)}</h1>
   <p class="hero__sub">${esc(t('store_sub', { addr: s.street }))}</p>
@@ -390,7 +400,7 @@ function couponPage(s) {
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/coupon/${s.slug}/`)}
-<main class="page page--coupon">
+<main id="main" tabindex="-1" class="page page--coupon">
 <section class="hero hero--split"><div class="wrap hero__inner">
   <div>
     <h1 class="h1">${esc(o.hero_title)}<br>${esc(t('coupon_h1_in', { city: s.city }))}</h1>
@@ -423,7 +433,7 @@ function freePage(s, key) {
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/${v.path}/${s.slug}/`)}
-<main class="page page--coupon page--free">
+<main id="main" tabindex="-1" class="page page--coupon page--free">
 <section class="hero hero--split"><div class="wrap hero__inner">
   <div>
     <h1 class="h1">${v.h1} ${t('free_h1_tail')}</h1>
@@ -445,6 +455,27 @@ ${services()}
 ${footer(s.group, s)}
 ${sticky(s, v.sticky)}
 ${scripts()}
+</body></html>`;
+}
+
+/* Legal and accessibility pages (English only; Spanish footers link here). */
+function legalPage(pg) {
+  const optout = pg.slug === 'privacy' ? `<script>(function(){var b=document.querySelector('.js-optout'),s=document.getElementById('optout-status');if(!b)return;function set(msg){s.textContent=msg;b.setAttribute('aria-disabled','true');b.textContent='Opted out';}
+if(window.JL_OPTOUT)set(navigator.globalPrivacyControl===true?'Your browser sends the Global Privacy Control signal, so you are already opted out of targeted advertising on this site.':'You are opted out of targeted advertising on this site in this browser.');
+b.addEventListener('click',function(){if(b.getAttribute('aria-disabled')==='true')return;document.cookie='jlc_optout=1; max-age=31536000; path=/; SameSite=Lax; Secure';if(typeof gtag==='function')gtag('consent','update',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});window.JL_OPTOUT=true;set('Done. This site will no longer send your visit data to advertising platforms for targeted ads in this browser.');});})();</script>` : '';
+  return `${head(`${pg.title} | Jiffy Lube Chicagoland`, pg.desc, `/${pg.slug}/`)}
+<body>
+${SPRITE}
+${nav(null, `/${pg.slug}/`)}
+<main id="main" tabindex="-1" class="page page--legal">
+<section class="section"><div class="wrap legal">
+  <h1>${esc(pg.title)}</h1>
+  <p class="legal__updated">Last updated: ${esc(pg.updated)}</p>
+  ${pg.body}
+</div></section>
+</main>
+${footer(site.legal.region_franchisee)}
+${scripts()}${optout}
 </body></html>`;
 }
 
@@ -478,9 +509,11 @@ for (const lang of ['en', 'es']) {
   }
 }
 setLang('en');
+for (const pg of LEGAL.pages) { write(`${pg.slug}/index.html`, legalPage(pg)); urls.push(`/${pg.slug}/`); }
 write('404.html', `${head('Page not found | Jiffy Lube Chicagoland', 'Page not found', '/404.html')}<body>${nav(null, '/')}<main><section class="section"><div class="wrap" style="text-align:center"><h1 class="h2">We couldn’t find that page.</h1><p class="body" style="margin-top:12px"><a href="/">Find a Jiffy Lube location near you</a></p></div></section></main>${footer(site.legal.region_franchisee)}</body></html>`);
 // Sitemap: every URL in both languages, each entry listing its en / es / x-default alternates (Google reads hreflang from here too).
-const sitemapEntry = (u) => { const base = u.replace(/^\/es/, ''); const en = `${site.domain}${base}`, es = `${site.domain}/es${base}`; return `  <url><loc>${site.domain}${u}</loc><xhtml:link rel="alternate" hreflang="en" href="${en}"/><xhtml:link rel="alternate" hreflang="es" href="${es}"/><xhtml:link rel="alternate" hreflang="x-default" href="${en}"/></url>`; };
+const EN_ONLY = new Set(LEGAL.pages.map((pg) => `/${pg.slug}/`));
+const sitemapEntry = (u) => { const base = u.replace(/^\/es/, ''); if (EN_ONLY.has(base)) return `  <url><loc>${site.domain}${u}</loc></url>`; const en = `${site.domain}${base}`, es = `${site.domain}/es${base}`; return `  <url><loc>${site.domain}${u}</loc><xhtml:link rel="alternate" hreflang="en" href="${en}"/><xhtml:link rel="alternate" hreflang="es" href="${es}"/><xhtml:link rel="alternate" hreflang="x-default" href="${en}"/></url>`; };
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.map(sitemapEntry).join('\n')}\n</urlset>\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /private/\nSitemap: ${site.domain}/sitemap.xml\n`);
 // llms.txt: a plain-language index for AI assistants (Claude, ChatGPT, Gemini, Perplexity).

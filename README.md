@@ -160,3 +160,13 @@ for site.js, `offers` are keyed by coupon code, `free` covers the free-service p
 their twin with hreflang tags, the nav has an English/Español switch, the sitemap lists both with
 alternates, and wallet links pass `lang=es` so the passes are in Spanish. To change Spanish copy, edit
 `data/es.json` and rebuild. Store data is shared; nothing in stores.json needs translating.
+
+## Accessibility and legal pages
+
+Target: WCAG 2.2 AA on every page. `npm run build` runs `scripts/a11y-check.mjs` (axe-core on a sample of built
+pages) and fails on any violation; the daily deploy script does the same. Patterns live in build.js and site.js:
+skip link, landmarks, coupon disclosure (aria-expanded / aria-controls, focus moves to the next action, status
+region for "copied"), popular-times text summary, search status announcements, visible focus rings, scroll padding
+for the sticky bar. Legal pages (`/privacy/`, `/terms/`, `/accessibility/`, English only) are in `data/legal.js`.
+`/privacy/#choices` has the Do Not Sell button; Consent Mode v2 defaults in `head()` honor Global Privacy Control
+and the `jlc_optout` cookie.

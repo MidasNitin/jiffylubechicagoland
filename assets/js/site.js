@@ -111,9 +111,16 @@
       return t('quiet', 'usually quiet');
     }
     function render(day) {
-      days.forEach(function (b) { b.classList.toggle('is-active', parseInt(b.getAttribute('data-day'), 10) === day); });
+      days.forEach(function (b) { var on = parseInt(b.getAttribute('data-day'), 10) === day; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
       chart.innerHTML = '';
       var vals = data[day] || [];
+      var summary = root.querySelector('.popular__summary');
+      if (summary && vals.length) {
+        var max = Math.max.apply(null, vals), min = Math.min.apply(null, vals);
+        var busy = [], quiet = [];
+        vals.forEach(function (v, i) { if (v >= max - 10) busy.push(fmtTime((start + i) * 60)); if (v <= min + 10) quiet.push(fmtTime((start + i) * 60)); });
+        summary.textContent = t('popular_summary', '{day}: busiest around {busy}. Quietest around {quiet}.').replace('{day}', DAY_NAMES[day]).replace('{busy}', busy.slice(0, 3).join(', ')).replace('{quiet}', quiet.slice(0, 3).join(', '));
+      }
       var curIdx = Math.floor(now.minutes / 60) - start;
       vals.forEach(function (v, i) {
         var bar = document.createElement('div');
@@ -145,13 +152,18 @@
       var code = c.getAttribute('data-code');
       if (cta) cta.addEventListener('click', function () {
         c.classList.add('is-revealed');
+        cta.setAttribute('aria-expanded', 'true');
         c.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        var next = Array.prototype.filter.call(c.querySelectorAll('.coupon__reveal button, .coupon__reveal a'), function (el) { return el.offsetParent !== null; })[0];
+        if (next) setTimeout(function () { next.focus({ preventScroll: true }); }, 50); // keyboard and screen-reader users land on the next visible action
       });
       if (copy) copy.addEventListener('click', function () {
-        var done = function () { c.classList.add('is-copied'); copy.textContent = t('copied', 'Copied!'); };
+        var status = c.querySelector('.coupon__copied');
+        var done = function () { c.classList.add('is-copied'); copy.textContent = t('copied', 'Copied!'); if (status) status.textContent = t('copied_status', 'Code {code} copied to your clipboard.').replace('{code}', code); };
+        var fail = function () { c.classList.add('is-copied'); if (status) status.textContent = t('copy_failed', 'Could not copy automatically. Your code is {code}.').replace('{code}', code); };
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(code).then(done, done);
-        } else { done(); }
+          navigator.clipboard.writeText(code).then(done, fail);
+        } else { fail(); }
       });
     });
     // "Get Coupon" buttons elsewhere on the page scroll to the coupon and reveal it
@@ -161,7 +173,9 @@
         if (!target) return;
         e.preventDefault();
         target.classList.add('is-revealed');
+        var tcta = target.querySelector('.coupon__cta'); if (tcta) tcta.setAttribute('aria-expanded', 'true');
         target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        var tnext = Array.prototype.filter.call(target.querySelectorAll('.coupon__reveal button, .coupon__reveal a'), function (el) { return el.offsetParent !== null; })[0]; if (tnext) setTimeout(function () { tnext.focus({ preventScroll: true }); }, 400);
       });
     });
   }
@@ -216,7 +230,9 @@
       if (q) { input.value = q; searchZip(q); }
     });
 
-    function err(msg) { errEl.textContent = msg; errEl.classList.toggle('is-visible', !!msg); }
+    function err(msg) { errEl.textContent = msg; errEl.classList.toggle('is-visible', !!msg); if (msg) input.focus(); }
+    var statusEl = document.querySelector('.js-search-status');
+    function say(msg) { if (statusEl) statusEl.textContent = msg; }
 
     function dist(a, b, c, d) {
       var R = 3958.8, toR = Math.PI / 180;
@@ -261,6 +277,7 @@
       title.textContent = (sorted.length === 1 && I18N.results_one ? I18N.results_one : t('results', '{n} location{s} near {place}')).replace('{n}', sorted.length).replace('{s}', sorted.length === 1 ? '' : t('plural', 's')).replace('{place}', placeLabel);
       track('search_results', { results: sorted.length, nearest: sorted[0] ? sorted[0].slug : '', nearest_miles: sorted[0] ? Math.round(sorted[0].d * 10) / 10 : null });
       results.classList.add('is-visible');
+      say(title.textContent);
       more(PAGE);
       results.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
@@ -303,6 +320,7 @@
         err('');
         var orig = b.textContent;
         b.textContent = t('finding', 'Finding you…');
+        say(t('finding_stores', 'Finding stores near you.'));
         navigator.geolocation.getCurrentPosition(function (pos) {
           b.textContent = orig;
           show(pos.coords.latitude, pos.coords.longitude, t('you', 'you'));

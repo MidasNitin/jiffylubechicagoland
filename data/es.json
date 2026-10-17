@@ -194,7 +194,15 @@
     "free_meta": "{desc} Llega a Jiffy Lube {addr}, {city}. ¿Quieres un cambio de aceite mientras estás aquí? Llévate {off}.",
     "free_h1_tail": "Sin necesidad de compra.",
     "free_sub": "Llega a {addr} y {sub} ¿Quieres un cambio de aceite mientras estás aquí? Llévate {off}.",
-    "free_feat_sub": "Sin cita. Sin necesidad de compra. Quédate en tu auto."
+    "free_feat_sub": "Sin cita. Sin necesidad de compra. Quédate en tu auto.",
+    "skip": "Ir al contenido principal",
+    "quick_actions": "Acciones rápidas",
+    "site_links": "Enlaces del sitio",
+    "legal_links": "Legal",
+    "footer_privacy": "Privacidad y grabación de llamadas (en inglés)",
+    "footer_dns": "No vender ni compartir mi información personal",
+    "footer_terms": "Términos de uso (en inglés)",
+    "footer_a11y": "Accesibilidad (en inglés)"
   },
   "js": {
     "days": [
@@ -234,6 +242,10 @@
     "coupon_code_aria": "Código de cupón ",
     "stars_aria": " de 5 estrellas",
     "mi": " mi",
-    "results_one": "1 ubicación cerca de {place}"
+    "results_one": "1 ubicación cerca de {place}",
+    "copied_status": "Código {code} copiado a tu portapapeles.",
+    "copy_failed": "No se pudo copiar automáticamente. Tu código es {code}.",
+    "popular_summary": "{day}: más concurrido alrededor de las {busy}. Más tranquilo alrededor de las {quiet}.",
+    "finding_stores": "Buscando tiendas cerca de ti."
   }
 }
