@@ -48,7 +48,8 @@ svg.plot{width:100%;height:auto;display:block}.plot text{font-family:inherit}.pl
 table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap}
 td.num,th.num{text-align:right}.q{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff}
 .q-strong{background:var(--q-strong)}.q-battle{background:var(--q-battle)}.q-open{background:var(--q-open);color:#1a1a1a}.q-risk{background:var(--q-risk)}
-.muted{color:var(--muted)}.foot{color:var(--muted);font-size:12px;margin:30px 0}
+.muted{color:var(--muted)}
+.rv-commentary p{font-size:15px;line-height:1.6;margin:0 0 12px}.rv-commentary details{margin-top:8px}.rv-commentary summary{cursor:pointer;font-weight:700;margin-bottom:8px}.rv-commentary h4{font-size:15px}.foot{color:var(--muted);font-size:12px;margin:30px 0}
 details{margin:10px 0}summary{cursor:pointer;font-weight:700}
 @media (max-width:720px){.top nav a{margin-left:12px}th,td{padding:6px}}
 `;
@@ -434,13 +435,15 @@ function reviewsPage() {
   const f = path.join(MAP, 'data', 'reviews-summary.json');
   if (!fs.existsSync(f)) return page('Reviews', `<h1>Reviews</h1><p class="sub">No review data yet. Run scripts/reviews-pull.mjs and scripts/reviews-analyze.mjs in the competitor-map project, then rebuild.</p>`, 'reviews');
   const R = JSON.parse(fs.readFileSync(f, 'utf8'));
+  const cf = path.join(MAP, 'data', 'reviews-commentary.json');
+  const C = fs.existsSync(cf) ? JSON.parse(fs.readFileSync(cf, 'utf8')) : { overall: [], groups: {}, stores: {}, brands: {} };
   const storeInfo = new Map(augStores.map((st) => [st.store, st]));
   const slugById = Object.fromEntries(siteStores.map((st) => [String(st.id), st.slug]));
   const brandLabel = { jl: 'Jiffy Lube', take5: 'Take 5', valvoline: 'Valvoline', strickland: 'Strickland Brothers', firestone: 'Firestone' };
   const brandColor = { jl: '#c8102e', take5: '#7a3fd1', valvoline: '#1f6fd1', strickland: '#2e9e5b', firestone: '#e07b1a' };
   // slim the location records for the page: keep metrics, themes, months, quotes; add groups a competitor sits near
   const locs = R.locations.map((l) => ({ ...l, slug: l.store ? slugById[String(l.store)] : null, groups: l.kind === 'store' ? [l.group] : [...new Set((l.near_stores || []).map((n) => (storeInfo.get(n.store) || {}).group).filter(Boolean))], near_stores: undefined }));
-  const data = JSON.stringify({ themes: R.themes, brandLabel, brandColor, locs, generated: R.generated, cutoff: R.cutoff, source: R.source });
+  const data = JSON.stringify({ themes: R.themes, brandLabel, brandColor, locs, generated: R.generated, cutoff: R.cutoff, source: R.source, commentary: C });
   const full = R.locations.filter((l) => l.source === 'outscraper').length, sampled = R.locations.length - full;
   const coverage = full && sampled ? `<strong>Partial data:</strong> ${full} locations have full review history since ${esc(R.cutoff || '2025')} (the pilot stores and their nearby competitors); ${sampled} others show only a 5-review sample from Google's API until the full pull runs.` : full ? `All reviews since ${esc(R.cutoff || '')}, refreshed monthly.` : `<strong>Sample data only:</strong> the newest 5 reviews per location from Google's API.`;
   const body = `
@@ -448,6 +451,8 @@ function reviewsPage() {
 <p class="sub">Google reviews for every Jiffy Lube store and every tracked competitor, tagged by theme. ${coverage} Last analyzed ${esc((R.generated || '').slice(0, 10))}. Negative = 1 to 3 stars. The franchise group picker filters our stores to that group and competitors to those within 3 miles of its stores.</p>
 <div class="ctl"><label>Compare with <select id="rvcomp"><option value="">All competitors</option>${Object.keys(brandLabel).filter((b) => b !== 'jl').map((b) => `<option value="${b}">${brandLabel[b]}</option>`).join('')}</select></label><span class="muted" id="rvnote"></span></div>
 <div class="stats" id="rv-stats"></div>
+<h2>What the reviews say</h2>
+<div class="panel rv-commentary" id="rv-commentary"></div>
 <h2>What negative reviews are about</h2>
 <p class="sub">Share of 1 to 3 star reviews that mention each theme. Ours versus the competitors in the same trade areas. A theme where our bar is longer is a weakness customers keep writing about.</p>
 <div class="panel"><div class="legend"><span><i style="background:#c8102e"></i>Jiffy Lube</span><span><i style="background:#5d5d5d"></i>Competitors</span></div><svg class="plot" id="rvthemes" viewBox="0 0 900 340" role="img" aria-label="Negative review themes, ours versus competitors"></svg></div>
@@ -461,6 +466,7 @@ function reviewsPage() {
 <div class="panel" style="overflow:auto"><table id="rv-stores"><thead><tr><th>Store</th><th>Group</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Change</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reply days</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
 <div class="panel" id="rv-detail" hidden></div>
 <h2>Competitors</h2>
+<div class="panel rv-commentary" id="rv-brandnotes"></div>
 <div class="panel" style="overflow:auto"><table id="rv-brands"><thead><tr><th>Brand</th><th class="num">Locations</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
 <div class="ctl"><label>Find competitor <input id="rvcq" type="search" placeholder="brand, address" style="font:inherit;padding:4px 8px;width:220px"></label><span class="muted">Click a row for its themes and quotes.</span></div>
 <div class="panel" style="overflow:auto"><table id="rv-comps"><thead><tr><th>Location</th><th>Near groups</th><th class="num">Reviews</th><th class="num">Avg rating</th><th class="num">Last 90 days</th><th class="num">Negative %</th><th class="num">Reply rate</th><th class="num">Reviews / mo</th><th>Top negative theme</th></tr></thead><tbody></tbody></table></div>
@@ -485,6 +491,12 @@ function render(){
   var h='';h+=stat(f1(O.avg),'Our average rating ('+n(O.pulled)+' reviews)');h+=stat(f1(O.avg90),'Our last 90 days',arrow(O.avg90,O.avgp,function(d){return Math.abs(d).toFixed(2)},true));h+=stat(pc(O.neg),'Our negative share');h+=stat(pc(O.reply),'Our reply rate');
   h+=stat(f1(C.avg),'Competitor average ('+n(C.pulled)+' reviews)');h+=stat(f1(C.avg90),'Competitor last 90 days',arrow(C.avg90,C.avgp,function(d){return Math.abs(d).toFixed(2)},false));h+=stat(pc(C.neg),'Competitor negative share');h+=stat(pc(C.reply),'Competitor reply rate');
   document.getElementById('rv-stats').innerHTML=h;
+  var CM=D.commentary||{},cm='';
+  if(g&&CM.groups&&CM.groups[g]){cm+='<h3 style="margin:0 0 8px">'+g+'</h3><p>'+CM.groups[g]+'</p><details><summary>Co-op wide read</summary>'+(CM.overall||[]).map(function(p){return '<p>'+p+'</p>'}).join('')+'</details>'}
+  else{cm+=(CM.overall||[]).map(function(p){return '<p>'+p+'</p>'}).join('');if(CM.groups){cm+='<details><summary>Read on each owner group</summary>'+Object.keys(CM.groups).sort().map(function(k){return '<h4 style="margin:14px 0 4px">'+k+'</h4><p>'+CM.groups[k]+'</p>'}).join('')+'</details>'}}
+  cm+='<p class="muted" style="font-size:12px;margin-top:12px">Written '+(CM.written||'')+'. '+(CM.basis||'')+'</p>';
+  document.getElementById('rv-commentary').innerHTML=cm;
+  var bn='';var bsel=comp.value;Object.keys(CM.brands||{}).forEach(function(b){if(bsel&&b!==bsel)return;bn+='<p><b style="color:'+D.brandColor[b]+'">'+D.brandLabel[b]+'.</b> '+CM.brands[b]+'</p>'});document.getElementById('rv-brandnotes').innerHTML=bn||'<p class="muted">No commentary for this brand yet.</p>';
   // theme bars
   var svg=document.getElementById('rvthemes'),W=900,rowH=34;var keys=TK.slice().sort(function(a,b){return (O.negN?O.th[b].neg/O.negN:0)-(O.negN?O.th[a].neg/O.negN:0)});
   var H=keys.length*rowH+20;svg.setAttribute('viewBox','0 0 '+W+' '+H);var lab=200,bw=W-lab-70,mx=0.01;keys.forEach(function(k){mx=Math.max(mx,O.negN?O.th[k].neg/O.negN:0,C.negN?C.th[k].neg/C.negN:0)});
@@ -518,7 +530,8 @@ function render(){
 }
 function detail(id,boxId){var l=L.filter(function(x){return x.id===id})[0],box=document.getElementById(boxId);if(!l){box.hidden=true;return}var negN=Math.round((l.neg_share||0)*l.pulled);
   var rows=TK.map(function(k){return [k,l.themes[k]]}).sort(function(a,b){return b[1].neg-a[1].neg});
-  box.innerHTML='<h3 style="margin:0 0 6px">'+l.label+'</h3><p class="muted" style="margin:0 0 12px">'+n(l.pulled)+' reviews pulled, '+negN+' negative. Average '+f1(l.avg_all)+', last 90 days '+f1(l.avg_90)+'. Reply rate '+pc(l.reply_rate)+'.</p><table><thead><tr><th>Theme</th><th class="num">In negative reviews</th><th class="num">In all reviews</th><th>Example</th></tr></thead><tbody>'+rows.map(function(r){var qt=(l.quotes[r[0]]||[])[0];return '<tr><td>'+D.themes[r[0]]+'</td><td class="num">'+r[1].neg+(negN?' ('+Math.round(100*r[1].neg/negN)+'%)':'')+'</td><td class="num">'+r[1].all+'</td><td class="muted" style="font-size:13px">'+(qt?'&#9733;'+qt.rating+' '+qt.date+': &ldquo;'+qt.text.replace(/</g,'&lt;')+'&rdquo;':'')+'</td></tr>'}).join('')+'</tbody></table>';box.hidden=false;box.scrollIntoView({block:'nearest',behavior:'smooth'})}
+  var note=(D.commentary&&D.commentary.stores&&l.store!=null)?D.commentary.stores[String(l.store)]:null;
+  box.innerHTML='<h3 style="margin:0 0 6px">'+l.label+'</h3><p class="muted" style="margin:0 0 12px">'+n(l.pulled)+' reviews pulled, '+negN+' negative. Average '+f1(l.avg_all)+', last 90 days '+f1(l.avg_90)+'. Reply rate '+pc(l.reply_rate)+'.</p>'+(note?'<p style="margin:0 0 14px;font-size:15px;line-height:1.55">'+note+'</p>':'')<table><thead><tr><th>Theme</th><th class="num">In negative reviews</th><th class="num">In all reviews</th><th>Example</th></tr></thead><tbody>'+rows.map(function(r){var qt=(l.quotes[r[0]]||[])[0];return '<tr><td>'+D.themes[r[0]]+'</td><td class="num">'+r[1].neg+(negN?' ('+Math.round(100*r[1].neg/negN)+'%)':'')+'</td><td class="num">'+r[1].all+'</td><td class="muted" style="font-size:13px">'+(qt?'&#9733;'+qt.rating+' '+qt.date+': &ldquo;'+qt.text.replace(/</g,'&lt;')+'&rdquo;':'')+'</td></tr>'}).join('')+'</tbody></table>';box.hidden=false;box.scrollIntoView({block:'nearest',behavior:'smooth'})}
 document.querySelector('#rv-stores tbody').addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)detail(tr.getAttribute('data-id'),'rv-detail')});
 document.querySelector('#rv-comps tbody').addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)detail(tr.getAttribute('data-id'),'rv-cdetail')});
 var tip=document.getElementById('rvtip'),tsvg=document.getElementById('rvtrend');
