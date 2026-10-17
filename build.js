@@ -531,6 +531,8 @@ ${byCity.map((s) => `- [Jiffy Lube ${s.city}, ${s.street}](${site.domain}/store/
   }).join('\n\n---\n\n');
   write('llms-full.txt', `# Jiffy Lube Chicagoland, full site text\n\nSee ${site.domain}/llms.txt for the index. Generated ${new Date().toISOString().slice(0, 10)}.\n\n---\n\n${out}\n`);
 }
+// IndexNow key file (Bing, Yandex, DuckDuckGo instant indexing); scripts/indexnow.mjs pings with the sitemap URLs after a deploy.
+{ const kf = path.join(ROOT, 'data/indexnow.key'); if (fs.existsSync(kf)) { const k = fs.readFileSync(kf, 'utf8').trim(); write(`${k}.txt`, k); } }
 write('CNAME', site.domain.replace(/^https?:\/\//, '') + '\n');
 write('.nojekyll', '');
 console.log(`Built ${urls.length} pages into docs/`);

@@ -10,4 +10,5 @@ node scripts/ga-pull.mjs >> "$LOG" 2>&1
 node private-build.js >> "$LOG" 2>&1
 node build.js >> "$LOG" 2>&1
 git add -A && git commit -q -m "Dashboard: daily GA pull $(date +%Y-%m-%d)" && git push -q mine main && git push -q origin main || echo "nothing to commit or push failed" >> "$LOG"
+sleep 150; node scripts/indexnow.mjs >> "$LOG" 2>&1 || true  # tell Bing about changed pages once Vercel has deployed
 echo "=== $(date '+%Y-%m-%d %H:%M') done" >> "$LOG"
