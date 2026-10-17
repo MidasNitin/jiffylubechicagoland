@@ -62,7 +62,7 @@ function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.h
 sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();if(g)window.dispatchEvent(new Event('jl-group'));})();</script>`;
 const page = (title, body, active) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"><title>${esc(title)} | Jiffy Lube Chicagoland dashboard</title><style>${CSS}</style></head>
 <body><header class="top"><div class="wrap"><a href="/private/">Jiffy Lube Chicagoland · Owner dashboard</a><nav>
-<a data-nav="/private/" href="/private/"${active === 'home' ? ' class="on"' : ''}>Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/"${active === 'map' ? ' class="on"' : ''}>Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/"${active === 'quad' ? ' class="on"' : ''}>Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/"${active === 'ratings' ? ' class="on"' : ''}>Ratings over time</a><a data-nav="/private/campaigns/" href="/private/campaigns/"${active === 'camp' ? ' class="on"' : ''}>Campaigns</a><a data-nav="/private/reviews/" href="/private/reviews/"${active === 'reviews' ? ' class="on"' : ''}>Reviews</a>
+<a data-nav="/private/" href="/private/"${active === 'home' ? ' class="on"' : ''}>Home</a><a data-nav="/private/competitor-map/" href="/private/competitor-map/"${active === 'map' ? ' class="on"' : ''}>Competitor map</a><a data-nav="/private/quadrants/" href="/private/quadrants/"${active === 'quad' ? ' class="on"' : ''}>Rating quadrants</a><a data-nav="/private/ratings/" href="/private/ratings/"${active === 'ratings' ? ' class="on"' : ''}>Ratings over time</a><a data-nav="/private/campaigns/" href="/private/campaigns/"${active === 'camp' ? ' class="on"' : ''}>Campaigns</a><a data-nav="/private/reviews/" href="/private/reviews/"${active === 'reviews' ? ' class="on"' : ''}>Reviews</a><a data-nav="/private/listing/" href="/private/listing/"${active === 'listing' ? ' class="on"' : ''}>Listing health</a>
 </nav>${GROUP_NAV()}</div></header><main class="wrap">${body}</main>${GROUP_JS}</body></html>`;
 
 /* ---------- data: join August map data with latest site ratings ---------- */
@@ -254,7 +254,7 @@ function homePage() {
   <a class="card" href="/private/quadrants/" data-nav="/private/quadrants/"><h3>Rating quadrants</h3><p>Our rating against the nearby competitor average. Strongholds, battlegrounds, open field and at-risk stores, with adjustable cut lines and a sortable list.</p><span class="tag">Ours ${esc(latestLabel)}, competitors ${esc(compDate)}</span></a>
   <a class="card" href="/private/ratings/" data-nav="/private/ratings/"><h3>Ratings over time</h3><p>Average rating and review totals by brand over time, with every store and every competitor listed snapshot by snapshot. Refreshed automatically on the 1st of each month.</p><span class="tag">${dates.length} snapshot${dates.length === 1 ? '' : 's'}</span></a>
 </div>
-<div class="cards"><a class="card" href="/private/reviews/" data-nav="/private/reviews/"><h3>Reviews</h3><p>Google review themes, ratings trend, response rates and review velocity, by store, by owner group, and for the competitors in each trade area.</p><span class="tag">Google reviews</span></a><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate, plus Google Ads spend, clicks, cost per conversion and search terms, by campaign, store and campaign key.</p><span class="tag">Google Analytics + Google Ads</span></a></div>
+<div class="cards"><a class="card" href="/private/reviews/" data-nav="/private/reviews/"><h3>Reviews</h3><p>Google review themes, ratings trend, response rates and review velocity, by store, by owner group, and for the competitors in each trade area.</p><span class="tag">Google reviews</span></a><a class="card" href="/private/campaigns/" data-nav="/private/campaigns/"><h3>Campaigns</h3><p>Website visits, conversions and conversion rate, plus Google Ads spend, clicks, cost per conversion and search terms, by campaign, store and campaign key.</p><span class="tag">Google Analytics + Google Ads</span></a><a class="card" href="/private/listing/" data-nav="/private/listing/"><h3>Listing health</h3><p>How complete each store's Google Business Profile is: website link, category, phone, hours, attributes, photos, rating, review replies. Scored out of 100 with a fix list per store.</p><span class="tag">Google Business Profile</span></a></div>
 <h2>Fleet leads</h2>
 <div class="cards"><div class="card card--qr"><img src="/assets/fleet/fleet-qr.png" alt="QR code linking to the fleet sign-up form" width="160" height="160" style="float:right;margin:0 0 8px 12px;border:1px solid var(--line);border-radius:8px"><h3>Fleet sign-up QR code</h3><p>One code for every store and lounge. It opens <a href="/fleet/">jiffylubechicagoland.com/fleet/</a>, where the fleet contact fills in their details and the employee picks the store. Leads land in the <a href="https://docs.google.com/spreadsheets/d/1GMEE1CR-waI34QVZgwG7_PrbxsNwyVX-hu6_esnhW3A/edit" rel="noopener" target="_blank">Fleet Leads Google Sheet</a>.</p><p><a href="/assets/fleet/fleet-qr.png" download="jiffy-lube-fleet-qr.png">Download PNG</a> · <a href="/assets/fleet/fleet-qr.svg" download="jiffy-lube-fleet-qr.svg">Download SVG (print)</a></p><span class="tag">Fleet Development: Matt Regan, 708-232-3455</span></div></div>
 <p class="foot">Questions or new sections: david.perez@neptuneventures.co</p>
@@ -550,6 +550,66 @@ function all(){render();sortable()}
   return page('Reviews', body, 'reviews');
 }
 
+
+/* ---------- Listing health: Google Business Profile completeness per store ---------- */
+function listingPage() {
+  let gbp = { stores: [], manual_checks: [], total_stores: rows.length, generated: null };
+  try { gbp = JSON.parse(fs.readFileSync(path.join(MAP, 'data/gbp/latest.json'), 'utf8')); } catch {}
+  const data = JSON.stringify(gbp).replace(/</g, '\\u003c');
+  const body = `
+<h1>Listing health</h1>
+<p class="sub">How complete each store's Google Business Profile is, scored on the checks we can verify from the outside. ${gbp.pulled || 0} of ${gbp.total_stores} stores pulled so far${gbp.generated ? ' (' + esc(gbp.generated.slice(0, 10)) + ')' : ''}. Pick a franchise group in the top bar to filter.</p>
+<div class="stats" id="lh-stats"></div>
+<div class="panel"><div class="ctl"><label>Search <input id="lq" type="search" placeholder="store, city, group"></label><span class="muted">Click a column to sort. Click a store for the full checklist.</span></div>
+<table id="lh-table"><thead><tr><th>Store</th><th>Group</th><th class="num">Score</th><th>Website link</th><th>Category</th><th>Phone</th><th>Hours</th><th>Attributes</th><th>Photos</th><th class="num">Rating</th><th>Replies</th></tr></thead><tbody></tbody></table></div>
+<div class="panel" id="lh-detail" hidden></div>
+<h2>How the score works</h2>
+<div class="panel"><p class="muted" style="margin-top:0">Each store gets up to 100 points across these checks. Pass is full points, partial is half, fail is zero. Checks that need Business Profile manager access are listed separately and are not scored yet.</p>
+<table id="lh-rules"><thead><tr><th>Check</th><th class="num">Points</th><th>Pass</th></tr></thead><tbody>
+<tr><td>Name is clean</td><td class="num">5</td><td>"Jiffy Lube" or "Jiffy Lube Oil Change", no city or keywords added</td></tr>
+<tr><td>Phone matches site</td><td class="num">10</td><td>Same number as the store page on jiffylubechicagoland.com</td></tr>
+<tr><td>Address matches site</td><td class="num">5</td><td>Street and city match</td></tr>
+<tr><td>Website link points to our store page</td><td class="num">15</td><td>Links to jiffylubechicagoland.com (partial: corporate jiffylube.com)</td></tr>
+<tr><td>Primary category</td><td class="num">10</td><td>"Oil change service" (partial: any other category set)</td></tr>
+<tr><td>Hours</td><td class="num">10</td><td>All 7 days set</td></tr>
+<tr><td>Attributes</td><td class="num">10</td><td>6 of 7: wheelchair parking, entrance, restroom, credit, debit, tap to pay, restroom (partial: 3 to 5)</td></tr>
+<tr><td>Owner photos</td><td class="num">10</td><td>5 or more owner-uploaded photos among the top 10 Google shows (partial: 1 to 4)</td></tr>
+<tr><td>Google rating</td><td class="num">10</td><td>4.3 or better (partial: 4.0 to 4.2)</td></tr>
+<tr><td>Review velocity</td><td class="num">5</td><td>30 or more new reviews in the last 90 days (partial: 10 to 29)</td></tr>
+<tr><td>Owner replies</td><td class="num">10</td><td>Replies to 90% or more of reviews (partial: 70% to 89%)</td></tr>
+</tbody></table>
+<h3 style="font-size:15px;margin:20px 0 6px">Needs Business Profile access to check</h3>
+<ul class="muted" style="margin:0;padding-left:20px;font-size:14px">${(gbp.manual_checks || []).map((m) => `<li>${esc(m)}</li>`).join('')}</ul></div>
+<p class="foot">Source: Google Places API (what Google shows publicly for each listing) plus the scraped reviews for velocity and reply rate. Refresh: node scripts/gbp-pull.mjs in the competitor-map project.</p>
+<script>
+(function(){
+var D=${data},S=D.stores,q=document.getElementById('lq'),tb=document.querySelector('#lh-table tbody'),det=document.getElementById('lh-detail'),stats=document.getElementById('lh-stats');
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function chip(c){if(!c)return '<span class="muted">n/a</span>';var cls=c.status==='pass'?'q-strong':c.status==='warn'?'q-open':c.status==='na'?'':'q-risk';var t=c.status==='pass'?'OK':c.status==='warn'?'Partial':c.status==='na'?'n/a':'Fix';return '<span class="q '+cls+'" title="'+esc(c.got+(c.why?' | '+c.why:''))+'">'+t+'</span>'}
+function get(s,k){for(var i=0;i<s.checks.length;i++)if(s.checks[i].key===k)return s.checks[i];return null}
+function scoreCls(n){return n>=85?'q-strong':n>=70?'q-open':'q-risk'}
+function visible(){var g=window.JL_GROUP||'',t=(q.value||'').toLowerCase();return S.filter(function(s){if(g&&s.group!==g)return false;if(t&&(String(s.store)+' '+s.city+' '+s.street+' '+s.group).toLowerCase().indexOf(t)<0)return false;return true})}
+function render(){var L=visible();var avg=L.length?Math.round(L.reduce(function(a,s){return a+(s.score||0)},0)/L.length):0;
+var corp=L.filter(function(s){var c=get(s,'website');return c&&c.status!=='pass'}).length,cat=L.filter(function(s){var c=get(s,'category');return c&&c.status!=='pass'}).length,rep=L.filter(function(s){var c=get(s,'replies');return c&&c.status==='fail'}).length;
+stats.innerHTML='<div class="stat"><b>'+L.length+'</b><span>stores scored</span></div><div class="stat"><b>'+avg+'</b><span>average score of 100</span></div><div class="stat"><b>'+corp+'</b><span>website link not pointing to our site</span></div><div class="stat"><b>'+cat+'</b><span>primary category not Oil change service</span></div><div class="stat"><b>'+rep+'</b><span>owner reply rate under 70%</span></div>';
+tb.innerHTML=L.map(function(s){var r=get(s,'rating'),w=get(s,'website');return '<tr data-s="'+s.store+'" style="cursor:pointer"><td><b>#'+s.store+'</b> '+esc(s.city)+', '+esc(s.street)+'</td><td>'+esc(s.group)+'</td><td class="num"><span class="q '+scoreCls(s.score)+'">'+s.score+'</span></td><td>'+chip(w)+' <span class="muted">'+(w&&w.status==='warn'?'corporate':w&&w.status==='pass'?'ours':'none')+'</span></td><td>'+chip(get(s,'category'))+' <span class="muted">'+esc(s.category)+'</span></td><td>'+chip(get(s,'phone'))+'</td><td>'+chip(get(s,'hours'))+'</td><td>'+chip(get(s,'attributes'))+' <span class="muted">'+esc(get(s,'attributes')?get(s,'attributes').got:'')+'</span></td><td>'+chip(get(s,'photos'))+' <span class="muted">'+esc(get(s,'photos')?get(s,'photos').got.replace(/ of top.*/,''):'')+'</span></td><td class="num">'+(s.rating||'')+'</td><td>'+chip(get(s,'replies'))+' <span class="muted">'+esc(get(s,'replies')?get(s,'replies').got.replace(/ all.*/,''):'')+'</span></td></tr>'}).join('')||'<tr><td colspan="11" class="muted">No stores pulled for this group yet.</td></tr>';
+}
+function detail(id){var s=null;for(var i=0;i<S.length;i++)if(String(S[i].store)===String(id))s=S[i];if(!s)return;det.hidden=false;
+det.innerHTML='<h2 style="margin-top:0">#'+s.store+' '+esc(s.city)+', '+esc(s.street)+' <span class="q '+scoreCls(s.score)+'">'+s.score+' of 100</span></h2><p class="muted">'+esc(s.group)+' · <a href="'+esc(s.maps_url)+'" target="_blank" rel="noopener">Open on Google Maps</a> · pulled '+esc((s.pulled_at||'').slice(0,10))+'</p>'+
+'<table><thead><tr><th>Check</th><th class="num">Points</th><th>Result</th><th>What Google shows</th><th>What to do</th></tr></thead><tbody>'+s.checks.map(function(c){return '<tr><td>'+esc(c.label)+'</td><td class="num">'+c.points+'</td><td>'+chip(c)+'</td><td>'+esc(c.got)+'</td><td class="muted">'+esc(c.status==='pass'?'':c.why)+'</td></tr>'}).join('')+'</tbody></table>'+
+(s.summary?'<p><b>Google\'s summary of this listing:</b> '+esc(s.summary)+'</p>':'')+(s.review_summary?'<p><b>Google\'s review summary:</b> '+esc(s.review_summary)+'</p>':'')+
+'<details><summary>Hours and attributes as listed</summary><p>'+s.hours.map(esc).join('<br>')+'</p><p class="muted">'+esc(JSON.stringify(s.attributes))+'</p><p class="muted">Website: '+esc(s.website||'none')+'</p></details>';
+det.scrollIntoView({behavior:'smooth',block:'start'})}
+tb.addEventListener('click',function(e){var tr=e.target.closest('tr[data-s]');if(tr)detail(tr.getAttribute('data-s'))});
+var SORT={};function parseCell(td){var t=td.textContent.trim().replace(/[$,%]/g,'');var m=t.match(/^[-+]?[0-9.]+/);return m?parseFloat(m[0]):t.toLowerCase()}
+function applySort(tbl){var st=SORT[tbl.id];if(!st)return;var b=tbl.tBodies[0],rs=Array.prototype.slice.call(b.rows);if(rs.length<2)return;rs.sort(function(a,c){var va=parseCell(a.cells[st.col]),vb=parseCell(c.cells[st.col]);if(typeof va==='number'&&typeof vb==='number')return (va-vb)*st.dir;if(typeof va==='number')return -1;if(typeof vb==='number')return 1;return String(va).localeCompare(String(vb))*st.dir});rs.forEach(function(r){b.appendChild(r)});Array.prototype.forEach.call(tbl.tHead.rows[0].cells,function(th,i){th.setAttribute('aria-sort',i===st.col?(st.dir>0?'ascending':'descending'):'none');th.style.textDecoration=i===st.col?'underline':''})}
+function sortable(){Array.prototype.forEach.call(document.querySelectorAll('main table[id]'),function(tbl){if(tbl._s)return;tbl._s=true;Array.prototype.forEach.call(tbl.tHead.rows[0].cells,function(th,i){th.title='Click to sort';th.addEventListener('click',function(){var st=SORT[tbl.id]||{col:-1,dir:1};SORT[tbl.id]={col:i,dir:st.col===i?-st.dir:(th.classList.contains('num')?-1:1)};applySort(tbl)})})});Array.prototype.forEach.call(document.querySelectorAll('main table[id]'),applySort)}
+function all(){render();sortable()}q.addEventListener('input',all);window.addEventListener('jl-group',all);all();
+})();
+</script>`;
+  return page('Listing health', body, 'listing');
+}
+
 /* ---------- write ---------- */
 fs.copyFileSync(path.join(MAP, 'dist/index.html'), path.join(OUT, 'competitor-map/index.html'));
 write('index.html', homePage());
@@ -557,4 +617,5 @@ write('quadrants/index.html', quadrantsPage());
 write('ratings/index.html', ratingsPage());
 write('campaigns/index.html', campaignsPage());
 write('reviews/index.html', reviewsPage());
+write('listing/index.html', listingPage());
 console.log(`Private dashboard built: ${rows.length} stores, ${competitors.length} competitors, ${rows.filter((r) => r.compAvg !== null).length} plotted in quadrants`);
