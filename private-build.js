@@ -308,11 +308,11 @@ function campaignsPage() {
 <p class="sub">Website traffic and conversions from Google Analytics for the last ${ga.days} days, through yesterday. Pulled ${esc(ga.pulled_at.slice(0, 16).replace('T', ' '))} UTC. Conversions are the five key events: get coupon, copy code, add to wallet, call, directions. Conversion rate is key events divided by sessions.</p>
 <div class="ctl"><label>Range <select id="crange"><option value="7">Last 7 days</option><option value="28" selected>Last 28 days</option><option value="${ga.days}">Last ${ga.days} days</option></select></label><span class="muted" id="cnote"></span></div>
 <div class="stats" id="c-stats"></div>
-<div class="panel"><div class="legend" id="c-legend"></div><div style="position:relative"><svg class="plot" id="cplot" viewBox="0 0 900 360" role="img" aria-label="Sessions and key events per day"></svg><div class="tip" id="ctip"></div></div></div>
+<div class="panel"><div class="ctl"><label>Chart <select id="cmetric"><option value="sessions">Sessions</option><option value="totalUsers">Users</option><option value="screenPageViews">Page views</option><option value="keyEvents" selected>Key events</option><option value="convRate">Conversion rate</option><option value="engagedSessions">Engaged sessions</option></select></label><label><input type="checkbox" id="cboth" checked> also show sessions</label></div><div class="legend" id="c-legend"></div><div style="position:relative"><svg class="plot" id="cplot" viewBox="0 0 900 360" role="img" aria-label="Daily chart"></svg><div class="tip" id="ctip"></div></div></div>
 <h2>Google Ads</h2>
 <p class="sub muted" id="a-note"></p>
 <div class="stats" id="a-stats"></div>
-<div class="panel"><div class="legend"><span><i style="background:#2a78d6"></i>Clicks</span><span><i style="background:#eda100"></i>Spend ($)</span></div><div style="position:relative"><svg class="plot" id="aplot" viewBox="0 0 900 300" role="img" aria-label="Google Ads clicks and spend per day"></svg><div class="tip" id="atip"></div></div></div>
+<div class="panel"><div class="ctl"><label>Chart <select id="ametric"><option value="s" selected>Spend</option><option value="c">Clicks</option><option value="i">Impressions</option><option value="k">Key events</option><option value="cpc">Cost per click</option><option value="cpk">Cost per key event</option><option value="ctr">Click-through rate</option></select></label></div><div class="legend" id="a-legend"></div><div style="position:relative"><svg class="plot" id="aplot" viewBox="0 0 900 300" role="img" aria-label="Google Ads daily chart"></svg><div class="tip" id="atip"></div></div></div>
 <div class="panel" style="overflow:auto"><table id="a-camp"><thead><tr><th>Campaign</th><th>Store</th><th class="num">Impr.</th><th class="num">Clicks</th><th class="num">CTR</th><th class="num">Spend</th><th class="num">CPC</th><th class="num">Sessions</th><th class="num">Key events</th><th class="num">Cost / key event</th></tr></thead><tbody></tbody></table></div>
 <h3 style="font-size:16px;margin:20px 0 8px">What people searched</h3>
 <div class="panel" style="overflow:auto"><table id="a-q"><thead><tr><th>Search term</th><th>Campaign</th><th class="num">Clicks</th><th class="num">Spend</th><th class="num">Key events</th></tr></thead><tbody></tbody></table></div>
@@ -349,15 +349,20 @@ function render(){
   st+=stat(n(K),'Key events (conversions)',arrow(K,pK,n));st+=stat(pct(K,S),'Conversion rate',arrow(S?K/S:0,pS?pK/pS:0,function(d){return (100*d).toFixed(1)+' pts'}));st+=stat(pct(E,S),'Engaged sessions');
   document.getElementById('c-stats').innerHTML=st;
   document.getElementById('cnote').textContent=days.length?days[0].replace(/(\\d{4})(\\d{2})(\\d{2})/,'$1-$2-$3')+' to '+days[days.length-1].replace(/(\\d{4})(\\d{2})(\\d{2})/,'$1-$2-$3'):'';
-  // chart: sessions + key events per day
-  var svg=document.getElementById('cplot'),W=900,H=360,Pd={l:48,r:20,t:16,b:40};var mx=Math.max(1,Math.max.apply(null,D.map(function(d){return d.sessions})));
+  // chart: one chosen metric per day (one axis), with sessions as an optional second line when the units match
+  var M=document.getElementById('cmetric').value,ML={sessions:'Sessions',totalUsers:'Users',screenPageViews:'Page views',keyEvents:'Key events',convRate:'Conversion rate',engagedSessions:'Engaged sessions'};
+  var val=function(d){return M==='convRate'?(d.sessions?100*d.keyEvents/d.sessions:0):d[M]};
+  var fmtv=function(v){return M==='convRate'?v.toFixed(1)+'%':Math.round(v).toLocaleString()};
+  var both=document.getElementById('cboth').checked&&M!=='convRate'&&M!=='sessions';
+  var svg=document.getElementById('cplot'),W=900,H=360,Pd={l:56,r:20,t:16,b:40};var mx=Math.max(1,Math.max.apply(null,D.map(function(d){return Math.max(val(d),both?d.sessions:0)})));
   var sx=function(i){return D.length===1?(Pd.l+W-Pd.r)/2:Pd.l+i/(D.length-1)*(W-Pd.l-Pd.r)},sy=function(v){return H-Pd.b-v/mx*(H-Pd.t-Pd.b)};
   var s='';for(var k=0;k<=4;k++){var v=mx*k/4;s+='<line class="grid" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+sy(v)+'" y2="'+sy(v)+'"/><text class="lbl" x="'+(Pd.l-8)+'" y="'+(sy(v)+4)+'" text-anchor="end">'+Math.round(v)+'</text>'}
   var step=Math.max(1,Math.ceil(D.length/10));D.forEach(function(d,i){if(i%step===0||i===D.length-1)s+='<text class="lbl" x="'+sx(i)+'" y="'+(H-Pd.b+18)+'" text-anchor="middle">'+d.date.slice(4,6)+'/'+d.date.slice(6)+'</text>'});
   s+='<line class="axis" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+(H-Pd.b)+'" y2="'+(H-Pd.b)+'"/>';
-  [['sessions','#2a78d6'],['keyEvents','#008300']].forEach(function(sr){var p='';D.forEach(function(d,i){p+=(p?' L':'M')+sx(i)+' '+sy(d[sr[0]])});s+='<path d="'+p+'" fill="none" stroke="'+sr[1]+'" stroke-width="2.5"/>';D.forEach(function(d,i){s+='<circle class="pt" data-i="'+i+'" data-k="'+sr[0]+'" cx="'+sx(i)+'" cy="'+sy(d[sr[0]])+'" r="5" fill="'+sr[1]+'"/>'})});
-  svg.innerHTML=s;svg._D=D;
-  document.getElementById('c-legend').innerHTML='<span><i style="background:#2a78d6"></i>Sessions</span><span><i style="background:#008300"></i>Key events</span>';
+  var series=[[M,'#008300',val]];if(both)series.unshift(['sessions','#2a78d6',function(d){return d.sessions}]);
+  series.forEach(function(sr){var p='';D.forEach(function(d,i){p+=(p?' L':'M')+sx(i)+' '+sy(sr[2](d))});s+='<path d="'+p+'" fill="none" stroke="'+sr[1]+'" stroke-width="2.5"/>';D.forEach(function(d,i){s+='<circle class="pt" data-i="'+i+'" data-k="'+sr[0]+'" cx="'+sx(i)+'" cy="'+sy(sr[2](d))+'" r="5" fill="'+sr[1]+'"/>'})});
+  svg.innerHTML=s;svg._D=D;svg._M=M;svg._fmt=fmtv;svg._val=val;
+  document.getElementById('c-legend').innerHTML=(both?'<span><i style="background:#2a78d6"></i>Sessions</span>':'')+'<span><i style="background:#008300"></i>'+ML[M]+'</span>';
   // Google Ads
   (function(){
     var g=window.JL_GROUP||'',CS=X.campStore||{};var inG=function(name){return !g||(CS[name]&&CS[name].group===g)};
@@ -371,14 +376,17 @@ function render(){
     h+=stat(T.i?(100*T.c/T.i).toFixed(1)+'%':'-','Click-through rate');h+=stat(T.c?money(T.s/T.c):'-','Cost per click');h+=stat(n(T.k),'Key events from ads',arrow(T.k,pad.k,n));h+=stat(T.k?money(T.s/T.k):'-','Cost per key event');
     document.getElementById('a-stats').innerHTML=h;
     document.getElementById('a-note').textContent=(g?'Campaigns for '+g+' stores. ':'All campaigns. ')+'Spend, clicks and impressions come from the Google Ads account through its link to Analytics; key events are the conversions those visits produced on the site.';
-    var svg=document.getElementById('aplot'),W=900,H=300,Pd={l:48,r:56,t:16,b:40};var mc=Math.max(1,Math.max.apply(null,AD.map(function(d){return d.c}))),ms=Math.max(1,Math.max.apply(null,AD.map(function(d){return d.s})));
-    var sx=function(i){return AD.length===1?(Pd.l+W-Pd.r)/2:Pd.l+i/(AD.length-1)*(W-Pd.l-Pd.r)},syc=function(v){return H-Pd.b-v/mc*(H-Pd.t-Pd.b)},sys=function(v){return H-Pd.b-v/ms*(H-Pd.t-Pd.b)};
-    var s='';for(var k=0;k<=4;k++){s+='<line class="grid" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+syc(mc*k/4)+'" y2="'+syc(mc*k/4)+'"/><text class="lbl" x="'+(Pd.l-8)+'" y="'+(syc(mc*k/4)+4)+'" text-anchor="end">'+Math.round(mc*k/4)+'</text><text class="lbl" x="'+(W-Pd.r+8)+'" y="'+(sys(ms*k/4)+4)+'">$'+Math.round(ms*k/4)+'</text>'}
+    var AM=document.getElementById('ametric').value,AL={s:'Spend',c:'Clicks',i:'Impressions',k:'Key events',cpc:'Cost per click',cpk:'Cost per key event',ctr:'Click-through rate'};
+    var aval=function(d){return AM==='cpc'?(d.c?d.s/d.c:0):AM==='cpk'?(d.k?d.s/d.k:0):AM==='ctr'?(d.i?100*d.c/d.i:0):d[AM]};
+    var afmt=function(v){return AM==='s'||AM==='cpc'||AM==='cpk'?'$'+v.toFixed(2):AM==='ctr'?v.toFixed(1)+'%':Math.round(v).toLocaleString()};
+    var svg=document.getElementById('aplot'),W=900,H=300,Pd={l:64,r:20,t:16,b:40};var mv=Math.max(0.01,Math.max.apply(null,AD.map(aval)));
+    var sx=function(i){return AD.length===1?(Pd.l+W-Pd.r)/2:Pd.l+i/(AD.length-1)*(W-Pd.l-Pd.r)},syv=function(v){return H-Pd.b-v/mv*(H-Pd.t-Pd.b)};
+    var s='';for(var k=0;k<=4;k++){s+='<line class="grid" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+syv(mv*k/4)+'" y2="'+syv(mv*k/4)+'"/><text class="lbl" x="'+(Pd.l-8)+'" y="'+(syv(mv*k/4)+4)+'" text-anchor="end">'+afmt(mv*k/4)+'</text>'}
     var step=Math.max(1,Math.ceil(AD.length/10));AD.forEach(function(d,i){if(i%step===0||i===AD.length-1)s+='<text class="lbl" x="'+sx(i)+'" y="'+(H-Pd.b+18)+'" text-anchor="middle">'+d.date.slice(4,6)+'/'+d.date.slice(6)+'</text>'});
     s+='<line class="axis" x1="'+Pd.l+'" x2="'+(W-Pd.r)+'" y1="'+(H-Pd.b)+'" y2="'+(H-Pd.b)+'"/>';
-    var bw=Math.max(4,(W-Pd.l-Pd.r)/Math.max(AD.length,1)*0.5);AD.forEach(function(d,i){s+='<rect class="pt" data-i="'+i+'" x="'+(sx(i)-bw/2)+'" y="'+sys(d.s)+'" width="'+bw+'" height="'+Math.max(0,H-Pd.b-sys(d.s))+'" rx="3" fill="#eda100" fill-opacity=".6"/>'});
-    var p='';AD.forEach(function(d,i){p+=(p?' L':'M')+sx(i)+' '+syc(d.c)});s+='<path d="'+p+'" fill="none" stroke="#2a78d6" stroke-width="2.5"/>';AD.forEach(function(d,i){s+='<circle class="pt" data-i="'+i+'" cx="'+sx(i)+'" cy="'+syc(d.c)+'" r="5" fill="#2a78d6"/>'});
-    svg.innerHTML=s;svg._AD=AD;
+    var bw=Math.max(4,(W-Pd.l-Pd.r)/Math.max(AD.length,1)*0.5);AD.forEach(function(d,i){var v=aval(d);s+='<rect class="pt" data-i="'+i+'" x="'+(sx(i)-bw/2)+'" y="'+syv(v)+'" width="'+bw+'" height="'+Math.max(0,H-Pd.b-syv(v))+'" rx="3" fill="#eda100" fill-opacity=".85"/>'});
+    svg.innerHTML=s;svg._AD=AD;svg._afmt=afmt;svg._aval=aval;
+    document.getElementById('a-legend').innerHTML='<span><i style="background:#eda100"></i>'+AL[AM]+' per day</span>';
     var camps=(ga.ads_campaigns||[]).filter(function(r){return inG(r.sessionGoogleAdsCampaignName)});
     document.querySelector('#a-camp tbody').innerHTML=camps.map(function(r){var cs=CS[r.sessionGoogleAdsCampaignName];return '<tr>'+td(r.sessionGoogleAdsCampaignName)+td(cs?cs.label:'<span class="muted">-</span>')+td(n(r.advertiserAdImpressions),1)+td(n(r.advertiserAdClicks),1)+td(r.advertiserAdImpressions?(100*r.advertiserAdClicks/r.advertiserAdImpressions).toFixed(1)+'%':'-',1)+td(money(r.advertiserAdCost),1)+td(r.advertiserAdClicks?money(r.advertiserAdCost/r.advertiserAdClicks):'-',1)+td(n(r.sessions),1)+td(n(r.keyEvents),1)+td(r.keyEvents?money(r.advertiserAdCost/r.keyEvents):'-',1)+'</tr>'}).join('')||'<tr><td colspan="10" class="muted">No ad data in this period.</td></tr>';
     var qs=(ga.ads_queries||[]).filter(function(r){return inG(r.sessionGoogleAdsCampaignName)&&r.sessionGoogleAdsQuery&&r.sessionGoogleAdsQuery!=='(not set)'}).slice(0,60);
@@ -402,12 +410,19 @@ function render(){
   document.querySelector('#c-key tbody').innerHTML=rows(bkl,[function(r){return td(r.k)}].concat(KE.map(function(e){return function(r){return td(n(bk[r.k][e]),1)}})).concat([function(r){return td(n(r.t),1)}]));
 }
 var tip=document.getElementById('ctip'),svg=document.getElementById('cplot');
-svg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){tip.style.display='none';return}var d=svg._D[+t.getAttribute('data-i')];tip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>Sessions '+d.sessions+', users '+d.totalUsers+'<br>Key events '+d.keyEvents+' ('+pct(d.keyEvents,d.sessions)+')';var box=svg.parentNode.getBoundingClientRect();tip.style.display='block';tip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';tip.style.top=(e.clientY-box.top+14)+'px'});
+svg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){tip.style.display='none';return}var d=svg._D[+t.getAttribute('data-i')];tip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>Sessions '+d.sessions+', users '+d.totalUsers+', page views '+d.screenPageViews+'<br>Key events '+d.keyEvents+' ('+pct(d.keyEvents,d.sessions)+'), engaged '+d.engagedSessions;var box=svg.parentNode.getBoundingClientRect();tip.style.display='block';tip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';tip.style.top=(e.clientY-box.top+14)+'px'});
 svg.addEventListener('mouseleave',function(){tip.style.display='none'});
 var atip=document.getElementById('atip'),asvg=document.getElementById('aplot');
-asvg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){atip.style.display='none';return}var d=asvg._AD[+t.getAttribute('data-i')];atip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>'+d.c+' clicks, '+d.i+' impressions<br>Spend $'+d.s.toFixed(2)+', key events '+d.k;var box=asvg.parentNode.getBoundingClientRect();atip.style.display='block';atip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';atip.style.top=(e.clientY-box.top+14)+'px'});
+asvg.addEventListener('mousemove',function(e){var t=e.target.closest('.pt');if(!t){atip.style.display='none';return}var d=asvg._AD[+t.getAttribute('data-i')];atip.innerHTML='<b>'+d.date.slice(0,4)+'-'+d.date.slice(4,6)+'-'+d.date.slice(6)+'</b><br>'+d.c+' clicks, '+d.i+' impressions<br>Spend $'+d.s.toFixed(2)+', key events '+d.k+(d.c?', CPC $'+(d.s/d.c).toFixed(2):'')+(d.k?', $'+(d.s/d.k).toFixed(2)+' per key event':'');var box=asvg.parentNode.getBoundingClientRect();atip.style.display='block';atip.style.left=Math.min(e.clientX-box.left+14,box.width-200)+'px';atip.style.top=(e.clientY-box.top+14)+'px'});
 asvg.addEventListener('mouseleave',function(){atip.style.display='none'});
-sel.addEventListener('change',render);window.addEventListener('jl-group',render);render();
+// Click any column heading to sort; the choice survives re-renders.
+var SORT={};
+function parseCell(td){var t=td.textContent.trim().replace(/[$,%]/g,'').replace(/,/g,'');var n=parseFloat(t);return isNaN(n)||!/^[-+]?[\d.]+$/.test(t)?td.textContent.trim().toLowerCase():n}
+function applySort(tbl){var st=SORT[tbl.id];if(!st)return;var tb=tbl.tBodies[0],rows=Array.prototype.slice.call(tb.rows);if(rows.length<2||rows[0].cells.length<=st.col)return;rows.sort(function(a,b){var va=parseCell(a.cells[st.col]),vb=parseCell(b.cells[st.col]);if(typeof va==='number'&&typeof vb==='number')return (va-vb)*st.dir;return String(va).localeCompare(String(vb))*st.dir});rows.forEach(function(r){tb.appendChild(r)});
+  Array.prototype.forEach.call(tbl.tHead.rows[0].cells,function(th,i){th.setAttribute('aria-sort',i===st.col?(st.dir>0?'ascending':'descending'):'none');th.style.textDecoration=i===st.col?'underline':''})}
+function sortableTables(){Array.prototype.forEach.call(document.querySelectorAll('main table'),function(tbl){if(!tbl.tHead||tbl._sortable)return;tbl._sortable=true;Array.prototype.forEach.call(tbl.tHead.rows[0].cells,function(th,i){th.title='Click to sort';th.addEventListener('click',function(){var st=SORT[tbl.id]||{col:-1,dir:1};var numeric=th.classList.contains('num');SORT[tbl.id]={col:i,dir:st.col===i?-st.dir:(numeric?-1:1)};applySort(tbl)})})});Array.prototype.forEach.call(document.querySelectorAll('main table'),applySort)}
+var baseRender=render;render=function(){baseRender();sortableTables()};
+sel.addEventListener('change',render);document.getElementById('cmetric').addEventListener('change',render);document.getElementById('cboth').addEventListener('change',render);document.getElementById('ametric').addEventListener('change',render);window.addEventListener('jl-group',render);render();
 })();
 </script>`;
   return page('Campaigns', body, 'camp');
