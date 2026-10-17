@@ -50,7 +50,7 @@ function last(e){for(var i=dates.length-1;i>=0;i--){var v=e.series[dates[i]];if(
 function first(e){for(var i=0;i<dates.length;i++){var v=e.series[dates[i]];if(v&&v.r!=null)return v}return null}
 function chart(){
   var g=gv(),m=mode.value,svg=document.getElementById('rplot');
-  var W=900,H=420,P={l:56,r:20,t:16,b:44};
+  var W=900,H=420,P={l:56,r:80,t:16,b:44}; // room on the right for the end-of-line value labels
   var series=D.brands.map(function(b){var es=E.filter(function(e){return e.brand===b&&inGroup(e,g)});return {b:b,pts:dates.map(function(d){var vs=es.map(function(e){return e.series[d]}).filter(function(v){return v&&v.r!=null});if(!vs.length)return null;return m==='avg'?{d:d,v:vs.reduce(function(a,v){return a+v.r},0)/vs.length,n:vs.length}:{d:d,v:vs.reduce(function(a,v){return a+(v.n||0)},0),n:vs.length}})}}).filter(function(s){return s.pts.some(Boolean)});
   var vals=[].concat.apply([],series.map(function(s){return s.pts.filter(Boolean).map(function(p){return p.v})}));
   if(!vals.length){svg.innerHTML='';return}
