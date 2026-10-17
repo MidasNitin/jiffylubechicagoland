@@ -65,6 +65,24 @@
           "value": "private, no-store"
         }
       ]
+    },
+    {
+      "source": "/fleet/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/fleet",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "functions": {

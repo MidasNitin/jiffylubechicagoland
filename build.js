@@ -479,6 +479,85 @@ ${scripts()}${optout}
 </body></html>`;
 }
 
+/* Fleet lead page: one shared QR code for every store and the lounges; unlisted (noindex, not in sitemap or llms). */
+function fleetPage() {
+  const sorted = [...stores].sort((a, b) => a.city.localeCompare(b.city) || a.street_name.localeCompare(b.street_name));
+  const opts = sorted.map((st) => `<option value="${st.id}">${esc(st.city)}, ${esc(st.street_name)} (#${st.id})</option>`).join('');
+  const field = (id, label, attrs = '', help = '') => `<div class="ff"><label for="${id}">${label}</label><input id="${id}" name="${id}" ${attrs}>${help ? `<small>${help}</small>` : ''}</div>`;
+  const title = 'Fleet Service Sign-Up | Jiffy Lube Chicagoland';
+  const desc = 'Tell us about your fleet and the Jiffy Lube Chicagoland fleet team will reach out.';
+  return `${head(title, desc, '/fleet/', '<meta name="robots" content="noindex,nofollow">')}
+<body data-store="fleet">
+${SPRITE}
+<header class="nav" role="banner"><div class="wrap nav__inner"><a class="nav__logo" href="/" aria-label="Jiffy Lube Chicagoland home">${svg('logo')}</a><div class="nav__right"><span class="fleet__badge">FLEET CARE</span></div></div></header>
+<main id="main" tabindex="-1" class="page page--fleet">
+<section class="hero hero--center"><div class="wrap hero__inner">
+  <h1 class="h1">Fleet Service Made Simple</h1>
+  <p class="hero__sub"><strong>Minimize</strong> vehicle down time. <strong>Maximize</strong> your bottom line. Cars, vans and trucks serviced at ${stores.length} Jiffy Lube locations across Chicagoland. Tell us about your fleet and our fleet team will reach out.</p>
+</div></section>
+<section class="section"><div class="wrap fleet">
+  <form class="fleet__form js-fleet" novalidate>
+    <h2 class="h2 fleet__h2">Fleet contact info</h2>
+    <p class="fleet__req"><span aria-hidden="true">*</span> Required</p>
+    ${field('company', 'Company name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="organization"')}
+    <div class="fleet__row">${field('first', 'Fleet contact first name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="given-name"')}${field('last', 'Fleet contact last name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="family-name"')}</div>
+    ${field('title', 'Title', 'type="text" placeholder="e.g. Fleet Manager, Owner" autocomplete="organization-title"')}
+    <div class="fleet__row">${field('email', 'Email address', 'type="email" autocomplete="email" inputmode="email"', 'So we can send you the fleet program details')}${field('phone', 'Phone number <span aria-hidden="true">*</span>', 'type="tel" required autocomplete="tel" inputmode="tel" placeholder="(708) 555-0123"')}</div>
+    ${field('address', 'Company address <span aria-hidden="true">*</span>', 'type="text" required autocomplete="street-address"')}
+    <div class="fleet__row fleet__row--3">${field('city', 'City <span aria-hidden="true">*</span>', 'type="text" required autocomplete="address-level2"')}
+      <div class="ff"><label for="state">State <span aria-hidden="true">*</span></label><select id="state" name="state" required autocomplete="address-level1"><option value="IL" selected>IL</option><option value="IN">IN</option><option value="WI">WI</option><option value="MI">MI</option><option value="IA">IA</option></select></div>
+      ${field('zip', 'ZIP <span aria-hidden="true">*</span>', 'type="text" required inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5"')}</div>
+    <h2 class="h2 fleet__h2">About your fleet <span class="fleet__opt">Optional</span></h2>
+    ${field('vehicles', 'Number of vehicles in your fleet', 'type="number" min="1" max="99999" inputmode="numeric"')}
+    <div class="fleet__store">
+      <h2 class="h2 fleet__h2 fleet__h2--light">Store use only</h2>
+      <div class="ff"><label for="store">Jiffy Lube location <span aria-hidden="true">*</span></label><select id="store" name="store" required><option value="">Choose the store</option>${opts}</select></div>
+      <div class="fleet__row">${field('emp_first', 'Employee first name', 'type="text" autocomplete="off"')}${field('emp_last', 'Employee last name', 'type="text" autocomplete="off"')}</div>
+    </div>
+    <div class="ff fleet__hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <p class="fleet__fine">We use this information only to contact you about Jiffy Lube fleet service. See our <a href="/privacy/">privacy policy</a>.</p>
+    <p class="fleet__error" id="fleet-error" role="alert"></p>
+    <button class="btn btn--primary btn--block fleet__submit" type="submit">Submit</button>
+  </form>
+  <div class="fleet__done" id="fleet-done" hidden tabindex="-1">
+    <div class="fleet__check" aria-hidden="true">${icon('icon-check', '#ffffff')}</div>
+    <h2 class="h2">Thanks, we got it</h2>
+    <p>Your fleet information was sent to the Jiffy Lube Chicagoland fleet team. We'll contact you soon to talk about service for your vehicles.</p>
+    <div class="fleet__talk"><strong>Want to talk sooner?</strong><br>Matt Regan, Fleet Development Manager<br><a href="tel:7082323455">708-232-3455</a><br><a href="mailto:fleet@jiffylubechicagoland.com">fleet@jiffylubechicagoland.com</a></div>
+    <button class="btn btn--secondary btn--block js-fleet-again" type="button">Submit another fleet</button>
+  </div>
+  <section class="fleet__about">
+    <h2 class="h2">Are you a fleet manager?</h2>
+    <p>Jiffy Lube helps take a little of the worry out of managing your fleet with a customizable program, including options for control over services, billing, payments and scheduling, so you can get a fleet solution built for your company's needs.</p>
+    <p>Most locations are also able to provide preventive maintenance for larger vehicles, such as medium duty trucks, diesels and limousines. See how Jiffy Lube Fleet Program can customize a program for you and help keep your company's business running smoothly.</p>
+    <p class="fleet__contact">Questions? Contact Matt Regan, Fleet Development Manager<br><a href="tel:7082323455">708-232-3455</a> · <a href="mailto:fleet@jiffylubechicagoland.com">fleet@jiffylubechicagoland.com</a></p>
+  </section>
+</div></section>
+</main>
+${footer(site.legal.region_franchisee)}
+${scripts()}
+<script>
+(function(){
+var f=document.querySelector('.js-fleet'),err=document.getElementById('fleet-error'),done=document.getElementById('fleet-done'),btn=f.querySelector('.fleet__submit');
+var q=new URLSearchParams(location.search),pre=q.get('store');if(pre){var sel=document.getElementById('store');if([].some.call(sel.options,function(o){return o.value===pre}))sel.value=pre;}
+function fail(m){err.textContent=m;err.classList.add('is-visible');btn.disabled=false;btn.textContent='Submit';}
+f.addEventListener('submit',function(e){e.preventDefault();err.classList.remove('is-visible');err.textContent='';
+  var req=['company','first','last','phone','address','city','state','zip','store'];for(var i=0;i<req.length;i++){var el=f.elements[req[i]];if(!el.value.trim()){fail('Please fill in '+f.querySelector('label[for="'+req[i]+'"]').textContent.replace('*','').trim()+'.');el.focus();return;}}
+  if(!/^\\d{5}$/.test(f.elements.zip.value.trim())){fail('Please enter a 5-digit ZIP code.');f.elements.zip.focus();return;}
+  var body={};['company','first','last','title','email','phone','address','city','state','zip','vehicles','store','emp_first','emp_last','website'].forEach(function(k){body[k]=f.elements[k]?f.elements[k].value:''});body.source=q.get('src')||(pre?'store-qr':'qr');
+  btn.disabled=true;btn.textContent='Sending…';
+  fetch('/api/fleet/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(j){
+    if(!j.ok){fail(j.error||'Something went wrong. Please try again.');return;}
+    if(typeof gtag==='function'){gtag('event','fleet_lead',{store:f.elements.store.value,source:body.source});}
+    f.hidden=true;done.hidden=false;done.focus();window.scrollTo({top:0,behavior:'smooth'});
+  }).catch(function(){fail('We could not send that. Please call Matt at 708-232-3455 and he will take your details.');});
+});
+document.querySelector('.js-fleet-again').addEventListener('click',function(){f.reset();if(pre)document.getElementById('store').value=pre;btn.disabled=false;btn.textContent='Submit';done.hidden=true;f.hidden=false;f.elements.company.focus();});
+})();
+</script>
+</body></html>`;
+}
+
 /* ---------- write ---------- */
 function rmrf(p) { if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true }); }
 function write(rel, content) { const p = path.join(OUT, rel); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, content); }
@@ -510,6 +589,7 @@ for (const lang of ['en', 'es']) {
 }
 setLang('en');
 for (const pg of LEGAL.pages) { write(`${pg.slug}/index.html`, legalPage(pg)); urls.push(`/${pg.slug}/`); }
+write('fleet/index.html', fleetPage()); // unlisted: not in urls (sitemap), excluded from llms-full below
 write('404.html', `${head('Page not found | Jiffy Lube Chicagoland', 'Page not found', '/404.html')}<body>${nav(null, '/')}<main><section class="section"><div class="wrap" style="text-align:center"><h1 class="h2">We couldn’t find that page.</h1><p class="body" style="margin-top:12px"><a href="/">Find a Jiffy Lube location near you</a></p></div></section></main>${footer(site.legal.region_franchisee)}</body></html>`);
 // Sitemap: every URL in both languages, each entry listing its en / es / x-default alternates (Google reads hreflang from here too).
 const EN_ONLY = new Set(LEGAL.pages.map((pg) => `/${pg.slug}/`));
@@ -551,7 +631,7 @@ ${byCity.map((s) => `- [Jiffy Lube ${s.city}, ${s.street}](${site.domain}/store/
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
     .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
   const pages = [];
-  const walk = (dir) => { for (const f of fs.readdirSync(dir)) { const p = path.join(dir, f); if (dir === OUT && f === 'private') continue; if (fs.statSync(p).isDirectory()) walk(p); else if (f === 'index.html') pages.push(p); } };
+  const walk = (dir) => { for (const f of fs.readdirSync(dir)) { const p = path.join(dir, f); if (dir === OUT && (f === 'private' || f === 'fleet')) continue; if (fs.statSync(p).isDirectory()) walk(p); else if (f === 'index.html') pages.push(p); } };
   walk(OUT);
   const order = (p) => (p.includes('/es/') ? 10 : 0) + (p.includes('/store/') ? 1 : p.includes('/coupon/') ? 2 : p.includes('/free-') ? 3 : 0);
   pages.sort((a, b) => order(a) - order(b) || a.localeCompare(b));
