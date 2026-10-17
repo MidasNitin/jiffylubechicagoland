@@ -88,17 +88,17 @@ function quadrantsPage() {
   const data = JSON.stringify(rows.map((r) => ({ s: r.store, g: r.group, a: `${r.street}, ${r.city}`, slug: r.slug, x: r.rating, n: r.reviews, y: r.compAvg === null ? null : +r.compAvg.toFixed(2), m: r.compMax, c: r.comps, near: r.near.map((c) => ({ b: c.brand_label, r: c.rating, n: c.review_count, mi: +c.miles.toFixed(1) })) })));
   const body = `
 <h1>Rating quadrants</h1>
-<p class="sub">Each dot is one Jiffy Lube store. Left to right: the store's Google rating (${esc(latestLabel)}). Bottom to top: the average Google rating of ${BRANDS} locations within ${radius} miles (${esc(compDate)}). The lines split the chart into four groups.</p>
+<p class="sub">Each dot is one Jiffy Lube store. Left to right: the store's Google rating (${esc(latestLabel)}). Bottom to top: how far the store rates above or below the average of the ${BRANDS} locations within ${radius} miles (${esc(compDate)}). Top right is best: a high rating and a lead over the neighbors.</p>
 <div class="stats">
-  <div class="stat"><b id="n-strong">0</b><span>Strongholds: we rate higher, competitors rate lower</span></div>
-  <div class="stat"><b id="n-battle">0</b><span>Battlegrounds: both rate high</span></div>
-  <div class="stat"><b id="n-open">0</b><span>Open field: both rate lower, easy to pull ahead</span></div>
-  <div class="stat"><b id="n-risk">0</b><span>At risk: competitors rate higher than we do</span></div>
+  <div class="stat"><b id="n-strong">0</b><span>Strongholds: high rating and ahead of the neighbors</span></div>
+  <div class="stat"><b id="n-battle">0</b><span>Battlegrounds: high rating but the neighbors match or beat it</span></div>
+  <div class="stat"><b id="n-open">0</b><span>Open field: lower rating but still ahead of weak neighbors</span></div>
+  <div class="stat"><b id="n-risk">0</b><span>At risk: lower rating and behind the neighbors</span></div>
 </div>
 <div class="panel">
   <div class="ctl">
     <label>Our rating line <select id="tx"><option>4.3</option><option>4.4</option><option selected>4.5</option><option>4.6</option><option>4.7</option></select></label>
-    <label>Competitor line <select id="ty"><option>4.3</option><option>4.4</option><option selected>4.5</option><option>4.6</option><option>4.7</option></select></label>
+    <label>Lead line <select id="ty"><option value="-0.2">-0.2</option><option value="-0.1">-0.1</option><option value="0" selected>0 (even with competitors)</option><option value="0.1">+0.1</option><option value="0.2">+0.2</option></select></label>
     <label>Find store <input id="q" type="search" placeholder="store #, city, street, group" style="font:inherit;padding:4px 8px;width:220px"></label>
     <span class="muted">${withComps.length} stores plotted, ${without.length} with no competitor within ${radius} miles (listed below).</span>
   </div>
@@ -118,25 +118,26 @@ ${without.sort((a, b) => a.rating - b.rating).map((r) => `<tr><td>#${r.store}</t
 (function(){
 var D=${data};
 var svg=document.getElementById('plot'),tip=document.getElementById('tip');
-var W=900,H=560,P={l:56,r:20,t:20,b:52},X0=3.4,X1=5.0,Y0=3.4,Y1=5.0;
+var W=900,H=560,P={l:56,r:20,t:20,b:52},X0=3.4,X1=5.0,Y0=-1.2,Y1=1.2;
 var sx=function(v){return P.l+(v-X0)/(X1-X0)*(W-P.l-P.r)},sy=function(v){return H-P.b-(v-Y0)/(Y1-Y0)*(H-P.t-P.b)};
 var Q={strong:['Stronghold','var(--q-strong)'],battle:['Battleground','var(--q-battle)'],open:['Open field','var(--q-open)'],risk:['At risk','var(--q-risk)']};
-function quad(d,tx,ty){if(d.y==null)return null;var hi=d.x>=tx,ch=d.y>=ty;return hi?(ch?'battle':'strong'):(ch?'risk':'open')}
+function lead(d){return d.y==null?null:d.x-d.y} // our rating minus the nearby competitor average
+function quad(d,tx,ty){if(d.y==null)return null;var hi=d.x>=tx,ahead=lead(d)>=ty;return hi?(ahead?'strong':'battle'):(ahead?'open':'risk')}
 function render(){
   var tx=+document.getElementById('tx').value,ty=+document.getElementById('ty').value,g=window.JL_GROUP||'',q=(document.getElementById('q').value||'').toLowerCase();
   var rows=D.filter(function(d){return d.y!=null&&(!g||d.g===g)&&(!q||(('#'+d.s+' '+d.a+' '+d.g).toLowerCase().indexOf(q)>=0))});
   var counts={strong:0,battle:0,open:0,risk:0};rows.forEach(function(d){counts[quad(d,tx,ty)]++});
   Object.keys(counts).forEach(function(k){document.getElementById('n-'+k).textContent=counts[k]});
   var s='';
-  for(var v=3.4;v<=5.001;v+=0.2){var vv=+v.toFixed(1);s+='<line class="grid" x1="'+sx(vv)+'" x2="'+sx(vv)+'" y1="'+P.t+'" y2="'+(H-P.b)+'"/><line class="grid" y1="'+sy(vv)+'" y2="'+sy(vv)+'" x1="'+P.l+'" x2="'+(W-P.r)+'"/>';
-    s+='<text class="lbl" x="'+sx(vv)+'" y="'+(H-P.b+18)+'" text-anchor="middle">'+vv.toFixed(1)+'</text><text class="lbl" x="'+(P.l-8)+'" y="'+(sy(vv)+4)+'" text-anchor="end">'+vv.toFixed(1)+'</text>';}
+  for(var v=3.4;v<=5.001;v+=0.2){var vv=+v.toFixed(1);s+='<line class="grid" x1="'+sx(vv)+'" x2="'+sx(vv)+'" y1="'+P.t+'" y2="'+(H-P.b)+'"/><text class="lbl" x="'+sx(vv)+'" y="'+(H-P.b+18)+'" text-anchor="middle">'+vv.toFixed(1)+'</text>';}
+  for(var g=-1.2;g<=1.201;g+=0.4){var gg=+g.toFixed(1);s+='<line class="grid" y1="'+sy(gg)+'" y2="'+sy(gg)+'" x1="'+P.l+'" x2="'+(W-P.r)+'"/><text class="lbl" x="'+(P.l-8)+'" y="'+(sy(gg)+4)+'" text-anchor="end">'+(gg>0?'+':'')+gg.toFixed(1)+'</text>';}
   s+='<line class="axis" x1="'+P.l+'" x2="'+(W-P.r)+'" y1="'+(H-P.b)+'" y2="'+(H-P.b)+'"/><line class="axis" x1="'+P.l+'" x2="'+P.l+'" y1="'+P.t+'" y2="'+(H-P.b)+'"/>';
-  s+='<text class="lbl" x="'+((P.l+W-P.r)/2)+'" y="'+(H-10)+'" text-anchor="middle">Our Google rating →</text><text class="lbl" transform="translate(14 '+((P.t+H-P.b)/2)+') rotate(-90)" text-anchor="middle">Nearby competitor average rating →</text>';
+  s+='<text class="lbl" x="'+((P.l+W-P.r)/2)+'" y="'+(H-10)+'" text-anchor="middle">Our Google rating →</text><text class="lbl" transform="translate(14 '+((P.t+H-P.b)/2)+') rotate(-90)" text-anchor="middle">Our lead over nearby competitors →</text>';
   s+='<line x1="'+sx(tx)+'" x2="'+sx(tx)+'" y1="'+P.t+'" y2="'+(H-P.b)+'" stroke="#700000" stroke-dasharray="4 4"/><line y1="'+sy(ty)+'" y2="'+sy(ty)+'" x1="'+P.l+'" x2="'+(W-P.r)+'" stroke="#700000" stroke-dasharray="4 4"/>';
-  s+='<text class="qlbl" x="'+(P.l+10)+'" y="'+(P.t+16)+'">At risk</text><text class="qlbl" x="'+(W-P.r-10)+'" y="'+(P.t+16)+'" text-anchor="end">Battleground</text><text class="qlbl" x="'+(P.l+10)+'" y="'+(H-P.b-10)+'">Open field</text><text class="qlbl" x="'+(W-P.r-10)+'" y="'+(H-P.b-10)+'" text-anchor="end">Stronghold</text>';
+  s+='<text class="qlbl" x="'+(P.l+10)+'" y="'+(P.t+16)+'">Open field</text><text class="qlbl" x="'+(W-P.r-10)+'" y="'+(P.t+16)+'" text-anchor="end">Stronghold</text><text class="qlbl" x="'+(P.l+10)+'" y="'+(H-P.b-10)+'">At risk</text><text class="qlbl" x="'+(W-P.r-10)+'" y="'+(H-P.b-10)+'" text-anchor="end">Battleground</text>';
   // deterministic jitter so stores with identical ratings don't stack exactly
   rows.forEach(function(d,i){var q=quad(d,tx,ty),h=0;for(var k=0;k<String(d.s).length;k++)h=(h*31+String(d.s).charCodeAt(k))%997;var jx=((h%7)-3)*1.6,jy=(((h/7|0)%7)-3)*1.6;var r=5+Math.min(d.c,6)*1.1;
-    s+='<circle class="pt" data-i="'+D.indexOf(d)+'" cx="'+(sx(d.x)+jx)+'" cy="'+(sy(d.y)+jy)+'" r="'+r+'" fill="'+Q[q][1]+'" fill-opacity=".85"/>'});
+    s+='<circle class="pt" data-i="'+D.indexOf(d)+'" cx="'+(sx(d.x)+jx)+'" cy="'+(sy(Math.max(Y0,Math.min(Y1,lead(d))))+jy)+'" r="'+r+'" fill="'+Q[q][1]+'" fill-opacity=".85"/>'});
   svg.innerHTML=s;
   var tb=document.querySelector('#tbl tbody');var list=rows.map(function(d){var q=quad(d,tx,ty);return Object.assign({},d,{q:q,qn:Q[q][0],gap:+(d.x-d.y).toFixed(2)})});
   var k=tb.getAttribute('data-k')||'gap',dir=+(tb.getAttribute('data-dir')||1);
