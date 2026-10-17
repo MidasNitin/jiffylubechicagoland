@@ -440,10 +440,11 @@ function reviewsPage() {
   // slim the location records for the page: keep metrics, themes, months, quotes; add groups a competitor sits near
   const locs = R.locations.map((l) => ({ ...l, slug: l.store ? slugById[String(l.store)] : null, groups: l.kind === 'store' ? [l.group] : [...new Set((l.near_stores || []).map((n) => (storeInfo.get(n.store) || {}).group).filter(Boolean))], near_stores: undefined }));
   const data = JSON.stringify({ themes: R.themes, brandLabel, brandColor, locs, generated: R.generated, cutoff: R.cutoff, source: R.source });
-  const sample = R.source !== 'outscraper';
+  const full = R.locations.filter((l) => l.source === 'outscraper').length, sampled = R.locations.length - full;
+  const coverage = full && sampled ? `<strong>Partial data:</strong> ${full} locations have full review history since ${esc(R.cutoff || '2025')} (the pilot stores and their nearby competitors); ${sampled} others show only a 5-review sample from Google's API until the full pull runs.` : full ? `All reviews since ${esc(R.cutoff || '')}, refreshed monthly.` : `<strong>Sample data only:</strong> the newest 5 reviews per location from Google's API.`;
   const body = `
 <h1>Reviews</h1>
-<p class="sub">Google reviews for every Jiffy Lube store and every tracked competitor, tagged by theme. ${sample ? '<strong>Sample data only:</strong> the newest 5 reviews per location from Google\'s API, to prove the page. The full pull (all reviews since ' + esc(R.cutoff || '2025') + ') replaces this once the Outscraper account is in place.' : 'All reviews since ' + esc(R.cutoff || '') + ', refreshed monthly.'} Last analyzed ${esc((R.generated || '').slice(0, 10))}. Negative = 1 to 3 stars. The franchise group picker filters our stores to that group and competitors to those within 3 miles of its stores.</p>
+<p class="sub">Google reviews for every Jiffy Lube store and every tracked competitor, tagged by theme. ${coverage} Last analyzed ${esc((R.generated || '').slice(0, 10))}. Negative = 1 to 3 stars. The franchise group picker filters our stores to that group and competitors to those within 3 miles of its stores.</p>
 <div class="ctl"><label>Compare with <select id="rvcomp"><option value="">All competitors</option>${Object.keys(brandLabel).filter((b) => b !== 'jl').map((b) => `<option value="${b}">${brandLabel[b]}</option>`).join('')}</select></label><span class="muted" id="rvnote"></span></div>
 <div class="stats" id="rv-stats"></div>
 <h2>What negative reviews are about</h2>
