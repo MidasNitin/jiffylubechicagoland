@@ -9,5 +9,9 @@ const key = fs.readFileSync(path.join(ROOT, 'data/indexnow.key'), 'utf8').trim()
 const host = 'www.jiffylubechicagoland.com';
 const xml = await (await fetch(`https://${host}/sitemap.xml`)).text();
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+// Never announce the password-protected dashboard or anything outside the public site, whatever the sitemap says.
+const safe = urls.filter((u) => u.startsWith(`https://${host}/`) && !/\/private(\/|$)/.test(u) && !/\.txt$/.test(u));
+if (safe.length !== urls.length) console.warn(`IndexNow: dropped ${urls.length - safe.length} non-public URL(s)`);
+urls.length = 0; urls.push(...safe);
 const r = await fetch('https://api.indexnow.org/indexnow', { method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify({ host, key, keyLocation: `https://${host}/${key}.txt`, urlList: urls }) });
 console.log(`IndexNow: ${urls.length} URLs, HTTP ${r.status}${r.status === 200 || r.status === 202 ? ' (accepted)' : ' ' + (await r.text()).slice(0, 200)}`);
