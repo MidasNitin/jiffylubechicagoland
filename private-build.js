@@ -597,7 +597,7 @@ tb.innerHTML=L.map(function(s){var r=get(s,'rating'),w=get(s,'website');return '
 function detail(id){var s=null;for(var i=0;i<S.length;i++)if(String(S[i].store)===String(id))s=S[i];if(!s)return;det.hidden=false;
 det.innerHTML='<h2 style="margin-top:0">#'+s.store+' '+esc(s.city)+', '+esc(s.street)+' <span class="q '+scoreCls(s.score)+'">'+s.score+' of 100</span></h2><p class="muted">'+esc(s.group)+' · <a href="'+esc(s.maps_url)+'" target="_blank" rel="noopener">Open on Google Maps</a> · pulled '+esc((s.pulled_at||'').slice(0,10))+'</p>'+
 '<table><thead><tr><th>Check</th><th class="num">Points</th><th>Result</th><th>What Google shows</th><th>What to do</th></tr></thead><tbody>'+s.checks.map(function(c){return '<tr><td>'+esc(c.label)+'</td><td class="num">'+c.points+'</td><td>'+chip(c)+'</td><td>'+esc(c.got)+'</td><td class="muted">'+esc(c.status==='pass'?'':c.why)+'</td></tr>'}).join('')+'</tbody></table>'+
-(s.summary?'<p><b>Google\'s summary of this listing:</b> '+esc(s.summary)+'</p>':'')+(s.review_summary?'<p><b>Google\'s review summary:</b> '+esc(s.review_summary)+'</p>':'')+
+(s.summary?'<p><b>Google&#39;s summary of this listing:</b> '+esc(s.summary)+'</p>':'')+(s.review_summary?'<p><b>Google&#39;s review summary:</b> '+esc(s.review_summary)+'</p>':'')+
 '<details><summary>Hours and attributes as listed</summary><p>'+s.hours.map(esc).join('<br>')+'</p><p class="muted">'+esc(JSON.stringify(s.attributes))+'</p><p class="muted">Website: '+esc(s.website||'none')+'</p></details>';
 det.scrollIntoView({behavior:'smooth',block:'start'})}
 tb.addEventListener('click',function(e){var tr=e.target.closest('tr[data-s]');if(tr)detail(tr.getAttribute('data-s'))});
