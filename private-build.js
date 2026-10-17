@@ -379,7 +379,10 @@ function render(){
     var h='';h+=stat(money(T.s),'Spend',arrow(T.s,pad.s,function(d){return money(Math.abs(d))}));h+=stat(n(T.c),'Clicks',arrow(T.c,pad.c,n));h+=stat(n(T.i),'Impressions');
     h+=stat(T.i?(100*T.c/T.i).toFixed(1)+'%':'-','Click-through rate');h+=stat(T.c?money(T.s/T.c):'-','Cost per click');h+=stat(n(T.k),'Key events from ads',arrow(T.k,pad.k,n));h+=stat(T.k?money(T.s/T.k):'-','Cost per key event');
     document.getElementById('a-stats').innerHTML=h;
-    document.getElementById('a-note').textContent=(g?'Campaigns for '+g+' stores. ':'All campaigns. ')+'Spend, clicks and impressions come from the Google Ads account through its link to Analytics; key events are the conversions those visits produced on the site.';
+    var esc=function(v){return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
+    var adGroups=[];Object.keys(CS).forEach(function(k){if(CS[k].group&&adGroups.indexOf(CS[k].group)<0)adGroups.push(CS[k].group)});
+    var noAds=g&&!(ga.ads_daily||[]).some(function(r){return inG(r.sessionGoogleAdsCampaignName)});
+    document.getElementById('a-note').innerHTML=noAds?'<b>No Google Ads are running for '+esc(g)+' stores yet.</b> Ads currently run for '+esc(adGroups.join(', ')||'no group')+' stores. Switch the franchise group in the top bar to "All groups" to see them.':esc((g?'Campaigns for '+g+' stores. ':'All campaigns. ')+'Spend, clicks and impressions come from the Google Ads account through its link to Analytics; key events are the conversions those visits produced on the site.');
     var AM=document.getElementById('ametric').value,AL={s:'Spend',c:'Clicks',i:'Impressions',k:'Key events',cpc:'Cost per click',cpk:'Cost per key event',ctr:'Click-through rate'};
     var aval=function(d){return AM==='cpc'?(d.c?d.s/d.c:0):AM==='cpk'?(d.k?d.s/d.k:0):AM==='ctr'?(d.i?100*d.c/d.i:0):d[AM]};
     var afmt=function(v){return AM==='s'||AM==='cpc'||AM==='cpk'?'$'+v.toFixed(2):AM==='ctr'?v.toFixed(1)+'%':Math.round(v).toLocaleString()};
