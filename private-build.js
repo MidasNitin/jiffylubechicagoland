@@ -584,13 +584,17 @@ function listingPage() {
 <tr><td>Setup</td><td>Phone matches site</td><td class="num">5</td><td>Exact after normalization</td></tr>
 <tr><td>Setup</td><td>Address matches site</td><td class="num">5</td><td>Street, city, state and ZIP compared separately; any difference = 0 with the diff shown</td></tr>
 <tr><td>Setup</td><td>Website link points to this store's page</td><td class="num">10</td><td>Co-op store page or the corporate jiffylube.com page for this store number = 10 (JLI sets that link chain-wide, so it is not held against the store); co-op home page = 7; corporate home page = 4; wrong store number, unrelated site or missing = 0</td></tr>
-<tr><td>Setup</td><td>Primary category is Oil change service</td><td class="num">10</td><td>Full or 0</td></tr>
+<tr><td>Setup</td><td>Primary category is Oil change service</td><td class="num">10</td><td>Full or 0. Read from the Google Maps profile (Outscraper), not the Places API, which often reports a broader type</td></tr>
 <tr><td>Setup</td><td>Secondary categories present</td><td class="num">3</td><td>Full with 2 or more of: Car repair and maintenance service, Tire shop, Brake shop, Auto air conditioning service</td></tr>
 <tr><td>Setup</td><td>Regular hours set for all 7 days</td><td class="num">4</td><td>Full or 0</td></tr>
 <tr><td>Setup</td><td>Holiday / special hours set</td><td class="num">3</td><td>Special hours exist for the next US holiday. Google only shows special hours 7 days ahead, so this is Not checked until the week before a holiday</td></tr>
 <tr><td>Setup</td><td>Attributes filled</td><td class="num">3</td><td>Proportional to filled out of 7; missing ones listed</td></tr>
-<tr><td>Setup</td><td>Owner description, Services list, Booking URL</td><td class="num">3 + 2 + 2</td><td>Not checked until we have Business Profile manager access</td></tr>
-<tr><td>Activity</td><td>Google Posts in last 30 days, Owner photo uploaded recently, Logo and cover photo</td><td class="num">6 + 4 + 2</td><td>Not checked until we have Business Profile manager access</td></tr>
+<tr><td>Setup</td><td>Owner description present and relevant</td><td class="num">3</td><td>3 if it mentions "oil change" and the town; 1 if present without those; 0 if absent</td></tr>
+<tr><td>Setup</td><td>Services list filled</td><td class="num">2</td><td>Not checked until we have Business Profile manager access</td></tr>
+<tr><td>Setup</td><td>Appointment / booking URL set</td><td class="num">2</td><td>Full if a booking or appointment link is on the listing</td></tr>
+<tr><td>Activity</td><td>Google Posts in last 30 days</td><td class="num">6</td><td>4 or more posts = 6; 1 to 3 = 3; none = 0. Date of the last post shown</td></tr>
+<tr><td>Activity</td><td>Owner photo uploaded recently</td><td class="num">4</td><td>Not checked: Google does not expose photo upload dates</td></tr>
+<tr><td>Activity</td><td>Logo and cover photo set</td><td class="num">2</td><td>1 point each</td></tr>
 <tr><td>Activity</td><td>Owner share of top photos</td><td class="num">3</td><td>Proportional: owner photos among the top 10 Google shows</td></tr>
 <tr><td>Reputation</td><td>Google rating</td><td class="num">10</td><td>Linear from 3.5 (0 points) to 4.5 (10 points); gap to nearby competitor median shown</td></tr>
 <tr><td>Reputation</td><td>New reviews in last 90 days</td><td class="num">7</td><td>Store count divided by the nearby competitor median, capped at 1 (target 30 if no competitor data)</td></tr>
@@ -598,8 +602,8 @@ function listingPage() {
 <tr><td>Reputation</td><td>Owner reply speed</td><td class="num">4</td><td>Not checked: the review source does not give reply dates</td></tr>
 <tr><td>Reputation</td><td>Service and town keywords in recent reviews</td><td class="num">3</td><td>Share of last-90-day reviews mentioning oil change, quick, fast, tire, brake or the town; 20%+ = full, proportional below</td></tr>
 </tbody></table></div>
-<p class="muted" style="margin-bottom:0">Unscored flags shown on the scorecard: closed status, possible duplicate listing within 200 m (same name or phone). Not available yet: verification status, pin distance from the street address.</p></div>
-<p class="foot">Sources: Google Places API (what Google shows publicly), the scraped Google reviews, the competitor map, and the store data on jiffylubechicagoland.com. Refresh: node scripts/gbp-pull.mjs in the competitor-map project.</p>
+<p class="muted" style="margin-bottom:0">Unscored flags shown on the scorecard: not verified, closed status, possible duplicate listing within 200 m (same name or phone). Not available yet: pin distance from the street address.</p></div>
+<p class="foot">Sources: Google Places API (what Google shows publicly), the Outscraper Google Maps profile pull (category, description, posts, booking link, verified, logo), the scraped Google reviews, the competitor map, and the store data on jiffylubechicagoland.com. Refresh: node scripts/gbp-pull.mjs in the competitor-map project.</p>
 <script>
 (function(){
 var D=${data},S=D.stores,q=document.getElementById('lq'),tb=document.querySelector('#lh-table tbody'),det=document.getElementById('lh-detail'),stats=document.getElementById('lh-stats');
@@ -633,7 +637,7 @@ var lastG='';s.checks.forEach(function(c){if(c.group!==lastG){lastG=c.group;h+='
 h+='<tr'+(c.status==='na'?' class="na"':'')+'><td>'+esc(c.label)+'</td><td class="num">'+(c.status==='na'?'<span class="muted">'+c.max+'</span>':pts(c.points)+' / '+c.max)+'</td><td>'+badge(c.status)+'</td><td>'+esc(c.shows)+(c.source?'<br><small class="muted">'+esc(c.source)+'</small>':'')+'</td><td>'+esc(c.action)+'</td></tr>'});
 h+='</tbody></table></div>';
 if(s.not_checked&&s.not_checked.length)h+='<p class="muted" style="font-size:13px">Not checked for this store: '+s.not_checked.map(esc).join('; ')+'.</p>';
-if(s.summary)h+='<p><b>Google&#39;s summary of this listing:</b> '+esc(s.summary)+'</p>';if(s.review_summary)h+='<p><b>Google&#39;s review summary:</b> '+esc(s.review_summary)+'</p>';
+if(s.posts&&s.posts.length)h+='<details><summary>Recent Google Posts ('+s.posts.length+' most recent)</summary><ul>'+s.posts.map(function(x){return '<li><span class="muted">'+esc(x.date||'')+'</span> '+esc(x.body)+'</li>'}).join('')+'</ul></details>';if(s.reviews_tags&&s.reviews_tags.length)h+='<p class="muted" style="font-size:13px">What reviewers mention most: '+s.reviews_tags.map(esc).join(', ')+'</p>';if(s.summary)h+='<p><b>Google&#39;s summary of this listing:</b> '+esc(s.summary)+'</p>';if(s.review_summary)h+='<p><b>Google&#39;s review summary:</b> '+esc(s.review_summary)+'</p>';
 h+='<details><summary>Hours as listed</summary><p>'+s.hours.map(esc).join('<br>')+'</p><p class="muted">Website: '+esc(s.website||'none')+'</p></details>';
 det.innerHTML=h;det.scrollIntoView({behavior:'smooth',block:'start'})}
 tb.addEventListener('click',function(e){var tr=e.target.closest('tr[data-s]');if(tr)detail(tr.getAttribute('data-s'))});
