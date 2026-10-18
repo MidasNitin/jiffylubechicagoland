@@ -580,7 +580,7 @@ function listingPage() {
 <h2>How the score works</h2>
 <div class="panel"><p class="muted" style="margin-top:0">Points are computed, not all-or-nothing: a 4.0 rating earns half the rating points, a 60% reply rate earns 60% of the reply points. Rows marked Not checked are dropped from the denominator and the score is rescaled to 100.</p>
 <div class="tscroll"><table id="lh-rules"><thead><tr><th>Group</th><th>Check</th><th class="num">Points</th><th>Scoring</th></tr></thead><tbody>
-<tr><td>Setup</td><td>Name matches sign name</td><td class="num">5</td><td>Exact = 5; descriptor added (for example "Oil Change") = 2; other = 0</td></tr>
+<tr><td>Setup</td><td>Name matches the standard listing name</td><td class="num">5</td><td>"Jiffy Lube Oil Change" (the chain standard, like "Valvoline Instant Oil Change") or the plain sign name = 5; a name with a city, keyword or slogan added = 0</td></tr>
 <tr><td>Setup</td><td>Phone matches site</td><td class="num">5</td><td>Exact after normalization</td></tr>
 <tr><td>Setup</td><td>Address matches site</td><td class="num">5</td><td>Street, city, state and ZIP compared separately; any difference = 0 with the diff shown</td></tr>
 <tr><td>Setup</td><td>Website link points to this store's page</td><td class="num">10</td><td>Co-op store page or the corporate jiffylube.com page for this store number = 10 (JLI sets that link chain-wide, so it is not held against the store); co-op home page = 7; corporate home page = 4; wrong store number, unrelated site or missing = 0</td></tr>
