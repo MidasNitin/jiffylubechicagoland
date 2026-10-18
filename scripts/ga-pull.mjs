@@ -43,22 +43,25 @@ const D = (...n) => n.map((name) => ({ name }));
 const evFilter = { filter: { fieldName: 'eventName', inListFilter: { values: KEY_EVENTS } } };
 
 const out = { pulled_at: new Date().toISOString(), days: DAYS, property: PROPERTY, key_events: KEY_EVENTS };
-out.daily = await report({ dateRanges: range, dimensions: D('date'), metrics: M('sessions', 'totalUsers', 'newUsers', 'screenPageViews', 'keyEvents', 'engagedSessions'), orderBys: [{ dimension: { dimensionName: 'date' } }] });
+out.daily = await report({ dateRanges: range, dimensions: D('date'), metrics: M('sessions', 'totalUsers', 'newUsers', 'screenPageViews', 'keyEvents', 'engagedSessions', 'sessionKeyEventRate'), orderBys: [{ dimension: { dimensionName: 'date' } }] });
 out.daily_events = await report({ dateRanges: range, dimensions: D('date', 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 5000 });
 out.events = await report({ dateRanges: range, dimensions: D('eventName'), metrics: M('eventCount', 'totalUsers'), orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }], limit: 50 });
-out.sources = await report({ dateRanges: range, dimensions: D('sessionSource', 'sessionMedium'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'engagedSessions'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
-out.channels = await report({ dateRanges: range, dimensions: D('sessionDefaultChannelGroup'), metrics: M('sessions', 'totalUsers', 'keyEvents'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }] });
-out.campaigns = await report({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource'), metrics: M('sessions', 'totalUsers', 'keyEvents'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
+out.sources = await report({ dateRanges: range, dimensions: D('sessionSource', 'sessionMedium'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'engagedSessions', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
+out.channels = await report({ dateRanges: range, dimensions: D('sessionDefaultChannelGroup'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }] });
+out.campaigns = await report({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
 out.pages = await report({ dateRanges: range, dimensions: D('pagePath'), metrics: M('screenPageViews', 'sessions', 'keyEvents'), orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }], limit: 100 });
 out.cities = await report({ dateRanges: range, dimensions: D('city'), metrics: M('sessions', 'totalUsers', 'keyEvents'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 25 });
 out.devices = await report({ dateRanges: range, dimensions: D('deviceCategory'), metrics: M('sessions', 'keyEvents') });
 // Google Ads (via the GA <-> Ads link): spend, clicks, impressions by campaign / ad group / day / search term
-const adsM = M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents');
+const adsM = M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents', 'sessionKeyEventRate');
 const adsFilter = { notExpression: { filter: { fieldName: 'sessionGoogleAdsCampaignName', stringFilter: { value: '(not set)' } } } };
 out.ads_campaigns = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 200 });
 out.ads_daily = await report({ dateRanges: range, dimensions: D('date', 'sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, limit: 5000 });
 out.ads_queries = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdClicks' }, desc: true }], limit: 300 });
 out.ads_keywords = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'keyEvents'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 300 });
+// which key events each campaign produced (event counts by action), for the GA campaign table and the Ads campaign table
+out.campaign_events = await report({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource', 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 2000 });
+out.ads_campaign_events = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName', 'eventName'), metrics: M('eventCount'), dimensionFilter: { andGroup: { expressions: [evFilter, adsFilter] } }, limit: 2000 });
 // custom event parameters (registered as event-scoped custom dimensions in GA): store slug and campaign key
 for (const [name, dim] of [['by_store', 'customEvent:store'], ['by_campaign_key', 'customEvent:campaign_key']]) {
   try { out[name] = await report({ dateRanges: range, dimensions: D(dim, 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 2000 }); }
