@@ -319,8 +319,8 @@ function storeJsonLd(store) {
     '@context': 'https://schema.org', '@type': 'AutoRepair', name: `Jiffy Lube ${store.city}, ${store.street_name}`,
     address: { '@type': 'PostalAddress', streetAddress: store.street, addressLocality: store.city, addressRegion: store.state, postalCode: store.zip, addressCountry: 'US' },
     geo: { '@type': 'GeoCoordinates', latitude: store.lat, longitude: store.lng },
-    telephone: store.phone || undefined, url: `${site.domain}${P}/store/${store.slug}/`, inLanguage: L, openingHoursSpecification: spec,
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: store.rating, reviewCount: store.review_count }
+    telephone: store.phone || undefined, url: `${site.domain}${P}/store/${store.slug}/`, inLanguage: L, openingHoursSpecification: spec
+    // No aggregateRating: Google's review-snippet rules require ratings collected on this site, not copied from Google. The rating still shows as page text.
   })}</script>`;
 }
 
