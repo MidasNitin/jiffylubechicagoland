@@ -202,7 +202,57 @@
     "footer_privacy": "Privacidad y grabación de llamadas (en inglés)",
     "footer_dns": "No vender ni compartir mi información personal",
     "footer_terms": "Términos de uso (en inglés)",
-    "footer_a11y": "Accesibilidad (en inglés)"
+    "footer_a11y": "Accesibilidad (en inglés)",
+    "faq_title": "Preguntas frecuentes sobre Jiffy Lube {city}",
+    "faq": [
+      {
+        "k": "appt",
+        "q": "¿Necesito cita en Jiffy Lube {city}?",
+        "a": "No. Llega a cualquier hora dentro del horario de atención a {addr}, {city}. La mayoría de los cambios de aceite toman unos 15 minutos."
+      },
+      {
+        "k": "time",
+        "q": "¿Cuánto tarda un cambio de aceite?",
+        "a": "Unos 15 minutos para la mayoría de los vehículos. En la mayoría de las ubicaciones puedes quedarte en tu auto durante el servicio; pregunta al técnico al llegar."
+      },
+      {
+        "k": "air",
+        "q": "¿La revisión de presión de llantas es gratis?",
+        "a": "Sí. Todas las ubicaciones de Jiffy Lube Chicagoland revisan y llenan la presión de tus llantas gratis, sin necesidad de compra."
+      },
+      {
+        "k": "battery",
+        "q": "¿La prueba de batería es gratis?",
+        "a": "Sí. Todas las ubicaciones prueban tu batería gratis, sin necesidad de compra."
+      },
+      {
+        "k": "oil",
+        "q": "¿Qué tipos de aceite manejan?",
+        "a": "Convencional, mezcla sintética y totalmente sintético. El técnico recomienda el grado que especifica el fabricante de tu vehículo."
+      },
+      {
+        "k": "services",
+        "q": "¿Qué servicios ofrece esta ubicación además del cambio de aceite?",
+        "a": "Limpiaparabrisas, focos, filtros, baterías, cambio de fluidos y rotación de llantas."
+      },
+      {
+        "k": "coupon",
+        "q": "¿Cómo funciona el cupón de {off}?",
+        "a": "Muestra el cupón en tu teléfono o impreso antes de que empiece el servicio. Un cupón por visita, no válido con ninguna otra oferta. Obtenlo en {coupon_url}"
+      },
+      {
+        "k": "holiday",
+        "q": "¿Abren los días festivos?",
+        "a": "El horario en días festivos varía según la ubicación. Revisa el horario en esta página o llama al {phone} antes de venir."
+      },
+      {
+        "k": "lang",
+        "q": "¿Esta información está disponible en inglés?",
+        "a": "Sí. Consulta esta página en inglés en {lang_url}"
+      }
+    ],
+    "faq_multicare": " Esta ubicación Multi-Care también hace frenos y bujías.",
+    "faq_tires": " También vende llantas, con montaje y balanceo."
   },
   "js": {
     "days": [

@@ -32,7 +32,20 @@ const UI_EN = {
   region_h1: 'Find a Jiffy Lube location in the {region} Area', region_sub: 'Fast, easy oil changes at over {n} Chicagoland locations. Jiffy Does It.', zip_label: 'Zip code', zip_ph: 'Enter zip code', search: 'Search', use_location: 'Use my location', show_more: 'Show more',
   store_title: 'Jiffy Lube® {city}, {street} | Oil Change, No Appointment Needed', store_desc: 'Jiffy Lube at {addr}, {city}, {state}. Oil changes in about 15 minutes, no appointment needed. Hours, directions, and a {off} coupon.', store_sub: '{addr} · No appointment needed', call_phone: 'Call {phone}',
   coupon_title: '{hero} in {city} | Jiffy Lube® {street}', coupon_desc: '{amount} {desc} at Jiffy Lube {addr}, {city}. No appointment needed. Get your coupon code.', coupon_h1_in: 'in {city}', coupon_sub: 'No appointment needed. Pull in to {addr}.',
-  free_title: '{word}, no purchase necessary | Jiffy Lube {street}, {city}', free_meta: "{desc} Pull in to Jiffy Lube {addr}, {city}. Want an oil change while you're here? Take {off}.", free_h1_tail: 'No purchase necessary.', free_sub: "Pull in to {addr} and {sub} Want an oil change while you're here? Take {off}.", free_feat_sub: 'No appointment. No purchase necessary. Stay in your car.'
+  free_title: '{word}, no purchase necessary | Jiffy Lube {street}, {city}', free_meta: "{desc} Pull in to Jiffy Lube {addr}, {city}. Want an oil change while you're here? Take {off}.", free_h1_tail: 'No purchase necessary.', free_sub: "Pull in to {addr} and {sub} Want an oil change while you're here? Take {off}.", free_feat_sub: 'No appointment. No purchase necessary. Stay in your car.',
+  faq_title: 'Questions drivers ask about Jiffy Lube {city}',
+  faq: [
+    { k: 'appt', q: 'Do I need an appointment at Jiffy Lube {city}?', a: 'No. Drive in any time during open hours at {addr}, {city}. Most oil changes take about 15 minutes.' },
+    { k: 'time', q: 'How long does an oil change take?', a: 'About 15 minutes for most vehicles. At most locations you can stay in your car during the service; ask the technician when you arrive.' },
+    { k: 'air', q: 'Is the tire pressure check free?', a: 'Yes. Every Jiffy Lube Chicagoland location checks and fills your tire pressure free, with no purchase necessary.' },
+    { k: 'battery', q: 'Is the battery test free?', a: 'Yes. Every location tests your battery free, with no purchase necessary.' },
+    { k: 'oil', q: 'Which oils do you carry?', a: 'Conventional, synthetic blend and full synthetic. The technician recommends the grade your vehicle manufacturer specifies.' },
+    { k: 'services', q: 'What services does this location offer besides oil changes?', a: 'Wiper blades, bulbs, filters, batteries, fluid exchanges and tire rotation.' },
+    { k: 'coupon', q: 'How does the {off} coupon work?', a: 'Show the coupon on your phone or printed before service starts. One coupon per visit, not valid with any other offer. Get it at {coupon_url}' },
+    { k: 'holiday', q: 'Are you open on holidays?', a: 'Holiday hours vary by location. Check the hours on this page or call {phone} before you come in.' },
+    { k: 'lang', q: 'Is this information available in Spanish?', a: 'Yes. See this page in Spanish at {lang_url}' }
+  ],
+  faq_multicare: ' This Multi-Care location also does brakes and spark plugs.', faq_tires: ' It also sells tires, with mounting and balancing.'
 };
 let L = 'en', P = '', site = siteEn, UI = UI_EN;
 const t = (k, vars) => { let v = UI[k] !== undefined ? UI[k] : UI_EN[k]; if (typeof v !== 'string') return v; return vars ? v.replace(/\{(\w+)\}/g, (m, n) => (vars[n] !== undefined ? vars[n] : m)) : v; };
@@ -324,6 +337,25 @@ function storeJsonLd(store) {
   })}</script>`;
 }
 
+const linkify = (str) => esc(str).replace(/(https?:\/\/[^\s]+?)([.,;)]?)(?=\s|$)/g, (m, u, tail) => `<a href="${u}">${u.replace(/^https?:\/\/(www\.)?/, '')}</a>${tail}`);
+function faqItems(s) {
+  const o = offerFor(s);
+  const vars = { city: s.city, addr: s.street, phone: s.phone || '', off: offAmount(o), coupon_url: `${site.domain}${P}/coupon/${s.slug}/`, lang_url: L === 'es' ? `${site.domain}/store/${s.slug}/` : `${site.domain}/es/store/${s.slug}/` };
+  const fill = (str) => str.replace(/\{(\w+)\}/g, (m, n) => (vars[n] !== undefined ? vars[n] : m));
+  return t('faq').map((x) => {
+    let a = fill(x.a);
+    if (x.k === 'services') { if (s.multicare) a += t('faq_multicare'); if (s.tires) a += t('faq_tires'); }
+    if (x.k === 'holiday' && !s.phone) a = a.replace(/ or call\s*\{?phone\}?/i, '').replace(/ o llama al\s*/i, '');
+    return { q: fill(x.q), a };
+  });
+}
+// Store-page FAQ: visible answers (details/summary) plus FAQPage structured data. Answers confirmed by Greg McGivney and Karl Krutsch, October 2026.
+const faqSection = (s) => `<section class="section section--gray faq" aria-labelledby="faq-h"><div class="wrap">
+  <h2 class="h2" id="faq-h">${esc(t('faq_title', { city: s.city }))}</h2>
+  <div class="faq__list">${faqItems(s).map((f) => `<details class="faq__item"><summary>${esc(f.q)}</summary><p>${linkify(f.a)}</p></details>`).join('')}</div>
+</div></section>`;
+const faqJsonLd = (s) => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: L, mainEntity: faqItems(s).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) })}</script>`;
+
 /* ---------- pages ---------- */
 function regionPage() {
   const title = t('region_title', { region: site.region_name });
@@ -365,7 +397,7 @@ ${scripts()}
 function storePage(s) {
   const title = t('store_title', { city: s.city, street: s.street_name });
   const desc = t('store_desc', { addr: s.street, city: s.city, state: s.state, off: offAmount(offerFor(s)) });
-  return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s), s.phone)}
+  return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s) + faqJsonLd(s), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/store/${s.slug}/`)}
@@ -385,6 +417,7 @@ ${how()}
 ${lounge()}
 ${team(s)}
 ${services()}
+${faqSection(s)}
 </main>
 ${footer(s.group, s)}
 ${sticky(s)}
