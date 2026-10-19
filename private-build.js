@@ -569,7 +569,7 @@ function listingPage() {
   const data = JSON.stringify({ ...gbp, yelp }).replace(/</g, '\\u003c');
   const body = `
 <h1>Listing health</h1>
-<p class="sub">How complete each store's Google Business Profile is, scored out of 100 in three groups: Profile setup (${gbp.weights.setup}), Content and activity (${gbp.weights.activity}), Reputation (${gbp.weights.reputation}). Checks Google does not expose from the outside are marked Not checked and left out of the score. ${gbp.pulled || 0} of ${gbp.total_stores} stores pulled so far${gbp.generated ? ' (' + esc(gbp.generated.slice(0, 10)) + ')' : ''}. Pick a franchise group in the top bar to filter.</p>
+<p class="sub">How complete each store's Google Business Profile is, scored out of 100 in three groups: Profile setup (${gbp.weights.setup}), Content and activity (${gbp.weights.activity}), Reputation (${gbp.weights.reputation}). Checks Google does not expose from the outside are marked Not checked and left out of the score. ${gbp.pulled || 0} of ${gbp.total_stores} stores pulled so far${gbp.generated ? ' (' + esc(gbp.generated.slice(0, 10)) + ')' : ''}. Pick a franchise group in the top bar to filter. ${yelp.pulled ? '<a href="#other-listings">Jump to Yelp and other listings</a>.' : ''}</p>
 <div class="stats" id="lh-stats"></div>
 <div class="panel"><div class="ctl"><label>Search <input id="lq" type="search" placeholder="store, city, group"></label><span class="muted">Click a column to sort. Click a store for its scorecard.</span></div>
 <div class="tscroll"><table id="lh-table"><thead><tr><th>Store</th><th>Group</th><th class="num">Score</th><th class="num">Setup</th><th class="num">Activity</th><th class="num">Reputation</th><th>Flags</th><th>Biggest fix</th></tr></thead><tbody></tbody></table></div></div>
@@ -579,7 +579,7 @@ function listingPage() {
 <div class="panel"><div class="tscroll"><table id="lh-fix"><thead><tr><th>Check</th><th>Group</th><th class="num">Points</th><th class="num">Fix</th><th class="num">Partial</th><th class="num">OK</th><th class="num">Not checked</th><th>Share needing work</th></tr></thead><tbody></tbody></table></div></div>
 <h2>By franchise group</h2>
 <div class="panel"><div class="tscroll"><table id="lh-groups"><thead><tr><th>Franchise group</th><th class="num">Stores pulled</th><th class="num">Average score</th><th>Top 3 failing checks</th></tr></thead><tbody></tbody></table></div></div>
-${yelp.pulled ? `<h2>Other listings</h2>
+${yelp.pulled ? `<h2 id="other-listings">Other listings (Yelp)</h2>
 <p class="sub">The same store on the sites the AI assistants cite besides Google. Yelp is pulled for every store${yelp.generated ? ' (' + esc(yelp.generated.slice(0, 10)) + ')' : ''}. Apple Maps and Bing Places are not checked yet: Apple needs a MapKit key from the Apple Developer account and Bing needs access to the Bing Places account.</p>
 <div class="stats" id="ol-stats"></div>
 <div class="panel"><div class="tscroll"><table id="ol-table"><thead><tr><th>Store</th><th>Group</th><th class="num">Google</th><th class="num">Yelp</th><th class="num">Gap</th><th class="num">Yelp reviews</th><th>Claimed</th><th>Phone matches</th><th>Yelp listing</th></tr></thead><tbody></tbody></table></div>
