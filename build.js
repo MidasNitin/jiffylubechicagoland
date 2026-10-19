@@ -530,7 +530,7 @@ function fleetPage() {
   return `${head(title, desc, '/fleet/', '<meta name="robots" content="noindex,nofollow">')}
 <body data-store="fleet">
 ${SPRITE}
-<header class="nav" role="banner"><div class="wrap nav__inner"><a class="nav__logo" href="/" aria-label="Jiffy Lube Chicagoland home">${svg('logo')}</a><div class="nav__right"><span class="fleet__badge">FLEET CARE</span></div></div></header>
+<header class="nav" role="banner"><div class="wrap nav__inner"><a class="nav__logo nav__logo--fleet" href="/" aria-label="Jiffy Lube Chicagoland home"><img src="/assets/img/fleet-care-logo-white.png" alt="Jiffy Lube Fleet Care" width="1166" height="313"></a></div></header>
 <main id="main" tabindex="-1" class="page page--fleet">
 <section class="hero hero--center"><div class="wrap hero__inner">
   <h1 class="h1">Fleet Service Made Simple</h1>
@@ -568,6 +568,7 @@ ${SPRITE}
     <button class="btn btn--secondary btn--block js-fleet-again" type="button">Submit another fleet</button>
   </div>
   <section class="fleet__about">
+    <img class="fleet__logo" src="/assets/img/fleet-care-logo.png" alt="Jiffy Lube Fleet Care" width="1166" height="313">
     <h2 class="h2">Are you a fleet manager?</h2>
     <p>Jiffy Lube helps take a little of the worry out of managing your fleet with a customizable program, including options for control over services, billing, payments and scheduling, so you can get a fleet solution built for your company's needs.</p>
     <p>Most locations are also able to provide preventive maintenance for larger vehicles, such as medium duty trucks, diesels and limousines. See how Jiffy Lube Fleet Program can customize a program for you and help keep your company's business running smoothly.</p>

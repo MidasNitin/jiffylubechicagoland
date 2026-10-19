@@ -426,3 +426,6 @@ body.is-ios .coupon.is-revealed .js-copy, body.is-android .coupon.is-revealed .j
 .faq__item[open] summary::after { content: '\2212'; }
 .faq__item p { margin: 0 0 16px; line-height: 1.6; color: #333; }
 .faq__item a { color: var(--maroon); font-weight: 700; word-break: break-all; }
+.nav__logo--fleet img { height: 44px; width: auto; display: block; }
+.fleet__logo { height: 56px; width: auto; display: block; margin-bottom: 16px; }
+@media (min-width: 700px) { .nav__logo--fleet img { height: 52px; } }
