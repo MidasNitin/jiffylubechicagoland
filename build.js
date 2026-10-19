@@ -326,10 +326,18 @@ const JS_HASH = require('crypto').createHash('sha1').update(fs.readFileSync(path
 const JS_FILE = `site.${JS_HASH}.js`;
 const scripts = () => `<script src="/assets/js/${JS_FILE}" defer></script>${site.analytics.vercel_analytics ? `<script defer src="/_vercel/insights/script.js"></script>` : ''}`;
 
+// BreadcrumbList: Home > Store > (Coupon | Free service). Names come from the page language.
+const crumbs = (items) => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ name: 'Jiffy Lube Chicagoland', url: `${site.domain}${P}/` }, ...items].map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })) })}</script>`;
+const storeCrumb = (s) => ({ name: t('footer_store', { city: s.city, street: s.street_name }), url: `${site.domain}${P}/store/${s.slug}/` });
+
 function storeJsonLd(store) {
   const spec = DAY_NAMES.map((n, d) => store.hours[d] ? { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d], opens: `${String(Math.floor(store.hours[d].open / 60)).padStart(2, '0')}:${String(store.hours[d].open % 60).padStart(2, '0')}`, closes: `${String(Math.floor(store.hours[d].close / 60)).padStart(2, '0')}:${String(store.hours[d].close % 60).padStart(2, '0')}` } : null).filter(Boolean);
   return `<script type="application/ld+json">${JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'AutoRepair', name: `Jiffy Lube ${store.city}, ${store.street_name}`,
+    '@context': 'https://schema.org', '@type': 'AutoRepair', '@id': `${site.domain}/store/${store.slug}/#store`, name: `Jiffy Lube ${store.city}, ${store.street_name}`,
+    image: `${site.domain}/assets/img/team.jpg`,
+    sameAs: [store.maps_url, store.jiffylube_url].filter(Boolean), hasMap: store.maps_url || undefined,
+    priceRange: '$$', paymentAccepted: 'Cash, Credit Card, Debit Card, NFC Mobile Payments', currenciesAccepted: 'USD', knowsLanguage: ['en', 'es'],
+    brand: { '@type': 'Brand', name: 'Jiffy Lube' }, parentOrganization: { '@type': 'Organization', name: 'Jiffy Lube International', url: 'https://www.jiffylube.com/' },
     address: { '@type': 'PostalAddress', streetAddress: store.street, addressLocality: store.city, addressRegion: store.state, postalCode: store.zip, addressCountry: 'US' },
     geo: { '@type': 'GeoCoordinates', latitude: store.lat, longitude: store.lng },
     telephone: store.phone || undefined, url: `${site.domain}${P}/store/${store.slug}/`, inLanguage: L, openingHoursSpecification: spec
@@ -397,7 +405,7 @@ ${scripts()}
 function storePage(s) {
   const title = t('store_title', { city: s.city, street: s.street_name });
   const desc = t('store_desc', { addr: s.street, city: s.city, state: s.state, off: offAmount(offerFor(s)) });
-  return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s) + faqJsonLd(s), s.phone)}
+  return `${head(title, desc, `/store/${s.slug}/`, storeJsonLd(s) + faqJsonLd(s) + crumbs([storeCrumb(s)]), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/store/${s.slug}/`)}
@@ -429,7 +437,7 @@ function couponPage(s) {
   const o = offerFor(s);
   const title = t('coupon_title', { hero: o.hero_title, city: s.city, street: s.street_name });
   const desc = t('coupon_desc', { amount: o.amount, desc: o.description, addr: s.street, city: s.city });
-  return `${head(title, desc, `/coupon/${s.slug}/`, storeJsonLd(s), s.phone)}
+  return `${head(title, desc, `/coupon/${s.slug}/`, storeJsonLd(s) + crumbs([storeCrumb(s), { name: t('footer_coupon', { off: offAmount(o) }), url: `${site.domain}${P}/coupon/${s.slug}/` }]), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/coupon/${s.slug}/`)}
@@ -462,7 +470,7 @@ function freePage(s, key) {
   const off = offAmount(o);
   const title = t('free_title', { word: v.titleWord, street: s.street_name, city: s.city });
   const desc = t('free_meta', { desc: v.desc, addr: s.street, city: s.city, off });
-  return `${head(title, desc, `/${v.path}/${s.slug}/`, storeJsonLd(s), s.phone)}
+  return `${head(title, desc, `/${v.path}/${s.slug}/`, storeJsonLd(s) + crumbs([storeCrumb(s), { name: v.titleWord, url: `${site.domain}${P}/${v.path}/${s.slug}/` }]), s.phone)}
 <body data-hours='${JSON.stringify(s.hours)}' data-store="${esc(s.slug)}">
 ${SPRITE}
 ${nav(s, `/${v.path}/${s.slug}/`)}
@@ -496,7 +504,7 @@ function legalPage(pg) {
   const optout = pg.slug === 'privacy' ? `<script>(function(){var b=document.querySelector('.js-optout'),s=document.getElementById('optout-status');if(!b)return;function set(msg){s.textContent=msg;b.setAttribute('aria-disabled','true');b.textContent='Opted out';}
 if(window.JL_OPTOUT)set(navigator.globalPrivacyControl===true?'Your browser sends the Global Privacy Control signal, so you are already opted out of targeted advertising on this site.':'You are opted out of targeted advertising on this site in this browser.');
 b.addEventListener('click',function(){if(b.getAttribute('aria-disabled')==='true')return;document.cookie='jlc_optout=1; max-age=31536000; path=/; SameSite=Lax; Secure';if(typeof gtag==='function')gtag('consent','update',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});window.JL_OPTOUT=true;set('Done. This site will no longer send your visit data to advertising platforms for targeted ads in this browser.');});})();</script>` : '';
-  return `${head(`${pg.title} | Jiffy Lube Chicagoland`, pg.desc, `/${pg.slug}/`)}
+  return `${head(`${pg.title} | Jiffy Lube Chicagoland`, pg.desc, `/${pg.slug}/`, crumbs([{ name: pg.title, url: `${site.domain}/${pg.slug}/` }]))}
 <body>
 ${SPRITE}
 ${nav(null, `/${pg.slug}/`)}
