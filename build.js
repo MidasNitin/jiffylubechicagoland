@@ -124,7 +124,7 @@ ${alts}
 <meta property="og:image" content="${site.domain}/assets/img/team.jpg">
 <meta name="theme-color" content="#700000">
 <script>window.JL_ATTR=${JSON.stringify({ params: site.attribution.params, days: site.attribution.days, codes: site.attribution.codes, defaultCode: site.offer.code })};window.JL_ADS=${JSON.stringify(Object.fromEntries(Object.entries(site.analytics.google_ads_conversions || {}).filter(([k]) => !k.startsWith('_'))))};</script>
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/assets/img/favicon-180.png">
 <link rel="preload" href="/assets/fonts/Poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Poppins-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>${CSS}</style>
@@ -607,6 +607,7 @@ function copyDir(src, dst) { fs.mkdirSync(dst, { recursive: true }); for (const 
 
 rmrf(OUT);
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
+fs.copyFileSync(path.join(ROOT, 'assets/img/favicon.ico'), path.join(OUT, 'favicon.ico')); // browsers and Safari ask for /favicon.ico
 if (fs.existsSync(path.join(ROOT, 'private'))) copyDir(path.join(ROOT, 'private'), path.join(OUT, 'private')); // password-gated by middleware.js; never linked, never in sitemap/llms
 fs.copyFileSync(path.join(ROOT, 'assets/js/site.js'), path.join(OUT, 'assets/js', JS_FILE));
 write('assets/img/favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#700000"/><text x="32" y="44" font-family="Poppins,Arial,sans-serif" font-weight="700" font-size="36" fill="#fff" text-anchor="middle">J</text></svg>`);
