@@ -603,7 +603,7 @@ function listingPage() {
 <div class="panel"><div class="tscroll"><table id="lh-fix"><thead><tr><th>Check</th><th>Group</th><th class="num">Points</th><th class="num">Fix</th><th class="num">Partial</th><th class="num">OK</th><th class="num">Not checked</th><th>Share needing work</th></tr></thead><tbody></tbody></table></div></div>
 <h2>By franchise group</h2>
 <div class="panel"><div class="tscroll"><table id="lh-groups"><thead><tr><th>Franchise group</th><th class="num">Stores pulled</th><th class="num">Average score</th><th>Top 3 failing checks</th></tr></thead><tbody></tbody></table></div></div>
-${yelp.pulled ? `<h2 id="other-listings">Other listings (Yelp)</h2>
+${yelp.pulled ? `<div id="yelp"></div><h2 id="other-listings">Other listings (Yelp)</h2>
 <p class="sub">The same store on the sites the AI assistants cite besides Google. Yelp is pulled for every store${yelp.generated ? ' (' + esc(yelp.generated.slice(0, 10)) + ')' : ''}. Apple Maps and Bing Places are not checked yet: Apple needs a MapKit key from the Apple Developer account and Bing needs access to the Bing Places account.</p>
 <div class="stats" id="ol-stats"></div>
 <div class="panel"><div class="tscroll"><table id="ol-table"><thead><tr><th>Store</th><th>Group</th><th class="num">Google</th><th class="num">Yelp</th><th class="num">Gap</th><th class="num">Yelp reviews</th><th>Claimed</th><th>Phone matches</th><th>Yelp listing</th></tr></thead><tbody></tbody></table></div>
