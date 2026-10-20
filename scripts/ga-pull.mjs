@@ -32,7 +32,7 @@ const TOKEN = await token();
 async function report(body) {
   const r = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${PROPERTY}:runReport`, { method: 'POST', headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const j = await r.json();
-  if (j.error) throw new Error(`GA API: ${j.error.message}`);
+  if (j.error) throw new Error(`GA API: ${j.error.message} [dims ${(body.dimensions||[]).map((d)=>d.name).join(',')} | metrics ${(body.metrics||[]).map((m)=>m.name).join(',')}]`);
   const dims = (j.dimensionHeaders || []).map((h) => h.name), mets = (j.metricHeaders || []).map((h) => h.name);
   return (j.rows || []).map((row) => { const o = {}; row.dimensionValues.forEach((v, i) => { o[dims[i]] = v.value; }); row.metricValues.forEach((v, i) => { o[mets[i]] = Number(v.value); }); return o; });
 }
@@ -42,34 +42,51 @@ const M = (...n) => n.map((name) => ({ name }));
 const D = (...n) => n.map((name) => ({ name }));
 const evFilter = { filter: { fieldName: 'eventName', inListFilter: { values: KEY_EVENTS } } };
 
-const out = { pulled_at: new Date().toISOString(), days: DAYS, property: PROPERTY, key_events: KEY_EVENTS };
-out.daily = await report({ dateRanges: range, dimensions: D('date'), metrics: M('sessions', 'totalUsers', 'newUsers', 'screenPageViews', 'keyEvents', 'engagedSessions', 'sessionKeyEventRate'), orderBys: [{ dimension: { dimensionName: 'date' } }] });
-out.daily_events = await report({ dateRanges: range, dimensions: D('date', 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 5000 });
-out.events = await report({ dateRanges: range, dimensions: D('eventName'), metrics: M('eventCount', 'totalUsers'), orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }], limit: 50 });
-out.sources = await report({ dateRanges: range, dimensions: D('sessionSource', 'sessionMedium'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'engagedSessions', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
-out.channels = await report({ dateRanges: range, dimensions: D('sessionDefaultChannelGroup'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }] });
-out.campaigns = await report({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
-out.pages = await report({ dateRanges: range, dimensions: D('pagePath'), metrics: M('screenPageViews', 'sessions', 'keyEvents'), orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }], limit: 100 });
-out.cities = await report({ dateRanges: range, dimensions: D('city'), metrics: M('sessions', 'totalUsers', 'keyEvents'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 25 });
-out.devices = await report({ dateRanges: range, dimensions: D('deviceCategory'), metrics: M('sessions', 'keyEvents') });
+// Only visits from the co-op's states count. Ads cost rows that never became a visit carry region "(not set)", so Ads reports keep those too.
+const REGION = (process.env.GA_REGIONS || 'Illinois,Indiana,Wisconsin').split(',');
+const inRegion = { filter: { fieldName: 'region', inListFilter: { values: REGION } } };
+const inRegionOrUnset = { orGroup: { expressions: [inRegion, { filter: { fieldName: 'region', stringFilter: { value: '(not set)' } } }] } };
+const outOfRegion = { notExpression: inRegionOrUnset };
+const geo = (body, f = inRegion) => ({ ...body, dimensionFilter: body.dimensionFilter ? { andGroup: { expressions: [body.dimensionFilter, f] } } : f });
+
+const out = { pulled_at: new Date().toISOString(), days: DAYS, property: PROPERTY, key_events: KEY_EVENTS, regions: REGION };
+out.daily = await report(geo({ dateRanges: range, dimensions: D('date'), metrics: M('sessions', 'totalUsers', 'newUsers', 'screenPageViews', 'keyEvents', 'engagedSessions', 'sessionKeyEventRate'), orderBys: [{ dimension: { dimensionName: 'date' } }] }));
+out.daily_events = await report(geo({ dateRanges: range, dimensions: D('date', 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 5000 }));
+out.events = await report(geo({ dateRanges: range, dimensions: D('eventName'), metrics: M('eventCount', 'totalUsers'), orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }], limit: 50 }));
+out.sources = await report(geo({ dateRanges: range, dimensions: D('sessionSource', 'sessionMedium'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'engagedSessions', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 }));
+out.channels = await report(geo({ dateRanges: range, dimensions: D('sessionDefaultChannelGroup'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }] }));
+out.campaigns = await report(geo({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource'), metrics: M('sessions', 'totalUsers', 'keyEvents', 'sessionKeyEventRate'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 }));
+out.pages = await report(geo({ dateRanges: range, dimensions: D('pagePath'), metrics: M('screenPageViews', 'sessions', 'keyEvents'), orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }], limit: 100 }));
+out.cities = await report(geo({ dateRanges: range, dimensions: D('city'), metrics: M('sessions', 'totalUsers', 'keyEvents'), orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 25 }));
+out.devices = await report(geo({ dateRanges: range, dimensions: D('deviceCategory'), metrics: M('sessions', 'keyEvents') }));
 // Google Ads (via the GA <-> Ads link): spend, clicks, impressions by campaign / ad group / day / search term
 const adsM = M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents', 'sessionKeyEventRate');
 const adsFilter = { notExpression: { filter: { fieldName: 'sessionGoogleAdsCampaignName', stringFilter: { value: '(not set)' } } } };
-out.ads_campaigns = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 200 });
-out.ads_daily = await report({ dateRanges: range, dimensions: D('date', 'sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, limit: 5000 });
-out.ads_queries = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents', 'sessionKeyEventRate'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdClicks' }, desc: true }], limit: 500 });
+// Google Ads cost metrics cannot be filtered by region, so the cost report stays whole and the visit and conversion
+// metrics come from a region-filtered companion report joined on the same dimensions.
+const keyOf = (r, dims) => dims.map((d) => r[d]).join('|');
+async function adsWithRegion(body, dims) {
+  const all = await report(body);
+  const reg = await report(geo({ dateRanges: range, dimensions: D(...dims), metrics: M('sessions', 'keyEvents', 'sessionKeyEventRate'), dimensionFilter: adsFilter, limit: body.limit || 5000 }));
+  const map = new Map(reg.map((r) => [keyOf(r, dims), r]));
+  return all.map((r) => { const x = map.get(keyOf(r, dims)) || {}; return { ...r, sessions_all: r.sessions, keyEvents_all: r.keyEvents, sessions: x.sessions || 0, keyEvents: x.keyEvents || 0, sessionKeyEventRate: x.sessionKeyEventRate || 0 }; });
+}
+out.ads_campaigns = await adsWithRegion({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 200 }, ['sessionGoogleAdsCampaignName']);
+out.ads_daily = await adsWithRegion({ dateRanges: range, dimensions: D('date', 'sessionGoogleAdsCampaignName'), metrics: adsM, dimensionFilter: adsFilter, limit: 5000 }, ['date', 'sessionGoogleAdsCampaignName']);
+out.ads_queries = await adsWithRegion({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents', 'sessionKeyEventRate'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdClicks' }, desc: true }], limit: 500 }, ['sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName']);
 // ad group per search term and per keyword (session-based, so only rows that produced a visit; joined on the dashboard)
-out.ads_query_adgroups = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'), metrics: M('sessions'), dimensionFilter: adsFilter, limit: 1000 });
-out.ads_keyword_adgroups = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'), metrics: M('sessions'), dimensionFilter: adsFilter, limit: 1000 });
-out.ads_keywords = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents', 'sessionKeyEventRate'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 500 });
+out.ads_query_adgroups = await report(geo({ dateRanges: range, dimensions: D('sessionGoogleAdsQuery', 'sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'), metrics: M('sessions'), dimensionFilter: adsFilter, limit: 1000 }));
+out.ads_keyword_adgroups = await report(geo({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName', 'sessionGoogleAdsAdGroupName'), metrics: M('sessions'), dimensionFilter: adsFilter, limit: 1000 }));
+out.ads_keywords = await adsWithRegion({ dateRanges: range, dimensions: D('sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName'), metrics: M('advertiserAdImpressions', 'advertiserAdClicks', 'advertiserAdCost', 'sessions', 'keyEvents', 'sessionKeyEventRate'), dimensionFilter: adsFilter, orderBys: [{ metric: { metricName: 'advertiserAdCost' }, desc: true }], limit: 500 }, ['sessionGoogleAdsKeyword', 'sessionGoogleAdsCampaignName']);
 // which key events each campaign produced (event counts by action), for the GA campaign table and the Ads campaign table
-out.campaign_events = await report({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource', 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 2000 });
-out.ads_campaign_events = await report({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName', 'eventName'), metrics: M('eventCount'), dimensionFilter: { andGroup: { expressions: [evFilter, adsFilter] } }, limit: 2000 });
+out.campaign_events = await report(geo({ dateRanges: range, dimensions: D('sessionCampaignName', 'sessionSource', 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 2000 }));
+out.ads_campaign_events = await report(geo({ dateRanges: range, dimensions: D('sessionGoogleAdsCampaignName', 'eventName'), metrics: M('eventCount'), dimensionFilter: { andGroup: { expressions: [evFilter, adsFilter] } }, limit: 2000 }));
 // custom event parameters (registered as event-scoped custom dimensions in GA): store slug and campaign key
 for (const [name, dim] of [['by_store', 'customEvent:store'], ['by_campaign_key', 'customEvent:campaign_key']]) {
   try { out[name] = await report({ dateRanges: range, dimensions: D(dim, 'eventName'), metrics: M('eventCount'), dimensionFilter: evFilter, limit: 2000 }); }
   catch (e) { out[name] = []; out[name + '_error'] = String(e.message).slice(0, 200); }
 }
+out.out_of_region = await report({ dateRanges: range, dimensions: D('region'), metrics: M('sessions', 'keyEvents'), dimensionFilter: outOfRegion, orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 50 });
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, 'latest.json'), JSON.stringify(out));
 const tot = out.daily.reduce((a, d) => ({ s: a.s + d.sessions, k: a.k + d.keyEvents }), { s: 0, k: 0 });
