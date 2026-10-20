@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /private/
+Disallow: /api/
 Sitemap: https://www.jiffylubechicagoland.com/sitemap.xml

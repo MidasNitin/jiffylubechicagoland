@@ -27,6 +27,7 @@
   /* ---- Analytics: one helper, GA4 events (no-op until a measurement ID is configured) ---- */
   function track(name, params) {
     try {
+      if (navigator.webdriver) return; // headless or automated browser: not a customer
       var p = params || {};
       var store = document.body.getAttribute('data-store');
       if (store && !p.store) p.store = store;

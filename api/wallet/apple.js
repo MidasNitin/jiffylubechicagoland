@@ -26,6 +26,13 @@ module.exports = async (req, res) => {
     res.status(503).json({ error: 'Apple Wallet is not configured yet.' });
     return;
   }
+  // Crawlers (Amazonbot, GPTBot, Bingbot and friends) follow the wallet links on every page. They get the coupon page, not a pass.
+  const ua = String(req.headers['user-agent'] || '');
+  if (/bot|crawl|spider|slurp|headlesschrome|phantomjs|python-requests|curl\/|wget|scrapy|httpclient|go-http-client|java\//i.test(ua)) {
+    const back = String((req.query && req.query.store) || '').replace(/[^a-z0-9-]/g, '');
+    res.setHeader('Cache-Control', 'no-store'); res.setHeader('X-Robots-Tag', 'noindex');
+    res.statusCode = 302; res.setHeader('Location', back ? `/coupon/${back}/` : '/'); res.end(); return;
+  }
   const slug = String((req.query && req.query.store) || '');
   const store = slug ? stores.find((s) => s.slug === slug) : null;
   if (slug && !store) { res.status(404).json({ error: 'Unknown store.' }); return; }

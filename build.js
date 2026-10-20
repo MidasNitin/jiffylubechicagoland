@@ -190,8 +190,8 @@ function couponCard(store, extraCls = '', variant = '') {
       <button class="btn btn--primary btn--block js-copy" type="button">${t('copy_code')}</button>
       <div class="coupon__copied" role="status" aria-live="polite">${t('copied')}</div>
       ${site.wallet && site.wallet.enabled ? `<div class="coupon__wallet" data-store="${store ? esc(store.slug) : ''}">
-        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple/${walletQs}" aria-label="${t('apple_aria')}">${svg('badge-apple-wallet')}</a>` : ''}
-        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google/${walletQs}" aria-label="${t('google_aria')}">${svg('badge-google-wallet')}</a>` : ''}
+        ${site.wallet.apple ? `<a class="coupon__wallet-btn coupon__wallet-btn--apple" href="/api/wallet/apple/${walletQs}" rel="nofollow" aria-label="${t('apple_aria')}">${svg('badge-apple-wallet')}</a>` : ''}
+        ${site.wallet.google ? `<a class="coupon__wallet-btn coupon__wallet-btn--google" href="/api/wallet/google/${walletQs}" rel="nofollow" aria-label="${t('google_aria')}">${svg('badge-google-wallet')}</a>` : ''}
       </div>` : ''}
       <p class="coupon__fine">${esc(o.copy_instructions)} ${esc(t('expires', { date: o.expires }))}${free ? ' ' + esc(t('free_fine')) : ''}</p>
     </div>
@@ -637,7 +637,7 @@ write('404.html', `${head('Page not found | Jiffy Lube Chicagoland', 'Page not f
 const EN_ONLY = new Set(LEGAL.pages.map((pg) => `/${pg.slug}/`));
 const sitemapEntry = (u) => { const base = u.replace(/^\/es/, ''); if (EN_ONLY.has(base)) return `  <url><loc>${site.domain}${u}</loc></url>`; const en = `${site.domain}${base}`, es = `${site.domain}/es${base}`; return `  <url><loc>${site.domain}${u}</loc><xhtml:link rel="alternate" hreflang="en" href="${en}"/><xhtml:link rel="alternate" hreflang="es" href="${es}"/><xhtml:link rel="alternate" hreflang="x-default" href="${en}"/></url>`; };
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.map(sitemapEntry).join('\n')}\n</urlset>\n`);
-write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /private/\nSitemap: ${site.domain}/sitemap.xml\n`);
+write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /private/\nDisallow: /api/\nSitemap: ${site.domain}/sitemap.xml\n`);
 // llms.txt: a plain-language index for AI assistants (Claude, ChatGPT, Gemini, Perplexity).
 {
   const pilots = stores.filter((s) => s.free_pages);
