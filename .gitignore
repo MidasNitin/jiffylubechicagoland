@@ -14,3 +14,4 @@ wallet/certs/*.json
 data/ga/daily.log
 data/ga/launchd.out
 data/ga/launchd.err
+data/pos/
