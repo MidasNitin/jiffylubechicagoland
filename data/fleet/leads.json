@@ -1,0 +1,36 @@
+{
+ "pulled_at": "2026-10-20T13:30:11.857Z",
+ "sheet": "https://docs.google.com/spreadsheets/d/1GMEE1CR-waI34QVZgwG7_PrbxsNwyVX-hu6_esnhW3A/edit",
+ "leads": [
+  {
+   "when": "10/17/2026, 3:48:59",
+   "store": 1841,
+   "store_name": "Evanston, Dempster St",
+   "company": "TEST - please ignore (Neptune Ventures)",
+   "title": "QA",
+   "city": "Hermosa Beach",
+   "state": "CA",
+   "vehicles": 3,
+   "employee": "Claude",
+   "source": "api-test",
+   "status": "New",
+   "notes": "",
+   "test": true
+  },
+  {
+   "when": "10/19/2026, 10:14:04",
+   "store": 2566,
+   "store_name": "Montgomery, Montgomery Rd",
+   "company": "Matt’s Landscaping",
+   "title": "Owner",
+   "city": "Palos Heights",
+   "state": "IL",
+   "vehicles": 6,
+   "employee": "Joe",
+   "source": "qr",
+   "status": "New",
+   "notes": "",
+   "test": false
+  }
+ ]
+}
