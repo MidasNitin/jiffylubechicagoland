@@ -60,7 +60,8 @@ details{margin:10px 0}summary{cursor:pointer;font-weight:700}
 `;
 // Franchise group filter lives in the top bar on every page. The choice is kept in localStorage (jl_group) and
 // passed to the map as ?group=. Pages listen for the 'jl-group' event and read window.JL_GROUP.
-const GROUP_NAV = () => `<label class="gsel">Franchise group <select id="gsel"><option value="">All groups</option>${GROUPS.map((g) => `<option>${esc(g)}</option>`).join('')}</select></label>`;
+const GROUP_COUNT = augStores.reduce((m, s) => { m[s.group] = (m[s.group] || 0) + 1; return m; }, {});
+const GROUP_NAV = () => `<label class="gsel">Franchise group <select id="gsel"><option value="">All groups (${augStores.length})</option>${GROUPS.map((g) => `<option value="${esc(g)}">${esc(g)} (${GROUP_COUNT[g]})</option>`).join('')}</select></label>`;
 const GROUP_JS = `<script>(function(){var k='jl_group',sel=document.getElementById('gsel'),u=new URLSearchParams(location.search),g=u.get('group');try{if(g!==null)localStorage.setItem(k,g);else g=localStorage.getItem(k)||''}catch(e){g=g||''}
 if(![].some.call(sel.options,function(o){return o.value===g}))g='';sel.value=g;window.JL_GROUP=g;
 function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}

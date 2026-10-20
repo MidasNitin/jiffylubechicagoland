@@ -5374,7 +5374,8 @@ function setActive(id, fly){
 document.getElementById("brandChips").innerHTML = BRANDS.map(b=>`<label class="chip"><input type="checkbox" data-brand="${b.key}" checked><span class="sw" style="background:${b.hex}"></span>${b.label}</label>`).join("");
 document.getElementById("brandChips").addEventListener("change",e=>{ const k=e.target.dataset.brand; if(!k)return; e.target.checked?state.brands.add(k):state.brands.delete(k); e.target.closest(".chip").classList.toggle("off",!e.target.checked); render(); });
 const groups = [...new Set(STORES.map(s=>s.group))].sort();
-document.getElementById("group").innerHTML += groups.map(g=>`<option>${esc(g)}</option>`).join("");
+const groupCount = STORES.reduce((m,s)=>{m[s.group]=(m[s.group]||0)+1;return m;},{});
+document.getElementById("group").innerHTML += groups.map(g=>`<option value="${esc(g)}">${esc(g)} (${groupCount[g]})</option>`).join("");
 document.getElementById("group").onchange = e=>{state.group=e.target.value; render();};
 document.getElementById("sort").onchange = e=>{state.sort=e.target.value; render();};
 document.getElementById("q").oninput = e=>{state.q=e.target.value; render();};
