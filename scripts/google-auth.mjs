@@ -21,7 +21,7 @@ const server = http.createServer();
 server.listen(0, '127.0.0.1', () => {
   const port = server.address().port; const redirect = `http://127.0.0.1:${port}/`;
   const url = `https://accounts.google.com/o/oauth2/v2/auth?` + new URLSearchParams({ client_id: c.client_id, redirect_uri: redirect, response_type: 'code', scope: SCOPE, access_type: 'offline', prompt: 'consent', code_challenge: challenge, code_challenge_method: 'S256' });
-  console.log('Opening Google sign-in. Pick wdavidperez@gmail.com and click Allow.\n' + url);
+  console.log('Opening Google sign-in. Pick david.perez@neptuneventures.co and click Allow.\n' + url);
   execFile('open', [url]);
   server.on('request', async (req, res) => {
     const u = new URL(req.url, redirect); const code = u.searchParams.get('code');

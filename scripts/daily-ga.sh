@@ -14,6 +14,7 @@ ok=0; for attempt in 1 2 3 4 5 6; do
 done
 [ "$ok" = 1 ] || { echo "GA pull failed after 6 attempts, not deploying" >> "$LOG"; exit 1; }
 node scripts/fleet-leads.mjs >> "$LOG" 2>&1 || echo "fleet leads pull failed, keeping yesterday's" >> "$LOG"
+node scripts/pos-pull.mjs >> "$LOG" 2>&1 || echo "POS pull failed, keeping yesterday's" >> "$LOG"
 node private-build.js >> "$LOG" 2>&1
 node build.js >> "$LOG" 2>&1
 node scripts/a11y-check.mjs >> "$LOG" 2>&1 || { echo "accessibility check failed, not deploying" >> "$LOG"; exit 1; }
