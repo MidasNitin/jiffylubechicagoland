@@ -37,11 +37,18 @@ do {
     }
   }
 } while (pageToken);
+// 1b. unzip anything that is still zipped (GROW delivers ZIPs; files downloaded by hand can be dropped into data/pos/raw/ too)
+import { execFileSync } from 'node:child_process';
+for (const f of fs.readdirSync(RAW).filter((f) => /\.zip$/i.test(f))) {
+  const dir = path.join(RAW, f.replace(/\.zip$/i, '')); if (fs.existsSync(dir)) continue;
+  fs.mkdirSync(dir); try { execFileSync('unzip', ['-o', '-q', path.join(RAW, f), '-d', dir]); console.log(`  unzipped ${f}`); } catch (e) { console.error(`  !! could not unzip ${f}: ${e.message}`); }
+}
+const allCsv = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (/\.(csv|txt)$/i.test(e.name)) allCsv.push(p); } })(RAW);
 // 2. merge every CSV into two tables
 function csv(text) { const rows = []; let row = [], cell = '', qd = false; for (let i = 0; i < text.length; i++) { const c = text[i]; if (qd) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else qd = false; } else cell += c; } else if (c === '"') qd = true; else if (c === ',') { row.push(cell); cell = ''; } else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; } else if (c !== '\r') cell += c; } if (cell || row.length) { row.push(cell); rows.push(row); } const [h, ...b] = rows; return b.filter((r) => r.length > 1).map((r) => Object.fromEntries(h.map((k, i) => [k.trim(), (r[i] || '').trim()]))); }
 const promo = new Map(), inv = new Map(); let files = 0;
-for (const f of fs.readdirSync(RAW).filter((f) => /\.(csv|txt)$/i.test(f)).sort()) {
-  const rows = csv(fs.readFileSync(path.join(RAW, f), 'latin1')); if (!rows.length) continue; files++;
+for (const f of allCsv.sort()) {
+  const rows = csv(fs.readFileSync(f, 'latin1')); if (!rows.length) continue; files++;
   const cols = Object.keys(rows[0]);
   if (cols.includes('Promo_Code')) for (const r of rows) promo.set(`${r.Store_Number}|${r.Invoice_Number}|${r.Promo_Code}`, { store: Number(r.Store_Number), invoice: r.Invoice_Number, date: r.Invoice_Date.slice(0, 10), code: r.Promo_Code, desc: r.Promo_Description, amount: Number(r.Promo_Amount) || 0, category: r.Promo_Category_Code, full_service: r.Full_Service_Promo_Flag });
   else if (cols.includes('Invoice_Total')) for (const r of rows) inv.set(`${r.Store_Number}|${r.Invoice_Number}`, { store: Number(r.Store_Number), invoice: r.Invoice_Number, date: r.Invoice_Date.slice(0, 10), zip: (r.ZIP_Code || '').slice(0, 5), year: r.Vehicle_Year, make: r.Vehicle_Make, model: r.Vehicle_Model, type: r.Vehicle_Type, mileage: Number(r.Vehicle_Mileage) || null, oil: r.Oil_Used, total: Number(r.Invoice_Total) || 0, net: Number(r.Net_Sales) || 0, promo_total: Number(r.Promotion_Total) || 0, repeat: /^(Y|1|T)/i.test(r.Repeat_Vehicle_Flag || ''), source: r.Invoice_Source, source_type: r.Source_Type, fleet_account: r.Business_Account_ID || '', greet: r.Greet_Time, bay_in: r.Bay_Start_Time, bay_out: r.Bay_End_Time, bay: r.Bay_Number });
