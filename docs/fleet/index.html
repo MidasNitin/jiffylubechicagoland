@@ -97,9 +97,12 @@
 var f=document.querySelector('.js-fleet'),err=document.getElementById('fleet-error'),done=document.getElementById('fleet-done'),btn=f.querySelector('.fleet__submit');
 var q=new URLSearchParams(location.search),pre=q.get('store');if(pre){var sel=document.getElementById('store');if([].some.call(sel.options,function(o){return o.value===pre}))sel.value=pre;}
 function fail(m){err.textContent=m;err.classList.add('is-visible');btn.disabled=false;btn.textContent='Submit';}
+var ph=f.elements.phone;function fmtPhone(v){var d=v.replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);d=d.slice(0,10);if(d.length<4)return d;if(d.length<7)return '('+d.slice(0,3)+') '+d.slice(3);return '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);}
+ph.addEventListener('input',function(){var c=ph.value;ph.value=fmtPhone(c);});ph.addEventListener('blur',function(){ph.value=fmtPhone(ph.value);});
 f.addEventListener('submit',function(e){e.preventDefault();err.classList.remove('is-visible');err.textContent='';
   var req=['company','first','last','phone','address','city','state','zip','store'];for(var i=0;i<req.length;i++){var el=f.elements[req[i]];if(!el.value.trim()){fail('Please fill in '+f.querySelector('label[for="'+req[i]+'"]').textContent.replace('*','').trim()+'.');el.focus();return;}}
   if(!/^\d{5}$/.test(f.elements.zip.value.trim())){fail('Please enter a 5-digit ZIP code.');f.elements.zip.focus();return;}
+  ph.value=fmtPhone(ph.value);if(!/^\(\d{3}\) \d{3}-\d{4}$/.test(ph.value)){fail('Please enter a 10-digit phone number.');ph.focus();return;}
   var body={};['company','first','last','title','email','phone','address','city','state','zip','vehicles','store','emp_first','emp_last','website'].forEach(function(k){body[k]=f.elements[k]?f.elements[k].value:''});body.source=q.get('src')||(pre?'store-qr':'qr');
   btn.disabled=true;btn.textContent='Sending…';
   fetch('/api/fleet/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(j){

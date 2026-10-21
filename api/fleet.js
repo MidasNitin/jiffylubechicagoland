@@ -33,12 +33,14 @@ module.exports = async (req, res) => {
   const address = clean(b.address), city = clean(b.city, 80), state = clean(b.state, 2).toUpperCase(), zip = clean(b.zip, 10);
   const store = stores.find((s) => String(s.id) === clean(b.store, 10)) || null;
   if (!company || !first || !last || !phone || !address || !city || !state || !zip) { res.status(400).json({ ok: false, error: 'Please fill in every required field.' }); return; }
-  if (!/^\+?[\d\s().-]{7,}$/.test(phone)) { res.status(400).json({ ok: false, error: 'Please enter a valid phone number.' }); return; }
+  let digits = phone.replace(/\D/g, ''); if (digits.length === 11 && digits[0] === '1') digits = digits.slice(1);
+  if (digits.length !== 10) { res.status(400).json({ ok: false, error: 'Please enter a 10-digit phone number.' }); return; }
+  const phoneFmt = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`; // stored as (000) 000-0000 so the sheet imports cleanly
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { res.status(400).json({ ok: false, error: 'Please enter a valid email address.' }); return; }
   if (!store) { res.status(400).json({ ok: false, error: 'Please choose the Jiffy Lube location.' }); return; }
 
   const when = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', hour12: false });
-  const row = [when, store.id, `${store.city}, ${store.street_name}`, company, first, last, clean(b.title, 80), email, phone, address, city, state, zip, clean(b.vehicles, 10), clean(b.emp_first, 60), clean(b.emp_last, 60), clean(b.source || 'qr', 20), 'New', ''];
+  const row = [when, store.id, `${store.city}, ${store.street_name}`, company, first, last, clean(b.title, 80), email, phoneFmt, address, city, state, zip, clean(b.vehicles, 10), clean(b.emp_first, 60), clean(b.emp_last, 60), clean(b.source || 'qr', 20), 'New', ''];
   try {
     const sa = JSON.parse(saRaw);
     const t = await token(sa);
