@@ -6,7 +6,7 @@
   "rating_as_of": "October 2026",
   "trust_year": "2026",
   "offer": {
-    "_note": "Site-wide default = Chicagoland co-op code D1S6F3 (Jen Ramirez, 2026-09-22): $11 off any oil change, expires 1/31/2027. JLO Group stores override this in stores.json (YCGUF2 $10; pilots GG1AD22 $22).",
+    "_note": "Site-wide default = Chicagoland co-op code D1S6F3 (Jen Ramirez, 2026-09-22): $11 off any oil change, expires 1/31/2027. JLO Group stores override this in stores.json (NMBCXZ $10, replaced YCGUF2 which expired 2026-10-19; pilots GG1AD22 $22).",
     "amount": "$11 OFF",
     "description": "any oil change",
     "code": "D1S6F3",

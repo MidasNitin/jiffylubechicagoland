@@ -69,6 +69,12 @@
       "off": "$22 de descuento",
       "description": "en cualquier cambio de aceite, más revisión y llenado de aire de las llantas gratis",
       "hero_title": "$22 de descuento en tu cambio de aceite"
+    },
+    "NMBCXZ": {
+      "amount": "AHORRA $10",
+      "off": "$10 de descuento",
+      "description": "en cualquier cambio de aceite",
+      "hero_title": "$10 de descuento en tu cambio de aceite"
     }
   },
   "free": {

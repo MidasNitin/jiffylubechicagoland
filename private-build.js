@@ -776,7 +776,7 @@ function posPage() {
   const gaFile = path.join(ROOT, 'data', 'ga', 'latest.json'); const ga = fs.existsSync(gaFile) ? JSON.parse(fs.readFileSync(gaFile, 'utf8')) : null;
   const PILOT_START = '2026-10-15';
   const pilots = siteStores.filter((s) => s.offer && s.offer.code === 'GG1AD22').map((s) => s.id);
-  const OUR = { GG1AD22: 'Pilot stores ($22 off, site and wallet)', YCGUF2: 'Other JLO stores ($10 off, site)', D1S6F3: 'Co-op code ($11 off, non-JLO pages)', M8W852: 'CHICOOP $10 (older online code)', Y8CPW2: 'Old SEM $15', YHFDE2: 'Old SEM $12', YEDUC2: 'Old SEM $7', YT88N2: 'Old SEM $5' };
+  const OUR = { GG1AD22: 'Pilot stores ($22 off, site and wallet)', NMBCXZ: 'Other JLO stores ($10 off, site; replaced YCGUF2 on Oct 22)', YCGUF2: 'Other JLO stores until it expired (last redeemed Oct 12)', D1S6F3: 'Co-op code ($11 off, non-JLO pages)', M8W852: 'CHICOOP $10 (older online code)', Y8CPW2: 'Old SEM $15', YHFDE2: 'Old SEM $12', YEDUC2: 'Old SEM $7', YT88N2: 'Old SEM $5' };
   const storeLabel = Object.fromEntries(siteStores.map((s) => [s.id, `#${s.id} ${s.city}, ${s.street_name}`]));
   const dates = [...new Set(I.map((r) => r.date))].sort(); const first = dates[0], last = dates[dates.length - 1];
   const dow = (d) => new Date(d + 'T12:00:00').getDay();
@@ -801,7 +801,7 @@ function posPage() {
   const weeks = {}; for (const r of I) { const w = addDays(r.date, -((dow(r.date) + 6) % 7)); weeks[w] = weeks[w] || { w, cars: 0, promo: 0, rev: 0, repeat: 0, days: new Set() }; const k = weeks[w]; k.cars++; if (r.promo_total > 0) k.promo++; k.rev += r.total; if (r.repeat) k.repeat++; k.days.add(r.date); }
   const weekly = Object.values(weeks).sort((a, b) => a.w.localeCompare(b.w)).map((k) => ({ w: k.w, cars: k.cars, promo: k.promo, avg: k.rev / k.cars, repeat: k.repeat / k.cars, days: k.days.size }));
   // flags: our codes that stopped
-  const flags = codes.filter((c) => c.ours && c.pre_rate >= 1 && c.pilot === 0).map((c) => `${c.code} (${c.label}) averaged ${c.pre_rate.toFixed(1)} redemptions a day before ${PILOT_START} and has had none since; last seen ${c.last}.`);
+  const flags = codes.filter((c) => c.ours && c.code !== 'YCGUF2' && c.pre_rate >= 1 && c.pilot === 0).map((c) => `${c.code} (${c.label}) averaged ${c.pre_rate.toFixed(1)} redemptions a day before ${PILOT_START} and has had none since; last seen ${c.last}.`);
   const stores12 = [...new Set(I.map((r) => r.store))].sort((a, b) => a - b);
   const data = JSON.stringify({ codes, days, pilots, storeLabel, stores12, PILOT_START, first, last, sum, weekly, flags });
   const fmt$ = (v) => '$' + Number(v).toLocaleString('en-US', { maximumFractionDigits: 0 });
