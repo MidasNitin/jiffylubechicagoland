@@ -16,3 +16,5 @@ data/ga/launchd.out
 data/ga/launchd.err
 data/pos/
 private-logins.txt
+.vercel
+.env*
