@@ -416,3 +416,10 @@
     initSearch();
   });
 })();
+
+  // Put the cursor in the main field on load, like a search engine does. Desktop only: on phones it would pop the keyboard and scroll.
+  (function () {
+    var el = document.querySelector('[data-autofocus]');
+    if (!el || window.innerWidth < 900 || (navigator.maxTouchPoints || 0) > 0 || location.hash) return;
+    try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+  })();

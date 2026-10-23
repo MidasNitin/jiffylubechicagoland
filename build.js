@@ -378,7 +378,7 @@ ${nav(null, '/')}
   <p class="hero__sub">${esc(t('region_sub', { n: stores.length }))}</p>
   <form class="search js-search" data-base="${P}/" action="${P}/" method="get" role="search" aria-label="${esc(t('zip_label'))}">
     <label class="visually-hidden" for="zip">${t('zip_label')}</label>
-    <input class="search__field" id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" placeholder="${esc(t('zip_ph'))}" aria-describedby="zip-err">
+    <input class="search__field" id="zip" name="zip" type="text" data-autofocus inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" placeholder="${esc(t('zip_ph'))}" aria-describedby="zip-err">
     <button class="btn btn--inverse" type="submit">${t('search')}</button>
     <div class="search__geo"><button class="btn btn--inverse js-geo" type="button">${PIN}${t('use_location')}</button><button class="search__geo-link js-geo" type="button">${t('use_location')}</button></div>
   </form>
@@ -540,7 +540,7 @@ ${SPRITE}
   <form class="fleet__form js-fleet" novalidate>
     <h2 class="h2 fleet__h2">Fleet contact info</h2>
     <p class="fleet__req"><span aria-hidden="true">*</span> Required</p>
-    ${field('company', 'Company name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="organization"')}
+    ${field('company', 'Company name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="organization" data-autofocus')}
     <div class="fleet__row">${field('first', 'Fleet contact first name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="given-name"')}${field('last', 'Fleet contact last name <span aria-hidden="true">*</span>', 'type="text" required autocomplete="family-name"')}</div>
     ${field('title', 'Title', 'type="text" placeholder="e.g. Fleet Manager, Owner" autocomplete="organization-title"')}
     <div class="fleet__row">${field('email', 'Email address', 'type="email" autocomplete="email" inputmode="email"', 'So we can send you the fleet program details')}${field('phone', 'Phone number <span aria-hidden="true">*</span>', 'type="tel" required autocomplete="tel" inputmode="tel" placeholder="(708) 555-0123"')}</div>
