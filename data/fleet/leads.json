@@ -1,5 +1,5 @@
 {
- "pulled_at": "2026-10-22T13:31:49.975Z",
+ "pulled_at": "2026-10-23T13:31:47.852Z",
  "sheet": "https://docs.google.com/spreadsheets/d/1GMEE1CR-waI34QVZgwG7_PrbxsNwyVX-hu6_esnhW3A/edit",
  "leads": [
   {
@@ -31,6 +31,36 @@
    "status": "New",
    "notes": "",
    "test": false
+  },
+  {
+   "when": "10/23/2026, 0:29:55",
+   "store": 1841,
+   "store_name": "Evanston, Dempster St",
+   "company": "TEST please ignore (HubSpot check)",
+   "title": "Owner",
+   "city": "Evanston",
+   "state": "IL",
+   "vehicles": 6,
+   "employee": "Joe",
+   "source": "qr-test",
+   "status": "New",
+   "notes": "",
+   "test": true
+  },
+  {
+   "when": "10/23/2026, 0:47:32",
+   "store": 1841,
+   "store_name": "Evanston, Dempster St",
+   "company": "TEST please ignore (HubSpot check 2)",
+   "title": "Owner",
+   "city": "Evanston",
+   "state": "IL",
+   "vehicles": 6,
+   "employee": "Joe",
+   "source": "qr-test",
+   "status": "New",
+   "notes": "",
+   "test": true
   }
  ]
 }
