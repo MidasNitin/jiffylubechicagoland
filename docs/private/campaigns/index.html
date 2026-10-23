@@ -186,7 +186,7 @@ function sortableTables(){Array.prototype.forEach.call(document.querySelectorAll
 var baseRender=render;render=function(){baseRender();sortableTables()};
 sel.addEventListener('change',render);document.getElementById('cmetric').addEventListener('change',render);document.getElementById('cboth').addEventListener('change',render);document.getElementById('ametric').addEventListener('change',render);window.addEventListener('jl-group',render);render();
 })();
-</script></main><script>(function(){var k='jl_group',sel=document.getElementById('gsel'),u=new URLSearchParams(location.search),g=u.get('group');try{if(g!==null)localStorage.setItem(k,g);else g=localStorage.getItem(k)||''}catch(e){g=g||''}
+</script></main><script>(function(){if(/(^|; )jl_scope=nopos/.test(document.cookie)){document.querySelectorAll('a[href="/private/pos/"]').forEach(function(a){var c=a.closest('.card');(c||a).remove()});}var k='jl_group',sel=document.getElementById('gsel'),u=new URLSearchParams(location.search),g=u.get('group');try{if(g!==null)localStorage.setItem(k,g);else g=localStorage.getItem(k)||''}catch(e){g=g||''}
 if(![].some.call(sel.options,function(o){return o.value===g}))g='';sel.value=g;window.JL_GROUP=g;
 function link(){document.querySelectorAll('a[data-nav]').forEach(function(a){a.href=a.getAttribute('data-nav')+(window.JL_GROUP?'?group='+encodeURIComponent(window.JL_GROUP):'')})}
 sel.addEventListener('change',function(){window.JL_GROUP=sel.value;try{localStorage.setItem(k,sel.value)}catch(e){}link();window.dispatchEvent(new Event('jl-group'))});link();if(g)window.dispatchEvent(new Event('jl-group'));})();</script></body></html>
