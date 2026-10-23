@@ -81,11 +81,12 @@ module.exports = async (req, res) => {
     const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A1:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`, { method: 'POST', headers: { Authorization: `Bearer ${t}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ values: [row] }) });
     const j = await r.json();
     if (j.error) throw new Error(j.error.message);
-    res.status(200).json({ ok: true, store: `${store.city}, ${store.street_name}` });
+    // HubSpot before the response: Vercel freezes the function as soon as it answers, so this cannot run afterward. Capped at 9s.
     if (process.env.HUBSPOT_TOKEN) {
-      try { const ids = await hubspot({ storeId: store.id, storeName: `${store.city}, ${store.street_name}`, company, first, last, title: clean(b.title, 80), email, phone: phoneFmt, address, city, state, zip, vehicles: Number(clean(b.vehicles, 10)) || 0, employee: [clean(b.emp_first, 60), clean(b.emp_last, 60)].filter(Boolean).join(' '), source: clean(b.source || 'qr', 20), when }, process.env.HUBSPOT_TOKEN); console.log('hubspot lead', JSON.stringify(ids)); }
+      try { const ids = await Promise.race([new Promise((_, rej) => setTimeout(() => rej(new Error('hubspot timeout')), 9000)), hubspot({ storeId: store.id, storeName: `${store.city}, ${store.street_name}`, company, first, last, title: clean(b.title, 80), email, phone: phoneFmt, address, city, state, zip, vehicles: Number(clean(b.vehicles, 10)) || 0, employee: [clean(b.emp_first, 60), clean(b.emp_last, 60)].filter(Boolean).join(' '), source: clean(b.source || 'qr', 20), when }, process.env.HUBSPOT_TOKEN)]); console.log('hubspot lead', JSON.stringify(ids)); }
       catch (e) { console.error('hubspot lead failed (sheet row saved)', e.message); }
     }
+    res.status(200).json({ ok: true, store: `${store.city}, ${store.street_name}` });
   } catch (e) {
     console.error('fleet lead failed', e.message, row);
     res.status(500).json({ ok: false, error: 'We could not save that. Please call the store and they will take your details.' });
