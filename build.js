@@ -26,7 +26,7 @@ const UI_EN = {
   team_alt: 'Jiffy Lube technician reviewing service with a customer', manager_alt: 'Store manager', lounge_title: 'Car or lounge? Your call.', lounge_body: 'Stay in your car or relax in our lounge while we take care of it.',
   closed: 'Closed', today: 'Today', mon_fri: 'Mon – Fri', days_long: { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday' }, saturday: 'Saturday', sunday: 'Sunday', day_short: DAY_NAMES,
   popular: 'Popular times', call_wait: 'Call us to check on wait times', find_us: 'Find us', hours: 'Hours', map_title: 'Map of Jiffy Lube {city}', view_maps: 'View on Google Maps', services_title: 'Services at this location',
-  footer_store: 'Jiffy Lube {city}, {street}', footer_coupon: '{off} oil change coupon', footer_air: 'Free air for tires', footer_battery: 'Free battery test', footer_all: 'All Chicagoland locations', footer_find: 'Find a Jiffy Lube location',
+  footer_store: 'Jiffy Lube {city}, {street}', footer_coupon: '{off} oil change coupon', footer_air: 'Free air for tires', footer_battery: 'Free battery test', footer_all: 'All Chicagoland locations', footer_fleet: 'Fleet Services', footer_find: 'Find a Jiffy Lube location',
   sticky_call: 'Call', sticky_dir: 'Directions', sticky_coupon: 'Get Coupon', all_locations: 'All Chicagoland locations',
   region_title: 'Jiffy Lube Chicagoland | Find a Jiffy Lube location in the {region} Area', region_desc: 'Fast, easy oil changes at over {n} Chicagoland Jiffy Lube locations. No appointment needed. Find your nearest location and save with a coupon.',
   region_h1: 'Find a Jiffy Lube location in the {region} Area', region_sub: 'Fast, easy oil changes at over {n} Chicagoland locations. Jiffy Does It.', zip_label: 'Zip code', zip_ph: 'Enter zip code', search: 'Search', use_location: 'Use my location', show_more: 'Show more',
@@ -298,8 +298,8 @@ const services = () => `<section class="section services" id="services"><div cla
 
 function footer(franchisee, store = null) {
   const links = store
-    ? [[`${P}/store/${store.slug}/`, t('footer_store', { city: store.city, street: store.street_name })], [`${P}/coupon/${store.slug}/`, t('footer_coupon', { off: offAmount(offerFor(store)) })], ...(store.free_pages ? [[`${P}/free-air/${store.slug}/`, t('footer_air')], [`${P}/free-battery/${store.slug}/`, t('footer_battery')]] : []), [`${P}/`, t('footer_all')]]
-    : [[`${P}/`, t('footer_find')], [`${P}/#all-locations`, t('footer_all')]];
+    ? [[`${P}/store/${store.slug}/`, t('footer_store', { city: store.city, street: store.street_name })], [`${P}/coupon/${store.slug}/`, t('footer_coupon', { off: offAmount(offerFor(store)) })], ...(store.free_pages ? [[`${P}/free-air/${store.slug}/`, t('footer_air')], [`${P}/free-battery/${store.slug}/`, t('footer_battery')]] : []), [`${P}/`, t('footer_all')], ['/fleet/', t('footer_fleet')]]
+    : [[`${P}/`, t('footer_find')], [`${P}/#all-locations`, t('footer_all')], ['/fleet/', t('footer_fleet')]];
   const legal = [['/privacy/', t('footer_privacy')], ['/privacy/#choices', t('footer_dns')], ['/terms/', t('footer_terms')], ['/accessibility/', t('footer_a11y')]];
   return `<footer class="footer section--dark" role="contentinfo"><div class="wrap">
     <nav class="footer__links" aria-label="${esc(t('site_links'))}">${links.map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join('')}</nav>
